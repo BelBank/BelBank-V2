@@ -180,5 +180,41 @@ Window {
             left: parent.left
         }
         color: "#fdffbd"
+
+        Rectangle {
+            id: finance
+            width: 600
+            height: 50
+            color: "#fdffbd"
+            anchors {
+                top: body.top
+                left: body.left
+            }
+            border.color: "#b24bd1"
+            border.width: 3
+
+            Text {
+                id: finance_text
+                anchors {
+                    horizontalCenter: finance.horizontalCenter
+                    verticalCenter: finance.verticalCenter
+                }
+                font.pixelSize: 30
+                text: "Финансы"
+            }
+            Rectangle {
+                z: 1
+                id: finance_area
+                anchors {
+                    bottom: footer.top
+                    left: header.left
+                    right: parent.right
+                    top: parent.bottom
+                }
+                color: "#fdffbd"
+                border.color: "#b24bd1"
+                border.width: 3
+            }
+        }
     }
 }
