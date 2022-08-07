@@ -184,36 +184,222 @@ Window {
         Rectangle {
             id: finance
             width: 600
-            height: 50
-            color: "#fdffbd"
             anchors {
                 top: body.top
+                bottom: body.bottom
                 left: body.left
+                margins: 10
             }
-            border.color: "#b24bd1"
+            radius: 8
             border.width: 3
+            border.color: "#d088f2"
+            color: "#fdffbd"
 
             Text {
                 id: finance_text
                 anchors {
                     horizontalCenter: finance.horizontalCenter
-                    verticalCenter: finance.verticalCenter
+                    top: finance.top
                 }
-                font.pixelSize: 30
                 text: "Финансы"
+                font.pixelSize: 26
             }
-            Rectangle {
-                z: 1
-                id: finance_area
+
+            ListView {
+                height: 240
+                width: 450
                 anchors {
-                    bottom: footer.top
-                    left: header.left
-                    right: parent.right
-                    top: parent.bottom
+                    top: finance_text.top
+                    left: finance.left
+                    margins: 40
                 }
-                color: "#fdffbd"
-                border.color: "#b24bd1"
-                border.width: 3
+
+                snapMode: ListView.SnapOneItem
+                orientation: ListView.Horizontal
+                delegate: card_delegate
+                model: ListModel {
+                    id: card_model
+                    ListElement {
+                        name: "Петя Иванов"
+                        number: "1234 5678 1234 5678"
+                        valid: "25/08"
+                        type: "gold"
+                        system: "visa"
+                    }
+                    ListElement {
+                        name: "Шурик Скворцов"
+                        number: "1234 5678 7654 5678"
+                        valid: "35/08"
+                        type: "silver"
+                        system: "visa"
+                    }
+                    ListElement {
+                        name: "PaShampusik"
+                        number: "1346 5678 1234 5678"
+                        valid: "25/08"
+                        type: "gold"
+                        system: "mastercard"
+                    }
+                    ListElement {
+                        name: "Павел Староста"
+                        number: "1234 5678 1234 5678"
+                        valid: "25/08"
+                        type: "gold"
+                        system: "visa"
+                    }
+                }
+                Component {
+                    id: card_delegate
+                    Rectangle {
+                        id: rect_for_flip_card
+
+                        width: 500
+                        height: 240
+                        color: "#fdffbd"
+
+                        function getCard() {
+                            var sorce
+                            if (card.type) {
+                                if (card.system) {
+                                    sorce = "images/Golden card VISA.png"
+                                } else {
+                                    sorce = "images/Golden Card Mastercard.png"
+                                }
+                            } else {
+                                if (card.system) {
+                                    sorce = "images/Silver card VISA.png"
+                                } else {
+                                    sorce = "images/Silver card Mastercard.png"
+                                }
+                            }
+                            return sorce
+                        }
+
+                        Flipable {
+                            id: card
+                            property bool flipped: false
+                            property bool type: model.type === "gold"
+                            property bool system: model.system === "visa"
+                            anchors.fill: parent
+                            front: Image {
+                                width: 450
+                                anchors {
+                                    //fill: parent
+                                    centerIn: parent
+                                }
+                                source: getCard()
+                            }
+                            back: Rectangle {
+                                id: card_info
+                                height: 180
+                                width: 450
+                                anchors {
+                                    //fill: parent
+                                    centerIn: parent
+                                }
+                                color: "gray"
+                                radius: 8
+                                border.width: 3
+                                border.color: "gray"
+
+                                Text {
+                                    text: "Данные о карте:"
+                                    anchors {
+                                        horizontalCenter: card_info.horizontalCenter
+                                        top: card_info.top
+                                        topMargin: 10
+                                    }
+                                    font.pixelSize: 22
+                                }
+                                Text {
+                                    id: cardholder_name_text
+                                    anchors {
+                                        left: card_info.left
+                                        top: card_info.top
+                                        topMargin: 50
+                                        leftMargin: 15
+                                    }
+                                    text: "Имя держателя:"
+                                    font.pixelSize: 20
+                                    Text {
+                                        ///////////////////////////////
+                                        id: cardholder_name
+                                        anchors {
+                                            verticalCenter: cardholder_name_text.verticalCenter
+                                            left: cardholder_name_text.right
+                                            leftMargin: 13
+                                        }
+                                        text: model.name
+                                        font.pixelSize: 20
+                                    }
+                                }
+                                Text {
+                                    id: card_number_text
+                                    text: "Номер карты:"
+                                    font.pixelSize: 20
+                                    anchors {
+                                        left: card_info.left
+                                        top: card_info.top
+                                        topMargin: 85
+                                        leftMargin: 15
+                                    }
+                                    Text {
+                                        ///////////////////////////////
+                                        id: card_number
+                                        anchors {
+                                            verticalCenter: card_number_text.verticalCenter
+                                            left: card_number_text.right
+                                            leftMargin: 13
+                                        }
+                                        text: model.number
+                                        font.pixelSize: 20
+                                    }
+                                }
+                                Text {
+                                    id: valid_thru_text
+                                    text: "Годна до:"
+                                    font.pixelSize: 20
+                                    anchors {
+                                        left: card_info.left
+                                        top: card_info.top
+                                        topMargin: 120
+                                        leftMargin: 15
+                                    }
+                                    Text {
+                                        ///////////////////////////////
+                                        id: valid_thru
+                                        anchors {
+                                            verticalCenter: valid_thru_text.verticalCenter
+                                            left: valid_thru_text.right
+                                            leftMargin: 13
+                                        }
+                                        text: model.valid
+                                        font.pixelSize: 20
+                                    }
+                                }
+                            }
+
+                            transform: Rotation {
+                                origin.x: card.width / 2
+                                origin.y: card.height / 2
+                                axis.x: 1
+                                axis.y: 0
+                                axis.z: 0
+                                angle: card.flipped ? 180 : 0
+
+                                Behavior on angle {
+                                    NumberAnimation {
+                                        duration: 500
+                                    }
+                                }
+                            }
+                            MouseArea {
+                                anchors.fill: parent
+                                onClicked: card.flipped = !card.flipped
+                            }
+                        }
+                    }
+                }
             }
         }
     }
