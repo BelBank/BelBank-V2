@@ -206,14 +206,17 @@ Window {
             }
 
             ListView {
+                id: lv
                 height: 240
-                width: 450
+                width: 500
                 anchors {
                     top: finance_text.top
                     left: finance.left
+                    right: finance.right
                     margins: 40
                 }
-
+                highlightRangeMode: ListView.StrictlyEnforceRange
+                clip: true
                 snapMode: ListView.SnapOneItem
                 orientation: ListView.Horizontal
                 delegate: card_delegate
@@ -282,7 +285,7 @@ Window {
                             property bool system: model.system === "visa"
                             anchors.fill: parent
                             front: Image {
-                                width: 450
+                                width: 480
                                 anchors {
                                     //fill: parent
                                     centerIn: parent
@@ -292,7 +295,7 @@ Window {
                             back: Rectangle {
                                 id: card_info
                                 height: 180
-                                width: 450
+                                width: 480
                                 anchors {
                                     //fill: parent
                                     centerIn: parent
@@ -389,7 +392,7 @@ Window {
 
                                 Behavior on angle {
                                     NumberAnimation {
-                                        duration: 500
+                                        duration: 600
                                     }
                                 }
                             }
@@ -398,6 +401,197 @@ Window {
                                 onClicked: card.flipped = !card.flipped
                             }
                         }
+                    }
+                }
+            }
+            Rectangle {
+
+                id: cash
+                height: 230
+                color: "#fdffbd"
+                anchors {
+                    bottom: finance.bottom
+                    left: finance.left
+                    right: finance.right
+                    bottomMargin: 20
+                    rightMargin: 50
+                    leftMargin: 50
+                }
+                radius: 8
+                border.width: 3
+                border.color: "#d088f2"
+                GridLayout {
+                    rows: 5
+                    columns: 4
+                    anchors {
+                        fill: parent
+                        margins: 20
+                    }
+
+                    Text {
+                        Layout.row: 0
+                        Layout.columnSpan: 4
+                        Layout.column: 0
+
+                        id: cash_title
+                        font.pixelSize: 25
+                        Layout.alignment: Qt.AlignCenter
+                        text: "Курсы валют в отделениях БелБанка"
+                    }
+                    Text {
+                        Layout.row: 1
+                        Layout.columnSpan: 2
+                        Layout.column: 0
+                        font.pixelSize: 19
+                        text: "Валюта"
+                    }
+                    Text {
+                        Layout.row: 1
+                        Layout.columnSpan: 1
+                        Layout.column: 2
+                        font.pixelSize: 19
+                        text: "Продажа"
+                    }
+                    Text {
+                        Layout.row: 1
+                        Layout.columnSpan: 1
+                        Layout.column: 3
+                        font.pixelSize: 19
+                        text: "Покупка"
+                    }
+                    Text {
+                        Layout.row: 2
+                        Layout.columnSpan: 2
+                        Layout.column: 0
+                        id: rub
+                        text: "100RUB"
+                        font.pixelSize: 12
+                        Image {
+                            width: 20
+                            height: 20
+                            source: "images/RUB.png"
+                            anchors {
+                                left: rub.right
+                            }
+                        }
+                    }
+                    Text {
+                        Layout.row: 2
+                        Layout.columnSpan: 1
+                        Layout.column: 2
+                        font.pixelSize: 18
+                        text: "4.32"
+                    }
+                    Text {
+                        Layout.row: 2
+                        Layout.columnSpan: 1
+                        Layout.column: 3
+                        font.pixelSize: 18
+                        text: "4.297"
+                    }
+                    Text {
+                        Layout.row: 3
+                        Layout.columnSpan: 2
+                        Layout.column: 0
+                        id: usd
+                        text: "1USD"
+                        font.pixelSize: 12
+                        Image {
+                            width: 20
+                            height: 20
+                            source: "images/USD.png"
+                            anchors {
+                                left: usd.right
+                            }
+                        }
+                    }
+                    Text {
+                        Layout.row: 3
+                        Layout.columnSpan: 1
+                        Layout.column: 2
+                        font.pixelSize: 18
+                        text: "2.63"
+                    }
+                    Text {
+                        Layout.row: 3
+                        Layout.columnSpan: 1
+                        Layout.column: 3
+                        font.pixelSize: 18
+                        text: "2.59"
+                    }
+                    Text {
+                        Layout.row: 4
+                        Layout.columnSpan: 2
+                        Layout.column: 0
+                        id: euro
+                        text: "1EURO"
+                        font.pixelSize: 12
+                        Image {
+                            width: 20
+                            height: 20
+                            source: "images/EURO.png"
+                            anchors {
+                                left: euro.right
+                            }
+                        }
+                    }
+                    Text {
+                        Layout.row: 4
+                        Layout.columnSpan: 1
+                        Layout.column: 2
+                        font.pixelSize: 18
+                        text: "3.2"
+                    }
+                    Text {
+                        Layout.row: 4
+                        Layout.columnSpan: 1
+                        Layout.column: 3
+                        font.pixelSize: 18
+                        text: "3.15"
+                    }
+                }
+            }
+
+            Rectangle {
+                id: new_card
+                height: 40
+                anchors {
+                    top: lv.bottom
+                    left: finance.left
+                    right: finance.right
+                    rightMargin: 50
+                    leftMargin: 50
+                    topMargin: 15
+                    bottomMargin: 40
+                }
+                color: "#d088f2"
+                border.color: "#7d3a9c"
+                border.width: 2
+                radius: 10
+                Text {
+                    anchors.centerIn: parent
+                    text: "Создать новую карту"
+                    color: "#222024"
+                    font.family: "Helvetica"
+                    font.pointSize: 17
+                    font.bold: true
+                }
+                MouseArea {
+                    anchors.fill: parent
+                    onClicked: {
+
+                        //////////////////////////////
+                        //////////многооконность блядь
+                        //////////////////////////////
+                    }
+
+                    onPressed: {
+                        parent.color = "#7d3a9c"
+                        parent.border.color = "dark gray"
+                    }
+                    onReleased: {
+                        parent.color = "#d088f2"
+                        parent.border.color = "#7d3a9c"
                     }
                 }
             }
