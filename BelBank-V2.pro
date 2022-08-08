@@ -1,4 +1,4 @@
-QT += quick
+QT += quick core
 
 # You can make your code fail to compile if it uses deprecated APIs.
 # In order to do so, uncomment the following line.
@@ -8,6 +8,12 @@ SOURCES += \
         main.cpp
 
 RESOURCES += qml.qrc
+
+INCLUDEPATH += $$PWD/libs/soci/include \
+        $$PWD/libs/soci/build/include
+
+LIBS += -L$$PWD/libs\soci\build\lib\Debug
+
 
 # Additional import path used to resolve QML modules in Qt Creator's code model
 QML_IMPORT_PATH =
@@ -19,3 +25,6 @@ QML_DESIGNER_IMPORT_PATH =
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
+
+HEADERS += \
+    DB_pool.hpp
