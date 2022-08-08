@@ -623,138 +623,128 @@ Window {
                 font.pixelSize: 26
             }
 
+            //            Rectangle {
+            //                width: 360
+            //                height: 360
 
-//            Rectangle {
-//                width: 360
-//                height: 360
+            //                ListModel {
+            //                    id: dataModel
 
-//                ListModel {
-//                    id: dataModel
+            //                    ListElement {
+            //                        color: "orange"
+            //                        text: "first"
+            //                    }
+            //                    ListElement {
+            //                        color: "lightgreen"
+            //                        text: "second"
+            //                    }
+            //                    ListElement {
+            //                        color: "orchid"
+            //                        text: "third"
+            //                    }
+            //                    ListElement {
+            //                        color: "tomato"
+            //                        text: "fourth"
+            //                    }
+            //                }
 
-//                    ListElement {
-//                        color: "orange"
-//                        text: "first"
-//                    }
-//                    ListElement {
-//                        color: "lightgreen"
-//                        text: "second"
-//                    }
-//                    ListElement {
-//                        color: "orchid"
-//                        text: "third"
-//                    }
-//                    ListElement {
-//                        color: "tomato"
-//                        text: "fourth"
-//                    }
-//                }
+            //                GridView {
+            //                    id: view
 
-//                GridView {
-//                    id: view
+            //                    anchors.margins: 10
+            //                    anchors.fill: parent
+            //                    cellHeight: 100
+            //                    cellWidth: cellHeight
+            //                    model: dataModel
+            //                    clip: true
 
-//                    anchors.margins: 10
-//                    anchors.fill: parent
-//                    cellHeight: 100
-//                    cellWidth: cellHeight
-//                    model: dataModel
-//                    clip: true
+            //                    highlight: Rectangle {
+            //                        color: "skyblue"
+            //                    }
 
-//                    highlight: Rectangle {
-//                        color: "skyblue"
-//                    }
+            //                    delegate: Item {
+            //                        property var view: GridView.view
+            //                        property var isCurrent: GridView.isCurrentItem
 
-//                    delegate: Item {
-//                        property var view: GridView.view
-//                        property var isCurrent: GridView.isCurrentItem
+            //                        height: view.cellHeight
+            //                        width: view.cellWidth
 
-//                        height: view.cellHeight
-//                        width: view.cellWidth
+            //                        Rectangle {
+            //                            anchors.margins: 5
+            //                            anchors.fill: parent
+            //                            color: model.color
+            //                            border {
+            //                                color: "black"
+            //                                width: 1
+            //                            }
 
-//                        Rectangle {
-//                            anchors.margins: 5
-//                            anchors.fill: parent
-//                            color: model.color
-//                            border {
-//                                color: "black"
-//                                width: 1
-//                            }
+            //                            Text {
+            //                                anchors.centerIn: parent
+            //                                renderType: Text.NativeRendering
+            //                                text: "%1%2".arg(model.text).arg(isCurrent ? " *" : "")
+            //                            }
 
-//                            Text {
-//                                anchors.centerIn: parent
-//                                renderType: Text.NativeRendering
-//                                text: "%1%2".arg(model.text).arg(isCurrent ? " *" : "")
-//                            }
+            //                            MouseArea {
+            //                                anchors.fill: parent
+            //                                onClicked: view.currentIndex = model.index
+            //                            }
+            //                        }
+            //                    }
+            //                }
+            //            }
 
-//                            MouseArea {
-//                                anchors.fill: parent
-//                                onClicked: view.currentIndex = model.index
-//                            }
-//                        }
-//                    }
-//                }
-//            }
+            //            Rectangle {
+            //                width: 360
+            //                height: 360
 
+            //                ListModel {
+            //                    id: dataModel
 
+            //                    ListElement {
+            //                        color: "orange"
+            //                        text: "first"
+            //                    }
+            //                    ListElement {
+            //                        color: "lightgreen"
+            //                        text: "second"
+            //                    }
+            //                    ListElement {
+            //                        color: "orchid"
+            //                        text: "third"
+            //                    }
+            //                    ListElement {
+            //                        color: "tomato"
+            //                        text: "fourth"
+            //                    }
+            //                }
 
+            //                TableView {
+            //                    id: view
 
+            //                    anchors.margins: 10
+            //                    anchors.fill: parent
+            //                    model: dataModel
+            //                    clip: true
 
+            //                    TableViewColumn {
+            //                        width: 100
+            //                        title: "Color"
+            //                        role: "color"
+            //                    }
+            //                    TableViewColumn {
+            //                        width: 100
+            //                        title: "Text"
+            //                        role: "text"
+            //                    }
 
-
-
-
-//            Rectangle {
-//                width: 360
-//                height: 360
-
-//                ListModel {
-//                    id: dataModel
-
-//                    ListElement {
-//                        color: "orange"
-//                        text: "first"
-//                    }
-//                    ListElement {
-//                        color: "lightgreen"
-//                        text: "second"
-//                    }
-//                    ListElement {
-//                        color: "orchid"
-//                        text: "third"
-//                    }
-//                    ListElement {
-//                        color: "tomato"
-//                        text: "fourth"
-//                    }
-//                }
-
-//                TableView {
-//                    id: view
-
-//                    anchors.margins: 10
-//                    anchors.fill: parent
-//                    model: dataModel
-//                    clip: true
-
-//                    TableViewColumn {
-//                        width: 100
-//                        title: "Color"
-//                        role: "color"
-//                    }
-//                    TableViewColumn {
-//                        width: 100
-//                        title: "Text"
-//                        role: "text"
-//                    }
-
-//                    itemDelegate: Item {
-//                        Text {
-//                            anchors.centerIn: parent
-//                            renderType: Text.NativeRendering
-//                            text: styleData.value
-//                        }
-//                    }
-//                }
-            }
+            //                    itemDelegate: Item {
+            //                        Text {
+            //                            anchors.centerIn: parent
+            //                            renderType: Text.NativeRendering
+            //                            text: styleData.value
+            //                        }
+            //                    }
+            //                }
         }
     }
 }
