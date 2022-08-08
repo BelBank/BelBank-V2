@@ -1,0 +1,227 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="F:\Documents\BSUIR\BelBank-V2\libs\soci\src\core\backend-loader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\Documents\BSUIR\BelBank-V2\libs\soci\src\core\blob.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\Documents\BSUIR\BelBank-V2\libs\soci\src\core\common.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\Documents\BSUIR\BelBank-V2\libs\soci\src\core\connection-parameters.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\Documents\BSUIR\BelBank-V2\libs\soci\src\core\connection-pool.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\Documents\BSUIR\BelBank-V2\libs\soci\src\core\error.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\Documents\BSUIR\BelBank-V2\libs\soci\src\core\into-type.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\Documents\BSUIR\BelBank-V2\libs\soci\src\core\logger.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\Documents\BSUIR\BelBank-V2\libs\soci\src\core\once-temp-type.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\Documents\BSUIR\BelBank-V2\libs\soci\src\core\prepare-temp-type.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\Documents\BSUIR\BelBank-V2\libs\soci\src\core\procedure.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\Documents\BSUIR\BelBank-V2\libs\soci\src\core\ref-counted-prepare-info.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\Documents\BSUIR\BelBank-V2\libs\soci\src\core\ref-counted-statement.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\Documents\BSUIR\BelBank-V2\libs\soci\src\core\row.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\Documents\BSUIR\BelBank-V2\libs\soci\src\core\rowid.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\Documents\BSUIR\BelBank-V2\libs\soci\src\core\session.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\Documents\BSUIR\BelBank-V2\libs\soci\src\core\soci-simple.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\Documents\BSUIR\BelBank-V2\libs\soci\src\core\statement.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\Documents\BSUIR\BelBank-V2\libs\soci\src\core\transaction.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\Documents\BSUIR\BelBank-V2\libs\soci\src\core\use-type.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\Documents\BSUIR\BelBank-V2\libs\soci\src\core\values.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="F:\Documents\BSUIR\BelBank-V2\libs\soci\include\soci\backend-loader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Documents\BSUIR\BelBank-V2\libs\soci\include\soci\bind-values.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Documents\BSUIR\BelBank-V2\libs\soci\include\soci\blob-exchange.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Documents\BSUIR\BelBank-V2\libs\soci\include\soci\blob.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Documents\BSUIR\BelBank-V2\libs\soci\include\soci\boost-fusion.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Documents\BSUIR\BelBank-V2\libs\soci\include\soci\boost-gregorian-date.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Documents\BSUIR\BelBank-V2\libs\soci\include\soci\boost-optional.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Documents\BSUIR\BelBank-V2\libs\soci\include\soci\boost-tuple.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Documents\BSUIR\BelBank-V2\libs\soci\include\soci\callbacks.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Documents\BSUIR\BelBank-V2\libs\soci\include\soci\column-info.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Documents\BSUIR\BelBank-V2\libs\soci\include\soci\connection-parameters.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Documents\BSUIR\BelBank-V2\libs\soci\include\soci\connection-pool.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Documents\BSUIR\BelBank-V2\libs\soci\include\soci\error.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Documents\BSUIR\BelBank-V2\libs\soci\include\soci\exchange-traits.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Documents\BSUIR\BelBank-V2\libs\soci\include\soci\into-type.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Documents\BSUIR\BelBank-V2\libs\soci\include\soci\into.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Documents\BSUIR\BelBank-V2\libs\soci\include\soci\logger.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Documents\BSUIR\BelBank-V2\libs\soci\include\soci\noreturn.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Documents\BSUIR\BelBank-V2\libs\soci\include\soci\once-temp-type.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Documents\BSUIR\BelBank-V2\libs\soci\include\soci\prepare-temp-type.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Documents\BSUIR\BelBank-V2\libs\soci\include\soci\procedure.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Documents\BSUIR\BelBank-V2\libs\soci\include\soci\query_transformation.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Documents\BSUIR\BelBank-V2\libs\soci\include\soci\ref-counted-prepare-info.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Documents\BSUIR\BelBank-V2\libs\soci\include\soci\ref-counted-statement.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Documents\BSUIR\BelBank-V2\libs\soci\include\soci\row-exchange.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Documents\BSUIR\BelBank-V2\libs\soci\include\soci\row.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Documents\BSUIR\BelBank-V2\libs\soci\include\soci\rowid-exchange.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Documents\BSUIR\BelBank-V2\libs\soci\include\soci\rowid.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Documents\BSUIR\BelBank-V2\libs\soci\include\soci\rowset.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Documents\BSUIR\BelBank-V2\libs\soci\include\soci\session.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Documents\BSUIR\BelBank-V2\libs\soci\include\soci\soci-backend.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Documents\BSUIR\BelBank-V2\libs\soci\include\soci\soci-platform.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Documents\BSUIR\BelBank-V2\libs\soci\include\soci\soci-simple.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Documents\BSUIR\BelBank-V2\libs\soci\include\soci\soci.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Documents\BSUIR\BelBank-V2\libs\soci\include\soci\statement.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Documents\BSUIR\BelBank-V2\libs\soci\include\soci\transaction.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Documents\BSUIR\BelBank-V2\libs\soci\include\soci\type-conversion-traits.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Documents\BSUIR\BelBank-V2\libs\soci\include\soci\type-conversion.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Documents\BSUIR\BelBank-V2\libs\soci\include\soci\type-holder.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Documents\BSUIR\BelBank-V2\libs\soci\include\soci\type-ptr.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Documents\BSUIR\BelBank-V2\libs\soci\include\soci\type-wrappers.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Documents\BSUIR\BelBank-V2\libs\soci\include\soci\unsigned-types.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Documents\BSUIR\BelBank-V2\libs\soci\include\soci\use-type.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Documents\BSUIR\BelBank-V2\libs\soci\include\soci\use.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Documents\BSUIR\BelBank-V2\libs\soci\include\soci\values-exchange.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Documents\BSUIR\BelBank-V2\libs\soci\include\soci\values.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Documents\BSUIR\BelBank-V2\libs\soci\include\soci\version.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="F:\Documents\BSUIR\BelBank-V2\libs\soci\src\core\CMakeLists.txt">
+      <Filter>CMake Files</Filter>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="CMake Files">
+      <UniqueIdentifier>{9B3E012D-E943-341C-A896-8D4D96CC515C}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{8F8C4774-FD88-328D-8571-8BA9FC7BE52E}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{C9B2F97D-433B-30CA-BCD8-56E622E15FD7}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

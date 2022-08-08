@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <CustomBuild Include="F:\Documents\BSUIR\BelBank-V2\libs\soci\build\CMakeFiles\a20a7a7e6f03a5901f54023e1fed6127\INSTALL_force.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="CMake Files">
+      <UniqueIdentifier>{9B3E012D-E943-341C-A896-8D4D96CC515C}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CMake Rules">
+      <UniqueIdentifier>{F0C84306-70EE-3D9C-A55C-040F8BF0B9BC}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

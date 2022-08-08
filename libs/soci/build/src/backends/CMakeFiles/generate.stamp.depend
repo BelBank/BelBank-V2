@@ -1,0 +1,5 @@
+# CMake generation dependency list for this directory.
+F:/Documents/BSUIR/BelBank-V2/libs/soci/cmake/modules/FindPostgreSQL.cmake
+F:/Documents/BSUIR/BelBank-V2/libs/soci/src/backends/CMakeLists.txt
+F:/Program Files/CMake/share/cmake-3.24/Modules/FindPackageHandleStandardArgs.cmake
+F:/Program Files/CMake/share/cmake-3.24/Modules/FindPackageMessage.cmake

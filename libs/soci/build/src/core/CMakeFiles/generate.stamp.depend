@@ -1,0 +1,7 @@
+# CMake generation dependency list for this directory.
+F:/Documents/BSUIR/BelBank-V2/libs/soci/cmake/resources/SOCIConfig.cmake.in
+F:/Documents/BSUIR/BelBank-V2/libs/soci/src/core/CMakeLists.txt
+F:/Documents/BSUIR/BelBank-V2/libs/soci/src/core/soci_backends_config.h.in
+F:/Program Files/CMake/share/cmake-3.24/Modules/BasicConfigVersion-SameMajorVersion.cmake.in
+F:/Program Files/CMake/share/cmake-3.24/Modules/CMakePackageConfigHelpers.cmake
+F:/Program Files/CMake/share/cmake-3.24/Modules/WriteBasicConfigVersionFile.cmake

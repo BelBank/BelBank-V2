@@ -1,0 +1,11 @@
+F:/Documents/BSUIR/BelBank-V2/libs/soci/build/CMakeFiles/INSTALL.dir
+F:/Documents/BSUIR/BelBank-V2/libs/soci/build/CMakeFiles/ALL_BUILD.dir
+F:/Documents/BSUIR/BelBank-V2/libs/soci/build/CMakeFiles/ZERO_CHECK.dir
+F:/Documents/BSUIR/BelBank-V2/libs/soci/build/src/CMakeFiles/INSTALL.dir
+F:/Documents/BSUIR/BelBank-V2/libs/soci/build/src/core/CMakeFiles/soci_core.dir
+F:/Documents/BSUIR/BelBank-V2/libs/soci/build/src/core/CMakeFiles/soci_core_static.dir
+F:/Documents/BSUIR/BelBank-V2/libs/soci/build/src/core/CMakeFiles/INSTALL.dir
+F:/Documents/BSUIR/BelBank-V2/libs/soci/build/src/backends/CMakeFiles/INSTALL.dir
+F:/Documents/BSUIR/BelBank-V2/libs/soci/build/src/backends/postgresql/CMakeFiles/soci_postgresql.dir
+F:/Documents/BSUIR/BelBank-V2/libs/soci/build/src/backends/postgresql/CMakeFiles/soci_postgresql_static.dir
+F:/Documents/BSUIR/BelBank-V2/libs/soci/build/src/backends/postgresql/CMakeFiles/INSTALL.dir

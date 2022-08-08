@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="F:\Documents\BSUIR\BelBank-V2\libs\soci\src\backends\postgresql\blob.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\Documents\BSUIR\BelBank-V2\libs\soci\src\backends\postgresql\error.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\Documents\BSUIR\BelBank-V2\libs\soci\src\backends\postgresql\factory.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\Documents\BSUIR\BelBank-V2\libs\soci\src\backends\postgresql\row-id.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\Documents\BSUIR\BelBank-V2\libs\soci\src\backends\postgresql\session.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\Documents\BSUIR\BelBank-V2\libs\soci\src\backends\postgresql\standard-into-type.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\Documents\BSUIR\BelBank-V2\libs\soci\src\backends\postgresql\standard-use-type.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\Documents\BSUIR\BelBank-V2\libs\soci\src\backends\postgresql\statement.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\Documents\BSUIR\BelBank-V2\libs\soci\src\backends\postgresql\vector-into-type.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\Documents\BSUIR\BelBank-V2\libs\soci\src\backends\postgresql\vector-use-type.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="F:\Documents\BSUIR\BelBank-V2\libs\soci\include\soci\postgresql\soci-postgresql.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="F:\Documents\BSUIR\BelBank-V2\libs\soci\src\backends\postgresql\CMakeLists.txt">
+      <Filter>CMake Files</Filter>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="CMake Files">
+      <UniqueIdentifier>{9B3E012D-E943-341C-A896-8D4D96CC515C}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{8F8C4774-FD88-328D-8571-8BA9FC7BE52E}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{C9B2F97D-433B-30CA-BCD8-56E622E15FD7}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

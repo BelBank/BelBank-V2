@@ -1,0 +1,396 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <PreferredToolArchitecture>x64</PreferredToolArchitecture>
+  </PropertyGroup>
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="MinSizeRel|x64">
+      <Configuration>MinSizeRel</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="RelWithDebInfo|x64">
+      <Configuration>RelWithDebInfo</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{12788F5D-FE36-3E14-80EE-68ABC72EA9BE}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <WindowsTargetPlatformVersion>10.0.19041.0</WindowsTargetPlatformVersion>
+    <Platform>x64</Platform>
+    <ProjectName>soci_core</ProjectName>
+    <VCProjectUpgraderObjectName>NoUpgrade</VCProjectUpgraderObjectName>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>10.0.20506.1</_ProjectFileVersion>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">F:\Documents\BSUIR\BelBank-V2\libs\soci\build\bin\Debug\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">soci_core.dir\Debug\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">soci_core_4_0</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">.dll</TargetExt>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</LinkIncremental>
+    <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</GenerateManifest>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">F:\Documents\BSUIR\BelBank-V2\libs\soci\build\bin\Release\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">soci_core.dir\Release\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">soci_core_4_0</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.dll</TargetExt>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkIncremental>
+    <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</GenerateManifest>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">F:\Documents\BSUIR\BelBank-V2\libs\soci\build\bin\MinSizeRel\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">soci_core.dir\MinSizeRel\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">soci_core_4_0</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">.dll</TargetExt>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">false</LinkIncremental>
+    <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">true</GenerateManifest>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">F:\Documents\BSUIR\BelBank-V2\libs\soci\build\bin\RelWithDebInfo\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">soci_core.dir\RelWithDebInfo\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">soci_core_4_0</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">.dll</TargetExt>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">true</LinkIncremental>
+    <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">true</GenerateManifest>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>F:\Documents\BSUIR\BelBank-V2\libs\soci\build;F:\Documents\BSUIR\BelBank-V2\libs\soci\include;F:\Documents\BSUIR\BelBank-V2\libs\soci\build\include;F:\Documents\BSUIR\BelBank-V2\libs\soci\include\private;F:\Documents\BSUIR\BelBank-V2\libs\soci\build\src\core;F:\Documents\BSUIR\BelBank-V2\libs\soci\src\core\..\..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <InlineFunctionExpansion>Disabled</InlineFunctionExpansion>
+      <Optimization>Disabled</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <TreatSpecificWarningsAsErrors>4266</TreatSpecificWarningsAsErrors>
+      <UseFullPaths>false</UseFullPaths>
+      <WarningLevel>Level4</WarningLevel>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;_CRT_SECURE_NO_DEPRECATE;_CRT_SECURE_NO_WARNINGS;_CRT_NONSTDC_NO_WARNING;_SCL_SECURE_NO_WARNINGS;SOCI_ABI_VERSION="4_0";SOCI_LIB_PREFIX="soci_";SOCI_LIB_SUFFIX=".dll";SOCI_DEBUG_POSTFIX="";CMAKE_INTDIR="Debug";SOCI_DLL</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_DEBUG;_WINDOWS;_CRT_SECURE_NO_DEPRECATE;_CRT_SECURE_NO_WARNINGS;_CRT_NONSTDC_NO_WARNING;_SCL_SECURE_NO_WARNINGS;SOCI_ABI_VERSION=\"4_0\";SOCI_LIB_PREFIX=\"soci_\";SOCI_LIB_SUFFIX=\".dll\";SOCI_DEBUG_POSTFIX=\"\";CMAKE_INTDIR=\"Debug\";SOCI_DLL</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>F:\Documents\BSUIR\BelBank-V2\libs\soci\build;F:\Documents\BSUIR\BelBank-V2\libs\soci\include;F:\Documents\BSUIR\BelBank-V2\libs\soci\build\include;F:\Documents\BSUIR\BelBank-V2\libs\soci\include\private;F:\Documents\BSUIR\BelBank-V2\libs\soci\build\src\core;F:\Documents\BSUIR\BelBank-V2\libs\soci\src\core\..\..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>F:\Documents\BSUIR\BelBank-V2\libs\soci\build;F:\Documents\BSUIR\BelBank-V2\libs\soci\include;F:\Documents\BSUIR\BelBank-V2\libs\soci\build\include;F:\Documents\BSUIR\BelBank-V2\libs\soci\include\private;F:\Documents\BSUIR\BelBank-V2\libs\soci\build\src\core;F:\Documents\BSUIR\BelBank-V2\libs\soci\src\core\..\..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Link>
+      <AdditionalDependencies>kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <ImportLibrary>F:/Documents/BSUIR/BelBank-V2/libs/soci/build/lib/Debug/soci_core_4_0.lib</ImportLibrary>
+      <ProgramDataBaseFile>F:/Documents/BSUIR/BelBank-V2/libs/soci/build/bin/Debug/soci_core_4_0.pdb</ProgramDataBaseFile>
+      <SubSystem>Console</SubSystem>
+    </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>F:\Documents\BSUIR\BelBank-V2\libs\soci\build;F:\Documents\BSUIR\BelBank-V2\libs\soci\include;F:\Documents\BSUIR\BelBank-V2\libs\soci\build\include;F:\Documents\BSUIR\BelBank-V2\libs\soci\include\private;F:\Documents\BSUIR\BelBank-V2\libs\soci\build\src\core;F:\Documents\BSUIR\BelBank-V2\libs\soci\src\core\..\..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
+      <Optimization>MaxSpeed</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <TreatSpecificWarningsAsErrors>4266</TreatSpecificWarningsAsErrors>
+      <UseFullPaths>false</UseFullPaths>
+      <WarningLevel>Level4</WarningLevel>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;_CRT_SECURE_NO_DEPRECATE;_CRT_SECURE_NO_WARNINGS;_CRT_NONSTDC_NO_WARNING;_SCL_SECURE_NO_WARNINGS;SOCI_ABI_VERSION="4_0";SOCI_LIB_PREFIX="soci_";SOCI_LIB_SUFFIX=".dll";SOCI_DEBUG_POSTFIX="";CMAKE_INTDIR="Release";SOCI_DLL</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <DebugInformationFormat>
+      </DebugInformationFormat>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;_CRT_SECURE_NO_DEPRECATE;_CRT_SECURE_NO_WARNINGS;_CRT_NONSTDC_NO_WARNING;_SCL_SECURE_NO_WARNINGS;SOCI_ABI_VERSION=\"4_0\";SOCI_LIB_PREFIX=\"soci_\";SOCI_LIB_SUFFIX=\".dll\";SOCI_DEBUG_POSTFIX=\"\";CMAKE_INTDIR=\"Release\";SOCI_DLL</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>F:\Documents\BSUIR\BelBank-V2\libs\soci\build;F:\Documents\BSUIR\BelBank-V2\libs\soci\include;F:\Documents\BSUIR\BelBank-V2\libs\soci\build\include;F:\Documents\BSUIR\BelBank-V2\libs\soci\include\private;F:\Documents\BSUIR\BelBank-V2\libs\soci\build\src\core;F:\Documents\BSUIR\BelBank-V2\libs\soci\src\core\..\..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>F:\Documents\BSUIR\BelBank-V2\libs\soci\build;F:\Documents\BSUIR\BelBank-V2\libs\soci\include;F:\Documents\BSUIR\BelBank-V2\libs\soci\build\include;F:\Documents\BSUIR\BelBank-V2\libs\soci\include\private;F:\Documents\BSUIR\BelBank-V2\libs\soci\build\src\core;F:\Documents\BSUIR\BelBank-V2\libs\soci\src\core\..\..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Link>
+      <AdditionalDependencies>kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <ImportLibrary>F:/Documents/BSUIR/BelBank-V2/libs/soci/build/lib/Release/soci_core_4_0.lib</ImportLibrary>
+      <ProgramDataBaseFile>F:/Documents/BSUIR/BelBank-V2/libs/soci/build/bin/Release/soci_core_4_0.pdb</ProgramDataBaseFile>
+      <SubSystem>Console</SubSystem>
+    </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>F:\Documents\BSUIR\BelBank-V2\libs\soci\build;F:\Documents\BSUIR\BelBank-V2\libs\soci\include;F:\Documents\BSUIR\BelBank-V2\libs\soci\build\include;F:\Documents\BSUIR\BelBank-V2\libs\soci\include\private;F:\Documents\BSUIR\BelBank-V2\libs\soci\build\src\core;F:\Documents\BSUIR\BelBank-V2\libs\soci\src\core\..\..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
+      <Optimization>MinSpace</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <TreatSpecificWarningsAsErrors>4266</TreatSpecificWarningsAsErrors>
+      <UseFullPaths>false</UseFullPaths>
+      <WarningLevel>Level4</WarningLevel>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;_CRT_SECURE_NO_DEPRECATE;_CRT_SECURE_NO_WARNINGS;_CRT_NONSTDC_NO_WARNING;_SCL_SECURE_NO_WARNINGS;SOCI_ABI_VERSION="4_0";SOCI_LIB_PREFIX="soci_";SOCI_LIB_SUFFIX=".dll";SOCI_DEBUG_POSTFIX="";CMAKE_INTDIR="MinSizeRel";SOCI_DLL</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <DebugInformationFormat>
+      </DebugInformationFormat>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;_CRT_SECURE_NO_DEPRECATE;_CRT_SECURE_NO_WARNINGS;_CRT_NONSTDC_NO_WARNING;_SCL_SECURE_NO_WARNINGS;SOCI_ABI_VERSION=\"4_0\";SOCI_LIB_PREFIX=\"soci_\";SOCI_LIB_SUFFIX=\".dll\";SOCI_DEBUG_POSTFIX=\"\";CMAKE_INTDIR=\"MinSizeRel\";SOCI_DLL</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>F:\Documents\BSUIR\BelBank-V2\libs\soci\build;F:\Documents\BSUIR\BelBank-V2\libs\soci\include;F:\Documents\BSUIR\BelBank-V2\libs\soci\build\include;F:\Documents\BSUIR\BelBank-V2\libs\soci\include\private;F:\Documents\BSUIR\BelBank-V2\libs\soci\build\src\core;F:\Documents\BSUIR\BelBank-V2\libs\soci\src\core\..\..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>F:\Documents\BSUIR\BelBank-V2\libs\soci\build;F:\Documents\BSUIR\BelBank-V2\libs\soci\include;F:\Documents\BSUIR\BelBank-V2\libs\soci\build\include;F:\Documents\BSUIR\BelBank-V2\libs\soci\include\private;F:\Documents\BSUIR\BelBank-V2\libs\soci\build\src\core;F:\Documents\BSUIR\BelBank-V2\libs\soci\src\core\..\..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Link>
+      <AdditionalDependencies>kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <ImportLibrary>F:/Documents/BSUIR/BelBank-V2/libs/soci/build/lib/MinSizeRel/soci_core_4_0.lib</ImportLibrary>
+      <ProgramDataBaseFile>F:/Documents/BSUIR/BelBank-V2/libs/soci/build/bin/MinSizeRel/soci_core_4_0.pdb</ProgramDataBaseFile>
+      <SubSystem>Console</SubSystem>
+    </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>F:\Documents\BSUIR\BelBank-V2\libs\soci\build;F:\Documents\BSUIR\BelBank-V2\libs\soci\include;F:\Documents\BSUIR\BelBank-V2\libs\soci\build\include;F:\Documents\BSUIR\BelBank-V2\libs\soci\include\private;F:\Documents\BSUIR\BelBank-V2\libs\soci\build\src\core;F:\Documents\BSUIR\BelBank-V2\libs\soci\src\core\..\..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
+      <Optimization>MaxSpeed</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <TreatSpecificWarningsAsErrors>4266</TreatSpecificWarningsAsErrors>
+      <UseFullPaths>false</UseFullPaths>
+      <WarningLevel>Level4</WarningLevel>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;_CRT_SECURE_NO_DEPRECATE;_CRT_SECURE_NO_WARNINGS;_CRT_NONSTDC_NO_WARNING;_SCL_SECURE_NO_WARNINGS;SOCI_ABI_VERSION="4_0";SOCI_LIB_PREFIX="soci_";SOCI_LIB_SUFFIX=".dll";SOCI_DEBUG_POSTFIX="";CMAKE_INTDIR="RelWithDebInfo";SOCI_DLL</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;_CRT_SECURE_NO_DEPRECATE;_CRT_SECURE_NO_WARNINGS;_CRT_NONSTDC_NO_WARNING;_SCL_SECURE_NO_WARNINGS;SOCI_ABI_VERSION=\"4_0\";SOCI_LIB_PREFIX=\"soci_\";SOCI_LIB_SUFFIX=\".dll\";SOCI_DEBUG_POSTFIX=\"\";CMAKE_INTDIR=\"RelWithDebInfo\";SOCI_DLL</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>F:\Documents\BSUIR\BelBank-V2\libs\soci\build;F:\Documents\BSUIR\BelBank-V2\libs\soci\include;F:\Documents\BSUIR\BelBank-V2\libs\soci\build\include;F:\Documents\BSUIR\BelBank-V2\libs\soci\include\private;F:\Documents\BSUIR\BelBank-V2\libs\soci\build\src\core;F:\Documents\BSUIR\BelBank-V2\libs\soci\src\core\..\..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>F:\Documents\BSUIR\BelBank-V2\libs\soci\build;F:\Documents\BSUIR\BelBank-V2\libs\soci\include;F:\Documents\BSUIR\BelBank-V2\libs\soci\build\include;F:\Documents\BSUIR\BelBank-V2\libs\soci\include\private;F:\Documents\BSUIR\BelBank-V2\libs\soci\build\src\core;F:\Documents\BSUIR\BelBank-V2\libs\soci\src\core\..\..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Link>
+      <AdditionalDependencies>kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <ImportLibrary>F:/Documents/BSUIR/BelBank-V2/libs/soci/build/lib/RelWithDebInfo/soci_core_4_0.lib</ImportLibrary>
+      <ProgramDataBaseFile>F:/Documents/BSUIR/BelBank-V2/libs/soci/build/bin/RelWithDebInfo/soci_core_4_0.pdb</ProgramDataBaseFile>
+      <SubSystem>Console</SubSystem>
+    </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <CustomBuild Include="F:\Documents\BSUIR\BelBank-V2\libs\soci\src\core\CMakeLists.txt">
+      <UseUtf8Encoding>Always</UseUtf8Encoding>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Building Custom Rule F:/Documents/BSUIR/BelBank-V2/libs/soci/src/core/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">setlocal
+"F:\Program Files\CMake\bin\cmake.exe" -SF:/Documents/BSUIR/BelBank-V2/libs/soci -BF:/Documents/BSUIR/BelBank-V2/libs/soci/build --check-stamp-file F:/Documents/BSUIR/BelBank-V2/libs/soci/build/src/core/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">F:\Documents\BSUIR\BelBank-V2\libs\soci\cmake\resources\SOCIConfig.cmake.in;F:\Documents\BSUIR\BelBank-V2\libs\soci\src\core\soci_backends_config.h.in;F:\Program Files\CMake\share\cmake-3.24\Modules\BasicConfigVersion-SameMajorVersion.cmake.in;F:\Program Files\CMake\share\cmake-3.24\Modules\CMakePackageConfigHelpers.cmake;F:\Program Files\CMake\share\cmake-3.24\Modules\WriteBasicConfigVersionFile.cmake;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">F:\Documents\BSUIR\BelBank-V2\libs\soci\build\src\core\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Building Custom Rule F:/Documents/BSUIR/BelBank-V2/libs/soci/src/core/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">setlocal
+"F:\Program Files\CMake\bin\cmake.exe" -SF:/Documents/BSUIR/BelBank-V2/libs/soci -BF:/Documents/BSUIR/BelBank-V2/libs/soci/build --check-stamp-file F:/Documents/BSUIR/BelBank-V2/libs/soci/build/src/core/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">F:\Documents\BSUIR\BelBank-V2\libs\soci\cmake\resources\SOCIConfig.cmake.in;F:\Documents\BSUIR\BelBank-V2\libs\soci\src\core\soci_backends_config.h.in;F:\Program Files\CMake\share\cmake-3.24\Modules\BasicConfigVersion-SameMajorVersion.cmake.in;F:\Program Files\CMake\share\cmake-3.24\Modules\CMakePackageConfigHelpers.cmake;F:\Program Files\CMake\share\cmake-3.24\Modules\WriteBasicConfigVersionFile.cmake;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">F:\Documents\BSUIR\BelBank-V2\libs\soci\build\src\core\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">Building Custom Rule F:/Documents/BSUIR/BelBank-V2/libs/soci/src/core/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">setlocal
+"F:\Program Files\CMake\bin\cmake.exe" -SF:/Documents/BSUIR/BelBank-V2/libs/soci -BF:/Documents/BSUIR/BelBank-V2/libs/soci/build --check-stamp-file F:/Documents/BSUIR/BelBank-V2/libs/soci/build/src/core/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">F:\Documents\BSUIR\BelBank-V2\libs\soci\cmake\resources\SOCIConfig.cmake.in;F:\Documents\BSUIR\BelBank-V2\libs\soci\src\core\soci_backends_config.h.in;F:\Program Files\CMake\share\cmake-3.24\Modules\BasicConfigVersion-SameMajorVersion.cmake.in;F:\Program Files\CMake\share\cmake-3.24\Modules\CMakePackageConfigHelpers.cmake;F:\Program Files\CMake\share\cmake-3.24\Modules\WriteBasicConfigVersionFile.cmake;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">F:\Documents\BSUIR\BelBank-V2\libs\soci\build\src\core\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">Building Custom Rule F:/Documents/BSUIR/BelBank-V2/libs/soci/src/core/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">setlocal
+"F:\Program Files\CMake\bin\cmake.exe" -SF:/Documents/BSUIR/BelBank-V2/libs/soci -BF:/Documents/BSUIR/BelBank-V2/libs/soci/build --check-stamp-file F:/Documents/BSUIR/BelBank-V2/libs/soci/build/src/core/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">F:\Documents\BSUIR\BelBank-V2\libs\soci\cmake\resources\SOCIConfig.cmake.in;F:\Documents\BSUIR\BelBank-V2\libs\soci\src\core\soci_backends_config.h.in;F:\Program Files\CMake\share\cmake-3.24\Modules\BasicConfigVersion-SameMajorVersion.cmake.in;F:\Program Files\CMake\share\cmake-3.24\Modules\CMakePackageConfigHelpers.cmake;F:\Program Files\CMake\share\cmake-3.24\Modules\WriteBasicConfigVersionFile.cmake;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">F:\Documents\BSUIR\BelBank-V2\libs\soci\build\src\core\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">false</LinkObjects>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="F:\Documents\BSUIR\BelBank-V2\libs\soci\include\soci\backend-loader.h" />
+    <ClInclude Include="F:\Documents\BSUIR\BelBank-V2\libs\soci\include\soci\bind-values.h" />
+    <ClInclude Include="F:\Documents\BSUIR\BelBank-V2\libs\soci\include\soci\blob-exchange.h" />
+    <ClInclude Include="F:\Documents\BSUIR\BelBank-V2\libs\soci\include\soci\blob.h" />
+    <ClInclude Include="F:\Documents\BSUIR\BelBank-V2\libs\soci\include\soci\boost-fusion.h" />
+    <ClInclude Include="F:\Documents\BSUIR\BelBank-V2\libs\soci\include\soci\boost-gregorian-date.h" />
+    <ClInclude Include="F:\Documents\BSUIR\BelBank-V2\libs\soci\include\soci\boost-optional.h" />
+    <ClInclude Include="F:\Documents\BSUIR\BelBank-V2\libs\soci\include\soci\boost-tuple.h" />
+    <ClInclude Include="F:\Documents\BSUIR\BelBank-V2\libs\soci\include\soci\callbacks.h" />
+    <ClInclude Include="F:\Documents\BSUIR\BelBank-V2\libs\soci\include\soci\column-info.h" />
+    <ClInclude Include="F:\Documents\BSUIR\BelBank-V2\libs\soci\include\soci\connection-parameters.h" />
+    <ClInclude Include="F:\Documents\BSUIR\BelBank-V2\libs\soci\include\soci\connection-pool.h" />
+    <ClInclude Include="F:\Documents\BSUIR\BelBank-V2\libs\soci\include\soci\error.h" />
+    <ClInclude Include="F:\Documents\BSUIR\BelBank-V2\libs\soci\include\soci\exchange-traits.h" />
+    <ClInclude Include="F:\Documents\BSUIR\BelBank-V2\libs\soci\include\soci\into-type.h" />
+    <ClInclude Include="F:\Documents\BSUIR\BelBank-V2\libs\soci\include\soci\into.h" />
+    <ClInclude Include="F:\Documents\BSUIR\BelBank-V2\libs\soci\include\soci\logger.h" />
+    <ClInclude Include="F:\Documents\BSUIR\BelBank-V2\libs\soci\include\soci\noreturn.h" />
+    <ClInclude Include="F:\Documents\BSUIR\BelBank-V2\libs\soci\include\soci\once-temp-type.h" />
+    <ClInclude Include="F:\Documents\BSUIR\BelBank-V2\libs\soci\include\soci\prepare-temp-type.h" />
+    <ClInclude Include="F:\Documents\BSUIR\BelBank-V2\libs\soci\include\soci\procedure.h" />
+    <ClInclude Include="F:\Documents\BSUIR\BelBank-V2\libs\soci\include\soci\query_transformation.h" />
+    <ClInclude Include="F:\Documents\BSUIR\BelBank-V2\libs\soci\include\soci\ref-counted-prepare-info.h" />
+    <ClInclude Include="F:\Documents\BSUIR\BelBank-V2\libs\soci\include\soci\ref-counted-statement.h" />
+    <ClInclude Include="F:\Documents\BSUIR\BelBank-V2\libs\soci\include\soci\row-exchange.h" />
+    <ClInclude Include="F:\Documents\BSUIR\BelBank-V2\libs\soci\include\soci\row.h" />
+    <ClInclude Include="F:\Documents\BSUIR\BelBank-V2\libs\soci\include\soci\rowid-exchange.h" />
+    <ClInclude Include="F:\Documents\BSUIR\BelBank-V2\libs\soci\include\soci\rowid.h" />
+    <ClInclude Include="F:\Documents\BSUIR\BelBank-V2\libs\soci\include\soci\rowset.h" />
+    <ClInclude Include="F:\Documents\BSUIR\BelBank-V2\libs\soci\include\soci\session.h" />
+    <ClInclude Include="F:\Documents\BSUIR\BelBank-V2\libs\soci\include\soci\soci-backend.h" />
+    <ClInclude Include="F:\Documents\BSUIR\BelBank-V2\libs\soci\include\soci\soci-platform.h" />
+    <ClInclude Include="F:\Documents\BSUIR\BelBank-V2\libs\soci\include\soci\soci-simple.h" />
+    <ClInclude Include="F:\Documents\BSUIR\BelBank-V2\libs\soci\include\soci\soci.h" />
+    <ClInclude Include="F:\Documents\BSUIR\BelBank-V2\libs\soci\include\soci\statement.h" />
+    <ClInclude Include="F:\Documents\BSUIR\BelBank-V2\libs\soci\include\soci\transaction.h" />
+    <ClInclude Include="F:\Documents\BSUIR\BelBank-V2\libs\soci\include\soci\type-conversion-traits.h" />
+    <ClInclude Include="F:\Documents\BSUIR\BelBank-V2\libs\soci\include\soci\type-conversion.h" />
+    <ClInclude Include="F:\Documents\BSUIR\BelBank-V2\libs\soci\include\soci\type-holder.h" />
+    <ClInclude Include="F:\Documents\BSUIR\BelBank-V2\libs\soci\include\soci\type-ptr.h" />
+    <ClInclude Include="F:\Documents\BSUIR\BelBank-V2\libs\soci\include\soci\type-wrappers.h" />
+    <ClInclude Include="F:\Documents\BSUIR\BelBank-V2\libs\soci\include\soci\unsigned-types.h" />
+    <ClInclude Include="F:\Documents\BSUIR\BelBank-V2\libs\soci\include\soci\use-type.h" />
+    <ClInclude Include="F:\Documents\BSUIR\BelBank-V2\libs\soci\include\soci\use.h" />
+    <ClInclude Include="F:\Documents\BSUIR\BelBank-V2\libs\soci\include\soci\values-exchange.h" />
+    <ClInclude Include="F:\Documents\BSUIR\BelBank-V2\libs\soci\include\soci\values.h" />
+    <ClInclude Include="F:\Documents\BSUIR\BelBank-V2\libs\soci\include\soci\version.h" />
+    <ClCompile Include="F:\Documents\BSUIR\BelBank-V2\libs\soci\src\core\backend-loader.cpp" />
+    <ClCompile Include="F:\Documents\BSUIR\BelBank-V2\libs\soci\src\core\blob.cpp" />
+    <ClCompile Include="F:\Documents\BSUIR\BelBank-V2\libs\soci\src\core\common.cpp" />
+    <ClCompile Include="F:\Documents\BSUIR\BelBank-V2\libs\soci\src\core\connection-parameters.cpp" />
+    <ClCompile Include="F:\Documents\BSUIR\BelBank-V2\libs\soci\src\core\connection-pool.cpp" />
+    <ClCompile Include="F:\Documents\BSUIR\BelBank-V2\libs\soci\src\core\error.cpp" />
+    <ClCompile Include="F:\Documents\BSUIR\BelBank-V2\libs\soci\src\core\into-type.cpp" />
+    <ClCompile Include="F:\Documents\BSUIR\BelBank-V2\libs\soci\src\core\logger.cpp" />
+    <ClCompile Include="F:\Documents\BSUIR\BelBank-V2\libs\soci\src\core\once-temp-type.cpp" />
+    <ClCompile Include="F:\Documents\BSUIR\BelBank-V2\libs\soci\src\core\prepare-temp-type.cpp" />
+    <ClCompile Include="F:\Documents\BSUIR\BelBank-V2\libs\soci\src\core\procedure.cpp" />
+    <ClCompile Include="F:\Documents\BSUIR\BelBank-V2\libs\soci\src\core\ref-counted-prepare-info.cpp" />
+    <ClCompile Include="F:\Documents\BSUIR\BelBank-V2\libs\soci\src\core\ref-counted-statement.cpp" />
+    <ClCompile Include="F:\Documents\BSUIR\BelBank-V2\libs\soci\src\core\row.cpp" />
+    <ClCompile Include="F:\Documents\BSUIR\BelBank-V2\libs\soci\src\core\rowid.cpp" />
+    <ClCompile Include="F:\Documents\BSUIR\BelBank-V2\libs\soci\src\core\session.cpp" />
+    <ClCompile Include="F:\Documents\BSUIR\BelBank-V2\libs\soci\src\core\soci-simple.cpp" />
+    <ClCompile Include="F:\Documents\BSUIR\BelBank-V2\libs\soci\src\core\statement.cpp" />
+    <ClCompile Include="F:\Documents\BSUIR\BelBank-V2\libs\soci\src\core\transaction.cpp" />
+    <ClCompile Include="F:\Documents\BSUIR\BelBank-V2\libs\soci\src\core\use-type.cpp" />
+    <ClCompile Include="F:\Documents\BSUIR\BelBank-V2\libs\soci\src\core\values.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="F:\Documents\BSUIR\BelBank-V2\libs\soci\build\ZERO_CHECK.vcxproj">
+      <Project>{4D53E5C8-385B-31A2-8C12-28CB4ED4735E}</Project>
+      <Name>ZERO_CHECK</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
