@@ -1,5 +1,18 @@
 <RCC>
     <qresource prefix="/">
-        <file>main.qml</file>
+        <file>AuthorizationWindow.qml</file>
+        <file>images/capture_20220617214014956.png</file>
+        <file>images/EURO.png</file>
+        <file>images/Fon.jpg</file>
+        <file>images/free-icon-telephone-4996346 (1).png</file>
+        <file>images/Golden Card Mastercard.png</file>
+        <file>images/Golden card MIR .png</file>
+        <file>images/Golden card VISA.png</file>
+        <file>images/RUB.png</file>
+        <file>images/Silver card Mastercard.png</file>
+        <file>images/Silver card MIR.png</file>
+        <file>images/Silver card VISA.png</file>
+        <file>images/USD.png</file>
+        <file>MainWindow.qml</file>
     </qresource>
 </RCC>
