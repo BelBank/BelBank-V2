@@ -410,6 +410,8 @@ Window {
                 height: 230
                 color: "#fdffbd"
                 anchors {
+                    top: new_card.bottom
+                    topMargin: 40
                     bottom: finance.bottom
                     left: finance.left
                     right: finance.right
@@ -561,7 +563,7 @@ Window {
                     right: finance.right
                     rightMargin: 50
                     leftMargin: 50
-                    topMargin: 15
+                    topMargin: 10
                     bottomMargin: 40
                 }
                 color: "#d088f2"
@@ -594,6 +596,164 @@ Window {
                         parent.border.color = "#7d3a9c"
                     }
                 }
+            }
+        }
+
+        Rectangle {
+            id: payments
+            anchors {
+                top: body.top
+                bottom: body.bottom
+                left: finance.right
+                right: body.right
+                margins: 10
+            }
+            radius: 8
+            border.width: 3
+            border.color: "#d088f2"
+            color: "#fdffbd"
+
+            Text {
+                id: payments_text
+                anchors {
+                    horizontalCenter: payments.horizontalCenter
+                    top: payments.top
+                }
+                text: "Платежи и переводы"
+                font.pixelSize: 26
+            }
+
+
+//            Rectangle {
+//                width: 360
+//                height: 360
+
+//                ListModel {
+//                    id: dataModel
+
+//                    ListElement {
+//                        color: "orange"
+//                        text: "first"
+//                    }
+//                    ListElement {
+//                        color: "lightgreen"
+//                        text: "second"
+//                    }
+//                    ListElement {
+//                        color: "orchid"
+//                        text: "third"
+//                    }
+//                    ListElement {
+//                        color: "tomato"
+//                        text: "fourth"
+//                    }
+//                }
+
+//                GridView {
+//                    id: view
+
+//                    anchors.margins: 10
+//                    anchors.fill: parent
+//                    cellHeight: 100
+//                    cellWidth: cellHeight
+//                    model: dataModel
+//                    clip: true
+
+//                    highlight: Rectangle {
+//                        color: "skyblue"
+//                    }
+
+//                    delegate: Item {
+//                        property var view: GridView.view
+//                        property var isCurrent: GridView.isCurrentItem
+
+//                        height: view.cellHeight
+//                        width: view.cellWidth
+
+//                        Rectangle {
+//                            anchors.margins: 5
+//                            anchors.fill: parent
+//                            color: model.color
+//                            border {
+//                                color: "black"
+//                                width: 1
+//                            }
+
+//                            Text {
+//                                anchors.centerIn: parent
+//                                renderType: Text.NativeRendering
+//                                text: "%1%2".arg(model.text).arg(isCurrent ? " *" : "")
+//                            }
+
+//                            MouseArea {
+//                                anchors.fill: parent
+//                                onClicked: view.currentIndex = model.index
+//                            }
+//                        }
+//                    }
+//                }
+//            }
+
+
+
+
+
+
+
+
+
+//            Rectangle {
+//                width: 360
+//                height: 360
+
+//                ListModel {
+//                    id: dataModel
+
+//                    ListElement {
+//                        color: "orange"
+//                        text: "first"
+//                    }
+//                    ListElement {
+//                        color: "lightgreen"
+//                        text: "second"
+//                    }
+//                    ListElement {
+//                        color: "orchid"
+//                        text: "third"
+//                    }
+//                    ListElement {
+//                        color: "tomato"
+//                        text: "fourth"
+//                    }
+//                }
+
+//                TableView {
+//                    id: view
+
+//                    anchors.margins: 10
+//                    anchors.fill: parent
+//                    model: dataModel
+//                    clip: true
+
+//                    TableViewColumn {
+//                        width: 100
+//                        title: "Color"
+//                        role: "color"
+//                    }
+//                    TableViewColumn {
+//                        width: 100
+//                        title: "Text"
+//                        role: "text"
+//                    }
+
+//                    itemDelegate: Item {
+//                        Text {
+//                            anchors.centerIn: parent
+//                            renderType: Text.NativeRendering
+//                            text: styleData.value
+//                        }
+//                    }
+//                }
             }
         }
     }
