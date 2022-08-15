@@ -92,7 +92,7 @@ Window {
         radius: 10
 
         TextInput {
-            id: text
+            id: password_text
             maximumLength: 25
             anchors {
                 top: password.top
