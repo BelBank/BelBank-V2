@@ -14,5 +14,8 @@
         <file>images/Silver card VISA.png</file>
         <file>images/USD.png</file>
         <file>MainWindow.qml</file>
+        <file>RegistrationWindow.qml</file>
+        <file>Main.qml</file>
+        <file>NewCardWindow.qml</file>
     </qresource>
 </RCC>

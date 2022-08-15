@@ -1,6 +1,7 @@
-import QtQuick 2.0
+import QtQuick 2.15
 import QtQuick.Layouts 1.15
 import QtQuick.Controls 2.15
+import QtQuick.Window 2.12
 
 Window {
     id: mainwindow
@@ -41,7 +42,7 @@ Window {
             font.pixelSize: 30
             font.bold: true
 
-            text: "Pidor" ///тут должен присваиваться ник клиента.
+            text: "Nickname" ///тут должен присваиваться ник клиента.
         }
 
         Rectangle {
@@ -71,7 +72,7 @@ Window {
             MouseArea {
                 anchors.fill: parent
                 onClicked: {
-
+                    set_authorization_window()
                 }
                 onPressed: {
                     parent.color = "#7d3a9c"
@@ -180,6 +181,10 @@ Window {
             left: parent.left
         }
         color: "#fdffbd"
+        anchors.rightMargin: 0
+        anchors.bottomMargin: 0
+        anchors.leftMargin: 0
+        anchors.topMargin: 0
 
         Rectangle {
             id: finance
@@ -202,7 +207,7 @@ Window {
                     top: finance.top
                 }
                 text: "Финансы"
-                font.pixelSize: 26
+                font.pixelSize: 30
             }
 
             ListView {
@@ -437,6 +442,8 @@ Window {
 
                         id: cash_title
                         font.pixelSize: 25
+                        font.bold: true
+
                         Layout.alignment: Qt.AlignCenter
                         text: "Курсы валют в отделениях БелБанка"
                     }
@@ -445,21 +452,26 @@ Window {
                         Layout.columnSpan: 2
                         Layout.column: 0
                         font.pixelSize: 19
-                        text: "Валюта"
+                        font.bold: true
+                        text: "Валюта:"
                     }
                     Text {
                         Layout.row: 1
                         Layout.columnSpan: 1
                         Layout.column: 2
                         font.pixelSize: 19
-                        text: "Продажа"
+                        font.bold: true
+
+                        text: "Продажа:"
                     }
                     Text {
                         Layout.row: 1
                         Layout.columnSpan: 1
                         Layout.column: 3
                         font.pixelSize: 19
-                        text: "Покупка"
+                        font.bold: true
+
+                        text: "Покупка:"
                     }
                     Text {
                         Layout.row: 2
@@ -467,10 +479,10 @@ Window {
                         Layout.column: 0
                         id: rub
                         text: "100RUB"
-                        font.pixelSize: 12
+                        font.pixelSize: 20
                         Image {
-                            width: 20
-                            height: 20
+                            width: 40
+                            height: 30
                             source: "images/RUB.png"
                             anchors {
                                 left: rub.right
@@ -481,14 +493,14 @@ Window {
                         Layout.row: 2
                         Layout.columnSpan: 1
                         Layout.column: 2
-                        font.pixelSize: 18
+                        font.pixelSize: 24
                         text: "4.32"
                     }
                     Text {
                         Layout.row: 2
                         Layout.columnSpan: 1
                         Layout.column: 3
-                        font.pixelSize: 18
+                        font.pixelSize: 24
                         text: "4.297"
                     }
                     Text {
@@ -497,10 +509,10 @@ Window {
                         Layout.column: 0
                         id: usd
                         text: "1USD"
-                        font.pixelSize: 12
+                        font.pixelSize: 20
                         Image {
-                            width: 20
-                            height: 20
+                            width: 40
+                            height: 30
                             source: "images/USD.png"
                             anchors {
                                 left: usd.right
@@ -511,14 +523,14 @@ Window {
                         Layout.row: 3
                         Layout.columnSpan: 1
                         Layout.column: 2
-                        font.pixelSize: 18
+                        font.pixelSize: 24
                         text: "2.63"
                     }
                     Text {
                         Layout.row: 3
                         Layout.columnSpan: 1
                         Layout.column: 3
-                        font.pixelSize: 18
+                        font.pixelSize: 24
                         text: "2.59"
                     }
                     Text {
@@ -527,10 +539,10 @@ Window {
                         Layout.column: 0
                         id: euro
                         text: "1EURO"
-                        font.pixelSize: 12
+                        font.pixelSize: 20
                         Image {
-                            width: 20
-                            height: 20
+                            width: 40
+                            height: 30
                             source: "images/EURO.png"
                             anchors {
                                 left: euro.right
@@ -541,14 +553,14 @@ Window {
                         Layout.row: 4
                         Layout.columnSpan: 1
                         Layout.column: 2
-                        font.pixelSize: 18
+                        font.pixelSize: 24
                         text: "3.2"
                     }
                     Text {
                         Layout.row: 4
                         Layout.columnSpan: 1
                         Layout.column: 3
-                        font.pixelSize: 18
+                        font.pixelSize: 24
                         text: "3.15"
                     }
                 }
@@ -581,10 +593,7 @@ Window {
                 MouseArea {
                     anchors.fill: parent
                     onClicked: {
-
-                        //////////////////////////////
-                        //////////многооконность блядь
-                        //////////////////////////////
+                        set_new_card_window()
                     }
 
                     onPressed: {
@@ -610,6 +619,10 @@ Window {
             }
             radius: 8
             border.width: 3
+            anchors.rightMargin: 8
+            anchors.bottomMargin: 10
+            anchors.leftMargin: 12
+            anchors.topMargin: 10
             border.color: "#d088f2"
             color: "#fdffbd"
 
@@ -620,131 +633,299 @@ Window {
                     top: payments.top
                 }
                 text: "Платежи и переводы"
-                font.pixelSize: 26
+                font.pixelSize: 30
             }
 
-            //            Rectangle {
-            //                width: 360
-            //                height: 360
+            Text {
+                id: erip_text
+                x: 30
+                y: 60
+                width: 295
+                height: 37
+                text: qsTr("Система Расчета ЕРИП")
+                font.pixelSize: 28
+                anchors {
+                    horizontalCenter: erip.horizontalCenter
+                    top: payments_text.bottom
+                    topMargin: 15
+                }
+            }
 
-            //                ListModel {
-            //                    id: dataModel
+            Rectangle {
+                id: popular_payments
 
-            //                    ListElement {
-            //                        color: "orange"
-            //                        text: "first"
-            //                    }
-            //                    ListElement {
-            //                        color: "lightgreen"
-            //                        text: "second"
-            //                    }
-            //                    ListElement {
-            //                        color: "orchid"
-            //                        text: "third"
-            //                    }
-            //                    ListElement {
-            //                        color: "tomato"
-            //                        text: "fourth"
-            //                    }
-            //                }
+                height: payments.height / 4
+                border.color: "#d088f2"
+                color: "#fdffbd"
+                border.width: 3
+                radius: 8
+                anchors {
+                    left: erip.right
+                    leftMargin: 25
+                    right: payments.right
+                    rightMargin: 30
+                    top: erip.top
+                }
+            }
 
-            //                GridView {
-            //                    id: view
+            Text {
+                id: popular_payments_text
 
-            //                    anchors.margins: 10
-            //                    anchors.fill: parent
-            //                    cellHeight: 100
-            //                    cellWidth: cellHeight
-            //                    model: dataModel
-            //                    clip: true
+                text: qsTr("Популярные платежи")
+                font.pixelSize: 28
+                anchors {
+                    top: erip_text.top
+                    horizontalCenter: popular_payments.horizontalCenter
+                }
+            }
 
-            //                    highlight: Rectangle {
-            //                        color: "skyblue"
-            //                    }
+            Rectangle {
+                id: selected_payments
+                height: payments.height / 4
+                anchors {
 
-            //                    delegate: Item {
-            //                        property var view: GridView.view
-            //                        property var isCurrent: GridView.isCurrentItem
+                    top: selected_payments_text.bottom
+                    topMargin: 15
+                    left: erip.right
+                    leftMargin: 25
+                    right: payments.right
+                    rightMargin: 30
+                }
+                border.color: "#d088f2"
+                color: "#fdffbd"
+                border.width: 3
+                radius: 8
+            }
 
-            //                        height: view.cellHeight
-            //                        width: view.cellWidth
+            Text {
+                id: selected_payments_text
+                text: qsTr("Избранные платежи")
+                font.pixelSize: 28
+                anchors {
+                    top: popular_payments.bottom
+                    topMargin: 10
+                    horizontalCenter: popular_payments.horizontalCenter
+                }
+            }
 
-            //                        Rectangle {
-            //                            anchors.margins: 5
-            //                            anchors.fill: parent
-            //                            color: model.color
-            //                            border {
-            //                                color: "black"
-            //                                width: 1
-            //                            }
+            Text {
+                id: payments_history_text
+                text: qsTr("История платежей")
+                font.pixelSize: 28
+                anchors {
+                    top: selected_payments.bottom
+                    topMargin: 10
+                    horizontalCenter: popular_payments.horizontalCenter
+                }
+            }
 
-            //                            Text {
-            //                                anchors.centerIn: parent
-            //                                renderType: Text.NativeRendering
-            //                                text: "%1%2".arg(model.text).arg(isCurrent ? " *" : "")
-            //                            }
+            Rectangle {
+                id: payments_history
 
-            //                            MouseArea {
-            //                                anchors.fill: parent
-            //                                onClicked: view.currentIndex = model.index
-            //                            }
-            //                        }
-            //                    }
-            //                }
-            //            }
+                anchors {
 
-            //            Rectangle {
-            //                width: 360
-            //                height: 360
+                    top: payments_history_text.bottom
+                    topMargin: 15
+                    left: erip.right
+                    leftMargin: 25
+                    right: payments.right
+                    rightMargin: 30
+                    bottom: payments.bottom
+                    bottomMargin: 20
+                }
+                border.color: "#d088f2"
+                color: "#fdffbd"
+                border.width: 3
+                radius: 8
+            }
 
-            //                ListModel {
-            //                    id: dataModel
+            ListView {
+                id: erip
+                x: 41
+                y: 112
+                width: 385
+                height: 719
+                anchors {
+                    left: payments.left
+                    leftMargin: 40
+                    bottom: payments.bottom
+                    bottomMargin: 20
+                    top: erip_text.bottom
+                    topMargin: 15
+                }
 
-            //                    ListElement {
-            //                        color: "orange"
-            //                        text: "first"
-            //                    }
-            //                    ListElement {
-            //                        color: "lightgreen"
-            //                        text: "second"
-            //                    }
-            //                    ListElement {
-            //                        color: "orchid"
-            //                        text: "third"
-            //                    }
-            //                    ListElement {
-            //                        color: "tomato"
-            //                        text: "fourth"
-            //                    }
-            //                }
+                model: ListModel {
+                    ListElement {
+                        colorCode: "grey"
+                    }
 
-            //                TableView {
-            //                    id: view
+                    ListElement {
+                        colorCode: "red"
+                    }
 
-            //                    anchors.margins: 10
-            //                    anchors.fill: parent
-            //                    model: dataModel
-            //                    clip: true
+                    ListElement {
+                        colorCode: "blue"
+                    }
 
-            //                    TableViewColumn {
-            //                        width: 100
-            //                        title: "Color"
-            //                        role: "color"
-            //                    }
-            //                    TableViewColumn {
-            //                        width: 100
-            //                        title: "Text"
-            //                        role: "text"
-            //                    }
+                    ListElement {
+                        colorCode: "green"
+                    }
+                }
+                delegate: Item {
+                    x: 5
+                    width: 200
+                    height: 40
+                    Row {
+                        id: row1
+                        spacing: 10
+                        Rectangle {
+                            width: 385
+                            height: 40
+                            color: colorCode
+                        }
 
-            //                    itemDelegate: Item {
-            //                        Text {
-            //                            anchors.centerIn: parent
-            //                            renderType: Text.NativeRendering
-            //                            text: styleData.value
-            //                        }
-            //                    }
-            //                }
+                        Text {
+                            text: "aaa"
+                            anchors.verticalCenter: parent.verticalCenter
+                            font.bold: true
+                        }
+                    }
+                }
+            }
         }
+
+        //            Rectangle {
+        //                width: 360
+        //                height: 360
+
+        //                ListModel {
+        //                    id: dataModel
+
+        //                    ListElement {
+        //                        color: "orange"
+        //                        text: "first"
+        //                    }
+        //                    ListElement {
+        //                        color: "lightgreen"
+        //                        text: "second"
+        //                    }
+        //                    ListElement {
+        //                        color: "orchid"
+        //                        text: "third"
+        //                    }
+        //                    ListElement {
+        //                        color: "tomato"
+        //                        text: "fourth"
+        //                    }
+        //                }
+
+        //                GridView {
+        //                    id: view
+
+        //                    anchors.margins: 10
+        //                    anchors.fill: parent
+        //                    cellHeight: 100
+        //                    cellWidth: cellHeight
+        //                    model: dataModel
+        //                    clip: true
+
+        //                    highlight: Rectangle {
+        //                        color: "skyblue"
+        //                    }
+
+        //                    delegate: Item {
+        //                        property var view: GridView.view
+        //                        property var isCurrent: GridView.isCurrentItem
+
+        //                        height: view.cellHeight
+        //                        width: view.cellWidth
+
+        //                        Rectangle {
+        //                            anchors.margins: 5
+        //                            anchors.fill: parent
+        //                            color: model.color
+        //                            border {
+        //                                color: "black"
+        //                                width: 1
+        //                            }
+
+        //                            Text {
+        //                                anchors.centerIn: parent
+        //                                renderType: Text.NativeRendering
+        //                                text: "%1%2".arg(model.text).arg(isCurrent ? " *" : "")
+        //                            }
+
+        //                            MouseArea {
+        //                                anchors.fill: parent
+        //                                onClicked: view.currentIndex = model.index
+        //                            }
+        //                        }
+        //                    }
+        //                }
+        //            }
+
+        //            Rectangle {
+        //                width: 360
+        //                height: 360
+
+        //                ListModel {
+        //                    id: dataModel
+
+        //                    ListElement {
+        //                        color: "orange"
+        //                        text: "first"
+        //                    }
+        //                    ListElement {
+        //                        color: "lightgreen"
+        //                        text: "second"
+        //                    }
+        //                    ListElement {
+        //                        color: "orchid"
+        //                        text: "third"
+        //                    }
+        //                    ListElement {
+        //                        color: "tomato"
+        //                        text: "fourth"
+        //                    }
+        //                }
+
+        //                TableView {
+        //                    id: view
+
+        //                    anchors.margins: 10
+        //                    anchors.fill: parent
+        //                    model: dataModel
+        //                    clip: true
+
+        //                    TableViewColumn {
+        //                        width: 100
+        //                        title: "Color"
+        //                        role: "color"
+        //                    }
+        //                    TableViewColumn {
+        //                        width: 100
+        //                        title: "Text"
+        //                        role: "text"
+        //                    }
+
+        //                    itemDelegate: Item {
+        //                        Text {
+        //                            anchors.centerIn: parent
+        //                            renderType: Text.NativeRendering
+        //                            text: styleData.value
+        //                        }
+        //                    }
+        //                }
     }
 }
+
+/*##^##
+Designer {
+    D{i:0;formeditorZoom:0.5}D{i:2}D{i:3}D{i:5}D{i:6}D{i:4}D{i:7}D{i:8}D{i:9}D{i:10}D{i:11}
+D{i:12}D{i:1}D{i:14}D{i:13}D{i:17}D{i:24}D{i:18}D{i:40}D{i:41}D{i:42}D{i:43}D{i:45}
+D{i:44}D{i:46}D{i:47}D{i:49}D{i:48}D{i:50}D{i:51}D{i:53}D{i:52}D{i:54}D{i:55}D{i:39}
+D{i:38}D{i:57}D{i:58}D{i:56}D{i:16}D{i:60}D{i:61}D{i:62}D{i:63}D{i:64}D{i:65}D{i:66}
+D{i:67}D{i:68}D{i:59}D{i:15}
+}
+##^##*/
+
