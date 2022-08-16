@@ -21,7 +21,7 @@ Window {
 
         Image {
             id: logo
-            width: 300
+            width: 143
             height: 100
             source: "images/capture_20220617214014956.png"
             anchors {
@@ -428,7 +428,9 @@ Window {
                 border.width: 3
                 border.color: "#d088f2"
                 GridLayout {
-                    rows: 5
+                    anchors.bottomMargin: 20
+                    anchors.topMargin: 8
+                    rows: 7
                     columns: 4
                     anchors {
                         fill: parent
@@ -538,7 +540,7 @@ Window {
                         Layout.columnSpan: 2
                         Layout.column: 0
                         id: euro
-                        text: "1EURO"
+                        text: "1EUR"
                         font.pixelSize: 20
                         Image {
                             width: 40
@@ -562,6 +564,68 @@ Window {
                         Layout.column: 3
                         font.pixelSize: 24
                         text: "3.15"
+                    }
+
+                    Text {
+                        Layout.row: 5
+                        Layout.columnSpan: 2
+                        Layout.column: 0
+                        id: china
+                        text: "10CNY"
+                        font.pixelSize: 20
+                        Image {
+                            width: 40
+                            height: 30
+                            source: "images/china.jpg"
+                            anchors {
+                                left: china.right
+                            }
+                        }
+                    }
+                    Text {
+                        Layout.row: 5
+                        Layout.columnSpan: 1
+                        Layout.column: 2
+                        font.pixelSize: 24
+                        text: "4"
+                    }
+                    Text {
+                        Layout.row: 5
+                        Layout.columnSpan: 1
+                        Layout.column: 3
+                        font.pixelSize: 24
+                        text: "3.679"
+                    }
+
+                    Text {
+                        Layout.row: 6
+                        Layout.columnSpan: 2
+                        Layout.column: 0
+                        id: pln
+                        text: "10PLN"
+                        font.pixelSize: 20
+                        Image {
+                            width: 40
+                            height: 30
+                            source: "images/PLN.jpg"
+                            anchors {
+                                left: pln.right
+                            }
+                        }
+                    }
+                    Text {
+                        Layout.row: 6
+                        Layout.columnSpan: 1
+                        Layout.column: 2
+                        font.pixelSize: 24
+                        text: "5.64"
+                    }
+                    Text {
+                        Layout.row: 6
+                        Layout.columnSpan: 1
+                        Layout.column: 3
+                        font.pixelSize: 24
+                        text: "5.14"
                     }
                 }
             }
@@ -654,7 +718,7 @@ Window {
             Rectangle {
                 id: popular_payments
 
-                height: payments.height / 4
+                height: payments.height / 2 - 70
                 border.color: "#d088f2"
                 color: "#fdffbd"
                 border.width: 3
@@ -665,6 +729,64 @@ Window {
                     right: payments.right
                     rightMargin: 30
                     top: erip.top
+                }
+
+                Flipable {
+                    id: popular_or_selected
+                    property bool flipped: false
+
+                    anchors.fill: parent
+                    front: Item {
+                        id: popular
+                        anchors {
+                            fill: parent
+                            margins: 15
+                        }
+
+                        Rectangle {
+                            width: 40
+                            height: 40
+                            radius: 10
+                            color: "black"
+                            id: swap_button_to_selected
+                            anchors {
+                                bottom: popular.bottom
+                                left: popular.left
+                            }
+                            Image {
+                                visible: false
+                                width: 40
+                                height: 40
+
+                                anchors {
+                                    centerIn: parent
+                                }
+                                source: "images/swap.png"
+                            }
+                        }
+                    }
+                    back: Item {
+                        id: selected
+                    }
+
+                    transform: Rotation {
+                        origin.x: popular_or_selected.width / 2
+                        origin.y: popular_or_selected.height / 2
+                        axis.x: 0
+                        axis.y: 1
+                        axis.z: 0
+                        angle: popular_or_selected.flipped ? 180 : 0
+
+                        Behavior on angle {
+                            NumberAnimation {
+                                duration: 600
+                            }
+                        }
+                    }
+                    MouseArea {
+                        anchors.fill: parent
+                        onClicked: popular_or_selected.flipped = !popular_or_selected.flipped
+                    }
                 }
             }
 
@@ -679,41 +801,12 @@ Window {
                 }
             }
 
-            Rectangle {
-                id: selected_payments
-                height: payments.height / 4
-                anchors {
-
-                    top: selected_payments_text.bottom
-                    topMargin: 15
-                    left: erip.right
-                    leftMargin: 25
-                    right: payments.right
-                    rightMargin: 30
-                }
-                border.color: "#d088f2"
-                color: "#fdffbd"
-                border.width: 3
-                radius: 8
-            }
-
-            Text {
-                id: selected_payments_text
-                text: qsTr("Избранные платежи")
-                font.pixelSize: 28
-                anchors {
-                    top: popular_payments.bottom
-                    topMargin: 10
-                    horizontalCenter: popular_payments.horizontalCenter
-                }
-            }
-
             Text {
                 id: payments_history_text
                 text: qsTr("История платежей")
                 font.pixelSize: 28
                 anchors {
-                    top: selected_payments.bottom
+                    top: popular_payments.bottom
                     topMargin: 10
                     horizontalCenter: popular_payments.horizontalCenter
                 }
@@ -740,7 +833,9 @@ Window {
             }
 
             ListView {
+                currentIndex: -1
                 id: erip
+                property var collapsed: ({})
                 x: 41
                 y: 112
                 width: 385
@@ -753,169 +848,138 @@ Window {
                     top: erip_text.bottom
                     topMargin: 15
                 }
+                model: nameModel
+                delegate: nameDelegate
 
-                model: ListModel {
-                    ListElement {
-                        colorCode: "grey"
-                    }
+                focus: true
+                clip: true
+                onCurrentItemChanged: console.log(
+                                          model.get(
+                                              erip.currentIndex).name + ' selected')
+                highlight: Rectangle {
+                    z: 1
+                    color: "transparent"
+                    border.width: 3
+                    border.color: "#d088f2"
+                }
+                section {
+                    property: "team"
+                    criteria: ViewSection.FullString
+                    delegate: Rectangle {
 
-                    ListElement {
-                        colorCode: "red"
-                    }
+                        id: section_
+                        signal clicked
 
-                    ListElement {
-                        colorCode: "blue"
-                    }
-
-                    ListElement {
-                        colorCode: "green"
+                        radius: 4
+                        color: "#d088f2"
+                        width: 385
+                        height: 30
+                        border.width: 2
+                        border.color: "gray"
+                        Text {
+                            anchors.horizontalCenter: parent.horizontalCenter
+                            font.pixelSize: 16
+                            font.bold: true
+                            text: section
+                        }
+                        MouseArea {
+                            anchors.fill: parent
+                            onClicked: {
+                                section_.clicked()
+                                erip.toggleSection(section)
+                            }
+                        }
                     }
                 }
-                delegate: Item {
-                    x: 5
-                    width: 200
-                    height: 40
-                    Row {
-                        id: row1
-                        spacing: 10
-                        Rectangle {
-                            width: 385
-                            height: 40
-                            color: colorCode
+
+                function isSectionExpanded(section) {
+                    return !(section in collapsed)
+                }
+
+                function showSection(section) {
+                    delete collapsed[section]
+                    collapsedChanged()
+                }
+
+                function hideSection(section) {
+                    collapsed[section] = true
+                    collapsedChanged()
+                }
+
+                function toggleSection(section) {
+                    if (isSectionExpanded((section))) {
+                        hideSection(section)
+                    } else {
+                        showSection(section)
+                    }
+                }
+
+                ListModel {
+                    id: nameModel
+                    ListElement {
+                        name: "Alice"
+                        team: "Crypto"
+                    }
+                    ListElement {
+                        name: "Bob"
+                        team: "Crypto"
+                    }
+                    ListElement {
+                        name: "Jane"
+                        team: "Crypto"
+                    }
+                    ListElement {
+                        name: "Victor"
+                        team: "QA"
+                    }
+                    ListElement {
+                        name: "Wendy"
+                        team: "Graphics"
+                    }
+                }
+                Component {
+                    id: nameDelegate
+
+                    Rectangle {
+                        radius: 3
+                        color: "#fcfa72"
+                        height: expanded ? 30 : 0
+                        clip: true
+                        width: 385
+                        border.width: 1
+                        border.color: "gray"
+                        readonly property ListView __lv: ListView.view
+                        property bool expanded: __lv.isSectionExpanded(
+                                                    model.team)
+                        anchors {
+                            left: parent.left
+                            right: parent.right
+                        }
+                        Text {
+                            id: delegate_text
+
+                            height: parent.height
+                            text: model.name
+                            font.pixelSize: 20
+                            anchors {
+                                horizontalCenter: parent.horizontalCenter
+                            }
                         }
 
-                        Text {
-                            text: "aaa"
-                            anchors.verticalCenter: parent.verticalCenter
-                            font.bold: true
+                        Behavior on height {
+                            NumberAnimation {
+                                duration: 200
+                            }
+                        }
+
+                        MouseArea {
+                            anchors.fill: parent
+                            onClicked: __lv.currentIndex = index
                         }
                     }
                 }
             }
         }
-
-        //            Rectangle {
-        //                width: 360
-        //                height: 360
-
-        //                ListModel {
-        //                    id: dataModel
-
-        //                    ListElement {
-        //                        color: "orange"
-        //                        text: "first"
-        //                    }
-        //                    ListElement {
-        //                        color: "lightgreen"
-        //                        text: "second"
-        //                    }
-        //                    ListElement {
-        //                        color: "orchid"
-        //                        text: "third"
-        //                    }
-        //                    ListElement {
-        //                        color: "tomato"
-        //                        text: "fourth"
-        //                    }
-        //                }
-
-        //                GridView {
-        //                    id: view
-
-        //                    anchors.margins: 10
-        //                    anchors.fill: parent
-        //                    cellHeight: 100
-        //                    cellWidth: cellHeight
-        //                    model: dataModel
-        //                    clip: true
-
-        //                    highlight: Rectangle {
-        //                        color: "skyblue"
-        //                    }
-
-        //                    delegate: Item {
-        //                        property var view: GridView.view
-        //                        property var isCurrent: GridView.isCurrentItem
-
-        //                        height: view.cellHeight
-        //                        width: view.cellWidth
-
-        //                        Rectangle {
-        //                            anchors.margins: 5
-        //                            anchors.fill: parent
-        //                            color: model.color
-        //                            border {
-        //                                color: "black"
-        //                                width: 1
-        //                            }
-
-        //                            Text {
-        //                                anchors.centerIn: parent
-        //                                renderType: Text.NativeRendering
-        //                                text: "%1%2".arg(model.text).arg(isCurrent ? " *" : "")
-        //                            }
-
-        //                            MouseArea {
-        //                                anchors.fill: parent
-        //                                onClicked: view.currentIndex = model.index
-        //                            }
-        //                        }
-        //                    }
-        //                }
-        //            }
-
-        //            Rectangle {
-        //                width: 360
-        //                height: 360
-
-        //                ListModel {
-        //                    id: dataModel
-
-        //                    ListElement {
-        //                        color: "orange"
-        //                        text: "first"
-        //                    }
-        //                    ListElement {
-        //                        color: "lightgreen"
-        //                        text: "second"
-        //                    }
-        //                    ListElement {
-        //                        color: "orchid"
-        //                        text: "third"
-        //                    }
-        //                    ListElement {
-        //                        color: "tomato"
-        //                        text: "fourth"
-        //                    }
-        //                }
-
-        //                TableView {
-        //                    id: view
-
-        //                    anchors.margins: 10
-        //                    anchors.fill: parent
-        //                    model: dataModel
-        //                    clip: true
-
-        //                    TableViewColumn {
-        //                        width: 100
-        //                        title: "Color"
-        //                        role: "color"
-        //                    }
-        //                    TableViewColumn {
-        //                        width: 100
-        //                        title: "Text"
-        //                        role: "text"
-        //                    }
-
-        //                    itemDelegate: Item {
-        //                        Text {
-        //                            anchors.centerIn: parent
-        //                            renderType: Text.NativeRendering
-        //                            text: styleData.value
-        //                        }
-        //                    }
-        //                }
     }
 }
 
@@ -923,9 +987,10 @@ Window {
 Designer {
     D{i:0;formeditorZoom:0.5}D{i:2}D{i:3}D{i:5}D{i:6}D{i:4}D{i:7}D{i:8}D{i:9}D{i:10}D{i:11}
 D{i:12}D{i:1}D{i:14}D{i:13}D{i:17}D{i:24}D{i:18}D{i:40}D{i:41}D{i:42}D{i:43}D{i:45}
-D{i:44}D{i:46}D{i:47}D{i:49}D{i:48}D{i:50}D{i:51}D{i:53}D{i:52}D{i:54}D{i:55}D{i:39}
-D{i:38}D{i:57}D{i:58}D{i:56}D{i:16}D{i:60}D{i:61}D{i:62}D{i:63}D{i:64}D{i:65}D{i:66}
-D{i:67}D{i:68}D{i:59}D{i:15}
+D{i:44}D{i:46}D{i:47}D{i:49}D{i:48}D{i:50}D{i:51}D{i:53}D{i:52}D{i:54}D{i:55}D{i:57}
+D{i:56}D{i:58}D{i:59}D{i:61}D{i:60}D{i:62}D{i:63}D{i:39}D{i:38}D{i:65}D{i:66}D{i:64}
+D{i:16}D{i:68}D{i:69}D{i:77}D{i:71}D{i:70}D{i:78}D{i:79}D{i:80}D{i:83}D{i:89}D{i:81}
+D{i:67}D{i:15}
 }
 ##^##*/
 
