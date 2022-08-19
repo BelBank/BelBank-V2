@@ -7,6 +7,6 @@
 #ifndef SOCI_BACKENDS_CONFIG_H
 #define SOCI_BACKENDS_CONFIG_H
 
-#define DEFAULT_BACKENDS_PATH "C:/Program Files (x86)/SOCI/lib"
+#define DEFAULT_BACKENDS_PATH "/usr/local/lib"
 
 #endif // SOCI_BACKENDS_CONFIG_H

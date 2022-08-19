@@ -1,4 +1,4 @@
-QT += quick core
+QT += quick core sql widgets
 
 # You can make your code fail to compile if it uses deprecated APIs.
 # In order to do so, uncomment the following line.
@@ -13,14 +13,28 @@ SOURCES += \
 RESOURCES += qml.qrc
 
 INCLUDEPATH += $$PWD/libs/soci/include \
-        $$PWD/libs/soci/build/include \
+        #$$PWD/libs/soci/build/include \
         $$PWD/../PostgreSQL/14/include \
+	/usr/include/postgresql \
+	/usr/local/include/soci/ \
+
 #        $$PWD/libs/soci/build/lib/Debug/
 
 
+LIBS += -L/usr/local/lib/
 
-#LIBS += -L"$$PWD/libs/soci/build/lib/Debug" -lsoci_core_4_0 \
-#        -L"$$PWD/libs/soci/build/lib/Debug" -lsoci_postgresql_4_0 \
+LIBS += /usr/local/lib/libsoci_postgresql.so \
+        /usr/local/lib/libsoci_core.so \
+#	/usr/local/lib/libsoci_postgresql.so.4.0 \
+#        /usr/local/lib/libsoci_core.so.4.0
+
+
+
+
+
+#LIBS += $$PWD/libs/soci/build/lib/libsoci_core.a \
+#        $$PWD/libs/soci/build/lib/libsoci_postgresql.a
+#-lsoci_postgresql_4_0
 #        -L"$$PWD/libs/soci/build/lib/Debug/"
 
 
@@ -41,15 +55,3 @@ HEADERS += \
     controller.h \
     db_pool.hpp \
     user.h
-
-win32:CONFIG(release, debug|release): LIBS += -L$$PWD/libs/soci/build/lib/release/ -lsoci_core_4_0
-else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/libs/soci/build/lib/debug/ -lsoci_core_4_0
-
-INCLUDEPATH += $$PWD/libs/soci/build/lib/Debug
-DEPENDPATH += $$PWD/libs/soci/build/lib/Debug
-
-win32:CONFIG(release, debug|release): LIBS += -L$$PWD/libs/soci/build/lib/release/ -lsoci_postgresql_4_0
-else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/libs/soci/build/lib/debug/ -lsoci_postgresql_4_0
-
-INCLUDEPATH += $$PWD/libs/soci/build/lib/Debug
-DEPENDPATH += $$PWD/libs/soci/build/lib/Debug

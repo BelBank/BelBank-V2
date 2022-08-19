@@ -2,11 +2,15 @@
 #define CONTROLLER_H
 
 #include <QObject>
-#include "user.h"
-#include "db_pool.hpp"
 
-class Controller : public QObject
-{
+//#include "db_pool.hpp"
+
+#include <QMessageBox>
+#include <QSqlDatabase>
+
+#include "user.h"
+
+class Controller : public QObject {
     Q_OBJECT
 public:
     explicit Controller(QObject *parent = nullptr);
@@ -15,8 +19,8 @@ signals:
 
 private:
     User client;
-    db_pool database;
-
+    QSqlDatabase database;
+    //    db_pool database;
 };
 
-#endif // CONTROLLER_H
+#endif  // CONTROLLER_H

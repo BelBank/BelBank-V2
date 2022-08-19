@@ -1,8 +1,8 @@
-# Install script for directory: F:/Documents/BSUIR/BelBank-V2/libs/soci/src/core
+# Install script for directory: /home/alexander/programming/qt/bsuir/BelBank-V2/libs/soci/src/core
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
-  set(CMAKE_INSTALL_PREFIX "C:/Program Files (x86)/SOCI")
+  set(CMAKE_INSTALL_PREFIX "/usr/local")
 endif()
 string(REGEX REPLACE "/$" "" CMAKE_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}")
 
@@ -12,7 +12,7 @@ if(NOT DEFINED CMAKE_INSTALL_CONFIG_NAME)
     string(REGEX REPLACE "^[^A-Za-z0-9_]+" ""
            CMAKE_INSTALL_CONFIG_NAME "${BUILD_TYPE}")
   else()
-    set(CMAKE_INSTALL_CONFIG_NAME "Release")
+    set(CMAKE_INSTALL_CONFIG_NAME "")
   endif()
   message(STATUS "Install configuration: \"${CMAKE_INSTALL_CONFIG_NAME}\"")
 endif()
@@ -27,135 +27,145 @@ if(NOT CMAKE_INSTALL_COMPONENT)
   endif()
 endif()
 
+# Install shared libraries without execute permission?
+if(NOT DEFINED CMAKE_INSTALL_SO_NO_EXE)
+  set(CMAKE_INSTALL_SO_NO_EXE "1")
+endif()
+
 # Is this installation the result of a crosscompile?
 if(NOT DEFINED CMAKE_CROSSCOMPILING)
   set(CMAKE_CROSSCOMPILING "FALSE")
 endif()
 
-if(CMAKE_INSTALL_COMPONENT STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT)
+# Set default install directory permissions.
+if(NOT DEFINED CMAKE_OBJDUMP)
+  set(CMAKE_OBJDUMP "/usr/bin/objdump")
+endif()
+
+if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
   file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/include/soci" TYPE FILE FILES
-    "F:/Documents/BSUIR/BelBank-V2/libs/soci/include/soci/backend-loader.h"
-    "F:/Documents/BSUIR/BelBank-V2/libs/soci/include/soci/bind-values.h"
-    "F:/Documents/BSUIR/BelBank-V2/libs/soci/include/soci/blob-exchange.h"
-    "F:/Documents/BSUIR/BelBank-V2/libs/soci/include/soci/blob.h"
-    "F:/Documents/BSUIR/BelBank-V2/libs/soci/include/soci/boost-fusion.h"
-    "F:/Documents/BSUIR/BelBank-V2/libs/soci/include/soci/boost-gregorian-date.h"
-    "F:/Documents/BSUIR/BelBank-V2/libs/soci/include/soci/boost-optional.h"
-    "F:/Documents/BSUIR/BelBank-V2/libs/soci/include/soci/boost-tuple.h"
-    "F:/Documents/BSUIR/BelBank-V2/libs/soci/include/soci/callbacks.h"
-    "F:/Documents/BSUIR/BelBank-V2/libs/soci/include/soci/column-info.h"
-    "F:/Documents/BSUIR/BelBank-V2/libs/soci/include/soci/connection-parameters.h"
-    "F:/Documents/BSUIR/BelBank-V2/libs/soci/include/soci/connection-pool.h"
-    "F:/Documents/BSUIR/BelBank-V2/libs/soci/include/soci/error.h"
-    "F:/Documents/BSUIR/BelBank-V2/libs/soci/include/soci/exchange-traits.h"
-    "F:/Documents/BSUIR/BelBank-V2/libs/soci/include/soci/into-type.h"
-    "F:/Documents/BSUIR/BelBank-V2/libs/soci/include/soci/into.h"
-    "F:/Documents/BSUIR/BelBank-V2/libs/soci/include/soci/logger.h"
-    "F:/Documents/BSUIR/BelBank-V2/libs/soci/include/soci/noreturn.h"
-    "F:/Documents/BSUIR/BelBank-V2/libs/soci/include/soci/once-temp-type.h"
-    "F:/Documents/BSUIR/BelBank-V2/libs/soci/include/soci/prepare-temp-type.h"
-    "F:/Documents/BSUIR/BelBank-V2/libs/soci/include/soci/procedure.h"
-    "F:/Documents/BSUIR/BelBank-V2/libs/soci/include/soci/query_transformation.h"
-    "F:/Documents/BSUIR/BelBank-V2/libs/soci/include/soci/ref-counted-prepare-info.h"
-    "F:/Documents/BSUIR/BelBank-V2/libs/soci/include/soci/ref-counted-statement.h"
-    "F:/Documents/BSUIR/BelBank-V2/libs/soci/include/soci/row-exchange.h"
-    "F:/Documents/BSUIR/BelBank-V2/libs/soci/include/soci/row.h"
-    "F:/Documents/BSUIR/BelBank-V2/libs/soci/include/soci/rowid-exchange.h"
-    "F:/Documents/BSUIR/BelBank-V2/libs/soci/include/soci/rowid.h"
-    "F:/Documents/BSUIR/BelBank-V2/libs/soci/include/soci/rowset.h"
-    "F:/Documents/BSUIR/BelBank-V2/libs/soci/include/soci/session.h"
-    "F:/Documents/BSUIR/BelBank-V2/libs/soci/include/soci/soci-backend.h"
-    "F:/Documents/BSUIR/BelBank-V2/libs/soci/include/soci/soci-platform.h"
-    "F:/Documents/BSUIR/BelBank-V2/libs/soci/include/soci/soci-simple.h"
-    "F:/Documents/BSUIR/BelBank-V2/libs/soci/include/soci/soci.h"
-    "F:/Documents/BSUIR/BelBank-V2/libs/soci/include/soci/statement.h"
-    "F:/Documents/BSUIR/BelBank-V2/libs/soci/include/soci/transaction.h"
-    "F:/Documents/BSUIR/BelBank-V2/libs/soci/include/soci/type-conversion-traits.h"
-    "F:/Documents/BSUIR/BelBank-V2/libs/soci/include/soci/type-conversion.h"
-    "F:/Documents/BSUIR/BelBank-V2/libs/soci/include/soci/type-holder.h"
-    "F:/Documents/BSUIR/BelBank-V2/libs/soci/include/soci/type-ptr.h"
-    "F:/Documents/BSUIR/BelBank-V2/libs/soci/include/soci/type-wrappers.h"
-    "F:/Documents/BSUIR/BelBank-V2/libs/soci/include/soci/unsigned-types.h"
-    "F:/Documents/BSUIR/BelBank-V2/libs/soci/include/soci/use-type.h"
-    "F:/Documents/BSUIR/BelBank-V2/libs/soci/include/soci/use.h"
-    "F:/Documents/BSUIR/BelBank-V2/libs/soci/include/soci/values-exchange.h"
-    "F:/Documents/BSUIR/BelBank-V2/libs/soci/include/soci/values.h"
-    "F:/Documents/BSUIR/BelBank-V2/libs/soci/include/soci/version.h"
+    "/home/alexander/programming/qt/bsuir/BelBank-V2/libs/soci/include/soci/backend-loader.h"
+    "/home/alexander/programming/qt/bsuir/BelBank-V2/libs/soci/include/soci/bind-values.h"
+    "/home/alexander/programming/qt/bsuir/BelBank-V2/libs/soci/include/soci/blob-exchange.h"
+    "/home/alexander/programming/qt/bsuir/BelBank-V2/libs/soci/include/soci/blob.h"
+    "/home/alexander/programming/qt/bsuir/BelBank-V2/libs/soci/include/soci/boost-fusion.h"
+    "/home/alexander/programming/qt/bsuir/BelBank-V2/libs/soci/include/soci/boost-gregorian-date.h"
+    "/home/alexander/programming/qt/bsuir/BelBank-V2/libs/soci/include/soci/boost-optional.h"
+    "/home/alexander/programming/qt/bsuir/BelBank-V2/libs/soci/include/soci/boost-tuple.h"
+    "/home/alexander/programming/qt/bsuir/BelBank-V2/libs/soci/include/soci/callbacks.h"
+    "/home/alexander/programming/qt/bsuir/BelBank-V2/libs/soci/include/soci/column-info.h"
+    "/home/alexander/programming/qt/bsuir/BelBank-V2/libs/soci/include/soci/connection-parameters.h"
+    "/home/alexander/programming/qt/bsuir/BelBank-V2/libs/soci/include/soci/connection-pool.h"
+    "/home/alexander/programming/qt/bsuir/BelBank-V2/libs/soci/include/soci/error.h"
+    "/home/alexander/programming/qt/bsuir/BelBank-V2/libs/soci/include/soci/exchange-traits.h"
+    "/home/alexander/programming/qt/bsuir/BelBank-V2/libs/soci/include/soci/into-type.h"
+    "/home/alexander/programming/qt/bsuir/BelBank-V2/libs/soci/include/soci/into.h"
+    "/home/alexander/programming/qt/bsuir/BelBank-V2/libs/soci/include/soci/logger.h"
+    "/home/alexander/programming/qt/bsuir/BelBank-V2/libs/soci/include/soci/noreturn.h"
+    "/home/alexander/programming/qt/bsuir/BelBank-V2/libs/soci/include/soci/once-temp-type.h"
+    "/home/alexander/programming/qt/bsuir/BelBank-V2/libs/soci/include/soci/prepare-temp-type.h"
+    "/home/alexander/programming/qt/bsuir/BelBank-V2/libs/soci/include/soci/procedure.h"
+    "/home/alexander/programming/qt/bsuir/BelBank-V2/libs/soci/include/soci/query_transformation.h"
+    "/home/alexander/programming/qt/bsuir/BelBank-V2/libs/soci/include/soci/ref-counted-prepare-info.h"
+    "/home/alexander/programming/qt/bsuir/BelBank-V2/libs/soci/include/soci/ref-counted-statement.h"
+    "/home/alexander/programming/qt/bsuir/BelBank-V2/libs/soci/include/soci/row-exchange.h"
+    "/home/alexander/programming/qt/bsuir/BelBank-V2/libs/soci/include/soci/row.h"
+    "/home/alexander/programming/qt/bsuir/BelBank-V2/libs/soci/include/soci/rowid-exchange.h"
+    "/home/alexander/programming/qt/bsuir/BelBank-V2/libs/soci/include/soci/rowid.h"
+    "/home/alexander/programming/qt/bsuir/BelBank-V2/libs/soci/include/soci/rowset.h"
+    "/home/alexander/programming/qt/bsuir/BelBank-V2/libs/soci/include/soci/session.h"
+    "/home/alexander/programming/qt/bsuir/BelBank-V2/libs/soci/include/soci/soci-backend.h"
+    "/home/alexander/programming/qt/bsuir/BelBank-V2/libs/soci/include/soci/soci-platform.h"
+    "/home/alexander/programming/qt/bsuir/BelBank-V2/libs/soci/include/soci/soci-simple.h"
+    "/home/alexander/programming/qt/bsuir/BelBank-V2/libs/soci/include/soci/soci.h"
+    "/home/alexander/programming/qt/bsuir/BelBank-V2/libs/soci/include/soci/statement.h"
+    "/home/alexander/programming/qt/bsuir/BelBank-V2/libs/soci/include/soci/transaction.h"
+    "/home/alexander/programming/qt/bsuir/BelBank-V2/libs/soci/include/soci/type-conversion-traits.h"
+    "/home/alexander/programming/qt/bsuir/BelBank-V2/libs/soci/include/soci/type-conversion.h"
+    "/home/alexander/programming/qt/bsuir/BelBank-V2/libs/soci/include/soci/type-holder.h"
+    "/home/alexander/programming/qt/bsuir/BelBank-V2/libs/soci/include/soci/type-ptr.h"
+    "/home/alexander/programming/qt/bsuir/BelBank-V2/libs/soci/include/soci/type-wrappers.h"
+    "/home/alexander/programming/qt/bsuir/BelBank-V2/libs/soci/include/soci/unsigned-types.h"
+    "/home/alexander/programming/qt/bsuir/BelBank-V2/libs/soci/include/soci/use-type.h"
+    "/home/alexander/programming/qt/bsuir/BelBank-V2/libs/soci/include/soci/use.h"
+    "/home/alexander/programming/qt/bsuir/BelBank-V2/libs/soci/include/soci/values-exchange.h"
+    "/home/alexander/programming/qt/bsuir/BelBank-V2/libs/soci/include/soci/values.h"
+    "/home/alexander/programming/qt/bsuir/BelBank-V2/libs/soci/include/soci/version.h"
     )
 endif()
 
-if(CMAKE_INSTALL_COMPONENT STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT)
-  if(CMAKE_INSTALL_CONFIG_NAME MATCHES "^([Dd][Ee][Bb][Uu][Gg])$")
-    file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib" TYPE STATIC_LIBRARY OPTIONAL FILES "F:/Documents/BSUIR/BelBank-V2/libs/soci/build/lib/Debug/soci_core_4_0.lib")
-  elseif(CMAKE_INSTALL_CONFIG_NAME MATCHES "^([Rr][Ee][Ll][Ee][Aa][Ss][Ee])$")
-    file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib" TYPE STATIC_LIBRARY OPTIONAL FILES "F:/Documents/BSUIR/BelBank-V2/libs/soci/build/lib/Release/soci_core_4_0.lib")
-  elseif(CMAKE_INSTALL_CONFIG_NAME MATCHES "^([Mm][Ii][Nn][Ss][Ii][Zz][Ee][Rr][Ee][Ll])$")
-    file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib" TYPE STATIC_LIBRARY OPTIONAL FILES "F:/Documents/BSUIR/BelBank-V2/libs/soci/build/lib/MinSizeRel/soci_core_4_0.lib")
-  elseif(CMAKE_INSTALL_CONFIG_NAME MATCHES "^([Rr][Ee][Ll][Ww][Ii][Tt][Hh][Dd][Ee][Bb][Ii][Nn][Ff][Oo])$")
-    file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib" TYPE STATIC_LIBRARY OPTIONAL FILES "F:/Documents/BSUIR/BelBank-V2/libs/soci/build/lib/RelWithDebInfo/soci_core_4_0.lib")
-  endif()
-endif()
-
-if(CMAKE_INSTALL_COMPONENT STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT)
-  if(CMAKE_INSTALL_CONFIG_NAME MATCHES "^([Dd][Ee][Bb][Uu][Gg])$")
-    file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/bin" TYPE SHARED_LIBRARY FILES "F:/Documents/BSUIR/BelBank-V2/libs/soci/build/bin/Debug/soci_core_4_0.dll")
-  elseif(CMAKE_INSTALL_CONFIG_NAME MATCHES "^([Rr][Ee][Ll][Ee][Aa][Ss][Ee])$")
-    file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/bin" TYPE SHARED_LIBRARY FILES "F:/Documents/BSUIR/BelBank-V2/libs/soci/build/bin/Release/soci_core_4_0.dll")
-  elseif(CMAKE_INSTALL_CONFIG_NAME MATCHES "^([Mm][Ii][Nn][Ss][Ii][Zz][Ee][Rr][Ee][Ll])$")
-    file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/bin" TYPE SHARED_LIBRARY FILES "F:/Documents/BSUIR/BelBank-V2/libs/soci/build/bin/MinSizeRel/soci_core_4_0.dll")
-  elseif(CMAKE_INSTALL_CONFIG_NAME MATCHES "^([Rr][Ee][Ll][Ww][Ii][Tt][Hh][Dd][Ee][Bb][Ii][Nn][Ff][Oo])$")
-    file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/bin" TYPE SHARED_LIBRARY FILES "F:/Documents/BSUIR/BelBank-V2/libs/soci/build/bin/RelWithDebInfo/soci_core_4_0.dll")
-  endif()
-endif()
-
-if(CMAKE_INSTALL_COMPONENT STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT)
-  if(CMAKE_INSTALL_CONFIG_NAME MATCHES "^([Dd][Ee][Bb][Uu][Gg])$")
-    file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib" TYPE STATIC_LIBRARY FILES "F:/Documents/BSUIR/BelBank-V2/libs/soci/build/lib/Debug/libsoci_core_4_0.lib")
-  elseif(CMAKE_INSTALL_CONFIG_NAME MATCHES "^([Rr][Ee][Ll][Ee][Aa][Ss][Ee])$")
-    file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib" TYPE STATIC_LIBRARY FILES "F:/Documents/BSUIR/BelBank-V2/libs/soci/build/lib/Release/libsoci_core_4_0.lib")
-  elseif(CMAKE_INSTALL_CONFIG_NAME MATCHES "^([Mm][Ii][Nn][Ss][Ii][Zz][Ee][Rr][Ee][Ll])$")
-    file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib" TYPE STATIC_LIBRARY FILES "F:/Documents/BSUIR/BelBank-V2/libs/soci/build/lib/MinSizeRel/libsoci_core_4_0.lib")
-  elseif(CMAKE_INSTALL_CONFIG_NAME MATCHES "^([Rr][Ee][Ll][Ww][Ii][Tt][Hh][Dd][Ee][Bb][Ii][Nn][Ff][Oo])$")
-    file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib" TYPE STATIC_LIBRARY FILES "F:/Documents/BSUIR/BelBank-V2/libs/soci/build/lib/RelWithDebInfo/libsoci_core_4_0.lib")
-  endif()
-endif()
-
-if(CMAKE_INSTALL_COMPONENT STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT)
-  if(EXISTS "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/cmake/SOCI/SOCITargets.cmake")
-    file(DIFFERENT _cmake_export_file_changed FILES
-         "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/cmake/SOCI/SOCITargets.cmake"
-         "F:/Documents/BSUIR/BelBank-V2/libs/soci/build/src/core/CMakeFiles/Export/39447b8616a7e0144dc6bdda034be1e2/SOCITargets.cmake")
-    if(_cmake_export_file_changed)
-      file(GLOB _cmake_old_config_files "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/cmake/SOCI/SOCITargets-*.cmake")
-      if(_cmake_old_config_files)
-        string(REPLACE ";" ", " _cmake_old_config_files_text "${_cmake_old_config_files}")
-        message(STATUS "Old export file \"$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/cmake/SOCI/SOCITargets.cmake\" will be replaced.  Removing files [${_cmake_old_config_files_text}].")
-        unset(_cmake_old_config_files_text)
-        file(REMOVE ${_cmake_old_config_files})
-      endif()
-      unset(_cmake_old_config_files)
+if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
+  foreach(file
+      "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/libsoci_core.so.4.0.3"
+      "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/libsoci_core.so.4.0"
+      )
+    if(EXISTS "${file}" AND
+       NOT IS_SYMLINK "${file}")
+      file(RPATH_CHECK
+           FILE "${file}"
+           RPATH "")
     endif()
-    unset(_cmake_export_file_changed)
+  endforeach()
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib" TYPE SHARED_LIBRARY FILES
+    "/home/alexander/programming/qt/bsuir/BelBank-V2/libs/soci/build/lib/libsoci_core.so.4.0.3"
+    "/home/alexander/programming/qt/bsuir/BelBank-V2/libs/soci/build/lib/libsoci_core.so.4.0"
+    )
+  foreach(file
+      "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/libsoci_core.so.4.0.3"
+      "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/libsoci_core.so.4.0"
+      )
+    if(EXISTS "${file}" AND
+       NOT IS_SYMLINK "${file}")
+      if(CMAKE_INSTALL_DO_STRIP)
+        execute_process(COMMAND "/usr/bin/strip" "${file}")
+      endif()
+    endif()
+  endforeach()
+endif()
+
+if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
+  if(EXISTS "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/libsoci_core.so" AND
+     NOT IS_SYMLINK "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/libsoci_core.so")
+    file(RPATH_CHECK
+         FILE "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/libsoci_core.so"
+         RPATH "")
   endif()
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/cmake/SOCI" TYPE FILE FILES "F:/Documents/BSUIR/BelBank-V2/libs/soci/build/src/core/CMakeFiles/Export/39447b8616a7e0144dc6bdda034be1e2/SOCITargets.cmake")
-  if(CMAKE_INSTALL_CONFIG_NAME MATCHES "^([Dd][Ee][Bb][Uu][Gg])$")
-    file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/cmake/SOCI" TYPE FILE FILES "F:/Documents/BSUIR/BelBank-V2/libs/soci/build/src/core/CMakeFiles/Export/39447b8616a7e0144dc6bdda034be1e2/SOCITargets-debug.cmake")
-  endif()
-  if(CMAKE_INSTALL_CONFIG_NAME MATCHES "^([Mm][Ii][Nn][Ss][Ii][Zz][Ee][Rr][Ee][Ll])$")
-    file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/cmake/SOCI" TYPE FILE FILES "F:/Documents/BSUIR/BelBank-V2/libs/soci/build/src/core/CMakeFiles/Export/39447b8616a7e0144dc6bdda034be1e2/SOCITargets-minsizerel.cmake")
-  endif()
-  if(CMAKE_INSTALL_CONFIG_NAME MATCHES "^([Rr][Ee][Ll][Ww][Ii][Tt][Hh][Dd][Ee][Bb][Ii][Nn][Ff][Oo])$")
-    file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/cmake/SOCI" TYPE FILE FILES "F:/Documents/BSUIR/BelBank-V2/libs/soci/build/src/core/CMakeFiles/Export/39447b8616a7e0144dc6bdda034be1e2/SOCITargets-relwithdebinfo.cmake")
-  endif()
-  if(CMAKE_INSTALL_CONFIG_NAME MATCHES "^([Rr][Ee][Ll][Ee][Aa][Ss][Ee])$")
-    file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/cmake/SOCI" TYPE FILE FILES "F:/Documents/BSUIR/BelBank-V2/libs/soci/build/src/core/CMakeFiles/Export/39447b8616a7e0144dc6bdda034be1e2/SOCITargets-release.cmake")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib" TYPE SHARED_LIBRARY FILES "/home/alexander/programming/qt/bsuir/BelBank-V2/libs/soci/build/lib/libsoci_core.so")
+  if(EXISTS "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/libsoci_core.so" AND
+     NOT IS_SYMLINK "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/libsoci_core.so")
+    if(CMAKE_INSTALL_DO_STRIP)
+      execute_process(COMMAND "/usr/bin/strip" "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/libsoci_core.so")
+    endif()
   endif()
 endif()
 
-if(CMAKE_INSTALL_COMPONENT STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT)
+if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib" TYPE STATIC_LIBRARY FILES "/home/alexander/programming/qt/bsuir/BelBank-V2/libs/soci/build/lib/libsoci_core.a")
+endif()
+
+if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
+  if(EXISTS "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/cmake/SOCI/SOCITargets.cmake")
+    file(DIFFERENT EXPORT_FILE_CHANGED FILES
+         "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/cmake/SOCI/SOCITargets.cmake"
+         "/home/alexander/programming/qt/bsuir/BelBank-V2/libs/soci/build/src/core/CMakeFiles/Export/lib/cmake/SOCI/SOCITargets.cmake")
+    if(EXPORT_FILE_CHANGED)
+      file(GLOB OLD_CONFIG_FILES "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/cmake/SOCI/SOCITargets-*.cmake")
+      if(OLD_CONFIG_FILES)
+        message(STATUS "Old export file \"$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/cmake/SOCI/SOCITargets.cmake\" will be replaced.  Removing files [${OLD_CONFIG_FILES}].")
+        file(REMOVE ${OLD_CONFIG_FILES})
+      endif()
+    endif()
+  endif()
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/cmake/SOCI" TYPE FILE FILES "/home/alexander/programming/qt/bsuir/BelBank-V2/libs/soci/build/src/core/CMakeFiles/Export/lib/cmake/SOCI/SOCITargets.cmake")
+  if("${CMAKE_INSTALL_CONFIG_NAME}" MATCHES "^()$")
+    file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/cmake/SOCI" TYPE FILE FILES "/home/alexander/programming/qt/bsuir/BelBank-V2/libs/soci/build/src/core/CMakeFiles/Export/lib/cmake/SOCI/SOCITargets-noconfig.cmake")
+  endif()
+endif()
+
+if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
   file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/cmake/SOCI" TYPE FILE FILES
-    "F:/Documents/BSUIR/BelBank-V2/libs/soci/build/src/core/SOCIConfig.cmake"
-    "F:/Documents/BSUIR/BelBank-V2/libs/soci/build/src/core/SOCIConfigVersion.cmake"
+    "/home/alexander/programming/qt/bsuir/BelBank-V2/libs/soci/build/src/core/SOCIConfig.cmake"
+    "/home/alexander/programming/qt/bsuir/BelBank-V2/libs/soci/build/src/core/SOCIConfigVersion.cmake"
     )
 endif()
 
