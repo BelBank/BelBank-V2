@@ -24,7 +24,7 @@ Window {
         height: 40
         color: "white"
         border.color: "#d088f2"
-        border.width: 4
+        border.width: 3
         radius: 10
 
         TextInput {
@@ -53,7 +53,7 @@ Window {
         height: 40
         color: "#fdffbd"
         border.color: "#d088f2"
-        border.width: 4
+        border.width: 3
         radius: 10
 
         Text {
@@ -79,7 +79,7 @@ Window {
         height: 40
         color: "white"
         border.color: "#d088f2"
-        border.width: 4
+        border.width: 3
         radius: 10
 
         TextInput {
@@ -116,7 +116,7 @@ Window {
         height: 40
         color: "#fdffbd"
         border.color: "#d088f2"
-        border.width: 4
+        border.width: 3
         radius: 10
 
         Text {

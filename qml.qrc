@@ -25,5 +25,6 @@
         <file>images/china.jpg</file>
         <file>images/PLN.jpg</file>
         <file>images/swap.png</file>
+        <file>PaymentWindow.qml</file>
     </qresource>
 </RCC>

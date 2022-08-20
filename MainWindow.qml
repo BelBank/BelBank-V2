@@ -55,7 +55,7 @@ Window {
                 verticalCenter: header.verticalCenter
                 margins: 15
             }
-            color: "#b24bd1"
+            color: "#d258f7"
             border.color: "#7d3a9c"
             border.width: 2
             radius: 10
@@ -158,7 +158,7 @@ Window {
             right: parent.right
             left: parent.left
         }
-        color: "#7d3a9c"
+        color: "#b956e8"
 
         Text {
             anchors {
@@ -413,7 +413,7 @@ Window {
 
                 id: cash
                 height: 230
-                color: "#fdffbd"
+                color: "#fcdd6d"
                 anchors {
                     top: new_card.bottom
                     topMargin: 40
@@ -425,8 +425,7 @@ Window {
                     leftMargin: 50
                 }
                 radius: 8
-                border.width: 3
-                border.color: "#d088f2"
+
                 GridLayout {
                     anchors.bottomMargin: 20
                     anchors.topMargin: 8
@@ -693,8 +692,8 @@ Window {
             Text {
                 id: payments_text
                 anchors {
-                    horizontalCenter: payments.horizontalCenter
                     top: payments.top
+                    horizontalCenter: payments.horizontalCenter
                 }
                 text: "Платежи и переводы"
                 font.pixelSize: 30
@@ -719,9 +718,9 @@ Window {
                 id: popular_payments
 
                 height: payments.height / 2 - 70
-                border.color: "#d088f2"
-                color: "#fdffbd"
-                border.width: 3
+                //                border.color: "#d088f2"
+                //                color: "#fdffbd"
+                //                border.width: 3
                 radius: 8
                 anchors {
                     left: erip.right
@@ -736,25 +735,29 @@ Window {
                     property bool flipped: false
 
                     anchors.fill: parent
-                    front: Item {
+                    front: Rectangle {
                         id: popular
                         anchors {
                             fill: parent
-                            margins: 15
+                            margins: 2
                         }
 
+                        color: "#fcdd6d"
+                        radius: 10
                         Rectangle {
                             width: 40
                             height: 40
                             radius: 10
-                            color: "black"
+                            color: "transparent"
                             id: swap_button_to_selected
                             anchors {
                                 bottom: popular.bottom
                                 left: popular.left
+                                margins: 10
                             }
                             Image {
-                                visible: false
+                                id: img_1
+                                visible: true
                                 width: 40
                                 height: 40
 
@@ -763,10 +766,328 @@ Window {
                                 }
                                 source: "images/swap.png"
                             }
+
+                            Rectangle {
+                                id: swap_rect_1
+                                // rounded corners for img
+                                anchors.fill: img_1
+                                color: "transparent"
+                                border.color: "#d088f2"
+                                border.width: 3
+                                radius: 10
+                            }
+                            MouseArea {
+
+                                anchors {
+                                    fill: swap_rect_1
+                                }
+                                function popular_text() {
+                                    popular_payments_text.text = "Избранные платежи"
+                                }
+
+                                onClicked: {
+                                    popular_or_selected.flipped = !popular_or_selected.flipped
+                                    popular_text()
+                                }
+                            }
+                        }
+
+                        GridLayout {
+                            rows: 5
+
+                            columns: 4
+                            anchors {
+                                leftMargin: 80
+                                topMargin: 30
+                                rightMargin: 30
+                                bottomMargin: 50
+                                fill: parent
+                            }
+
+                            Rectangle {
+                                Layout.row: 0
+                                Layout.column: 0
+                                width: 60
+                                height: 60
+
+                                clip: true
+                                radius: 30
+
+                                Image {
+                                    id: mts
+                                    fillMode: Image.Stretch
+                                    anchors {
+                                        fill: parent
+                                    }
+                                    smooth: true
+                                    source: "images/MTS.png"
+                                }
+                            }
+                            Text {
+                                Layout.row: 1
+                                Layout.column: 0
+                                font.pixelSize: 20
+                                text: "МТС"
+                            }
+
+                            Rectangle {
+                                Layout.row: 0
+                                Layout.column: 1
+                                width: 60
+                                height: 60
+
+                                Image {
+                                    fillMode: Image.Stretch
+                                    anchors {
+                                        fill: parent
+                                    }
+                                    source: "images/A1.jpg"
+                                }
+                            }
+                            Text {
+                                Layout.row: 1
+                                Layout.column: 1
+                                font.pixelSize: 20
+                                text: "А1"
+                            }
+
+                            Rectangle {
+                                Layout.row: 0
+                                Layout.column: 2
+                                width: 60
+                                height: 60
+
+                                Image {
+                                    fillMode: Image.Stretch
+                                    anchors {
+                                        fill: parent
+                                    }
+                                    source: "images/LIFE.png"
+                                }
+                            }
+                            Text {
+                                Layout.row: 1
+                                Layout.column: 2
+                                font.pixelSize: 20
+                                text: "Life"
+                            }
+
+                            Rectangle {
+                                Layout.row: 0
+                                Layout.column: 3
+                                width: 60
+                                height: 60
+
+                                Image {
+                                    fillMode: Image.Stretch
+                                    anchors {
+                                        fill: parent
+                                    }
+                                    source: "images/Beltelecom.png"
+                                }
+                            }
+                            Text {
+                                Layout.row: 1
+                                Layout.column: 3
+                                font.pixelSize: 20
+                                text: "Белтелеком"
+                            }
+
+                            Rectangle {
+                                Layout.row: 3
+                                Layout.column: 0
+                                width: 60
+                                height: 60
+
+                                Image {
+                                    fillMode: Image.Stretch
+                                    anchors {
+                                        fill: parent
+                                    }
+                                    source: "images/ByFly.jpg"
+                                }
+                            }
+                            Text {
+                                Layout.row: 4
+                                Layout.column: 0
+                                font.pixelSize: 20
+                                text: "ByFly"
+                            }
                         }
                     }
-                    back: Item {
+                    back: Rectangle {
                         id: selected
+
+                        anchors {
+                            fill: parent
+                            margins: 3
+                        }
+                        color: "#fcdd6d"
+                        radius: 10
+
+                        Rectangle {
+                            width: 40
+                            height: 40
+                            radius: 10
+                            color: "transparent"
+                            id: swap_button_to_popular
+                            anchors {
+                                bottom: selected.bottom
+                                left: selected.left
+                                margins: 10
+                            }
+                            Image {
+                                id: img_2
+                                visible: true
+                                width: 40
+                                height: 40
+
+                                anchors {
+                                    centerIn: parent
+                                }
+                                source: "images/swap.png"
+                            }
+
+                            Rectangle {
+                                id: swap_rect_2
+                                // rounded corners for img
+                                anchors.fill: img_2
+                                color: "transparent"
+                                border.color: "#d088f2"
+                                border.width: 4
+                                radius: 10
+                            }
+                            MouseArea {
+
+                                anchors {
+                                    fill: swap_rect_2
+                                }
+
+                                function selected_text() {
+                                    popular_payments_text.text = "Популярные платежи"
+                                }
+
+                                onClicked: {
+                                    popular_or_selected.flipped = !popular_or_selected.flipped
+                                    selected_text()
+                                }
+                            }
+                        }
+
+                        ListView {
+                            currentIndex: -1
+                            id: selected_payments
+                            x: 41
+                            y: 112
+                            width: 385
+                            height: 719
+                            anchors {
+                                fill: parent
+                                margins: 50
+                            }
+                            model: selected_paymentModel
+                            delegate: selected_paymentDelegate
+
+                            focus: true
+                            clip: true
+                            highlight: Rectangle {
+                                z: 1
+                                color: "transparent"
+                                border.width: 3
+                                border.color: "#d088f2"
+                            }
+                        }
+
+                        ListModel {
+                            id: selected_paymentModel
+                            ListElement {
+                                name: "Приорбанк"
+                            }
+                            ListElement {
+                                name: "Гаи"
+                            }
+                            ListElement {
+                                name: "Погашение кредита"
+                            }
+                            ListElement {
+
+                                name: "Коммунальные платежи"
+                            }
+                            ListElement {
+
+                                name: "МТС"
+                            }
+                            ListElement {
+                                name: "Приорбанк"
+                            }
+                            ListElement {
+                                name: "Гаи"
+                            }
+                            ListElement {
+                                name: "Погашение кредита"
+                            }
+                            ListElement {
+
+                                name: "Коммунальные платежи"
+                            }
+                            ListElement {
+
+                                name: "МТС"
+                            }
+                            ListElement {
+                                name: "Приорбанк"
+                            }
+                            ListElement {
+                                name: "Гаи"
+                            }
+                            ListElement {
+                                name: "Погашение кредита"
+                            }
+                            ListElement {
+
+                                name: "Коммунальные платежи"
+                            }
+                            ListElement {
+
+                                name: "МТС"
+                            }
+                        }
+                        Component {
+                            id: selected_paymentDelegate
+
+                            Rectangle {
+                                radius: 3
+                                color: index % 2 ? "#fcfa72" : "#fccf53"
+                                height: 30
+                                clip: true
+                                width: 385
+                                border.width: 1
+                                border.color: "gray"
+                                readonly property ListView __lv: ListView.view
+
+                                anchors {
+                                    left: parent.left
+                                    right: parent.right
+                                }
+                                Text {
+
+                                    height: parent.height
+                                    text: model.name
+                                    font.pixelSize: 20
+                                    anchors {
+                                        horizontalCenter: parent.horizontalCenter
+                                    }
+                                }
+
+                                MouseArea {
+                                    anchors.fill: parent
+                                    onClicked: __lv.currentIndex = index
+                                    onDoubleClicked: {
+                                        set_payment_window()
+                                    }
+                                }
+                            }
+                        }
                     }
 
                     transform: Rotation {
@@ -782,10 +1103,6 @@ Window {
                                 duration: 600
                             }
                         }
-                    }
-                    MouseArea {
-                        anchors.fill: parent
-                        onClicked: popular_or_selected.flipped = !popular_or_selected.flipped
                     }
                 }
             }
@@ -803,7 +1120,7 @@ Window {
 
             Text {
                 id: payments_history_text
-                text: qsTr("История платежей")
+                text: "История платежей"
                 font.pixelSize: 28
                 anchors {
                     top: popular_payments.bottom
@@ -826,10 +1143,176 @@ Window {
                     bottom: payments.bottom
                     bottomMargin: 20
                 }
-                border.color: "#d088f2"
+                //                border.color: "#d088f2"
                 color: "#fdffbd"
-                border.width: 3
-                radius: 8
+
+                //                border.width: 3
+                //                radius: 8
+                ListView {
+                    currentIndex: -1
+                    id: history
+                    x: 41
+                    y: 112
+                    width: 385
+                    height: 719
+                    anchors {
+                        fill: parent
+                    }
+                    model: historyModel
+                    delegate: historyDelegate
+
+                    focus: true
+                    clip: true
+                    highlight: Rectangle {
+                        z: 1
+                        color: "transparent"
+                        border.width: 3
+                        border.color: "#d088f2"
+                    }
+                }
+
+                ListModel {
+                    id: historyModel
+                    ListElement {
+                        value: "32"
+                        name: "Приорбанк"
+                        date: "12.12.21"
+                    }
+                    ListElement {
+                        value: "32"
+
+                        name: "Гаи"
+                        date: "12.12.21"
+                    }
+                    ListElement {
+                        value: "32"
+                        date: "12.12.21"
+
+                        name: "Погашение кредита"
+                    }
+                    ListElement {
+                        value: "33472"
+                        date: "12.12.21"
+
+                        name: "Коммунальные платежи"
+                    }
+                    ListElement {
+                        value: "32"
+                        date: "12.12.21"
+
+                        name: "МТС"
+                    }
+                    ListElement {
+                        name: "Приорбанк"
+                        value: "32"
+                        date: "12.12.21"
+                    }
+                    ListElement {
+                        name: "Гаи"
+                        value: "32"
+                        date: "12.12.21"
+                    }
+                    ListElement {
+                        name: "Погашение кредита"
+                        value: "32"
+                        date: "12.12.21"
+                    }
+                    ListElement {
+
+                        name: "Коммунальные платежи"
+                        value: "32"
+                        date: "12.12.21"
+                    }
+                    ListElement {
+
+                        name: "МТС"
+                        value: "32"
+                        date: "12.12.21"
+                    }
+                    ListElement {
+                        name: "Приорбанк"
+                        value: "32"
+                        date: "12.12.21"
+                    }
+                    ListElement {
+                        name: "Гаи"
+                        value: "32"
+                        date: "12.12.21"
+                    }
+                    ListElement {
+                        name: "Погашение кредита"
+                        value: "32"
+                        date: "12.12.21"
+                    }
+                    ListElement {
+
+                        name: "Коммунальные платежи"
+                        value: "329"
+                        date: "12.12.21"
+                    }
+                    ListElement {
+
+                        name: "МТС"
+                        value: "37962"
+                        date: "12.12.21"
+                    }
+                }
+                Component {
+                    id: historyDelegate
+
+                    Rectangle {
+                        radius: 3
+                        color: index % 2 ? "#fcfa72" : "#fcdd6d"
+                        height: 30
+                        clip: true
+                        width: 385
+                        border.width: 1
+                        border.color: "gray"
+                        readonly property ListView __lv: ListView.view
+
+                        anchors {
+                            left: parent.left
+                            right: parent.right
+                        }
+                        Text {
+
+                            height: parent.height
+                            text: model.name
+                            font.pixelSize: 20
+                            anchors {
+                                left: parent.left
+                                leftMargin: 15
+                            }
+                        }
+                        Text {
+
+                            height: parent.height
+                            text: model.value
+                            font.pixelSize: 20
+                            anchors {
+                                right: parent.right
+                                rightMargin: 15
+                            }
+                        }
+                        Text {
+
+                            height: parent.height
+                            text: model.date
+                            font.pixelSize: 20
+                            anchors {
+                                horizontalCenter: parent.horizontalCenter
+                            }
+                        }
+
+                        MouseArea {
+                            anchors.fill: parent
+                            onClicked: __lv.currentIndex = index
+                            onDoubleClicked: {
+                                set_payment_window()
+                            }
+                        }
+                    }
+                }
             }
 
             ListView {
@@ -873,22 +1356,30 @@ Window {
                         radius: 4
                         color: "#d088f2"
                         width: 385
-                        height: 30
+                        height: 40
+
                         border.width: 2
-                        border.color: "gray"
+                        border.color: "black"
                         Text {
-                            anchors.horizontalCenter: parent.horizontalCenter
+                            anchors {
+                                horizontalCenter: parent.horizontalCenter
+                                verticalCenter: parent.verticalCenter
+                            }
+
                             font.pixelSize: 16
                             font.bold: true
                             text: section
                         }
+
                         MouseArea {
                             anchors.fill: parent
+
                             onClicked: {
                                 section_.clicked()
                                 erip.toggleSection(section)
                             }
                         }
+                        Component.onCompleted: erip.hideSection(section)
                     }
                 }
 
@@ -917,24 +1408,184 @@ Window {
                 ListModel {
                     id: nameModel
                     ListElement {
-                        name: "Alice"
-                        team: "Crypto"
+                        name: "Погашение кредита"
+                        team: "Банки, НКФО"
                     }
                     ListElement {
-                        name: "Bob"
-                        team: "Crypto"
+                        name: "Пополнение счета"
+                        team: "Банки, НКФО"
                     }
                     ListElement {
-                        name: "Jane"
-                        team: "Crypto"
+                        name: "Пополнение безотзывного вклада"
+                        team: "Банки, НКФО"
                     }
                     ListElement {
-                        name: "Victor"
-                        team: "QA"
+                        name: "Bynex"
+                        team: "Криптобиржи, криптообменники"
                     }
                     ListElement {
-                        name: "Wendy"
-                        team: "Graphics"
+                        name: "Currency.com"
+                        team: "Криптобиржи, криптообменники"
+                    }
+                    ListElement {
+                        name: "Free2x.com"
+                        team: "Криптобиржи, криптообменники"
+                    }
+                    ListElement {
+                        name: "Пополнение QIWI Кошелька"
+                        team: "Электронные деньги"
+                    }
+                    ListElement {
+                        name: "Пополнение ЮMoney"
+                        team: "Электронные деньги"
+                    }
+                    ListElement {
+                        name: "Продажа WMB (эл.денег)"
+                        team: "Электронные деньги"
+                    }
+                    ListElement {
+                        name: "Интернет, ТВ"
+                        team: "А1"
+                    }
+                    ListElement {
+                        name: "Кабельное ТВ"
+                        team: "А1"
+                    }
+                    ListElement {
+                        name: "Абонентская плата"
+                        team: "А1"
+                    }
+                    ListElement {
+                        name: "Услуга VOKA"
+                        team: "А1"
+                    }
+                    ListElement {
+                        name: "ZALA, byfly, Умный дом, пакеты"
+                        team: "Белтелеком"
+                    }
+                    ListElement {
+                        name: "Закрытый телефон"
+                        team: "Белтелеком"
+                    }
+                    ListElement {
+                        name: "Разовый платеж"
+                        team: "Белтелеком"
+                    }
+                    ListElement {
+                        name: "Реализация товаров"
+                        team: "Белтелеком"
+                    }
+                    ListElement {
+                        name: "Телефон"
+                        team: "Белтелеком"
+                    }
+                    ListElement {
+                        name: "ТСИС:карт/абон/корпоратив.счет"
+                        team: "Белтелеком"
+                    }
+                    ListElement {
+                        name: "Домашний интернет"
+                        team: "МТС"
+                    }
+                    ListElement {
+                        name: "Промывка водопроводных сетей"
+                        team: "Коммунальные платежи"
+                    }
+                    ListElement {
+                        name: "Приемка в эксплуатацию"
+                        team: "Коммунальные платежи"
+                    }
+                    ListElement {
+                        name: "Утилизация сточных вод"
+                        team: "Коммунальные платежи"
+                    }
+                    ListElement {
+                        name: "Экспертная проверка водомера"
+                        team: "Коммунальные платежи"
+                    }
+                    ListElement {
+                        name: "Вывоз мусора"
+                        team: "Коммунальные платежи"
+                    }
+                    ListElement {
+                        name: "Газоснабжение"
+                        team: "Коммунальные платежи"
+                    }
+                    ListElement {
+                        name: "Прочие услуги"
+                        team: "Коммунальные платежи"
+                    }
+                    ListElement {
+                        name: "ТО, ремонт, услуги"
+                        team: "Коммунальные платежи"
+                    }
+                    ListElement {
+                        name: "Коммун. платежи АИС Расчет-ЖКУ"
+                        team: "Коммунальные платежи"
+                    }
+                    ListElement {
+                        name: "Платно-бытовые услуги"
+                        team: "Коммунальные платежи"
+                    }
+                    ListElement {
+                        name: "Платежи через ЦИТ"
+                        team: "Коммунальные платежи"
+                    }
+                    ListElement {
+                        name: "Выдача ВУ"
+                        team: "ГАИ"
+                    }
+                    ListElement {
+                        name: "Выдача дубликата ВУ"
+                        team: "ГАИ"
+                    }
+                    ListElement {
+                        name: "Компьютерные услуги"
+                        team: "ГАИ"
+                    }
+                    ListElement {
+                        name: "Оформление заявления"
+                        team: "ГАИ"
+                    }
+                    ListElement {
+                        name: "Практический экзамен на авто"
+                        team: "ГАИ"
+                    }
+                    ListElement {
+                        name: "Практический экзамен на мото"
+                        team: "ГАИ"
+                    }
+                    ListElement {
+                        name: "Предоставление автодрома"
+                        team: "ГАИ"
+                    }
+                    ListElement {
+                        name: "Предоставление ТС для экзамена"
+                        team: "ГАИ"
+                    }
+                    ListElement {
+                        name: "Теоретический экзамен"
+                        team: "ГАИ"
+                    }
+                    ListElement {
+                        name: "Тестирование знаний ПДД"
+                        team: "ГАИ"
+                    }
+                    ListElement {
+                        name: "Репетиционное тестирование"
+                        team: "Образование и развитие"
+                    }
+                    ListElement {
+                        name: "Централизованное тестирование"
+                        team: "Образование и развитие"
+                    }
+                    ListElement {
+                        name: "Физкультурно-оздоровит. услуги"
+                        team: "Образование и развитие"
+                    }
+                    ListElement {
+                        name: "Посещение бассейна"
+                        team: "Образование и развитие"
                     }
                 }
                 Component {
@@ -942,7 +1593,7 @@ Window {
 
                     Rectangle {
                         radius: 3
-                        color: "#fcfa72"
+                        color: index % 2 ? "#fcfa72" : "#fcdd6d"
                         height: expanded ? 30 : 0
                         clip: true
                         width: 385
@@ -951,10 +1602,7 @@ Window {
                         readonly property ListView __lv: ListView.view
                         property bool expanded: __lv.isSectionExpanded(
                                                     model.team)
-                        anchors {
-                            left: parent.left
-                            right: parent.right
-                        }
+
                         Text {
                             id: delegate_text
 
@@ -968,13 +1616,16 @@ Window {
 
                         Behavior on height {
                             NumberAnimation {
-                                duration: 200
+                                duration: 300
                             }
                         }
 
                         MouseArea {
                             anchors.fill: parent
                             onClicked: __lv.currentIndex = index
+                            onDoubleClicked: {
+                                set_payment_window()
+                            }
                         }
                     }
                 }
@@ -989,8 +1640,8 @@ Designer {
 D{i:12}D{i:1}D{i:14}D{i:13}D{i:17}D{i:24}D{i:18}D{i:40}D{i:41}D{i:42}D{i:43}D{i:45}
 D{i:44}D{i:46}D{i:47}D{i:49}D{i:48}D{i:50}D{i:51}D{i:53}D{i:52}D{i:54}D{i:55}D{i:57}
 D{i:56}D{i:58}D{i:59}D{i:61}D{i:60}D{i:62}D{i:63}D{i:39}D{i:38}D{i:65}D{i:66}D{i:64}
-D{i:16}D{i:68}D{i:69}D{i:77}D{i:71}D{i:70}D{i:78}D{i:79}D{i:80}D{i:83}D{i:89}D{i:81}
-D{i:67}D{i:15}
+D{i:16}D{i:68}D{i:69}D{i:71}D{i:70}D{i:121}D{i:122}D{i:124}D{i:126}D{i:142}D{i:123}
+D{i:150}D{i:196}D{i:148}D{i:67}D{i:15}
 }
 ##^##*/
 
