@@ -17,7 +17,7 @@ Window {
             right: parent.right
             left: parent.left
         }
-        color: "#d088f2"
+        color: "#dbaaf2"
 
         Image {
             id: logo
@@ -158,7 +158,7 @@ Window {
             right: parent.right
             left: parent.left
         }
-        color: "#b956e8"
+        color: "#d599f2"
 
         Text {
             anchors {
@@ -167,7 +167,7 @@ Window {
                 rightMargin: 45
             }
             font.bold: true
-            font.pixelSize: 24
+            font.pixelSize: 26
             text: "Белбанк, 2022"
         }
     }
@@ -454,18 +454,20 @@ Window {
                         Layout.column: 0
                         font.pixelSize: 19
                         font.bold: true
-                        text: "Валюта:"
+                        text: "    Валюта:"
                     }
                     Text {
+                        id: sell
                         Layout.row: 1
                         Layout.columnSpan: 1
                         Layout.column: 2
                         font.pixelSize: 19
                         font.bold: true
 
-                        text: "Продажа:"
+                        text: "   Продажа:"
                     }
                     Text {
+                        id: buy
                         Layout.row: 1
                         Layout.columnSpan: 1
                         Layout.column: 3
@@ -496,6 +498,9 @@ Window {
                         Layout.column: 2
                         font.pixelSize: 24
                         text: "4.32"
+                        anchors {
+                            horizontalCenter: sell.horizontalCenter
+                        }
                     }
                     Text {
                         Layout.row: 2
@@ -503,6 +508,9 @@ Window {
                         Layout.column: 3
                         font.pixelSize: 24
                         text: "4.297"
+                        anchors {
+                            horizontalCenter: buy.horizontalCenter
+                        }
                     }
                     Text {
                         Layout.row: 3
@@ -526,6 +534,9 @@ Window {
                         Layout.column: 2
                         font.pixelSize: 24
                         text: "2.63"
+                        anchors {
+                            horizontalCenter: sell.horizontalCenter
+                        }
                     }
                     Text {
                         Layout.row: 3
@@ -533,6 +544,9 @@ Window {
                         Layout.column: 3
                         font.pixelSize: 24
                         text: "2.59"
+                        anchors {
+                            horizontalCenter: buy.horizontalCenter
+                        }
                     }
                     Text {
                         Layout.row: 4
@@ -556,6 +570,9 @@ Window {
                         Layout.column: 2
                         font.pixelSize: 24
                         text: "3.2"
+                        anchors {
+                            horizontalCenter: sell.horizontalCenter
+                        }
                     }
                     Text {
                         Layout.row: 4
@@ -563,6 +580,9 @@ Window {
                         Layout.column: 3
                         font.pixelSize: 24
                         text: "3.15"
+                        anchors {
+                            horizontalCenter: buy.horizontalCenter
+                        }
                     }
 
                     Text {
@@ -587,6 +607,9 @@ Window {
                         Layout.column: 2
                         font.pixelSize: 24
                         text: "4"
+                        anchors {
+                            horizontalCenter: sell.horizontalCenter
+                        }
                     }
                     Text {
                         Layout.row: 5
@@ -594,6 +617,9 @@ Window {
                         Layout.column: 3
                         font.pixelSize: 24
                         text: "3.679"
+                        anchors {
+                            horizontalCenter: buy.horizontalCenter
+                        }
                     }
 
                     Text {
@@ -618,6 +644,9 @@ Window {
                         Layout.column: 2
                         font.pixelSize: 24
                         text: "5.64"
+                        anchors {
+                            horizontalCenter: sell.horizontalCenter
+                        }
                     }
                     Text {
                         Layout.row: 6
@@ -625,6 +654,9 @@ Window {
                         Layout.column: 3
                         font.pixelSize: 24
                         text: "5.14"
+                        anchors {
+                            horizontalCenter: buy.horizontalCenter
+                        }
                     }
                 }
             }
@@ -804,7 +836,109 @@ Window {
                                 fill: parent
                             }
 
+                            MouseArea {
+                                id: mts_mouse_area
+                                Layout.row: 0
+                                Layout.column: 0
+                                Layout.rowSpan: 2
+                                Layout.columnSpan: 1
+
+                                width: 60
+                                height: 140
+                                onClicked: {
+                                    set_payment_window()
+                                }
+                                onPressed: {
+                                    mts_text.font.bold = true
+                                }
+                                onReleased: {
+                                    mts_text.font.bold = false
+                                }
+                            }
+
+                            MouseArea {
+                                id: a1_mouse_area
+                                Layout.row: 0
+                                Layout.column: 1
+                                Layout.rowSpan: 2
+                                Layout.columnSpan: 1
+
+                                width: 60
+                                height: 140
+                                onClicked: {
+                                    set_payment_window()
+                                }
+                                onPressed: {
+                                    a1_text.font.bold = true
+                                }
+                                onReleased: {
+                                    a1_text.font.bold = false
+                                }
+                            }
+
+                            MouseArea {
+                                id: life_mouse_area
+                                Layout.row: 0
+                                Layout.column: 2
+                                Layout.rowSpan: 2
+                                Layout.columnSpan: 1
+
+                                width: 60
+                                height: 140
+                                onClicked: {
+                                    set_payment_window()
+                                }
+                                onPressed: {
+                                    life_text.font.bold = true
+                                }
+                                onReleased: {
+                                    life_text.font.bold = false
+                                }
+                            }
+
+                            MouseArea {
+                                id: beltelecom_mouse_area
+                                Layout.row: 0
+                                Layout.column: 3
+                                Layout.rowSpan: 2
+                                Layout.columnSpan: 1
+
+                                width: 110
+                                height: 140
+                                onClicked: {
+                                    set_payment_window()
+                                }
+                                onPressed: {
+                                    beltelecom_text.font.bold = true
+                                }
+                                onReleased: {
+                                    beltelecom_text.font.bold = false
+                                }
+                            }
+
+                            MouseArea {
+                                id: byfly_mouse_area
+                                Layout.row: 3
+                                Layout.column: 0
+                                Layout.rowSpan: 2
+                                Layout.columnSpan: 1
+
+                                width: 60
+                                height: 140
+                                onClicked: {
+                                    set_payment_window()
+                                }
+                                onPressed: {
+                                    byfly_text.font.bold = true
+                                }
+                                onReleased: {
+                                    byfly_text.font.bold = false
+                                }
+                            }
+
                             Rectangle {
+                                id: mts
+
                                 Layout.row: 0
                                 Layout.column: 0
                                 width: 60
@@ -814,7 +948,6 @@ Window {
                                 radius: 30
 
                                 Image {
-                                    id: mts
                                     fillMode: Image.Stretch
                                     anchors {
                                         fill: parent
@@ -824,10 +957,11 @@ Window {
                                 }
                             }
                             Text {
+                                id: mts_text
                                 Layout.row: 1
                                 Layout.column: 0
                                 font.pixelSize: 20
-                                text: "МТС"
+                                text: " МТС"
                             }
 
                             Rectangle {
@@ -845,10 +979,11 @@ Window {
                                 }
                             }
                             Text {
+                                id: a1_text
                                 Layout.row: 1
                                 Layout.column: 1
                                 font.pixelSize: 20
-                                text: "А1"
+                                text: "    А1"
                             }
 
                             Rectangle {
@@ -866,10 +1001,11 @@ Window {
                                 }
                             }
                             Text {
+                                id: life_text
                                 Layout.row: 1
                                 Layout.column: 2
                                 font.pixelSize: 20
-                                text: "Life"
+                                text: "   Life"
                             }
 
                             Rectangle {
@@ -877,6 +1013,7 @@ Window {
                                 Layout.column: 3
                                 width: 60
                                 height: 60
+                                color: "transparent"
 
                                 Image {
                                     fillMode: Image.Stretch
@@ -884,9 +1021,14 @@ Window {
                                         fill: parent
                                     }
                                     source: "images/Beltelecom.png"
+                                    anchors.rightMargin: -21
+                                    anchors.bottomMargin: 0
+                                    anchors.leftMargin: 21
+                                    anchors.topMargin: 0
                                 }
                             }
                             Text {
+                                id: beltelecom_text
                                 Layout.row: 1
                                 Layout.column: 3
                                 font.pixelSize: 20
@@ -908,10 +1050,11 @@ Window {
                                 }
                             }
                             Text {
+                                id: byfly_text
                                 Layout.row: 4
                                 Layout.column: 0
                                 font.pixelSize: 20
-                                text: "ByFly"
+                                text: " ByFly"
                             }
                         }
                     }
@@ -1336,9 +1479,7 @@ Window {
 
                 focus: true
                 clip: true
-                onCurrentItemChanged: console.log(
-                                          model.get(
-                                              erip.currentIndex).name + ' selected')
+
                 highlight: Rectangle {
                     z: 1
                     color: "transparent"
@@ -1636,12 +1777,12 @@ Window {
 
 /*##^##
 Designer {
-    D{i:0;formeditorZoom:0.5}D{i:2}D{i:3}D{i:5}D{i:6}D{i:4}D{i:7}D{i:8}D{i:9}D{i:10}D{i:11}
-D{i:12}D{i:1}D{i:14}D{i:13}D{i:17}D{i:24}D{i:18}D{i:40}D{i:41}D{i:42}D{i:43}D{i:45}
-D{i:44}D{i:46}D{i:47}D{i:49}D{i:48}D{i:50}D{i:51}D{i:53}D{i:52}D{i:54}D{i:55}D{i:57}
-D{i:56}D{i:58}D{i:59}D{i:61}D{i:60}D{i:62}D{i:63}D{i:39}D{i:38}D{i:65}D{i:66}D{i:64}
-D{i:16}D{i:68}D{i:69}D{i:71}D{i:70}D{i:121}D{i:122}D{i:124}D{i:126}D{i:142}D{i:123}
-D{i:150}D{i:196}D{i:148}D{i:67}D{i:15}
+    D{i:0;formeditorZoom:0.66}D{i:2}D{i:3}D{i:5}D{i:6}D{i:4}D{i:7}D{i:8}D{i:9}D{i:10}
+D{i:11}D{i:12}D{i:1}D{i:14}D{i:13}D{i:17}D{i:24}D{i:18}D{i:40}D{i:41}D{i:42}D{i:43}
+D{i:45}D{i:44}D{i:46}D{i:47}D{i:49}D{i:48}D{i:50}D{i:51}D{i:53}D{i:52}D{i:54}D{i:55}
+D{i:57}D{i:56}D{i:58}D{i:59}D{i:61}D{i:60}D{i:62}D{i:63}D{i:39}D{i:38}D{i:65}D{i:66}
+D{i:64}D{i:16}D{i:68}D{i:69}D{i:71}D{i:70}D{i:126}D{i:127}D{i:129}D{i:131}D{i:147}
+D{i:128}D{i:155}D{i:201}D{i:153}D{i:67}D{i:15}
 }
 ##^##*/
 

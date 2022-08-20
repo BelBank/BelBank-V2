@@ -3,13 +3,11 @@ import QtQuick.Layouts 1.15
 import QtQuick.Controls 2.15
 import QtQuick.Window 2.12
 
-
 Window {
     id: payment_window
     width: 800
     height: 600
     visible: true
-
 
     color: "white"
     title: "Выбор тарифа"
@@ -28,6 +26,7 @@ Window {
             anchors {
                 horizontalCenter: payment_rectangle.horizontalCenter
                 top: payment_rectangle.top
+                topMargin: 80
             }
         }
 

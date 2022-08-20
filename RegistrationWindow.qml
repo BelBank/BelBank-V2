@@ -18,7 +18,7 @@ Window {
         Image {
             id: logo_on_background
             source: "images/capture_20220617214014956.png"
-            width: 600
+            width: 350
             height: 250
             anchors {
                 horizontalCenter: rectangler.horizontalCenter
@@ -36,7 +36,8 @@ Window {
             radius: 10
 
             anchors {
-                left: logo_on_background.left
+                left: rectangler.left
+                leftMargin: 100
                 top: logo_on_background.bottom
                 margins: 15
             }
@@ -63,7 +64,8 @@ Window {
             radius: 10
 
             anchors {
-                left: logo_on_background.left
+                left: rectangler.left
+                leftMargin: 100
                 top: nickname_text.bottom
                 margins: 15
             }
@@ -90,7 +92,8 @@ Window {
             radius: 10
 
             anchors {
-                left: logo_on_background.left
+                left: rectangler.left
+                leftMargin: 100
                 top: password_text.bottom
                 margins: 15
             }
@@ -114,7 +117,8 @@ Window {
 
                 top: nickname_text.top
                 left: nickname_text.right
-                right: logo_on_background.right
+                right: rectangler.right
+                rightMargin: 100
             }
 
             height: nickname_text.height
@@ -146,7 +150,8 @@ Window {
 
                 top: password_text.top
                 left: password_text.right
-                right: logo_on_background.right
+                right: rectangler.right
+                rightMargin: 100
             }
 
             height: nickname_text.height
@@ -181,7 +186,8 @@ Window {
             anchors {
                 top: repeat_password_text.top
                 left: repeat_password_text.right
-                right: logo_on_background.right
+                right: rectangler.right
+                rightMargin: 100
                 leftMargin: 15
             }
 
@@ -218,10 +224,9 @@ Window {
             height: 40
             anchors {
                 top: repeat_password.bottom
-                left: logo_on_background.left
+                left: repeat_password_text.left
                 right: repeat_password.right
                 topMargin: 14
-                leftMargin: 15
             }
 
             color: "#d088f2"
@@ -234,7 +239,7 @@ Window {
                 text: "Зарегистрироваться"
                 color: "#222024"
                 font.family: "Helvetica"
-                font.pointSize: 12
+                font.pointSize: 14
                 font.bold: true
             }
 
