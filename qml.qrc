@@ -14,5 +14,17 @@
         <file>images/Silver card VISA.png</file>
         <file>images/USD.png</file>
         <file>MainWindow.qml</file>
+        <file>RegistrationWindow.qml</file>
+        <file>Main.qml</file>
+        <file>NewCardWindow.qml</file>
+        <file>images/Beltelecom.png</file>
+        <file>images/A1.jpg</file>
+        <file>images/ByFly.jpg</file>
+        <file>images/LIFE.png</file>
+        <file>images/MTS.png</file>
+        <file>images/china.jpg</file>
+        <file>images/PLN.jpg</file>
+        <file>images/swap.png</file>
+        <file>PaymentWindow.qml</file>
     </qresource>
 </RCC>

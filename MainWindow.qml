@@ -1,6 +1,7 @@
-import QtQuick 2.0
+import QtQuick 2.15
 import QtQuick.Layouts 1.15
 import QtQuick.Controls 2.15
+import QtQuick.Window 2.12
 
 Window {
     id: mainwindow
@@ -16,11 +17,11 @@ Window {
             right: parent.right
             left: parent.left
         }
-        color: "#d088f2"
+        color: "#dbaaf2"
 
         Image {
             id: logo
-            width: 300
+            width: 143
             height: 100
             source: "images/capture_20220617214014956.png"
             anchors {
@@ -41,7 +42,7 @@ Window {
             font.pixelSize: 30
             font.bold: true
 
-            text: "Pidor" ///тут должен присваиваться ник клиента.
+            text: "Nickname" ///тут должен присваиваться ник клиента.
         }
 
         Rectangle {
@@ -54,7 +55,7 @@ Window {
                 verticalCenter: header.verticalCenter
                 margins: 15
             }
-            color: "#b24bd1"
+            color: "#d258f7"
             border.color: "#7d3a9c"
             border.width: 2
             radius: 10
@@ -71,7 +72,7 @@ Window {
             MouseArea {
                 anchors.fill: parent
                 onClicked: {
-
+                    set_authorization_window()
                 }
                 onPressed: {
                     parent.color = "#7d3a9c"
@@ -157,7 +158,7 @@ Window {
             right: parent.right
             left: parent.left
         }
-        color: "#7d3a9c"
+        color: "#d599f2"
 
         Text {
             anchors {
@@ -166,7 +167,7 @@ Window {
                 rightMargin: 45
             }
             font.bold: true
-            font.pixelSize: 24
+            font.pixelSize: 26
             text: "Белбанк, 2022"
         }
     }
@@ -180,6 +181,10 @@ Window {
             left: parent.left
         }
         color: "#fdffbd"
+        anchors.rightMargin: 0
+        anchors.bottomMargin: 0
+        anchors.leftMargin: 0
+        anchors.topMargin: 0
 
         Rectangle {
             id: finance
@@ -202,7 +207,7 @@ Window {
                     top: finance.top
                 }
                 text: "Финансы"
-                font.pixelSize: 26
+                font.pixelSize: 30
             }
 
             ListView {
@@ -408,7 +413,7 @@ Window {
 
                 id: cash
                 height: 230
-                color: "#fdffbd"
+                color: "#fcdd6d"
                 anchors {
                     top: new_card.bottom
                     topMargin: 40
@@ -420,10 +425,11 @@ Window {
                     leftMargin: 50
                 }
                 radius: 8
-                border.width: 3
-                border.color: "#d088f2"
+
                 GridLayout {
-                    rows: 5
+                    anchors.bottomMargin: 20
+                    anchors.topMargin: 8
+                    rows: 7
                     columns: 4
                     anchors {
                         fill: parent
@@ -437,6 +443,8 @@ Window {
 
                         id: cash_title
                         font.pixelSize: 25
+                        font.bold: true
+
                         Layout.alignment: Qt.AlignCenter
                         text: "Курсы валют в отделениях БелБанка"
                     }
@@ -445,21 +453,28 @@ Window {
                         Layout.columnSpan: 2
                         Layout.column: 0
                         font.pixelSize: 19
-                        text: "Валюта"
+                        font.bold: true
+                        text: "    Валюта:"
                     }
                     Text {
+                        id: sell
                         Layout.row: 1
                         Layout.columnSpan: 1
                         Layout.column: 2
                         font.pixelSize: 19
-                        text: "Продажа"
+                        font.bold: true
+
+                        text: "   Продажа:"
                     }
                     Text {
+                        id: buy
                         Layout.row: 1
                         Layout.columnSpan: 1
                         Layout.column: 3
                         font.pixelSize: 19
-                        text: "Покупка"
+                        font.bold: true
+
+                        text: "Покупка:"
                     }
                     Text {
                         Layout.row: 2
@@ -467,10 +482,10 @@ Window {
                         Layout.column: 0
                         id: rub
                         text: "100RUB"
-                        font.pixelSize: 12
+                        font.pixelSize: 20
                         Image {
-                            width: 20
-                            height: 20
+                            width: 40
+                            height: 30
                             source: "images/RUB.png"
                             anchors {
                                 left: rub.right
@@ -481,15 +496,21 @@ Window {
                         Layout.row: 2
                         Layout.columnSpan: 1
                         Layout.column: 2
-                        font.pixelSize: 18
+                        font.pixelSize: 24
                         text: "4.32"
+                        anchors {
+                            horizontalCenter: sell.horizontalCenter
+                        }
                     }
                     Text {
                         Layout.row: 2
                         Layout.columnSpan: 1
                         Layout.column: 3
-                        font.pixelSize: 18
+                        font.pixelSize: 24
                         text: "4.297"
+                        anchors {
+                            horizontalCenter: buy.horizontalCenter
+                        }
                     }
                     Text {
                         Layout.row: 3
@@ -497,10 +518,10 @@ Window {
                         Layout.column: 0
                         id: usd
                         text: "1USD"
-                        font.pixelSize: 12
+                        font.pixelSize: 20
                         Image {
-                            width: 20
-                            height: 20
+                            width: 40
+                            height: 30
                             source: "images/USD.png"
                             anchors {
                                 left: usd.right
@@ -511,26 +532,32 @@ Window {
                         Layout.row: 3
                         Layout.columnSpan: 1
                         Layout.column: 2
-                        font.pixelSize: 18
+                        font.pixelSize: 24
                         text: "2.63"
+                        anchors {
+                            horizontalCenter: sell.horizontalCenter
+                        }
                     }
                     Text {
                         Layout.row: 3
                         Layout.columnSpan: 1
                         Layout.column: 3
-                        font.pixelSize: 18
+                        font.pixelSize: 24
                         text: "2.59"
+                        anchors {
+                            horizontalCenter: buy.horizontalCenter
+                        }
                     }
                     Text {
                         Layout.row: 4
                         Layout.columnSpan: 2
                         Layout.column: 0
                         id: euro
-                        text: "1EURO"
-                        font.pixelSize: 12
+                        text: "1EUR"
+                        font.pixelSize: 20
                         Image {
-                            width: 20
-                            height: 20
+                            width: 40
+                            height: 30
                             source: "images/EURO.png"
                             anchors {
                                 left: euro.right
@@ -541,15 +568,95 @@ Window {
                         Layout.row: 4
                         Layout.columnSpan: 1
                         Layout.column: 2
-                        font.pixelSize: 18
+                        font.pixelSize: 24
                         text: "3.2"
+                        anchors {
+                            horizontalCenter: sell.horizontalCenter
+                        }
                     }
                     Text {
                         Layout.row: 4
                         Layout.columnSpan: 1
                         Layout.column: 3
-                        font.pixelSize: 18
+                        font.pixelSize: 24
                         text: "3.15"
+                        anchors {
+                            horizontalCenter: buy.horizontalCenter
+                        }
+                    }
+
+                    Text {
+                        Layout.row: 5
+                        Layout.columnSpan: 2
+                        Layout.column: 0
+                        id: china
+                        text: "10CNY"
+                        font.pixelSize: 20
+                        Image {
+                            width: 40
+                            height: 30
+                            source: "images/china.jpg"
+                            anchors {
+                                left: china.right
+                            }
+                        }
+                    }
+                    Text {
+                        Layout.row: 5
+                        Layout.columnSpan: 1
+                        Layout.column: 2
+                        font.pixelSize: 24
+                        text: "4"
+                        anchors {
+                            horizontalCenter: sell.horizontalCenter
+                        }
+                    }
+                    Text {
+                        Layout.row: 5
+                        Layout.columnSpan: 1
+                        Layout.column: 3
+                        font.pixelSize: 24
+                        text: "3.679"
+                        anchors {
+                            horizontalCenter: buy.horizontalCenter
+                        }
+                    }
+
+                    Text {
+                        Layout.row: 6
+                        Layout.columnSpan: 2
+                        Layout.column: 0
+                        id: pln
+                        text: "10PLN"
+                        font.pixelSize: 20
+                        Image {
+                            width: 40
+                            height: 30
+                            source: "images/PLN.jpg"
+                            anchors {
+                                left: pln.right
+                            }
+                        }
+                    }
+                    Text {
+                        Layout.row: 6
+                        Layout.columnSpan: 1
+                        Layout.column: 2
+                        font.pixelSize: 24
+                        text: "5.64"
+                        anchors {
+                            horizontalCenter: sell.horizontalCenter
+                        }
+                    }
+                    Text {
+                        Layout.row: 6
+                        Layout.columnSpan: 1
+                        Layout.column: 3
+                        font.pixelSize: 24
+                        text: "5.14"
+                        anchors {
+                            horizontalCenter: buy.horizontalCenter
+                        }
                     }
                 }
             }
@@ -581,10 +688,7 @@ Window {
                 MouseArea {
                     anchors.fill: parent
                     onClicked: {
-
-                        //////////////////////////////
-                        //////////многооконность блядь
-                        //////////////////////////////
+                        set_new_card_window()
                     }
 
                     onPressed: {
@@ -610,141 +714,1075 @@ Window {
             }
             radius: 8
             border.width: 3
+            anchors.rightMargin: 8
+            anchors.bottomMargin: 10
+            anchors.leftMargin: 12
+            anchors.topMargin: 10
             border.color: "#d088f2"
             color: "#fdffbd"
 
             Text {
                 id: payments_text
                 anchors {
-                    horizontalCenter: payments.horizontalCenter
                     top: payments.top
+                    horizontalCenter: payments.horizontalCenter
                 }
                 text: "Платежи и переводы"
-                font.pixelSize: 26
+                font.pixelSize: 30
             }
 
-            //            Rectangle {
-            //                width: 360
-            //                height: 360
+            Text {
+                id: erip_text
+                x: 30
+                y: 60
+                width: 295
+                height: 37
+                text: qsTr("Система Расчета ЕРИП")
+                font.pixelSize: 28
+                anchors {
+                    horizontalCenter: erip.horizontalCenter
+                    top: payments_text.bottom
+                    topMargin: 15
+                }
+            }
 
-            //                ListModel {
-            //                    id: dataModel
+            Rectangle {
+                id: popular_payments
 
-            //                    ListElement {
-            //                        color: "orange"
-            //                        text: "first"
-            //                    }
-            //                    ListElement {
-            //                        color: "lightgreen"
-            //                        text: "second"
-            //                    }
-            //                    ListElement {
-            //                        color: "orchid"
-            //                        text: "third"
-            //                    }
-            //                    ListElement {
-            //                        color: "tomato"
-            //                        text: "fourth"
-            //                    }
-            //                }
+                height: payments.height / 2 - 70
+                //                border.color: "#d088f2"
+                //                color: "#fdffbd"
+                //                border.width: 3
+                radius: 8
+                anchors {
+                    left: erip.right
+                    leftMargin: 25
+                    right: payments.right
+                    rightMargin: 30
+                    top: erip.top
+                }
 
-            //                GridView {
-            //                    id: view
+                Flipable {
+                    id: popular_or_selected
+                    property bool flipped: false
 
-            //                    anchors.margins: 10
-            //                    anchors.fill: parent
-            //                    cellHeight: 100
-            //                    cellWidth: cellHeight
-            //                    model: dataModel
-            //                    clip: true
+                    anchors.fill: parent
+                    front: Rectangle {
+                        id: popular
+                        anchors {
+                            fill: parent
+                            margins: 2
+                        }
 
-            //                    highlight: Rectangle {
-            //                        color: "skyblue"
-            //                    }
+                        color: "#fcdd6d"
+                        radius: 10
+                        Rectangle {
+                            width: 40
+                            height: 40
+                            radius: 10
+                            color: "transparent"
+                            id: swap_button_to_selected
+                            anchors {
+                                bottom: popular.bottom
+                                left: popular.left
+                                margins: 10
+                            }
+                            Image {
+                                id: img_1
+                                visible: true
+                                width: 40
+                                height: 40
 
-            //                    delegate: Item {
-            //                        property var view: GridView.view
-            //                        property var isCurrent: GridView.isCurrentItem
+                                anchors {
+                                    centerIn: parent
+                                }
+                                source: "images/swap.png"
+                            }
 
-            //                        height: view.cellHeight
-            //                        width: view.cellWidth
+                            Rectangle {
+                                id: swap_rect_1
+                                // rounded corners for img
+                                anchors.fill: img_1
+                                color: "transparent"
+                                border.color: "#d088f2"
+                                border.width: 3
+                                radius: 10
+                            }
+                            MouseArea {
 
-            //                        Rectangle {
-            //                            anchors.margins: 5
-            //                            anchors.fill: parent
-            //                            color: model.color
-            //                            border {
-            //                                color: "black"
-            //                                width: 1
-            //                            }
+                                anchors {
+                                    fill: swap_rect_1
+                                }
+                                function popular_text() {
+                                    popular_payments_text.text = "Избранные платежи"
+                                }
 
-            //                            Text {
-            //                                anchors.centerIn: parent
-            //                                renderType: Text.NativeRendering
-            //                                text: "%1%2".arg(model.text).arg(isCurrent ? " *" : "")
-            //                            }
+                                onClicked: {
+                                    popular_or_selected.flipped = !popular_or_selected.flipped
+                                    popular_text()
+                                }
+                            }
+                        }
 
-            //                            MouseArea {
-            //                                anchors.fill: parent
-            //                                onClicked: view.currentIndex = model.index
-            //                            }
-            //                        }
-            //                    }
-            //                }
-            //            }
+                        GridLayout {
+                            rows: 5
 
-            //            Rectangle {
-            //                width: 360
-            //                height: 360
+                            columns: 4
+                            anchors {
+                                leftMargin: 80
+                                topMargin: 30
+                                rightMargin: 30
+                                bottomMargin: 50
+                                fill: parent
+                            }
 
-            //                ListModel {
-            //                    id: dataModel
+                            MouseArea {
+                                id: mts_mouse_area
+                                Layout.row: 0
+                                Layout.column: 0
+                                Layout.rowSpan: 2
+                                Layout.columnSpan: 1
 
-            //                    ListElement {
-            //                        color: "orange"
-            //                        text: "first"
-            //                    }
-            //                    ListElement {
-            //                        color: "lightgreen"
-            //                        text: "second"
-            //                    }
-            //                    ListElement {
-            //                        color: "orchid"
-            //                        text: "third"
-            //                    }
-            //                    ListElement {
-            //                        color: "tomato"
-            //                        text: "fourth"
-            //                    }
-            //                }
+                                width: 60
+                                height: 140
+                                onClicked: {
+                                    set_payment_window()
+                                }
+                                onPressed: {
+                                    mts_text.font.bold = true
+                                }
+                                onReleased: {
+                                    mts_text.font.bold = false
+                                }
+                            }
 
-            //                TableView {
-            //                    id: view
+                            MouseArea {
+                                id: a1_mouse_area
+                                Layout.row: 0
+                                Layout.column: 1
+                                Layout.rowSpan: 2
+                                Layout.columnSpan: 1
 
-            //                    anchors.margins: 10
-            //                    anchors.fill: parent
-            //                    model: dataModel
-            //                    clip: true
+                                width: 60
+                                height: 140
+                                onClicked: {
+                                    set_payment_window()
+                                }
+                                onPressed: {
+                                    a1_text.font.bold = true
+                                }
+                                onReleased: {
+                                    a1_text.font.bold = false
+                                }
+                            }
 
-            //                    TableViewColumn {
-            //                        width: 100
-            //                        title: "Color"
-            //                        role: "color"
-            //                    }
-            //                    TableViewColumn {
-            //                        width: 100
-            //                        title: "Text"
-            //                        role: "text"
-            //                    }
+                            MouseArea {
+                                id: life_mouse_area
+                                Layout.row: 0
+                                Layout.column: 2
+                                Layout.rowSpan: 2
+                                Layout.columnSpan: 1
 
-            //                    itemDelegate: Item {
-            //                        Text {
-            //                            anchors.centerIn: parent
-            //                            renderType: Text.NativeRendering
-            //                            text: styleData.value
-            //                        }
-            //                    }
-            //                }
+                                width: 60
+                                height: 140
+                                onClicked: {
+                                    set_payment_window()
+                                }
+                                onPressed: {
+                                    life_text.font.bold = true
+                                }
+                                onReleased: {
+                                    life_text.font.bold = false
+                                }
+                            }
+
+                            MouseArea {
+                                id: beltelecom_mouse_area
+                                Layout.row: 0
+                                Layout.column: 3
+                                Layout.rowSpan: 2
+                                Layout.columnSpan: 1
+
+                                width: 110
+                                height: 140
+                                onClicked: {
+                                    set_payment_window()
+                                }
+                                onPressed: {
+                                    beltelecom_text.font.bold = true
+                                }
+                                onReleased: {
+                                    beltelecom_text.font.bold = false
+                                }
+                            }
+
+                            MouseArea {
+                                id: byfly_mouse_area
+                                Layout.row: 3
+                                Layout.column: 0
+                                Layout.rowSpan: 2
+                                Layout.columnSpan: 1
+
+                                width: 60
+                                height: 140
+                                onClicked: {
+                                    set_payment_window()
+                                }
+                                onPressed: {
+                                    byfly_text.font.bold = true
+                                }
+                                onReleased: {
+                                    byfly_text.font.bold = false
+                                }
+                            }
+
+                            Rectangle {
+                                id: mts
+
+                                Layout.row: 0
+                                Layout.column: 0
+                                width: 60
+                                height: 60
+
+                                clip: true
+                                radius: 30
+
+                                Image {
+                                    fillMode: Image.Stretch
+                                    anchors {
+                                        fill: parent
+                                    }
+                                    smooth: true
+                                    source: "images/MTS.png"
+                                }
+                            }
+                            Text {
+                                id: mts_text
+                                Layout.row: 1
+                                Layout.column: 0
+                                font.pixelSize: 20
+                                text: " МТС"
+                            }
+
+                            Rectangle {
+                                Layout.row: 0
+                                Layout.column: 1
+                                width: 60
+                                height: 60
+
+                                Image {
+                                    fillMode: Image.Stretch
+                                    anchors {
+                                        fill: parent
+                                    }
+                                    source: "images/A1.jpg"
+                                }
+                            }
+                            Text {
+                                id: a1_text
+                                Layout.row: 1
+                                Layout.column: 1
+                                font.pixelSize: 20
+                                text: "    А1"
+                            }
+
+                            Rectangle {
+                                Layout.row: 0
+                                Layout.column: 2
+                                width: 60
+                                height: 60
+
+                                Image {
+                                    fillMode: Image.Stretch
+                                    anchors {
+                                        fill: parent
+                                    }
+                                    source: "images/LIFE.png"
+                                }
+                            }
+                            Text {
+                                id: life_text
+                                Layout.row: 1
+                                Layout.column: 2
+                                font.pixelSize: 20
+                                text: "   Life"
+                            }
+
+                            Rectangle {
+                                Layout.row: 0
+                                Layout.column: 3
+                                width: 60
+                                height: 60
+                                color: "transparent"
+
+                                Image {
+                                    fillMode: Image.Stretch
+                                    anchors {
+                                        fill: parent
+                                    }
+                                    source: "images/Beltelecom.png"
+                                    anchors.rightMargin: -21
+                                    anchors.bottomMargin: 0
+                                    anchors.leftMargin: 21
+                                    anchors.topMargin: 0
+                                }
+                            }
+                            Text {
+                                id: beltelecom_text
+                                Layout.row: 1
+                                Layout.column: 3
+                                font.pixelSize: 20
+                                text: "Белтелеком"
+                            }
+
+                            Rectangle {
+                                Layout.row: 3
+                                Layout.column: 0
+                                width: 60
+                                height: 60
+
+                                Image {
+                                    fillMode: Image.Stretch
+                                    anchors {
+                                        fill: parent
+                                    }
+                                    source: "images/ByFly.jpg"
+                                }
+                            }
+                            Text {
+                                id: byfly_text
+                                Layout.row: 4
+                                Layout.column: 0
+                                font.pixelSize: 20
+                                text: " ByFly"
+                            }
+                        }
+                    }
+                    back: Rectangle {
+                        id: selected
+
+                        anchors {
+                            fill: parent
+                            margins: 3
+                        }
+                        color: "#fcdd6d"
+                        radius: 10
+
+                        Rectangle {
+                            width: 40
+                            height: 40
+                            radius: 10
+                            color: "transparent"
+                            id: swap_button_to_popular
+                            anchors {
+                                bottom: selected.bottom
+                                left: selected.left
+                                margins: 10
+                            }
+                            Image {
+                                id: img_2
+                                visible: true
+                                width: 40
+                                height: 40
+
+                                anchors {
+                                    centerIn: parent
+                                }
+                                source: "images/swap.png"
+                            }
+
+                            Rectangle {
+                                id: swap_rect_2
+                                // rounded corners for img
+                                anchors.fill: img_2
+                                color: "transparent"
+                                border.color: "#d088f2"
+                                border.width: 4
+                                radius: 10
+                            }
+                            MouseArea {
+
+                                anchors {
+                                    fill: swap_rect_2
+                                }
+
+                                function selected_text() {
+                                    popular_payments_text.text = "Популярные платежи"
+                                }
+
+                                onClicked: {
+                                    popular_or_selected.flipped = !popular_or_selected.flipped
+                                    selected_text()
+                                }
+                            }
+                        }
+
+                        ListView {
+                            currentIndex: -1
+                            id: selected_payments
+                            x: 41
+                            y: 112
+                            width: 385
+                            height: 719
+                            anchors {
+                                fill: parent
+                                margins: 50
+                            }
+                            model: selected_paymentModel
+                            delegate: selected_paymentDelegate
+
+                            focus: true
+                            clip: true
+                            highlight: Rectangle {
+                                z: 1
+                                color: "transparent"
+                                border.width: 3
+                                border.color: "#d088f2"
+                            }
+                        }
+
+                        ListModel {
+                            id: selected_paymentModel
+                            ListElement {
+                                name: "Приорбанк"
+                            }
+                            ListElement {
+                                name: "Гаи"
+                            }
+                            ListElement {
+                                name: "Погашение кредита"
+                            }
+                            ListElement {
+
+                                name: "Коммунальные платежи"
+                            }
+                            ListElement {
+
+                                name: "МТС"
+                            }
+                            ListElement {
+                                name: "Приорбанк"
+                            }
+                            ListElement {
+                                name: "Гаи"
+                            }
+                            ListElement {
+                                name: "Погашение кредита"
+                            }
+                            ListElement {
+
+                                name: "Коммунальные платежи"
+                            }
+                            ListElement {
+
+                                name: "МТС"
+                            }
+                            ListElement {
+                                name: "Приорбанк"
+                            }
+                            ListElement {
+                                name: "Гаи"
+                            }
+                            ListElement {
+                                name: "Погашение кредита"
+                            }
+                            ListElement {
+
+                                name: "Коммунальные платежи"
+                            }
+                            ListElement {
+
+                                name: "МТС"
+                            }
+                        }
+                        Component {
+                            id: selected_paymentDelegate
+
+                            Rectangle {
+                                radius: 3
+                                color: index % 2 ? "#fcfa72" : "#fccf53"
+                                height: 30
+                                clip: true
+                                width: 385
+                                border.width: 1
+                                border.color: "gray"
+                                readonly property ListView __lv: ListView.view
+
+                                anchors {
+                                    left: parent.left
+                                    right: parent.right
+                                }
+                                Text {
+
+                                    height: parent.height
+                                    text: model.name
+                                    font.pixelSize: 20
+                                    anchors {
+                                        horizontalCenter: parent.horizontalCenter
+                                    }
+                                }
+
+                                MouseArea {
+                                    anchors.fill: parent
+                                    onClicked: __lv.currentIndex = index
+                                    onDoubleClicked: {
+                                        set_payment_window()
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    transform: Rotation {
+                        origin.x: popular_or_selected.width / 2
+                        origin.y: popular_or_selected.height / 2
+                        axis.x: 0
+                        axis.y: 1
+                        axis.z: 0
+                        angle: popular_or_selected.flipped ? 180 : 0
+
+                        Behavior on angle {
+                            NumberAnimation {
+                                duration: 600
+                            }
+                        }
+                    }
+                }
+            }
+
+            Text {
+                id: popular_payments_text
+
+                text: qsTr("Популярные платежи")
+                font.pixelSize: 28
+                anchors {
+                    top: erip_text.top
+                    horizontalCenter: popular_payments.horizontalCenter
+                }
+            }
+
+            Text {
+                id: payments_history_text
+                text: "История платежей"
+                font.pixelSize: 28
+                anchors {
+                    top: popular_payments.bottom
+                    topMargin: 10
+                    horizontalCenter: popular_payments.horizontalCenter
+                }
+            }
+
+            Rectangle {
+                id: payments_history
+
+                anchors {
+
+                    top: payments_history_text.bottom
+                    topMargin: 15
+                    left: erip.right
+                    leftMargin: 25
+                    right: payments.right
+                    rightMargin: 30
+                    bottom: payments.bottom
+                    bottomMargin: 20
+                }
+                //                border.color: "#d088f2"
+                color: "#fdffbd"
+
+                //                border.width: 3
+                //                radius: 8
+                ListView {
+                    currentIndex: -1
+                    id: history
+                    x: 41
+                    y: 112
+                    width: 385
+                    height: 719
+                    anchors {
+                        fill: parent
+                    }
+                    model: historyModel
+                    delegate: historyDelegate
+
+                    focus: true
+                    clip: true
+                    highlight: Rectangle {
+                        z: 1
+                        color: "transparent"
+                        border.width: 3
+                        border.color: "#d088f2"
+                    }
+                }
+
+                ListModel {
+                    id: historyModel
+                    ListElement {
+                        value: "32"
+                        name: "Приорбанк"
+                        date: "12.12.21"
+                    }
+                    ListElement {
+                        value: "32"
+
+                        name: "Гаи"
+                        date: "12.12.21"
+                    }
+                    ListElement {
+                        value: "32"
+                        date: "12.12.21"
+
+                        name: "Погашение кредита"
+                    }
+                    ListElement {
+                        value: "33472"
+                        date: "12.12.21"
+
+                        name: "Коммунальные платежи"
+                    }
+                    ListElement {
+                        value: "32"
+                        date: "12.12.21"
+
+                        name: "МТС"
+                    }
+                    ListElement {
+                        name: "Приорбанк"
+                        value: "32"
+                        date: "12.12.21"
+                    }
+                    ListElement {
+                        name: "Гаи"
+                        value: "32"
+                        date: "12.12.21"
+                    }
+                    ListElement {
+                        name: "Погашение кредита"
+                        value: "32"
+                        date: "12.12.21"
+                    }
+                    ListElement {
+
+                        name: "Коммунальные платежи"
+                        value: "32"
+                        date: "12.12.21"
+                    }
+                    ListElement {
+
+                        name: "МТС"
+                        value: "32"
+                        date: "12.12.21"
+                    }
+                    ListElement {
+                        name: "Приорбанк"
+                        value: "32"
+                        date: "12.12.21"
+                    }
+                    ListElement {
+                        name: "Гаи"
+                        value: "32"
+                        date: "12.12.21"
+                    }
+                    ListElement {
+                        name: "Погашение кредита"
+                        value: "32"
+                        date: "12.12.21"
+                    }
+                    ListElement {
+
+                        name: "Коммунальные платежи"
+                        value: "329"
+                        date: "12.12.21"
+                    }
+                    ListElement {
+
+                        name: "МТС"
+                        value: "37962"
+                        date: "12.12.21"
+                    }
+                }
+                Component {
+                    id: historyDelegate
+
+                    Rectangle {
+                        radius: 8
+                        color: index % 2 ? "#fcfa72" : "#fcdd6d"
+                        height: 30
+                        clip: true
+                        width: 385
+                        border.width: 1
+                        border.color: "gray"
+                        readonly property ListView __lv: ListView.view
+
+                        anchors {
+                            left: parent.left
+                            right: parent.right
+                        }
+                        Text {
+
+                            height: parent.height
+                            text: model.name
+                            font.pixelSize: 20
+                            anchors {
+                                left: parent.left
+                                leftMargin: 15
+                            }
+                        }
+                        Text {
+
+                            height: parent.height
+                            text: model.value
+                            font.pixelSize: 20
+                            anchors {
+                                right: parent.right
+                                rightMargin: 15
+                            }
+                        }
+                        Text {
+
+                            height: parent.height
+                            text: model.date
+                            font.pixelSize: 20
+                            anchors {
+                                horizontalCenter: parent.horizontalCenter
+                            }
+                        }
+
+                        MouseArea {
+                            anchors.fill: parent
+                            onClicked: __lv.currentIndex = index
+                            onDoubleClicked: {
+                                set_payment_window()
+                            }
+                        }
+                    }
+                }
+            }
+
+            ListView {
+                currentIndex: -1
+                id: erip
+                property var collapsed: ({})
+                x: 41
+                y: 112
+                width: 385
+                height: 719
+                anchors {
+                    left: payments.left
+                    leftMargin: 40
+                    bottom: payments.bottom
+                    bottomMargin: 20
+                    top: erip_text.bottom
+                    topMargin: 15
+                }
+                model: nameModel
+                delegate: nameDelegate
+
+                focus: true
+                clip: true
+
+                highlight: Rectangle {
+                    z: 1
+                    color: "transparent"
+                    border.width: 3
+                    border.color: "#d088f2"
+                }
+                section {
+                    property: "team"
+                    criteria: ViewSection.FullString
+                    delegate: Rectangle {
+
+                        id: section_
+                        signal clicked
+
+                        radius: 4
+                        color: "#d088f2"
+                        width: 385
+                        height: 40
+
+                        border.width: 2
+                        border.color: "black"
+                        Text {
+                            anchors {
+                                horizontalCenter: parent.horizontalCenter
+                                verticalCenter: parent.verticalCenter
+                            }
+
+                            font.pixelSize: 16
+                            font.bold: true
+                            text: section
+                        }
+
+                        MouseArea {
+                            anchors.fill: parent
+
+                            onClicked: {
+                                section_.clicked()
+                                erip.toggleSection(section)
+                            }
+                        }
+                        Component.onCompleted: erip.hideSection(section)
+                    }
+                }
+
+                function isSectionExpanded(section) {
+                    return !(section in collapsed)
+                }
+
+                function showSection(section) {
+                    delete collapsed[section]
+                    collapsedChanged()
+                }
+
+                function hideSection(section) {
+                    collapsed[section] = true
+                    collapsedChanged()
+                }
+
+                function toggleSection(section) {
+                    if (isSectionExpanded((section))) {
+                        hideSection(section)
+                    } else {
+                        showSection(section)
+                    }
+                }
+
+                ListModel {
+                    id: nameModel
+                    ListElement {
+                        name: "Погашение кредита"
+                        team: "Банки, НКФО"
+                    }
+                    ListElement {
+                        name: "Пополнение счета"
+                        team: "Банки, НКФО"
+                    }
+                    ListElement {
+                        name: "Пополнение безотзывного вклада"
+                        team: "Банки, НКФО"
+                    }
+                    ListElement {
+                        name: "Bynex"
+                        team: "Криптобиржи, криптообменники"
+                    }
+                    ListElement {
+                        name: "Currency.com"
+                        team: "Криптобиржи, криптообменники"
+                    }
+                    ListElement {
+                        name: "Free2x.com"
+                        team: "Криптобиржи, криптообменники"
+                    }
+                    ListElement {
+                        name: "Пополнение QIWI Кошелька"
+                        team: "Электронные деньги"
+                    }
+                    ListElement {
+                        name: "Пополнение ЮMoney"
+                        team: "Электронные деньги"
+                    }
+                    ListElement {
+                        name: "Продажа WMB (эл.денег)"
+                        team: "Электронные деньги"
+                    }
+                    ListElement {
+                        name: "Интернет, ТВ"
+                        team: "А1"
+                    }
+                    ListElement {
+                        name: "Кабельное ТВ"
+                        team: "А1"
+                    }
+                    ListElement {
+                        name: "Абонентская плата"
+                        team: "А1"
+                    }
+                    ListElement {
+                        name: "Услуга VOKA"
+                        team: "А1"
+                    }
+                    ListElement {
+                        name: "ZALA, byfly, Умный дом, пакеты"
+                        team: "Белтелеком"
+                    }
+                    ListElement {
+                        name: "Закрытый телефон"
+                        team: "Белтелеком"
+                    }
+                    ListElement {
+                        name: "Разовый платеж"
+                        team: "Белтелеком"
+                    }
+                    ListElement {
+                        name: "Реализация товаров"
+                        team: "Белтелеком"
+                    }
+                    ListElement {
+                        name: "Телефон"
+                        team: "Белтелеком"
+                    }
+                    ListElement {
+                        name: "ТСИС:карт/абон/корпоратив.счет"
+                        team: "Белтелеком"
+                    }
+                    ListElement {
+                        name: "Домашний интернет"
+                        team: "МТС"
+                    }
+                    ListElement {
+                        name: "Промывка водопроводных сетей"
+                        team: "Коммунальные платежи"
+                    }
+                    ListElement {
+                        name: "Приемка в эксплуатацию"
+                        team: "Коммунальные платежи"
+                    }
+                    ListElement {
+                        name: "Утилизация сточных вод"
+                        team: "Коммунальные платежи"
+                    }
+                    ListElement {
+                        name: "Экспертная проверка водомера"
+                        team: "Коммунальные платежи"
+                    }
+                    ListElement {
+                        name: "Вывоз мусора"
+                        team: "Коммунальные платежи"
+                    }
+                    ListElement {
+                        name: "Газоснабжение"
+                        team: "Коммунальные платежи"
+                    }
+                    ListElement {
+                        name: "Прочие услуги"
+                        team: "Коммунальные платежи"
+                    }
+                    ListElement {
+                        name: "ТО, ремонт, услуги"
+                        team: "Коммунальные платежи"
+                    }
+                    ListElement {
+                        name: "Коммун. платежи АИС Расчет-ЖКУ"
+                        team: "Коммунальные платежи"
+                    }
+                    ListElement {
+                        name: "Платно-бытовые услуги"
+                        team: "Коммунальные платежи"
+                    }
+                    ListElement {
+                        name: "Платежи через ЦИТ"
+                        team: "Коммунальные платежи"
+                    }
+                    ListElement {
+                        name: "Выдача ВУ"
+                        team: "ГАИ"
+                    }
+                    ListElement {
+                        name: "Выдача дубликата ВУ"
+                        team: "ГАИ"
+                    }
+                    ListElement {
+                        name: "Компьютерные услуги"
+                        team: "ГАИ"
+                    }
+                    ListElement {
+                        name: "Оформление заявления"
+                        team: "ГАИ"
+                    }
+                    ListElement {
+                        name: "Практический экзамен на авто"
+                        team: "ГАИ"
+                    }
+                    ListElement {
+                        name: "Практический экзамен на мото"
+                        team: "ГАИ"
+                    }
+                    ListElement {
+                        name: "Предоставление автодрома"
+                        team: "ГАИ"
+                    }
+                    ListElement {
+                        name: "Предоставление ТС для экзамена"
+                        team: "ГАИ"
+                    }
+                    ListElement {
+                        name: "Теоретический экзамен"
+                        team: "ГАИ"
+                    }
+                    ListElement {
+                        name: "Тестирование знаний ПДД"
+                        team: "ГАИ"
+                    }
+                    ListElement {
+                        name: "Репетиционное тестирование"
+                        team: "Образование и развитие"
+                    }
+                    ListElement {
+                        name: "Централизованное тестирование"
+                        team: "Образование и развитие"
+                    }
+                    ListElement {
+                        name: "Физкультурно-оздоровит. услуги"
+                        team: "Образование и развитие"
+                    }
+                    ListElement {
+                        name: "Посещение бассейна"
+                        team: "Образование и развитие"
+                    }
+                }
+                Component {
+                    id: nameDelegate
+
+                    Rectangle {
+                        radius: 8
+                        color: index % 2 ? "#fcfa72" : "#fcdd6d"
+                        height: expanded ? 30 : 0
+                        clip: true
+                        width: 385
+                        border.width: 1
+                        border.color: "gray"
+                        readonly property ListView __lv: ListView.view
+                        property bool expanded: __lv.isSectionExpanded(
+                                                    model.team)
+
+                        Text {
+                            id: delegate_text
+
+                            height: parent.height
+                            text: model.name
+                            font.pixelSize: 20
+                            anchors {
+                                horizontalCenter: parent.horizontalCenter
+                            }
+                        }
+
+                        Behavior on height {
+                            NumberAnimation {
+                                duration: 300
+                            }
+                        }
+
+                        MouseArea {
+                            anchors.fill: parent
+                            onClicked: __lv.currentIndex = index
+                            onDoubleClicked: {
+                                set_payment_window()
+                            }
+                        }
+                    }
+                }
+            }
         }
     }
 }
+
+/*##^##
+Designer {
+    D{i:0;formeditorZoom:0.66}D{i:2}D{i:3}D{i:5}D{i:6}D{i:4}D{i:7}D{i:8}D{i:9}D{i:10}
+D{i:11}D{i:12}D{i:1}D{i:14}D{i:13}D{i:17}D{i:24}D{i:18}D{i:40}D{i:41}D{i:42}D{i:43}
+D{i:45}D{i:44}D{i:46}D{i:47}D{i:49}D{i:48}D{i:50}D{i:51}D{i:53}D{i:52}D{i:54}D{i:55}
+D{i:57}D{i:56}D{i:58}D{i:59}D{i:61}D{i:60}D{i:62}D{i:63}D{i:39}D{i:38}D{i:65}D{i:66}
+D{i:64}D{i:16}D{i:68}D{i:69}D{i:71}D{i:70}D{i:126}D{i:127}D{i:129}D{i:131}D{i:147}
+D{i:128}D{i:155}D{i:201}D{i:153}D{i:67}D{i:15}
+}
+##^##*/
+

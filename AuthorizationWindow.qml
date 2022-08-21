@@ -1,18 +1,9 @@
-import QtQuick 2.12
-import QtQuick.Window 2.12
+import QtQuick 2.15
+import QtQuick.Layouts 1.15
 import QtQuick.Controls 2.15
+import QtQuick.Window 2.12
 
 Window {
-    Loader {
-        id: homescreen
-        anchors {
-            fill: parent
-            centerIn: parent
-        }
-
-        visible: false
-        source: "MainWindow.qml"
-    }
     id: main
     width: 1920
     visible: true
@@ -33,7 +24,7 @@ Window {
         height: 40
         color: "white"
         border.color: "#d088f2"
-        border.width: 4
+        border.width: 3
         radius: 10
 
         TextInput {
@@ -62,7 +53,7 @@ Window {
         height: 40
         color: "#fdffbd"
         border.color: "#d088f2"
-        border.width: 4
+        border.width: 3
         radius: 10
 
         Text {
@@ -88,11 +79,11 @@ Window {
         height: 40
         color: "white"
         border.color: "#d088f2"
-        border.width: 4
+        border.width: 3
         radius: 10
 
         TextInput {
-            id: text
+            id: text0
             maximumLength: 25
             anchors {
                 top: password.top
@@ -125,7 +116,7 @@ Window {
         height: 40
         color: "#fdffbd"
         border.color: "#d088f2"
-        border.width: 4
+        border.width: 3
         radius: 10
 
         Text {
@@ -165,12 +156,7 @@ Window {
         MouseArea {
             anchors.fill: parent
             onClicked: {
-                main.visible = false
-                homescreen.visible = true
-
-                //////////////////////////////
-                //////////многооконность блядь
-                //////////////////////////////
+                set_main_window()
             }
 
             onPressed: {
@@ -212,10 +198,7 @@ Window {
 
             anchors.fill: parent
             onClicked: {
-
-                ///////////////////////////////
-                //////////регистрация
-                ///////////////////////////////
+                set_registration_window()
             }
 
             onPressed: {
