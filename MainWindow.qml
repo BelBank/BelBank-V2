@@ -1404,7 +1404,7 @@ Window {
                     id: historyDelegate
 
                     Rectangle {
-                        radius: 3
+                        radius: 8
                         color: index % 2 ? "#fcfa72" : "#fcdd6d"
                         height: 30
                         clip: true
@@ -1733,7 +1733,7 @@ Window {
                     id: nameDelegate
 
                     Rectangle {
-                        radius: 3
+                        radius: 8
                         color: index % 2 ? "#fcfa72" : "#fcdd6d"
                         height: expanded ? 30 : 0
                         clip: true
