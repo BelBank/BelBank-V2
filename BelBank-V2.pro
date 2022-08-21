@@ -16,34 +16,22 @@ INCLUDEPATH += $$PWD/libs/soci/include \
         #$$PWD/libs/soci/build/include \
         $$PWD/../PostgreSQL/14/include \
 	/usr/include/postgresql \
-	/usr/local/include/soci/ \
-
-#        $$PWD/libs/soci/build/lib/Debug/
-
-
-LIBS += -L/usr/local/lib/
-
-LIBS += /usr/local/lib/libsoci_postgresql.so \
-        /usr/local/lib/libsoci_core.so \
-#	/usr/local/lib/libsoci_postgresql.so.4.0 \
-#        /usr/local/lib/libsoci_core.so.4.0
+        /usr/local/include/soci/
 
 
 
 
-
-#LIBS += $$PWD/libs/soci/build/lib/libsoci_core.a \
-#        $$PWD/libs/soci/build/lib/libsoci_postgresql.a
-#-lsoci_postgresql_4_0
-#        -L"$$PWD/libs/soci/build/lib/Debug/"
-
-
-
+linux {
+    LIBS += -L/usr/local/lib/ \
+         /usr/local/lib/libsoci_postgresql.so \
+         /usr/local/lib/libsoci_core.so
+}
 # Additional import path used to resolve QML modules in Qt Creator's code model
 QML_IMPORT_PATH =
 
 # Additional import path used to resolve QML modules just for Qt Quick Designer
 QML_DESIGNER_IMPORT_PATH =
+
 
 #Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
