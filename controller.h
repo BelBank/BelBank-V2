@@ -7,6 +7,8 @@
 
 #include <QMessageBox>
 #include <QSqlDatabase>
+#include <QSqlError>
+#include <QSqlQuery>
 
 #include "user.h"
 

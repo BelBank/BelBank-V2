@@ -1,5 +1,7 @@
 #include "controller.h"
 
+#include <QDebug>
+
 Controller::Controller(QObject *parent) : QObject{parent} {
     database = QSqlDatabase::addDatabase("QPSQL");
     database.setHostName("localhost");
@@ -7,10 +9,20 @@ Controller::Controller(QObject *parent) : QObject{parent} {
     database.setUserName("root");
     database.setPassword("root");
     if (database.open()) {
-        QMessageBox::information(nullptr, "Info", "Database connected!");
+        qDebug() << "Database success connection!";
     } else {
-        QMessageBox::warning(nullptr, "Error", "Error with database");
+        qDebug() << "Database connetion failed.";
     }
-    //    database.connect("postgresql://host='localhost' port='5432' dbname='test' user='postgres'
-    //    password='drakonkapusta'"); soci::session sql(*database.get_pool());
+
+    QSqlQuery query(database);
+    //    if (!query.exec("INSERT INTO test (id, \"user\") VALUES (2, 'admin')")) {
+    //        qDebug() << "Query failed! Error: " << query.lastError().text();
+    //    }
+    if (!query.exec("SELECT user FROM test")) {
+        qDebug() << "Query failed! Error: " << query.lastError().text();
+    }
+    while (query.next()) {
+        qDebug() << "User is " << query.value(0).toString();
+        qDebug() << "User is " << query.value(1).toString();
+    }
 }

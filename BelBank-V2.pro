@@ -53,5 +53,4 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 HEADERS += \
     card.h \
     controller.h \
-    db_pool.hpp \
     user.h
