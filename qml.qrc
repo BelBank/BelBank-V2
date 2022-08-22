@@ -26,5 +26,7 @@
         <file>images/PLN.jpg</file>
         <file>images/swap.png</file>
         <file>PaymentWindow.qml</file>
+        <file>MessageWindow.qml</file>
+        <file>images/MountainForBackground.png</file>
     </qresource>
 </RCC>
