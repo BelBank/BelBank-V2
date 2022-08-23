@@ -4,83 +4,88 @@ import QtQuick.Controls 2.15
 import QtQuick.Window 2.12
 
 Window {
-    id: message_window
+    id: successfulPayment_window
     title: "Уведомление"
     visible: true
-    width: 350
-    height: 250
+    width: 300
+    height: 200
 
     Rectangle {
-        id: message_window_rect
-        //anchors.fill: message_window
-        width: message_window.width
-        height: message_window.height
-        radius: 20
-        Image {
-            source: "images/MountainForBackground.png"
-            anchors.fill: message_window_rect
-        }
+        id: successfulPaymentWindow_rect
+        width: successfulPayment_window.width
+        height: successfulPayment_window.height
         border.width: 3
         border.color: "#dbaaf2"
+        radius: 10
         clip: true
+
+        Image {
+            id: backgroundImage
+            source: "images/MountainForSuccessfulPayment.png"
+            anchors.fill: successfulPaymentWindow_rect
+            opacity: 0.3
+            anchors.margins: 5
+        }
 
         Image {
             id: logo_image
             source: "images/capture_20220617214014956.png"
-            width: message_window_rect.width/3.5
-            height: message_window_rect.height/3.5
-            anchors.horizontalCenter: message_window_rect.horizontalCenter
-            anchors.top: message_window_rect.top
-            anchors.topMargin: message_window_rect.border.width + 2
+            width: successfulPaymentWindow_rect.width/2.3
+            height: successfulPaymentWindow_rect.height/2.3
+            anchors {
+                horizontalCenter: successfulPaymentWindow_rect.horizontalCenter
+                top: successfulPaymentWindow_rect.top
+                margins: 5
+            }
         }
 
         Rectangle {
             id: message_rect
-            width: message_window_rect.width/2 + 50
+            width: successfulPaymentWindow_rect.width/1.5
             anchors {
                 top: logo_image.bottom
                 bottom: ok_button.top
-                horizontalCenter: message_window_rect.horizontalCenter
-                topMargin: 2
-                bottomMargin: 2
+                horizontalCenter: successfulPaymentWindow_rect.horizontalCenter
+                topMargin: 10
+                bottomMargin: 10
             }
-            color: "white"
+            radius: 3
             border.width: 2
-            border.color: "#dbaaf2"
-            radius: 5
+            border.color: "#d088f2"
 
             Flickable {
                 id: flick_message_rect
+                clip: true
                 anchors.fill: message_rect
-                anchors.margins: 2
+                anchors.margins: 3
                 contentWidth: message.width
                 contentHeight: message.height
-                ScrollBar.vertical: ScrollBar { opacity: 0.2; visible: true; }
-                clip: true
 
                 Text {
                     id: message
-                    text: "Message about incorrect data"
+                    text: "Ваш платёж был успешно совершён."
                     width: message_rect.width - 10
-                    wrapMode: Text.WordWrap
-                    padding: 7
                     font.family: "Helvetica"
-                    font.pointSize: 12
+                    font.pointSize: 13
+                    anchors.fill: message_rect
+                    horizontalAlignment: Text.AlignHCenter
+                    wrapMode: Text.WordWrap
                 }
             }
         }
 
         Rectangle {
             id: ok_button
-            width: 80
-            height: 40
+            width: 70
+            height: 30
             radius: 25
             color: "#d088f2"
             border.color: "#28aaf5"
             anchors {
-                bottom: message_window_rect.bottom
-                horizontalCenter: message_window_rect.horizontalCenter
-                bottomMargin: message_window_rect.border.width + 3
+                bottom: successfulPaymentWindow_rect.bottom
+                horizontalCenter: successfulPaymentWindow_rect.horizontalCenter
+                bottomMargin: successfulPaymentWindow_rect.border.width + 3
+
             }
 
             Text {
@@ -90,9 +95,9 @@ Window {
                 font.bold: true
                 anchors {
                     fill: ok_button
-                    rightMargin: 25
-                    leftMargin: 25
-                    topMargin: 10
+                    rightMargin: 20
+                    leftMargin: 20
+                    topMargin: 5
                     bottomMargin: 5
                     centerIn: ok_button
                 }
@@ -101,7 +106,7 @@ Window {
             MouseArea {
                 anchors.fill: ok_button
                 onClicked: {
-                    message_window.close()
+                    successfulPayment_window.close()
                 }
                 onPressed: {
                     ok_button.color = "#7d3a9c"

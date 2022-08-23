@@ -26,7 +26,10 @@
         <file>images/PLN.jpg</file>
         <file>images/swap.png</file>
         <file>PaymentWindow.qml</file>
-        <file>MessageWindow.qml</file>
+        <file>UniversalMessage.qml</file>
         <file>images/MountainForBackground.png</file>
+        <file>SuccessfulPaymentMessage.qml</file>
+        <file>images/MountainForSuccessfulPayment.png</file>
+        <file>InsufficientFundsMessage.qml</file>
     </qresource>
 </RCC>
