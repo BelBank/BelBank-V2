@@ -158,6 +158,7 @@ Window {
             radius: 10
 
             TextInput {
+                id: name_input
                 maximumLength: 27
                 anchors {
                     fill: parent
@@ -190,6 +191,7 @@ Window {
             radius: 10
 
             TextInput {
+                id: nickname_input
                 maximumLength: 27
                 anchors {
                     fill: parent
@@ -223,7 +225,7 @@ Window {
             radius: 10
 
             TextInput {
-                id: text0
+                id: text_password
                 maximumLength: 25
                 anchors {
                     top: password.top
@@ -260,7 +262,7 @@ Window {
             radius: 10
 
             TextInput {
-                id: text1
+                id: text_repeat_password
                 maximumLength: 25
                 anchors {
                     top: repeat_password.top
@@ -309,7 +311,14 @@ Window {
 
                 anchors.fill: parent
                 onClicked: {
-                    set_authorization_window()
+                    if(text_password.text != text_repeat_password.text) {
+                        // ошибка: пароли не совпадают
+                    } else if (!Controller.registration(nickname_input.text, text_password.text, name_input.text)) {
+                        // ошибка регистрации
+                    } else {
+                        // успешная регистрация
+                        set_authorization_window()
+                    }
                 }
 
                 onPressed: {
