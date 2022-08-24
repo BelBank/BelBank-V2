@@ -8,6 +8,7 @@ Window {
     width: 800
     height: 600
     visible: true
+    flags: Qt.CustomizeWindowHint
 
     color: "white"
     title: "Выбор тарифа"
@@ -71,47 +72,46 @@ Window {
             }
         }
 
-//        Rectangle {
-//            id: make_a_payment_selected
+        Rectangle {
+            id: make_a_payment_selected
 
-//            height: 30
-//            width: 230
-//            anchors {
-//                top: payment_rectangle.top
-//                left: payment_rectangle.left
-//                margins: 15
-//            }
-//            color: "#d088f2"
-//            border.color: "#7d3a9c"
-//            border.width: 3
-//            radius: 10
+            height: 30
+            width: 130
+            property bool selected: false
+            anchors {
+                top: payment_rectangle.top
+                left: payment_rectangle.left
+                margins: 15
+            }
+            color: selected ? "#fdffbd" : "white"
+            border.color: "#7d3a9c"
+            border.width: 3
+            radius: 10
 
-//            Text {
-//                anchors.centerIn: parent
-//                text: "Вернуться на главную страницу"
-//                color: "#222024"
-//                font.family: "Helvetica"
-//                font.pointSize: 9
-//                font.bold: true
-//            }
+            Text {
+                anchors.centerIn: parent
+                text: "Избранный"
+                color: "#222024"
+                font.family: "Helvetica"
+                font.pointSize: 9
+                font.bold: true
+            }
 
-//            MouseArea {
-//                anchors.fill: parent
-//                onClicked: {
-//                    set_main_window()
-//                }
+            MouseArea {
+                anchors.fill: parent
+                onClicked: {
+                    make_a_payment_selected.selected = !make_a_payment_selected.selected
+                }
 
-//                onPressed: {
-//                    parent.color = "#7d3a9c"
-//                    parent.border.color = "dark gray"
-//                }
-//                onReleased: {
-//                    parent.color = "#d088f2"
-//                    parent.border.color = "#7d3a9c"
-//                }
-//            }
-//        }
-
+                onPressed: {
+                    parent.border.color = "dark gray"
+                }
+                onReleased: {
+                    parent.color = make_a_payment_selected.selected ? "#fdffbd" : "white"
+                    parent.border.color = "#7d3a9c"
+                }
+            }
+        }
         Rectangle {
             id: choose_card_text
             width: 200
