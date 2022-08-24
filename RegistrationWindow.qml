@@ -8,6 +8,8 @@ Window {
     width: 800
     height: 600
     visible: true
+    flags: Qt.CustomizeWindowHint
+
     Rectangle {
         id: rectangler
         anchors {

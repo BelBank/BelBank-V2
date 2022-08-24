@@ -8,6 +8,10 @@ Window {
     width: 1920
     visible: true
     height: 1080
+    flags: {
+        Qt.CustomizeWindowHint
+        Qt.WindowFullScreen
+    }
 
     Image {
         width: 1920

@@ -26,5 +26,8 @@
         <file>images/PLN.jpg</file>
         <file>images/swap.png</file>
         <file>PaymentWindow.qml</file>
+        <file>images/card_background.jpg</file>
+        <file>images/password_safety.jpg</file>
+        <file>images/news.jpg</file>
     </qresource>
 </RCC>
