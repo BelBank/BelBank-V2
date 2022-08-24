@@ -29,7 +29,7 @@ Window {
         }
 
         Rectangle {
-            id: nickname_text
+            id: name_text
             width: 200
             height: 40
             color: "#fdffbd"
@@ -44,7 +44,35 @@ Window {
                 margins: 15
             }
             Text {
-                text: "Никнейм"
+                text: "Имя"
+                color: "#222024"
+                font.family: "Helvetica"
+                font.pointSize: 14
+                font.bold: true
+                anchors {
+                    margins: 10
+                    centerIn: parent
+                }
+            }
+        }
+
+        Rectangle {
+            id: nickname_text
+            width: 200
+            height: 40
+            color: "#fdffbd"
+            border.color: "#d088f2"
+            border.width: 3
+            radius: 10
+
+            anchors {
+                left: rectangler.left
+                leftMargin: 100
+                top: name_text.bottom
+                margins: 15
+            }
+            Text {
+                text: "Логин"
                 color: "#222024"
                 font.family: "Helvetica"
                 font.pointSize: 14
@@ -109,6 +137,38 @@ Window {
                     margins: 10
                     centerIn: parent
                 }
+            }
+        }
+
+        Rectangle {
+            id: name
+            anchors {
+                leftMargin: 15
+
+                top: name_text.top
+                left: name_text.right
+                right: rectangler.right
+                rightMargin: 100
+            }
+
+            height: nickname_text.height
+            color: "white"
+            border.color: "#d088f2"
+            border.width: 3
+            radius: 10
+
+            TextInput {
+                maximumLength: 27
+                anchors {
+                    fill: parent
+                    topMargin: 10
+                    leftMargin: 15
+                }
+                color: activeFocus ? "black" : "gray"
+                focus: true
+                activeFocusOnTab: true
+                font.family: "Helvetica"
+                font.pointSize: 16
             }
         }
 

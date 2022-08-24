@@ -10,9 +10,9 @@ Window {
     visible: true
     flags: {
 
-        Qt.CustomizeWindowHint
-
         Qt.WindowFullScreen
+
+
     }
 
     Rectangle {
