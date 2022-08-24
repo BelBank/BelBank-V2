@@ -488,7 +488,7 @@ Window {
                         Layout.columnSpan: 1
                         Layout.column: 2
                         font.pixelSize: 22
-                        text: "4.32"
+                        text: Controller.exchangeRatesToQML()[0];
                         anchors {
                             horizontalCenter: sell.horizontalCenter
                         }
@@ -498,7 +498,7 @@ Window {
                         Layout.columnSpan: 1
                         Layout.column: 3
                         font.pixelSize: 22
-                        text: "4.297"
+//                        text: Controller.exchangeRatesToQML()[1];
                         anchors {
                             horizontalCenter: buy.horizontalCenter
                         }

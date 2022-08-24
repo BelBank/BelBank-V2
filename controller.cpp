@@ -13,6 +13,7 @@ Controller::Controller(QObject *parent) : QObject{parent} {
     } else {
         qDebug() << "Database connetion failed.";
     }
+    exchangeRates();
 }
 
 QString Controller::getUserName() const {
@@ -153,6 +154,31 @@ bool Controller::registration(const QString& login, const QString& password, con
     qDebug() << "Success registration of user " + owner_name;
     return true;
 }
+
+
+void Controller::exchangeRates() {
+    QNetworkAccessManager* manager = new QNetworkAccessManager;
+    QNetworkRequest request;
+    request.setUrl(QUrl("https://openexchangerates.org/api/latest.json?app_id=80d0efece45a4c67a23fafbdfe6047d6"));
+    reply_exchange_rates = manager->get(request);
+    connect(reply_exchange_rates, &QNetworkReply::finished, this, &Controller::getExchangeRates);
+}
+
+
+void Controller::getExchangeRates() {
+    QByteArray result = reply_exchange_rates->readAll();
+    QJsonDocument exchange_rates = QJsonDocument::fromJson(result);
+    exchangeRatesToQML(exchange_rates);
+}
+
+QStringList Controller::exchangeRatesToQML(QJsonDocument exchange_rates) {
+    QStringList rates_list;
+    QJsonValue rates = exchange_rates.object().value("rates");
+    rates_list.push_back(rates["RUS"].toString());
+//    rates_list.push
+    return rates_list;
+}
+
 
 
 

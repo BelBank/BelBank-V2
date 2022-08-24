@@ -15,6 +15,10 @@
 #include <QJsonObject>
 #include <QJsonDocument>
 
+#include <QNetworkAccessManager>
+#include <QNetworkRequest>
+#include <QNetworkReply>
+
 #include "user.h"
 
 class Controller : public QObject {
@@ -53,11 +57,19 @@ public Q_SLOTS:
     // Возвращает false, если ошибка при добавлении данных либо данные были пустыми
     bool registration(const QString& login, const QString& password, const QString& owner_name);
 
+    void exchangeRates();
+
+    void getExchangeRates();
+
+    QStringList exchangeRatesToQML(QJsonDocument exchange_rates);
+
 signals:
 
 private:
     User client;
     QSqlDatabase database;
+    QNetworkReply* reply_exchange_rates;
+
 };
 
 #endif  // CONTROLLER_H
