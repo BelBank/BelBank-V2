@@ -42,7 +42,7 @@ Window {
             font.pixelSize: 30
             font.bold: true
 
-            text: "Nickname" ///тут должен присваиваться ник клиента.
+            text: Controller.getUserName() ///тут должен присваиваться ник клиента.
         }
 
         Rectangle {

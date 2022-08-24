@@ -13,21 +13,23 @@ Controller::Controller(QObject *parent) : QObject{parent} {
     } else {
         qDebug() << "Database connetion failed.";
     }
-    client.setName("root");
-    makeNewCard("1234 5678 9098 7654", "09/27");
-    getCardsFromDB("root");
-    client.printCardsData();
 }
 
+QString Controller::getUserName() const {
+    return client.getName();
+}
 
 bool Controller::enterToBank(const QString& login, const QString& password) {
+    qDebug() << "Entering...";
     if (login == "" or password == "") {
         qDebug() << "No data in field";
         return false;
     }
-    QString request_text = "SELECT * FROM bank_login WHERE login = " + login + " AND password = " + password;
     QSqlQuery login_query(database);
-    if (!login_query.exec(request_text)) {
+    login_query.prepare("SELECT * FROM bank_login WHERE login = :login AND password = :password");
+    login_query.bindValue(0, login);
+    login_query.bindValue(1, password);
+    if (!login_query.exec()) {
         qDebug() << "Query failed! Error: " << login_query.lastError().text();
         return false;
     }
@@ -41,9 +43,17 @@ bool Controller::enterToBank(const QString& login, const QString& password) {
     return true;
 }
 
-void Controller::makeNewCard(const QString& card_number, const QString& valid) {
+bool Controller::makeNewCard(const QString& card_number, const QString& valid) {
+    QString valid_copy = valid;
+    if (QDate(QDate::fromString("01/" + valid_copy.insert(3,"20"), "dd/MM/yyyy")) < QDate::currentDate()) {
+        qDebug() << "Card is not valid";
+        return false;
+    }
     Card new_card(card_number, client.getName(), valid);
-    addNewCard(new_card);
+    if(!addNewCard(new_card)) {
+        return false;
+    }
+    return true;
 }
 
 bool Controller::addNewCard(Card new_card) {
@@ -96,6 +106,10 @@ QJsonDocument Controller::getCardsFromDB(const QString& owner_name) {
     std::vector<Card> cards;
     QString reply = get_cards_query.value(0).toString().remove('\\');
     json = QJsonDocument::fromJson(reply.toUtf8());
+    if (json.isEmpty()) {
+        qDebug() << "This user have no cards";
+        return json;
+    }
     qDebug() << "Json is " << json;
     if (!json.isArray()) {
         QJsonObject card = json.object();

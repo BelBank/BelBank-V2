@@ -22,13 +22,23 @@ class Controller : public QObject {
 public:
     explicit Controller(QObject *parent = nullptr);
 
+public Q_SLOTS:
+
+    // Вспомогательный метод для получение имени авторизированного пользователя
+    // В основном нужен для получения имени пользователя в QML интерфейсе
+    QString getUserName() const;
     // В метод передается логин и пароль, метод делает выборку из БД
     // Возвращает true, если профиль был найден
     // Возвращает false, если ошибка при выборке, данные были пустыми либо профиль не найден
     bool enterToBank(const QString& login, const QString& password);
 
-    void makeNewCard(const QString& card_number, const QString& valid);
 
+    // Метод для создания новой карты и добавления ее в БД
+    // Возвращает false, если addNewCard вернул false либо срок действия карты истёк
+    bool makeNewCard(const QString& card_number, const QString& valid);
+
+    // Вызывается автоматически из makeNewCard
+    // Возвращает false, если ошибка при добавлении карты в БД
     bool addNewCard(Card new_card);
 
     // В метод передается только имя владельца карты
