@@ -8,6 +8,11 @@ Window {
     width: 1920
     visible: true
     height: 1080
+    flags: {
+
+        //Qt.CustomizeWindowHint
+        //Qt.WindowCloseButtonHint
+    }
 
     Image {
         width: 1920
@@ -58,7 +63,7 @@ Window {
 
         Text {
             anchors.centerIn: parent
-            text: "Телефон"
+            text: "Логин"
             color: "#222024"
             font.family: "Helvetica"
             font.pointSize: 14

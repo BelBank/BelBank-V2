@@ -30,15 +30,10 @@ ApplicationWindow {
         id: card_window
         NewCardWindow {}
     }
-    Component{
+    Component {
         id: payment_window
-        PaymentWindow{}
+        PaymentWindow {}
     }
-
-//    function transfer_info_for_payment(title, check){
-//        payment_window.title = title
-//    }
-
 
     function set_main_window() {
         loader.source = "MainWindow.qml"

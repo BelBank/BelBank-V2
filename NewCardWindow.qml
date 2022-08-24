@@ -9,6 +9,10 @@ Window {
     height: 600
     visible: true
     title: "Выбор тарифа"
+    flags: {
+        Qt.CustomizeWindowHint
+        Qt.WindowFullScreen
+    }
 
     Rectangle {
         id: card_rectangle
@@ -227,7 +231,7 @@ Window {
                 topMargin: 5
                 horizontalCenter: silver_card.horizontalCenter
             }
-            font.pixelSize: 20
+            font.pixelSize: 19
         }
 
         Image {
