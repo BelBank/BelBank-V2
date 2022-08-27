@@ -1,0 +1,58 @@
+Determining if the __i386__ exist failed with the following output:
+Change Dir: /home/alexander/programming/qt/bsuir/BelBank-V2/libs/soci/build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_6652a/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_6652a.dir/build.make CMakeFiles/cmTC_6652a.dir/build
+gmake[1]: вход в каталог «/home/alexander/programming/qt/bsuir/BelBank-V2/libs/soci/build/CMakeFiles/CMakeTmp»
+Building CXX object CMakeFiles/cmTC_6652a.dir/CheckSymbolExists.cxx.o
+/usr/bin/c++    -o CMakeFiles/cmTC_6652a.dir/CheckSymbolExists.cxx.o -c /home/alexander/programming/qt/bsuir/BelBank-V2/libs/soci/build/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx
+/home/alexander/programming/qt/bsuir/BelBank-V2/libs/soci/build/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx: In function ‘int main(int, char**)’:
+/home/alexander/programming/qt/bsuir/BelBank-V2/libs/soci/build/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx:7:19: error: ‘__i386__’ was not declared in this scope
+    7 |   return ((int*)(&__i386__))[argc];
+      |                   ^~~~~~~~
+gmake[1]: *** [CMakeFiles/cmTC_6652a.dir/build.make:78: CMakeFiles/cmTC_6652a.dir/CheckSymbolExists.cxx.o] Ошибка 1
+gmake[1]: выход из каталога «/home/alexander/programming/qt/bsuir/BelBank-V2/libs/soci/build/CMakeFiles/CMakeTmp»
+gmake: *** [Makefile:127: cmTC_6652a/fast] Ошибка 2
+
+
+File /home/alexander/programming/qt/bsuir/BelBank-V2/libs/soci/build/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx:
+/* */
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef __i386__
+  return ((int*)(&__i386__))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+Determining if the __arm__ exist failed with the following output:
+Change Dir: /home/alexander/programming/qt/bsuir/BelBank-V2/libs/soci/build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_0ed8f/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_0ed8f.dir/build.make CMakeFiles/cmTC_0ed8f.dir/build
+gmake[1]: вход в каталог «/home/alexander/programming/qt/bsuir/BelBank-V2/libs/soci/build/CMakeFiles/CMakeTmp»
+Building CXX object CMakeFiles/cmTC_0ed8f.dir/CheckSymbolExists.cxx.o
+/usr/bin/c++    -o CMakeFiles/cmTC_0ed8f.dir/CheckSymbolExists.cxx.o -c /home/alexander/programming/qt/bsuir/BelBank-V2/libs/soci/build/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx
+/home/alexander/programming/qt/bsuir/BelBank-V2/libs/soci/build/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx: In function ‘int main(int, char**)’:
+/home/alexander/programming/qt/bsuir/BelBank-V2/libs/soci/build/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx:7:19: error: ‘__arm__’ was not declared in this scope
+    7 |   return ((int*)(&__arm__))[argc];
+      |                   ^~~~~~~
+gmake[1]: *** [CMakeFiles/cmTC_0ed8f.dir/build.make:78: CMakeFiles/cmTC_0ed8f.dir/CheckSymbolExists.cxx.o] Ошибка 1
+gmake[1]: выход из каталога «/home/alexander/programming/qt/bsuir/BelBank-V2/libs/soci/build/CMakeFiles/CMakeTmp»
+gmake: *** [Makefile:127: cmTC_0ed8f/fast] Ошибка 2
+
+
+File /home/alexander/programming/qt/bsuir/BelBank-V2/libs/soci/build/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx:
+/* */
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef __arm__
+  return ((int*)(&__arm__))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}

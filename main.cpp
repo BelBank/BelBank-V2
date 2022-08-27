@@ -1,14 +1,19 @@
+#include <controller.h>
+
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
+#include <QQmlContext>>
 
 int main(int argc, char *argv[]) {
 #if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
-	QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
+    QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
 #endif
-	QGuiApplication app(argc, argv);
+    QGuiApplication app(argc, argv);
 
-	QQmlApplicationEngine engine;
+    QQmlApplicationEngine engine;
+    Controller *controller = new Controller();
 
+    engine.rootContext()->setContextProperty("Controller", controller);
 	const QUrl url(QStringLiteral("qrc:/Main.qml"));
 	QObject::connect(
 			&engine,
@@ -20,7 +25,7 @@ int main(int argc, char *argv[]) {
 			},
 			Qt::QueuedConnection);
 
-	engine.load(url);
+    engine.load(url);
 
-	return app.exec();
+    return app.exec();
 }

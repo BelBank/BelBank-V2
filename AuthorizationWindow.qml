@@ -33,6 +33,7 @@ Window {
         radius: 10
 
         TextInput {
+            id: login_text
             maximumLength: 27
             anchors {
                 fill: parent
@@ -88,6 +89,7 @@ Window {
         radius: 10
 
         TextInput {
+
             id: text0
             maximumLength: 25
             anchors {
@@ -161,7 +163,11 @@ Window {
         MouseArea {
             anchors.fill: parent
             onClicked: {
-                set_main_window()
+                if (Controller.enterToBank(login_text.text, text0.text)) {
+                    set_main_window()
+                } else {
+                    //ошибка
+                }
             }
 
             onPressed: {
