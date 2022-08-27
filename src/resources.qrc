@@ -1,6 +1,6 @@
 <RCC>
     <qresource prefix="/">
-        <file>AuthorizationWindow.qml</file>
+        <file>content/AuthorizationWindow.qml</file>
         <file>images/capture_20220617214014956.png</file>
         <file>images/EURO.png</file>
         <file>images/Fon.jpg</file>
@@ -13,10 +13,10 @@
         <file>images/Silver card MIR.png</file>
         <file>images/Silver card VISA.png</file>
         <file>images/USD.png</file>
-        <file>MainWindow.qml</file>
-        <file>RegistrationWindow.qml</file>
-        <file>Main.qml</file>
-        <file>NewCardWindow.qml</file>
+        <file>content/MainWindow.qml</file>
+        <file>content/RegistrationWindow.qml</file>
+        <file>content/Main.qml</file>
+        <file>content/NewCardWindow.qml</file>
         <file>images/Beltelecom.png</file>
         <file>images/A1.jpg</file>
         <file>images/ByFly.jpg</file>
@@ -25,14 +25,14 @@
         <file>images/china.jpg</file>
         <file>images/PLN.jpg</file>
         <file>images/swap.png</file>
-        <file>PaymentWindow.qml</file>
+        <file>content/PaymentWindow.qml</file>
         <file>images/card_background.jpg</file>
         <file>images/password_safety.jpg</file>
         <file>images/news.jpg</file>
-        <file>UniversalMessage.qml</file>
+        <file>content/UniversalMessage.qml</file>
         <file>images/MountainForBackground.png</file>
-        <file>SuccessfulPaymentMessage.qml</file>
+        <file>content/SuccessfulPaymentMessage.qml</file>
         <file>images/MountainForSuccessfulPayment.png</file>
-        <file>InsufficientFundsMessage.qml</file>
+        <file>content/InsufficientFundsMessage.qml</file>
     </qresource>
 </RCC>

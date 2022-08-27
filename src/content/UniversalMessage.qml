@@ -17,7 +17,7 @@ Window {
         height: universalMessage_window.height
         radius: 20
         Image {
-            source: "images/MountainForBackground.png"
+            source: "/images/MountainForBackground.png"
             anchors.fill: message_window_rect
         }
         border.width: 3
@@ -26,7 +26,7 @@ Window {
 
         Image {
             id: logo_image
-            source: "images/capture_20220617214014956.png"
+            source: "/images/capture_20220617214014956.png"
             width: message_window_rect.width/3.5
             height: message_window_rect.height/3.5
             anchors.horizontalCenter: message_window_rect.horizontalCenter

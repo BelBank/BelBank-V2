@@ -19,7 +19,7 @@ Window {
 
         Image {
             id: logo_on_background
-            source: "images/capture_20220617214014956.png"
+            source: "/images/capture_20220617214014956.png"
             width: 350
             height: 250
             anchors {

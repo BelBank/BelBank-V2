@@ -21,7 +21,7 @@ Window {
 
         Image {
             id: backgroundImage
-            source: "images/MountainForSuccessfulPayment.png"
+            source: "/images/MountainForSuccessfulPayment.png"
             anchors.fill: insufficienFundsForPaymentWindow_rect
             opacity: 0.3
             anchors.margins: 5
@@ -29,7 +29,7 @@ Window {
 
         Image {
             id: logo_image
-            source: "images/capture_20220617214014956.png"
+            source: "/images/capture_20220617214014956.png"
             width: insufficienFundsForPaymentWindow_rect.width/2.3
             height: insufficienFundsForPaymentWindow_rect.height/2.3
             anchors {
