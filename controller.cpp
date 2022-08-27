@@ -13,7 +13,7 @@ Controller::Controller(QObject *parent) : QObject{parent} {
     } else {
         qDebug() << "Database connetion failed.";
     }
-    exchangeRates();
+//    exchangeRates();
 }
 
 QString Controller::getUserName() const {
@@ -95,38 +95,54 @@ bool Controller::addNewCard(Card new_card) {
 
 
 QJsonDocument Controller::getCardsFromDB(const QString& owner_name) {
-    QJsonDocument json;
+//    QJsonDocument json;
     QSqlQuery get_cards_query(database);
-    get_cards_query.prepare("SELECT card_json FROM cards WHERE owner_name = :owner_name");
+    get_cards_query.prepare("SELECT cards FROM card_owner WHERE owner_name = :owner_name");
     get_cards_query.bindValue(0, owner_name);
     if (!get_cards_query.exec()) {
         qDebug() << "Query failed! Error: " << get_cards_query.lastError().text();
-        return json;
+//        return json;
     }
     get_cards_query.next();
+    QList<QVariant> cards_qvariant = get_cards_query.value("cards").toList();
+    QVector<int> cards_id;
+    foreach(const QVariant val, cards_qvariant) {
+        cards_id.push_back(val.toInt());
+    }
     std::vector<Card> cards;
-    QString reply = get_cards_query.value(0).toString().remove('\\');
-    json = QJsonDocument::fromJson(reply.toUtf8());
-    if (json.isEmpty()) {
-        qDebug() << "This user have no cards";
-        return json;
-    }
-    qDebug() << "Json is " << json;
-    if (!json.isArray()) {
-        QJsonObject card = json.object();
-        qDebug() << "Card is " << card;
-        cards.push_back(Card(card["card_number"].toString(), owner_name, card["valid_thru"].toString(), card["balance"].toString().toDouble()));
-    } else {
-        QJsonArray cards_array = json.array();
-        qDebug() << "Array is " << cards_array;
-
-        foreach (const QJsonValue& value, cards_array) {
-            qDebug() << "Card is " << value;
-            cards.push_back(Card(value["card_number"].toString(), owner_name, value["valid_thru"].toString(), value["balance"].toString().toDouble()));
+    get_cards_query.prepare("SELECT * FROM card WHERE id = :id");
+    foreach (const int& id, cards_id) {
+        get_cards_query.bindValue(0, id);
+        if (!get_cards_query.exec()) {
+            qDebug() << "Query failed! Error: " << get_cards_query.lastError().text();
+//            return json;
         }
+        cards.push_back(Card(get_cards_query.value("number").toString(), client.getName(), get_cards_query.value("valid").toString(), get_cards_query.value("balance").toDouble()));
+
     }
+
+//    QString reply = get_cards_query.value(0).toString().remove('\\');
+//    json = QJsonDocument::fromJson(reply.toUtf8());
+//    if (json.isEmpty()) {
+//        qDebug() << "This user have no cards";
+//        return json;
+//    }
+//    qDebug() << "Json is " << json;
+//    if (!json.isArray()) {
+//        QJsonObject card = json.object();
+//        qDebug() << "Card is " << card;
+//        cards.push_back(Card(card["card_number"].toString(), owner_name, card["valid_thru"].toString(), card["balance"].toString().toDouble()));
+//    } else {
+//        QJsonArray cards_array = json.array();
+//        qDebug() << "Array is " << cards_array;
+
+//        foreach (const QJsonValue& value, cards_array) {
+//            qDebug() << "Card is " << value;
+//            cards.push_back(Card(value["card_number"].toString(), owner_name, value["valid_thru"].toString(), value["balance"].toString().toDouble()));
+//        }
+//    }
     client.setCards(cards);
-    return json;
+//    return json;
 }
 
 
@@ -144,7 +160,7 @@ bool Controller::registration(const QString& login, const QString& password, con
         qDebug() << "Query failed! Error: " << registration_query.lastError().text();
         return false;
     }
-    registration_query.prepare("INSERT INTO cards (owner_name) "
+    registration_query.prepare("INSERT INTO card_owner (owner_name) "
                                "VALUES (:owner_name)");
     registration_query.bindValue(0, owner_name);
     if (!registration_query.exec()) {
