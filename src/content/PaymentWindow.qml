@@ -21,7 +21,7 @@ Window {
 
         Image {
             id: payment_logo
-            source: "images/capture_20220617214014956.png"
+            source: "/images/capture_20220617214014956.png"
             width: 300
             height: 150
             anchors {
@@ -200,15 +200,15 @@ Window {
                         var sorce
                         if (card.type) {
                             if (card.system) {
-                                sorce = "images/Golden card VISA.png"
+                                sorce = "/images/Golden card VISA.png"
                             } else {
-                                sorce = "images/Golden Card Mastercard.png"
+                                sorce = "/images/Golden Card Mastercard.png"
                             }
                         } else {
                             if (card.system) {
-                                sorce = "images/Silver card VISA.png"
+                                sorce = "/images/Silver card VISA.png"
                             } else {
-                                sorce = "images/Silver card Mastercard.png"
+                                sorce = "/images/Silver card Mastercard.png"
                             }
                         }
                         return sorce

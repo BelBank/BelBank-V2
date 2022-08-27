@@ -18,7 +18,7 @@ Window {
         width: 1920
         height: 1080
         anchors.fill: parent
-        source: "images/Fon.jpg"
+        source: "/images/Fon.jpg"
     }
 
     Rectangle {

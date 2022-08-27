@@ -29,7 +29,7 @@ Window {
             id: logo
             width: 143
             height: 100
-            source: "images/capture_20220617214014956.png"
+            source: "/images/capture_20220617214014956.png"
             anchors {
                 margins: 15
                 left: header.left
@@ -113,7 +113,7 @@ Window {
                 rightMargin: 15
                 right: call_number.left
             }
-            source: "images/free-icon-telephone-4996346 (1).png"
+            source: "/images/free-icon-telephone-4996346 (1).png"
         }
 
         Text {
@@ -253,15 +253,15 @@ Window {
                             var sorce
                             if (card.type) {
                                 if (card.system) {
-                                    sorce = "images/Golden card VISA.png"
+                                    sorce = "/images/Golden card VISA.png"
                                 } else {
-                                    sorce = "images/Golden Card Mastercard.png"
+                                    sorce = "/images/Golden Card Mastercard.png"
                                 }
                             } else {
                                 if (card.system) {
-                                    sorce = "images/Silver card VISA.png"
+                                    sorce = "/images/Silver card VISA.png"
                                 } else {
-                                    sorce = "images/Silver card Mastercard.png"
+                                    sorce = "/images/Silver card Mastercard.png"
                                 }
                             }
                             return sorce
@@ -294,7 +294,7 @@ Window {
                                     anchors {
                                         fill: parent
                                     }
-                                    source: "images/card_background.jpg"
+                                    source: "/images/card_background.jpg"
                                     opacity: 0.8
                                 }
 
@@ -477,7 +477,7 @@ Window {
                         Image {
                             width: 40
                             height: 30
-                            source: "images/RUB.png"
+                            source: "/images/RUB.png"
                             anchors {
                                 left: rub.right
                             }
@@ -513,7 +513,7 @@ Window {
                         Image {
                             width: 40
                             height: 30
-                            source: "images/USD.png"
+                            source: "/images/USD.png"
                             anchors {
                                 left: usd.right
                             }
@@ -549,7 +549,7 @@ Window {
                         Image {
                             width: 40
                             height: 30
-                            source: "images/EURO.png"
+                            source: "/images/EURO.png"
                             anchors {
                                 left: euro.right
                             }
@@ -586,7 +586,7 @@ Window {
                         Image {
                             width: 40
                             height: 30
-                            source: "images/china.jpg"
+                            source: "/images/china.jpg"
                             anchors {
                                 left: china.right
                             }
@@ -623,7 +623,7 @@ Window {
                         Image {
                             width: 40
                             height: 30
-                            source: "images/PLN.jpg"
+                            source: "/images/PLN.jpg"
                             anchors {
                                 left: pln.right
                             }
@@ -788,7 +788,7 @@ Window {
                                 anchors {
                                     centerIn: parent
                                 }
-                                source: "images/swap.png"
+                                source: "/images/swap.png"
                             }
 
                             Rectangle {
@@ -951,7 +951,7 @@ Window {
                                         fill: parent
                                     }
                                     smooth: true
-                                    source: "images/MTS.png"
+                                    source: "/images/MTS.png"
                                 }
                             }
                             Text {
@@ -973,7 +973,7 @@ Window {
                                     anchors {
                                         fill: parent
                                     }
-                                    source: "images/A1.jpg"
+                                    source: "/images/A1.jpg"
                                 }
                             }
                             Text {
@@ -995,7 +995,7 @@ Window {
                                     anchors {
                                         fill: parent
                                     }
-                                    source: "images/LIFE.png"
+                                    source: "/images/LIFE.png"
                                 }
                             }
                             Text {
@@ -1018,7 +1018,7 @@ Window {
                                     anchors {
                                         fill: parent
                                     }
-                                    source: "images/Beltelecom.png"
+                                    source: "/images/Beltelecom.png"
                                     anchors.rightMargin: -21
                                     anchors.bottomMargin: 0
                                     anchors.leftMargin: 21
@@ -1044,7 +1044,7 @@ Window {
                                     anchors {
                                         fill: parent
                                     }
-                                    source: "images/ByFly.jpg"
+                                    source: "/images/ByFly.jpg"
                                 }
                             }
                             Text {
@@ -1086,7 +1086,7 @@ Window {
                                 anchors {
                                     centerIn: parent
                                 }
-                                source: "images/swap.png"
+                                source: "/images/swap.png"
                             }
 
                             Rectangle {
@@ -1840,11 +1840,11 @@ Window {
             model: ListModel {
                 id: info_model
                 ListElement {
-                    source__: "images/password_safety.jpg"
+                    source__: "/images/password_safety.jpg"
                     text__: '<html><style type="text/css"></style><a href="https://belarusbank.by/ru/33139/press/bank_news/36608">google</a></html>'
                 }
                 ListElement {
-                    source__: "images/news.jpg"
+                    source__: "/images/news.jpg"
                     text__: '<html><style type="text/css"></style><a href="https://primepress.by/news/finansi/">google</a></html>'
                 }
             }

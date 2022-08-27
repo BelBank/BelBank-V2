@@ -23,7 +23,7 @@ Window {
 
     Image {
         id: logo_on_background
-        source: "images/capture_20220617214014956.png"
+        source: "/images/capture_20220617214014956.png"
         width: 300
         height: 150
         anchors {
@@ -238,7 +238,7 @@ Window {
             id: silver_image
             width: card_rectangle.height / 2 - 30
             height: 130
-            source: "images/Silver card MIR.png"
+            source: "/images/Silver card MIR.png"
             anchors {
                 horizontalCenter: silver_card.horizontalCenter
                 top: silver_rate_text.bottom
@@ -397,7 +397,7 @@ Window {
 
             width: card_rectangle.height / 2 - 30
             height: 130
-            source: "images/Golden card MIR .png"
+            source: "/images/Golden card MIR .png"
         }
 
         GridLayout {
