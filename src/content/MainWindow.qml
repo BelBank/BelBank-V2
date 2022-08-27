@@ -15,6 +15,7 @@ Window {
 
     }
 
+
     Rectangle {
         id: header
         height: 100
@@ -209,6 +210,14 @@ Window {
                 snapMode: ListView.SnapOneItem
                 orientation: ListView.Horizontal
                 delegate: card_delegate
+
+                Connections {
+                    target: Controller
+                    // function addNewCard(number, owner_name, is_gold, valid, balance)
+                    onAddNewCard: {
+                        card_model.append({"name": owner_name, "number":number, "valid":valid, "type": is_gold ? "gold" : "silver", "system": "visa"})
+                    }
+                }
                 model: ListModel {
                     id: card_model
                     ListElement {
