@@ -1,30 +1,28 @@
 #ifndef USER_H
 #define USER_H
 
-#include <QObject>
 #include <card.h>
 
-class User : public QObject
-{
+#include <QObject>
+
+class User : public QObject {
     Q_OBJECT
-public:
-    explicit User(QObject *parent = nullptr);
+    public:
+    explicit User(QObject* parent = nullptr);
+
+    std::vector<Card> getCards();
 
     void setName(const QString& name_to_set);
     void setCards(std::vector<Card> cards_to_set);
     const QString& getName() const;
 
-
     void printCardsData() const;
 
-signals:
+    signals:
 
-private:
+    private:
     QString user_name;
     std::vector<Card> cards;
-
-
-
 };
 
-#endif // USER_H
+#endif	// USER_H

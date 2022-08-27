@@ -1,8 +1,10 @@
 #include "user.h"
 
-User::User(QObject *parent)
-    : QObject{parent} {
+User::User(QObject* parent) : QObject{parent} {
+}
 
+std::vector<Card> User::getCards() {
+    return cards;
 }
 
 void User::setName(const QString& name) {
@@ -19,7 +21,6 @@ const QString& User::getName() const {
     return user_name;
 }
 
-
 void User::printCardsData() const {
     foreach (const Card& card, cards) {
         qDebug() << "=============================";
@@ -29,4 +30,3 @@ void User::printCardsData() const {
         qDebug() << "=============================";
     }
 }
-

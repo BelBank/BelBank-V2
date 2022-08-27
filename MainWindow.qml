@@ -488,7 +488,7 @@ Window {
                         Layout.columnSpan: 1
                         Layout.column: 2
                         font.pixelSize: 22
-                        text: Controller.exchangeRatesToQML()[0];
+//                        text: Controller.exchangeRatesToQML()[0];
                         anchors {
                             horizontalCenter: sell.horizontalCenter
                         }
