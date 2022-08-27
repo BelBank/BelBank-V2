@@ -29,5 +29,10 @@
         <file>images/card_background.jpg</file>
         <file>images/password_safety.jpg</file>
         <file>images/news.jpg</file>
+        <file>UniversalMessage.qml</file>
+        <file>images/MountainForBackground.png</file>
+        <file>SuccessfulPaymentMessage.qml</file>
+        <file>images/MountainForSuccessfulPayment.png</file>
+        <file>InsufficientFundsMessage.qml</file>
     </qresource>
 </RCC>
