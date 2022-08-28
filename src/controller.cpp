@@ -61,7 +61,7 @@ bool Controller::enterToBank(const QString& login, const QString& password) {
 	this->client.setName(login_query.value(3).toString());
 	this->getCardsFromDB(login_query.value(1).toString());
 	/* //////////////////////////// */
-	if (!makeNewCard("5143 7833 2344 3456", 1, "11/23")) {
+	if (!makeNewCard("5143 7233 2344 3456", 1, "11/23")) {
 		qDebug() << "failed";
 		return false;
 	}
@@ -82,7 +82,6 @@ bool Controller::makeNewCard(const QString& card_number, bool is_gold, const QSt
 }
 
 bool Controller::addNewCard(Card new_card) {
-	std::vector<Card> cards = client.getCards();
 	QSqlQuery add_card_query(database);
 	add_card_query.prepare(
 			"INSERT INTO card (number, is_gold, valid, balance) "
@@ -96,20 +95,28 @@ bool Controller::addNewCard(Card new_card) {
 		return false;
 	}
 	QVector<int> cards_id = getCardsId(client.getName());
-	if (!add_card_query.exec("SELECT id FROM card ORDER BY id DESC LIMIT 1")) {
+	if (!add_card_query.exec("SELECT MAX(id) FROM card")) {
 		qDebug() << "Query for max id failed! Error: " << add_card_query.lastError().text();
 		return false;
 	}
-	cards_id.push_back(add_card_query.value("id").toInt());
+	if (!add_card_query.next()) {
+		qDebug() << "Max id failed";
+		return false;
+	}
+	qDebug() << "Max id is " << add_card_query.value("max").toString();
+	cards_id.push_back(add_card_query.value("max").toInt());
 	add_card_query.prepare(
 			"UPDATE card_owner "
 			"SET cards = :cards "
 			"WHERE owner_name = :owner_name");
-	QList<QVariant> cards_array;
+	QStringList cards_array;
 	foreach (const int& value, cards_id) {
-		cards_array.push_back(QVariant(value));
+		if (value == 0) {
+			continue;
+		}
+		cards_array << QString::number(value);
 	}
-	add_card_query.bindValue(0, QVariant(cards_array));
+	add_card_query.bindValue(0, "{ " + cards_array.join(",") + " }");
 	add_card_query.bindValue(1, client.getName());
 
 	if (!add_card_query.exec()) {
@@ -126,21 +133,31 @@ QVector<int> Controller::getCardsId(const QString& owner_name) {
 	get_cards_id_query.bindValue(0, owner_name);
 	if (!get_cards_id_query.exec()) {
 		qDebug() << "Query for getting cards array failed! Error: " << get_cards_id_query.lastError().text();
-		cards_id.push_back(0);
+		cards_id.push_back(-1);
 		return cards_id;
 	}
 	get_cards_id_query.next();
-	QList<QVariant> cards_qvariant = get_cards_id_query.value("cards").toList();
-	foreach (const QVariant& val, cards_qvariant) {
+	QStringList cards_list = get_cards_id_query.value("cards").toString().split(",");
+	foreach (QString val, cards_list) {
+		if (val.contains('{')) {
+			val.remove('{');
+		}
+		if (val.contains('}')) {
+			val.remove('}');
+		}
+		if (val == "0") {
+			continue;
+		}
 		cards_id.push_back(val.toInt());
 	}
+	qDebug() << "Cards id's " << cards_id;
 	return cards_id;
 }
 
 bool Controller::getCardsFromDB(const QString& owner_name) {
 	QSqlQuery get_cards_query(database);
 	QVector<int> cards_id = getCardsId(owner_name);
-	if (cards_id.contains(0)) {
+	if (cards_id.contains(-1)) {
 		qDebug() << "Error!";
 		return false;
 	}
