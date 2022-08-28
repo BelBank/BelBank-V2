@@ -213,41 +213,42 @@ Window {
 
                 Connections {
                     target: Controller
-                    // function addNewCard(number, owner_name, is_gold, valid, balance)
-                    onAddNewCard: {
-                        card_model.append({"name": owner_name, "number":number, "valid":valid, "type": is_gold ? "gold" : "silver", "system": "visa"})
+//                     function onCardToQML(number, owner_name, is_gold, valid, balance) {
+                    onCardToQML: {
+                        card_model.append({"name": owner_name, "number":number, "valid":valid,
+                                              "type": is_gold ? "gold" : "silver", "system": "visa"})
                     }
                 }
                 model: ListModel {
                     id: card_model
-                    ListElement {
-                        name: "Петя Иванов"
-                        number: "1234 5678 1234 5678"
-                        valid: "25/08"
-                        type: "gold"
-                        system: "visa"
-                    }
-                    ListElement {
-                        name: "Шурик Скворцов"
-                        number: "1234 5678 7654 5678"
-                        valid: "35/08"
-                        type: "silver"
-                        system: "visa"
-                    }
-                    ListElement {
-                        name: "PaShampusik"
-                        number: "1346 5678 1234 5678"
-                        valid: "25/08"
-                        type: "gold"
-                        system: "mastercard"
-                    }
-                    ListElement {
-                        name: "Павел Староста"
-                        number: "1234 5678 1234 5678"
-                        valid: "25/08"
-                        type: "gold"
-                        system: "visa"
-                    }
+//                    ListElement {
+//                        name: "Петя Иванов"
+//                        number: "1234 5678 1234 5678"
+//                        valid: "25/08"
+//                        type: "gold"
+//                        system: "visa"
+//                    }
+//                    ListElement {
+//                        name: "Шурик Скворцов"
+//                        number: "1234 5678 7654 5678"
+//                        valid: "35/08"
+//                        type: "silver"
+//                        system: "visa"
+//                    }
+//                    ListElement {
+//                        name: "PaShampusik"
+//                        number: "1346 5678 1234 5678"
+//                        valid: "25/08"
+//                        type: "gold"
+//                        system: "mastercard"
+//                    }
+//                    ListElement {
+//                        name: "Павел Староста"
+//                        number: "1234 5678 1234 5678"
+//                        valid: "25/08"
+//                        type: "gold"
+//                        system: "visa"
+//                    }
                 }
                 Component {
                     id: card_delegate

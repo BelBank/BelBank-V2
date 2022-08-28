@@ -60,10 +60,10 @@ bool Controller::enterToBank(const QString& login, const QString& password) {
 	qDebug() << "Success login";
 	this->client.setName(login_query.value(3).toString());
 	this->getCardsFromDB(login_query.value(1).toString());
-	/* //////////////////////////// */
-	if (!makeNewCard("5143 7233 2344 3456", 1, "11/23")) {
-		qDebug() << "failed";
-		return false;
+	std::vector<Card> cards = client.getCards();
+	foreach (Card card, cards) {
+		emit Controller::CardToQML(
+				card.getNumber(), card.getHolderName(), card.getType(), card.getValid(), card.getBalance());
 	}
 	return true;
 }
