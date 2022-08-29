@@ -3,7 +3,6 @@
 This is a banking application that allows bank customers to perform various operations.
 
 ## What this application can do
-***
 This application allows you to:
 - Make various payments through the ERIP system.
 - Make transfers to other cards.
@@ -16,12 +15,10 @@ This application allows you to:
 - Add and view favorite payments.
 
 ## How to use this application
-***
 First of all, you need to ***download*** this application. <br/>
 After launching the application, you need to ***log in*** to your bank account or ***register*** if you are a new user. <br/>
 
 ## Contributors
-***
 - ***Alexander Skvortsov***
 - ***Pavel Kosmin***
 - ***Pavel Shchirov***
@@ -29,5 +26,4 @@ After launching the application, you need to ***log in*** to your bank account o
 The application was developed by a team of BSUIR students as a practice project.
 
 ## License
-***
 This project is licensed under GPL-3.0 license.
