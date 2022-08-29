@@ -1,4 +1,4 @@
-# ![logo](https://github.com/BelBank/BelBank-V2/raw/main/src/images/Logo40.png) BelBank applications
+# ![logo](https://github.com/BelBank/BelBank-V2/raw/main/src/images/Logo40.png) BelBank application
 
 This is a banking application that allows bank customers to perform various operations.
 
