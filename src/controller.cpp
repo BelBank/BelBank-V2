@@ -61,8 +61,9 @@ bool Controller::enterToBank(const QString& login, const QString& password) {
 	this->client.setName(login_query.value(3).toString());
 	this->getCardsFromDB(login_query.value(1).toString());
 	std::vector<Card> cards = client.getCards();
+	emit Controller::test();
 	foreach (Card card, cards) {
-		emit Controller::CardToQML(
+		emit Controller::cardToQML(
 				card.getNumber(), card.getHolderName(), card.getType(), card.getValid(), card.getBalance());
 	}
 	return true;
@@ -164,11 +165,18 @@ bool Controller::getCardsFromDB(const QString& owner_name) {
 	std::vector<Card> cards;
 	get_cards_query.prepare("SELECT * FROM card WHERE id = :id");
 	foreach (const int& id, cards_id) {
+		qDebug() << "id is " << id;
 		get_cards_query.bindValue(0, id);
 		if (!get_cards_query.exec()) {
 			qDebug() << "Query for getting cards array failed! Error: " << get_cards_query.lastError().text();
 			return false;
 		}
+		if (!get_cards_query.next()) {
+			qDebug() << "No reply from cards";
+			return false;
+		}
+		qDebug() << "Number of card: " << get_cards_query.value("number").toString()
+						 << "Owner_name: " << client.getName();
 		cards.push_back(Card(get_cards_query.value("number").toString(),
 												 client.getName(),
 												 get_cards_query.value("is_gold").toBool(),

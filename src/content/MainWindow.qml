@@ -3,6 +3,10 @@ import QtQuick.Layouts 1.15
 import QtQuick.Controls 2.15
 import QtQuick.Window 2.12
 
+
+
+
+
 Window {
     id: mainwindow
     width: 1920
@@ -14,7 +18,7 @@ Window {
 
 
     }
-
+    property alias cardlist: card_model
 
     Rectangle {
         id: header
@@ -211,23 +215,16 @@ Window {
                 orientation: ListView.Horizontal
                 delegate: card_delegate
 
-                Connections {
-                    target: Controller
-//                     function onCardToQML(number, owner_name, is_gold, valid, balance) {
-                    onCardToQML: {
-                        card_model.append({"name": owner_name, "number":number, "valid":valid,
-                                              "type": is_gold ? "gold" : "silver", "system": "visa"})
-                    }
-                }
+
                 model: ListModel {
                     id: card_model
-//                    ListElement {
-//                        name: "Петя Иванов"
-//                        number: "1234 5678 1234 5678"
-//                        valid: "25/08"
-//                        type: "gold"
-//                        system: "visa"
-//                    }
+                    ListElement {
+                        name: "Петя Иванов"
+                        number: "1234 5678 1234 5678"
+                        valid: "25/08"
+                        type: "silver"
+                        system: "visa"
+                    }
 //                    ListElement {
 //                        name: "Шурик Скворцов"
 //                        number: "1234 5678 7654 5678"

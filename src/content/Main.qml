@@ -7,6 +7,22 @@ ApplicationWindow {
     id: main_stack_window
     width: 1920
     height: 1080
+    Connections {
+        target: Controller
+        function onTest() {
+            console.log("Test is working")
+        }
+        function onCardToQML(number, owner_name, is_gold, valid, balance) {
+//                    onCardToQML: {
+            console.log("Signal was sent");
+            mainwindow.cardlist.append({"name" : owner_name, "number" : number, "valid" : valid,
+                                  "type" : is_gold ? "gold" : "silver", "system" : "visa"})
+        }
+    }
+
+    MainWindow {
+        id: mainwindow
+    }
 
     Loader {
         id: loader

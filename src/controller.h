@@ -79,8 +79,9 @@ public Q_SLOTS:
 	QStringList exchangeRatesToQML(QJsonDocument exchange_rates);
 
 signals:
+	void test();
 
-	void CardToQML(
+	void cardToQML(
 			const QString& number, const QString& owner_name, bool is_gold, const QString& valid, double balance);
 
 private:
