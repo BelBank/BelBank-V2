@@ -10,6 +10,22 @@ Window {
     visible: true
     flags: Qt.CustomizeWindowHint
 
+
+    /////////////////////////////////////////////////////use function set_error("TEXT") to set an error
+    UniversalMessage {
+        visible: false
+        id: error
+    }
+
+    function set_error(text_) {
+        error.text__ = text_
+        error.visible = true
+    }
+    ///////////////////////////////////////////////////////
+
+
+
+
     color: "white"
     title: "Выбор тарифа"
     Rectangle {

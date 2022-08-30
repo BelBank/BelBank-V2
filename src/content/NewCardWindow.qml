@@ -14,6 +14,20 @@ Window {
         Qt.WindowFullScreen
     }
 
+
+
+    /////////////////////////////////////////////////////use function set_error("TEXT") to set an error
+    UniversalMessage {
+        visible: false
+        id: error
+    }
+
+    function set_error(text_) {
+        error.text__ = text_
+        error.visible = true
+    }
+    ///////////////////////////////////////////////////////
+
     Rectangle {
         id: card_rectangle
         anchors.fill: parent

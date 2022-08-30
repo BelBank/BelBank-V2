@@ -4,16 +4,24 @@ import QtQuick.Controls 2.15
 import QtQuick.Window 2.12
 
 Window {
+
     id: main
     width: 1920
     visible: true
     height: 1080
 
-    //    flags: {
+    /////////////////////////////////////////////////////use function set_error("TEXT") to set an error
+    UniversalMessage {
+        visible: false
+        id: error
+    }
 
-    //        //Qt.CustomizeWindowHint
-    //        //Qt.WindowCloseButtonHint
-    //    }
+    function set_error(text_) {
+        error.text__ = text_
+        error.visible = true
+    }
+
+    ///////////////////////////////////////////////////////
     Image {
         width: 1920
         height: 1080

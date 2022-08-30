@@ -99,8 +99,7 @@ Window {
             MouseArea {
                 anchors.fill: parent
                 onClicked: {
-                    //set_authorization_window()
-                    set_error("zdlkfjbnzdflkbjn")
+                    set_authorization_window()
                 }
                 onPressed: {
                     parent.color = "#242f67"
@@ -1378,11 +1377,10 @@ Window {
                     bottom: payments.bottom
                     bottomMargin: 20
                 }
-                //                border.color: "#d088f2"
-                color: "#fdffbd"
 
-                //                border.width: 3
-                //                radius: 8
+                color: "white"
+
+
                 ListView {
                     currentIndex: -1
                     id: history
@@ -1891,6 +1889,46 @@ Window {
         color: "#274cac"
 
         PageIndicator {
+            Rectangle {
+                id: left_page_indicator
+                width: parent.width / 2
+                height: parent.height
+                anchors {
+                    left: parent.left
+                    top: parent.top
+                }
+                color: "transparent"
+                radius: 4
+                MouseArea {
+                    anchors {
+                        fill: parent
+                    }
+                    onClicked: {
+                        info_lv.decrementCurrentIndex()
+                    }
+                }
+            }
+            Rectangle {
+                id: right_page_indicator
+                width: parent.width / 2
+                height: parent.height
+                anchors {
+                    right: parent.right
+                    top: parent.top
+                }
+                color: "transparent"
+                radius: 4
+                MouseArea {
+                    anchors {
+                        fill: parent
+                    }
+
+                    onClicked: {
+                        info_lv.incrementCurrentIndex()
+                    }
+                }
+            }
+
             id: control
             count: 2
             currentIndex: info_lv.currentIndex
@@ -1902,8 +1940,8 @@ Window {
             }
 
             delegate: Rectangle {
-                implicitWidth: 8
-                implicitHeight: 8
+                implicitWidth: 10
+                implicitHeight: 10
 
                 radius: width / 2
                 color: "#f9b54c"
@@ -1956,6 +1994,8 @@ Window {
                     color: "transparent"
 
                     Image {
+                        fillMode: info_lv.currentIndex ? Image.PreserveAspectCrop : Image.Stretch
+
                         anchors {
                             fill: parent
                         }
@@ -1991,12 +2031,13 @@ Window {
 
 /*##^##
 Designer {
-    D{i:0;formeditorZoom:0.33}D{i:2}D{i:3}D{i:4}D{i:6}D{i:7}D{i:5}D{i:8}D{i:9}D{i:10}
-D{i:11}D{i:12}D{i:13}D{i:1}D{i:16}D{i:25}D{i:17}D{i:44}D{i:45}D{i:46}D{i:47}D{i:49}
-D{i:48}D{i:50}D{i:51}D{i:53}D{i:52}D{i:54}D{i:55}D{i:57}D{i:56}D{i:58}D{i:59}D{i:61}
-D{i:60}D{i:62}D{i:63}D{i:65}D{i:64}D{i:66}D{i:67}D{i:43}D{i:42}D{i:69}D{i:70}D{i:68}
-D{i:15}D{i:72}D{i:73}D{i:75}D{i:74}D{i:130}D{i:131}D{i:133}D{i:135}D{i:151}D{i:132}
-D{i:159}D{i:205}D{i:157}D{i:71}D{i:14}D{i:210}D{i:216}D{i:212}D{i:220}D{i:209}
+    D{i:0;formeditorZoom:0.75}D{i:1}D{i:3}D{i:4}D{i:5}D{i:7}D{i:8}D{i:6}D{i:9}D{i:10}
+D{i:11}D{i:12}D{i:13}D{i:14}D{i:2}D{i:17}D{i:26}D{i:18}D{i:45}D{i:46}D{i:47}D{i:48}
+D{i:50}D{i:49}D{i:51}D{i:52}D{i:54}D{i:53}D{i:55}D{i:56}D{i:58}D{i:57}D{i:59}D{i:60}
+D{i:62}D{i:61}D{i:63}D{i:64}D{i:66}D{i:65}D{i:67}D{i:68}D{i:44}D{i:43}D{i:70}D{i:71}
+D{i:69}D{i:16}D{i:73}D{i:74}D{i:76}D{i:75}D{i:131}D{i:132}D{i:134}D{i:136}D{i:152}
+D{i:133}D{i:158}D{i:161}D{i:207}D{i:159}D{i:72}D{i:15}D{i:214}D{i:213}D{i:216}D{i:215}
+D{i:212}D{i:222}D{i:218}D{i:226}D{i:211}
 }
 ##^##*/
 
