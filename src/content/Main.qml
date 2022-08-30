@@ -14,13 +14,23 @@ ApplicationWindow {
         source: "AuthorizationWindow.qml"
     }
 
+    StackView {
+        id: error_stack
+    }
+
     Component {
         id: auth_window
         AuthorizationWindow {}
     }
     Component {
         id: main_window
-        MainWindow {}
+        MainWindow {
+            onErrored: {
+
+                universal_message_window.message_ = text_
+                error_stack.push(universal_message_window)
+            }
+        }
     }
     Component {
         id: reg_window
@@ -33,6 +43,24 @@ ApplicationWindow {
     Component {
         id: payment_window
         PaymentWindow {}
+    }
+    Component {
+        id: universal_message_window
+        UniversalMessage {}
+    }
+    Component {
+        id: insufficient_funds_error_window
+        InsufficientFundsMessage {}
+    }
+    Component {
+        id: successful_payment_message_window
+        SuccessfulPaymentMessage {}
+    }
+
+    function set_universal_message(text) {
+
+        loader.source = "UniversalMessage.qml"
+        universal_message_window.message__ = text
     }
 
     function set_main_window() {

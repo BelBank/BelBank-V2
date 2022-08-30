@@ -8,12 +8,12 @@ Window {
     width: 1920
     visible: true
     height: 1080
-    flags: {
 
-        //Qt.CustomizeWindowHint
-        //Qt.WindowCloseButtonHint
-    }
+    //    flags: {
 
+    //        //Qt.CustomizeWindowHint
+    //        //Qt.WindowCloseButtonHint
+    //    }
     Image {
         width: 1920
         height: 1080
@@ -166,6 +166,7 @@ Window {
                 if (Controller.enterToBank(login_text.text, text0.text)) {
                     set_main_window()
                 } else {
+
                     //ошибка
                 }
             }

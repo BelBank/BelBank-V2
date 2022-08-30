@@ -4,17 +4,19 @@ import QtQuick.Controls 2.15
 import QtQuick.Window 2.12
 
 Window {
+
     id: mainwindow
+
+    signal errored(bool text_)
+
     width: 1920
     height: 1080
     visible: true
-    flags: {
 
-        Qt.WindowFullScreen
+    //    flags: {
 
-
-    }
-
+    //        // Qt.WindowFullScreen
+    //    }
     Rectangle {
         id: header
         height: 100
@@ -23,15 +25,27 @@ Window {
             right: parent.right
             left: parent.left
         }
-        color: "#dbaaf2"
+        color: "#274cac"
+        Rectangle {
+            id: logo_white
+            width: 200
+            height: 200
+            radius: 50
+            anchors {
+                margins: 5
+                left: logo.left
+                top: logo.top
+                bottom: logo.bottom
+                right: logo.right
+            }
+        }
 
         Image {
             id: logo
-            width: 143
+            width: 177
             height: 100
-            source: "/images/capture_20220617214014956.png"
+            source: "/images/Logo.png"
             anchors {
-                margins: 15
                 left: header.left
                 top: header.top
                 bottom: header.bottom
@@ -47,8 +61,10 @@ Window {
             }
             font.pixelSize: 28
             font.bold: true
+            color: "white"
 
-            text: Controller.getUserName() ///тут должен присваиваться ник клиента.
+            text: Controller.getUserName(
+                      ) ///тут должен присваиваться ник клиента.
         }
 
         Rectangle {
@@ -61,32 +77,34 @@ Window {
                 verticalCenter: header.verticalCenter
                 margins: 15
             }
-            color: "#e18eff"
-            border.color: "#7d3a9c"
+            color: "#6e91de"
+            border.color: "#264892"
             border.width: 2
             radius: 10
 
             Text {
                 anchors.centerIn: parent
                 text: "Выйти"
-                color: "#222024"
+                //color: "#222024"
                 font.family: "Helvetica"
                 font.pointSize: 17
+                color: "white"
                 font.bold: true
             }
 
             MouseArea {
                 anchors.fill: parent
                 onClicked: {
-                    set_authorization_window()
+                    //set_authorization_window()
+                    main_window.errored("AAAAAAAAAAAAAAAAA")
                 }
                 onPressed: {
-                    parent.color = "#7d3a9c"
+                    parent.color = "#242f67"
                     parent.border.color = "dark gray"
                 }
                 onReleased: {
-                    parent.color = "#d088f2"
-                    parent.border.color = "#7d3a9c"
+                    parent.color = "#6e91de"
+                    parent.border.color = "#264892"
                 }
             }
         }
@@ -100,6 +118,7 @@ Window {
                 rightMargin: 45
             }
             text: "142"
+            color: "white"
             font.pixelSize: 35
             font.bold: true
         }
@@ -126,6 +145,7 @@ Window {
             font.pixelSize: 20
             font.bold: true
             text: "+375336314010"
+            color: "white"
         }
 
         Text {
@@ -136,6 +156,7 @@ Window {
             }
             font.pixelSize: 20
             text: "Текущая сессия:"
+            color: "white"
         }
 
         Timer {
@@ -153,6 +174,7 @@ Window {
             }
             font.pixelSize: 18
             id: time
+            color: "white"
         }
     }
 
@@ -164,7 +186,7 @@ Window {
             right: parent.right
             left: parent.left
         }
-        color: "#fdffcc"
+        color: "white"
         anchors.rightMargin: 0
         anchors.bottomMargin: 0
         anchors.leftMargin: 0
@@ -181,8 +203,8 @@ Window {
             }
             radius: 8
             border.width: 3
-            border.color: "#dbaaf2"
-            color: "#fdffbd"
+            border.color: "#386cde"
+            color: "white"
 
             Text {
                 id: finance_text
@@ -216,28 +238,49 @@ Window {
                         number: "1234 5678 1234 5678"
                         valid: "25/08"
                         type: "gold"
-                        system: "visa"
+                        system: "mir"
+                        balance: "234"
                     }
                     ListElement {
                         name: "Шурик Скворцов"
                         number: "1234 5678 7654 5678"
                         valid: "35/08"
                         type: "silver"
-                        system: "visa"
+                        system: "mir"
+                        balance: "2136.3"
                     }
-                    ListElement {
-                        name: "PaShampusik"
-                        number: "1346 5678 1234 5678"
-                        valid: "25/08"
-                        type: "gold"
-                        system: "mastercard"
-                    }
+
                     ListElement {
                         name: "Павел Староста"
                         number: "1234 5678 1234 5678"
                         valid: "25/08"
                         type: "gold"
                         system: "visa"
+                        balance: "45366.37"
+                    }
+                    ListElement {
+                        name: "Павел Староста"
+                        number: "1234 5678 1234 5678"
+                        valid: "25/08"
+                        type: "silver"
+                        system: "visa"
+                        balance: "45366.37"
+                    }
+                    ListElement {
+                        name: "Павел Староста"
+                        number: "1234 5678 1234 5678"
+                        valid: "25/08"
+                        type: "gold"
+                        system: "mastercard"
+                        balance: "45366.37"
+                    }
+                    ListElement {
+                        name: "Павел Староста"
+                        number: "1234 5678 1234 5678"
+                        valid: "25/08"
+                        type: "silver"
+                        system: "mastercard"
+                        balance: "45366.37"
                     }
                 }
                 Component {
@@ -247,21 +290,25 @@ Window {
 
                         width: 500
                         height: 240
-                        color: "#fdffbd"
+                        color: "white"
 
                         function getCard() {
                             var sorce
                             if (card.type) {
                                 if (card.system) {
                                     sorce = "/images/Golden card VISA.png"
-                                } else {
+                                } else if (model.system === "mastercard") {
                                     sorce = "/images/Golden Card Mastercard.png"
+                                } else {
+                                    sorce = "/images/Golden card MIR .png"
                                 }
                             } else {
                                 if (card.system) {
                                     sorce = "/images/Silver card VISA.png"
-                                } else {
+                                } else if (model.system === "mastercard") {
                                     sorce = "/images/Silver card Mastercard.png"
+                                } else {
+                                    sorce = "/images/Silver card MIR.png"
                                 }
                             }
                             return sorce
@@ -274,12 +321,38 @@ Window {
                             property bool system: model.system === "visa"
                             anchors.fill: parent
                             front: Image {
+                                id: card_img
                                 width: 480
                                 anchors {
                                     //fill: parent
                                     centerIn: parent
                                 }
                                 source: getCard()
+                                Text {
+                                    id: balance_text
+                                    anchors {
+                                        left: parent.left
+                                        leftMargin: 30
+                                        top: card_img.top
+                                        topMargin: card_img.height / 2 - 8
+                                    }
+                                    font.pixelSize: 50
+                                    text: "Баланс:"
+                                    color: "white"
+                                    font.bold: true
+                                }
+                                Text {
+                                    id: balance
+                                    anchors {
+                                        left: balance_text.right
+                                        leftMargin: 15
+                                        verticalCenter: balance_text.verticalCenter
+                                    }
+                                    font.pixelSize: 60
+                                    // font.bold: true
+                                    text: model.balance
+                                    color: "white"
+                                }
                             }
                             back: Rectangle {
                                 id: card_info
@@ -404,10 +477,10 @@ Window {
 
                 id: cash
                 height: 230
-                color: "#fcdd6d"
+                color: "#d5e2ff"
                 anchors {
                     top: new_card.bottom
-                    topMargin: 40
+                    topMargin: 20
                     bottom: finance.bottom
                     left: finance.left
                     right: finance.right
@@ -418,13 +491,15 @@ Window {
                 radius: 8
 
                 GridLayout {
-                    anchors.bottomMargin: 20
-                    anchors.topMargin: 8
+                    id: grid__
                     rows: 7
                     columns: 4
                     anchors {
-                        fill: parent
-                        margins: 20
+                        top: parent.top
+                        bottom: parent.bottom
+                        right: parent.right
+                        left: parent.left
+                        margins: 10
                     }
 
                     Text {
@@ -433,7 +508,7 @@ Window {
                         Layout.column: 0
 
                         id: cash_title
-                        font.pixelSize: 23
+                        font.pixelSize: 20
                         font.bold: true
 
                         Layout.alignment: Qt.AlignCenter
@@ -443,7 +518,7 @@ Window {
                         Layout.row: 1
                         Layout.columnSpan: 2
                         Layout.column: 0
-                        font.pixelSize: 21
+                        font.pixelSize: 18
                         font.bold: true
                         text: "    Валюта:"
                     }
@@ -452,7 +527,7 @@ Window {
                         Layout.row: 1
                         Layout.columnSpan: 1
                         Layout.column: 2
-                        font.pixelSize: 21
+                        font.pixelSize: 18
                         font.bold: true
 
                         text: "   Продажа:"
@@ -462,33 +537,38 @@ Window {
                         Layout.row: 1
                         Layout.columnSpan: 1
                         Layout.column: 3
-                        font.pixelSize: 21
+                        font.pixelSize: 18
                         font.bold: true
 
                         text: "Покупка:"
                     }
                     Text {
                         Layout.row: 2
-                        Layout.columnSpan: 2
-                        Layout.column: 0
+                        Layout.columnSpan: 1
+                        Layout.column: 1
                         id: rub
                         text: "100RUB"
-                        font.pixelSize: 20
+                        font.pixelSize: 18
                         Image {
+                            Layout.row: 2
+                            Layout.columnSpan: 1
+                            Layout.column: 0
                             width: 40
                             height: 30
                             source: "/images/RUB.png"
                             anchors {
-                                left: rub.right
+                                right: rub.left
+                                //left: grid__.left
                             }
                         }
                     }
+
                     Text {
                         Layout.row: 2
                         Layout.columnSpan: 1
                         Layout.column: 2
-                        font.pixelSize: 22
-//                        text: Controller.exchangeRatesToQML()[0];
+                        font.pixelSize: rub.font.pixelSize
+                        //                        text: Controller.exchangeRatesToQML()[0];
                         anchors {
                             horizontalCenter: sell.horizontalCenter
                         }
@@ -497,25 +577,26 @@ Window {
                         Layout.row: 2
                         Layout.columnSpan: 1
                         Layout.column: 3
-                        font.pixelSize: 22
-//                        text: Controller.exchangeRatesToQML()[1];
+                        font.pixelSize: rub.font.pixelSize
+                        //                        text: Controller.exchangeRatesToQML()[1];
                         anchors {
                             horizontalCenter: buy.horizontalCenter
                         }
                     }
                     Text {
                         Layout.row: 3
-                        Layout.columnSpan: 2
-                        Layout.column: 0
+                        Layout.columnSpan: 1
+                        Layout.column: 1
                         id: usd
                         text: "1USD"
-                        font.pixelSize: 20
+                        font.pixelSize: 18
                         Image {
                             width: 40
                             height: 30
                             source: "/images/USD.png"
                             anchors {
-                                left: usd.right
+                                right: usd.left
+                                // left: grid__.left
                             }
                         }
                     }
@@ -523,7 +604,7 @@ Window {
                         Layout.row: 3
                         Layout.columnSpan: 1
                         Layout.column: 2
-                        font.pixelSize: 22
+                        font.pixelSize: rub.font.pixelSize
                         text: "2.63"
                         anchors {
                             horizontalCenter: sell.horizontalCenter
@@ -533,7 +614,7 @@ Window {
                         Layout.row: 3
                         Layout.columnSpan: 1
                         Layout.column: 3
-                        font.pixelSize: 22
+                        font.pixelSize: rub.font.pixelSize
                         text: "2.59"
                         anchors {
                             horizontalCenter: buy.horizontalCenter
@@ -541,17 +622,18 @@ Window {
                     }
                     Text {
                         Layout.row: 4
-                        Layout.columnSpan: 2
-                        Layout.column: 0
+                        Layout.columnSpan: 1
+                        Layout.column: 1
                         id: euro
                         text: "1EUR"
-                        font.pixelSize: 20
+                        font.pixelSize: 18
                         Image {
                             width: 40
                             height: 30
                             source: "/images/EURO.png"
                             anchors {
-                                left: euro.right
+                                right: euro.left
+                                //left: grid__.left
                             }
                         }
                     }
@@ -559,7 +641,7 @@ Window {
                         Layout.row: 4
                         Layout.columnSpan: 1
                         Layout.column: 2
-                        font.pixelSize: 22
+                        font.pixelSize: rub.font.pixelSize
                         text: "3.2"
                         anchors {
                             horizontalCenter: sell.horizontalCenter
@@ -569,7 +651,7 @@ Window {
                         Layout.row: 4
                         Layout.columnSpan: 1
                         Layout.column: 3
-                        font.pixelSize: 22
+                        font.pixelSize: rub.font.pixelSize
                         text: "3.15"
                         anchors {
                             horizontalCenter: buy.horizontalCenter
@@ -578,17 +660,18 @@ Window {
 
                     Text {
                         Layout.row: 5
-                        Layout.columnSpan: 2
-                        Layout.column: 0
+                        Layout.columnSpan: 1
+                        Layout.column: 1
                         id: china
                         text: "10CNY"
-                        font.pixelSize: 20
+                        font.pixelSize: rub.font.pixelSize
                         Image {
                             width: 40
                             height: 30
                             source: "/images/china.jpg"
                             anchors {
-                                left: china.right
+                                right: china.left
+                                //left: grid__.left
                             }
                         }
                     }
@@ -596,7 +679,7 @@ Window {
                         Layout.row: 5
                         Layout.columnSpan: 1
                         Layout.column: 2
-                        font.pixelSize: 22
+                        font.pixelSize: rub.font.pixelSize
                         text: "4"
                         anchors {
                             horizontalCenter: sell.horizontalCenter
@@ -606,7 +689,7 @@ Window {
                         Layout.row: 5
                         Layout.columnSpan: 1
                         Layout.column: 3
-                        font.pixelSize: 22
+                        font.pixelSize: rub.font.pixelSize
                         text: "3.679"
                         anchors {
                             horizontalCenter: buy.horizontalCenter
@@ -615,17 +698,18 @@ Window {
 
                     Text {
                         Layout.row: 6
-                        Layout.columnSpan: 2
-                        Layout.column: 0
+                        Layout.columnSpan: 1
+                        Layout.column: 1
                         id: pln
                         text: "10PLN"
-                        font.pixelSize: 20
+                        font.pixelSize: rub.font.pixelSize
                         Image {
                             width: 40
                             height: 30
                             source: "/images/PLN.jpg"
                             anchors {
-                                left: pln.right
+                                right: pln.left
+                                //left: grid__.left
                             }
                         }
                     }
@@ -633,7 +717,7 @@ Window {
                         Layout.row: 6
                         Layout.columnSpan: 1
                         Layout.column: 2
-                        font.pixelSize: 22
+                        font.pixelSize: rub.font.pixelSize
                         text: "5.64"
                         anchors {
                             horizontalCenter: sell.horizontalCenter
@@ -643,7 +727,7 @@ Window {
                         Layout.row: 6
                         Layout.columnSpan: 1
                         Layout.column: 3
-                        font.pixelSize: 22
+                        font.pixelSize: rub.font.pixelSize
                         text: "5.14"
                         anchors {
                             horizontalCenter: buy.horizontalCenter
@@ -662,19 +746,19 @@ Window {
                     rightMargin: 50
                     leftMargin: 50
                     topMargin: 10
-                    bottomMargin: 40
+                    bottomMargin: 20
                 }
-                color: "#dbaaf2"
-                border.color: "#7d3a9c"
+                color: "#6e91de"
+                border.color: "#264892"
                 border.width: 2
                 radius: 10
                 Text {
                     anchors.centerIn: parent
                     text: "Создать новую карту"
-                    color: "#222024"
                     font.family: "Helvetica"
                     font.pointSize: 17
                     font.bold: true
+                    color: "white"
                 }
                 MouseArea {
                     anchors.fill: parent
@@ -683,11 +767,11 @@ Window {
                     }
 
                     onPressed: {
-                        parent.color = "#d599f2"
+                        parent.color = "#242f67"
                         parent.border.color = "dark gray"
                     }
                     onReleased: {
-                        parent.color = "#dbaaf2"
+                        parent.color = "#6e91de"
                         parent.border.color = "#7d3a9c"
                     }
                 }
@@ -709,8 +793,8 @@ Window {
             anchors.bottomMargin: 10
             anchors.leftMargin: 12
             anchors.topMargin: 10
-            border.color: "#dbaaf2"
-            color: "#fdffbd"
+            border.color: "#386cde"
+            color: "white"
 
             Text {
                 id: payments_text
@@ -766,7 +850,7 @@ Window {
                             margins: 2
                         }
 
-                        color: "#fcdd6d"
+                        color: "#d5e2ff"
                         radius: 10
                         Rectangle {
                             width: 40
@@ -796,7 +880,7 @@ Window {
                                 // rounded corners for img
                                 anchors.fill: img_1
                                 color: "transparent"
-                                border.color: "#d088f2"
+                                border.color: "#264892"
                                 border.width: 1
                                 radius: 10
                             }
@@ -1063,7 +1147,7 @@ Window {
                             fill: parent
                             margins: 3
                         }
-                        color: "#fcdd6d"
+                        color: "#d5e2ff"
                         radius: 10
 
                         Rectangle {
@@ -1094,7 +1178,7 @@ Window {
                                 // rounded corners for img
                                 anchors.fill: img_2
                                 color: "transparent"
-                                border.color: "#d088f2"
+                                border.color: "#274cac"
                                 border.width: 1
                                 radius: 10
                             }
@@ -1141,7 +1225,7 @@ Window {
                                 z: 1
                                 color: "transparent"
                                 border.width: 3
-                                border.color: "#d088f2"
+                                border.color: "#6e91de"
                             }
                         }
 
@@ -1204,7 +1288,7 @@ Window {
 
                             Rectangle {
                                 radius: 3
-                                color: index % 2 ? "#fcfa72" : "#fccf53"
+                                color: index % 2 ? "#d5e2ff" : "#bed2ff"
                                 height: 30
                                 clip: true
                                 width: 385
@@ -1314,7 +1398,7 @@ Window {
                         z: 1
                         color: "transparent"
                         border.width: 3
-                        border.color: "#d088f2"
+                        border.color: "#6e91de"
                     }
                 }
 
@@ -1409,12 +1493,12 @@ Window {
 
                     Rectangle {
                         radius: 8
-                        color: index % 2 ? "#fcfa72" : "#fcdd6d"
+                        color: index % 2 ? "#d5e2ff" : "#bed2ff"
                         height: 30
                         clip: true
                         width: 385
                         border.width: 1
-                        border.color: "#dbaaf2"
+                        border.color: "#264892"
                         readonly property ListView __lv: ListView.view
 
                         anchors {
@@ -1462,6 +1546,17 @@ Window {
                 }
             }
 
+            Rectangle {
+                anchors {
+                    top: erip.top
+                    bottom: erip.bottom
+                    right: erip.right
+                    left: erip.left
+                    margins: 5
+                }
+                color: "#d5e2ff"
+            }
+
             ListView {
                 currentIndex: -1
                 id: erip
@@ -1488,7 +1583,7 @@ Window {
                     z: 1
                     color: "transparent"
                     border.width: 3
-                    border.color: "#d088f2"
+                    border.color: "#6e91de"
                 }
                 section {
                     property: "team"
@@ -1499,7 +1594,7 @@ Window {
                         signal clicked
 
                         radius: 4
-                        color: "#dbaaf2"
+                        color: "#6e91de"
                         width: 385
                         height: 40
 
@@ -1738,7 +1833,7 @@ Window {
 
                     Rectangle {
                         radius: 8
-                        color: index % 2 ? "#fcfa72" : "#fcdd6d"
+                        color: index % 2 ? "#d5e2ff" : "#bed2ff"
                         height: expanded ? 30 : 0
                         clip: true
                         width: 385
@@ -1789,7 +1884,7 @@ Window {
             left: parent.left
         }
 
-        color: "#dbaaf2"
+        color: "#274cac"
 
         PageIndicator {
             id: control
@@ -1885,18 +1980,19 @@ Window {
             font.bold: true
             font.pixelSize: 26
             text: "Белбанк, 2022"
+            color: "white"
         }
     }
 }
 
 /*##^##
 Designer {
-    D{i:0;formeditorZoom:0.66}D{i:2}D{i:3}D{i:5}D{i:6}D{i:4}D{i:7}D{i:8}D{i:9}D{i:10}
-D{i:11}D{i:12}D{i:1}D{i:15}D{i:22}D{i:16}D{i:39}D{i:40}D{i:41}D{i:42}D{i:44}D{i:43}
-D{i:45}D{i:46}D{i:48}D{i:47}D{i:49}D{i:50}D{i:52}D{i:51}D{i:53}D{i:54}D{i:56}D{i:55}
-D{i:57}D{i:58}D{i:60}D{i:59}D{i:61}D{i:62}D{i:38}D{i:37}D{i:64}D{i:65}D{i:63}D{i:14}
-D{i:67}D{i:68}D{i:70}D{i:69}D{i:125}D{i:126}D{i:128}D{i:130}D{i:146}D{i:127}D{i:154}
-D{i:200}D{i:152}D{i:66}D{i:13}D{i:205}D{i:211}D{i:207}D{i:215}D{i:204}
+    D{i:0;formeditorZoom:0.33}D{i:2}D{i:3}D{i:4}D{i:6}D{i:7}D{i:5}D{i:8}D{i:9}D{i:10}
+D{i:11}D{i:12}D{i:13}D{i:1}D{i:16}D{i:25}D{i:17}D{i:44}D{i:45}D{i:46}D{i:47}D{i:49}
+D{i:48}D{i:50}D{i:51}D{i:53}D{i:52}D{i:54}D{i:55}D{i:57}D{i:56}D{i:58}D{i:59}D{i:61}
+D{i:60}D{i:62}D{i:63}D{i:65}D{i:64}D{i:66}D{i:67}D{i:43}D{i:42}D{i:69}D{i:70}D{i:68}
+D{i:15}D{i:72}D{i:73}D{i:75}D{i:74}D{i:130}D{i:131}D{i:133}D{i:135}D{i:151}D{i:132}
+D{i:159}D{i:205}D{i:157}D{i:71}D{i:14}D{i:210}D{i:216}D{i:212}D{i:220}D{i:209}
 }
 ##^##*/
 

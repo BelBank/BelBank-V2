@@ -21,13 +21,13 @@ Window {
 
         Image {
             id: payment_logo
-            source: "/images/capture_20220617214014956.png"
-            width: 300
-            height: 150
+            source: "/images/Logo.png"
+            width: 340
+            height: 166
             anchors {
                 horizontalCenter: payment_rectangle.horizontalCenter
                 top: payment_rectangle.top
-                topMargin: 80
+                topMargin: 60
             }
         }
 
@@ -41,15 +41,15 @@ Window {
                 right: payment_rectangle.right
                 margins: 15
             }
-            color: "#d088f2"
-            border.color: "#7d3a9c"
+            color: "#6e91de"
+            border.color: "#386cde"
             border.width: 3
             radius: 10
 
             Text {
                 anchors.centerIn: parent
                 text: "Вернуться на главную страницу"
-                color: "#222024"
+                color: "white"
                 font.family: "Helvetica"
                 font.pointSize: 9
                 font.bold: true
@@ -62,12 +62,12 @@ Window {
                 }
 
                 onPressed: {
-                    parent.color = "#7d3a9c"
+                    parent.color = "#2b53ab"
                     parent.border.color = "dark gray"
                 }
                 onReleased: {
-                    parent.color = "#d088f2"
-                    parent.border.color = "#7d3a9c"
+                    parent.color = "#6e91de"
+                    parent.border.color = "#386cde"
                 }
             }
         }
@@ -83,8 +83,8 @@ Window {
                 left: payment_rectangle.left
                 margins: 15
             }
-            color: selected ? "#fdffbd" : "white"
-            border.color: "#7d3a9c"
+            color: selected ? "#d5e2ff" : "white"
+            border.color: "#386cde"
             border.width: 3
             radius: 10
 
@@ -107,8 +107,8 @@ Window {
                     parent.border.color = "dark gray"
                 }
                 onReleased: {
-                    parent.color = make_a_payment_selected.selected ? "#fdffbd" : "white"
-                    parent.border.color = "#7d3a9c"
+                    //parent.color = make_a_payment_selected.selected ? "#d5e2ff" : "white"
+                    parent.border.color = "#386cde"
                 }
             }
         }
@@ -116,8 +116,8 @@ Window {
             id: choose_card_text
             width: 200
             height: 35
-            color: "#fdffbd"
-            border.color: "#d088f2"
+            color: "#d5e2ff"
+            border.color: "#386cde"
             border.width: 3
             radius: 10
 
@@ -164,6 +164,7 @@ Window {
                     valid: "25/08"
                     type: "gold"
                     system: "visa"
+                    balance: "3.23"
                 }
                 ListElement {
                     name: "Шурик Скворцов"
@@ -171,6 +172,7 @@ Window {
                     valid: "35/08"
                     type: "silver"
                     system: "visa"
+                    balance: "0"
                 }
                 ListElement {
                     name: "PaShampusik"
@@ -178,6 +180,7 @@ Window {
                     valid: "25/08"
                     type: "gold"
                     system: "mastercard"
+                    balance: "33423"
                 }
                 ListElement {
                     name: "Павел Староста"
@@ -185,6 +188,7 @@ Window {
                     valid: "25/08"
                     type: "gold"
                     system: "visa"
+                    balance: "323.24"
                 }
             }
             Component {
@@ -221,6 +225,7 @@ Window {
                         property bool system: model.system === "visa"
                         anchors.fill: parent
                         front: Image {
+                            id: card_img
                             width: 270
                             height: 120
                             anchors {
@@ -228,6 +233,31 @@ Window {
                                 centerIn: parent
                             }
                             source: getCard()
+                            Text {
+                                id: balance_text
+                                anchors {
+                                    left: parent.left
+                                    leftMargin: 30
+                                    top: card_img.top
+                                    topMargin: card_img.height / 2
+                                }
+                                font.pixelSize: 25
+                                text: "Баланс:"
+                                color: "white"
+                                font.bold: true
+                            }
+                            Text {
+                                id: balance
+                                anchors {
+                                    left: balance_text.right
+                                    leftMargin: 15
+                                    verticalCenter: balance_text.verticalCenter
+                                }
+                                font.pixelSize: 35
+                                // font.bold: true
+                                text: model.balance
+                                color: "white"
+                            }
                         }
                         back: Rectangle {
                             id: payment_card_info
@@ -347,8 +377,8 @@ Window {
             id: check_text
             width: 150
             height: 35
-            color: "#fdffbd"
-            border.color: "#d088f2"
+            color: "#d5e2ff"
+            border.color: "#386cde"
             border.width: 3
             radius: 10
 
@@ -383,7 +413,7 @@ Window {
             }
 
             color: "white"
-            border.color: "#d088f2"
+            border.color: "#386cde"
             border.width: 3
             radius: 10
 
@@ -396,7 +426,7 @@ Window {
                     right: check.right
                     bottom: check.bottom
                     topMargin: 10
-                    leftMargin: 20
+                    leftMargin: 10
                     bottomMargin: 6
                 }
                 color: activeFocus ? "black" : "gray"
@@ -411,8 +441,8 @@ Window {
             id: money_value_text
             width: 150
             height: 35
-            color: "#fdffbd"
-            border.color: "#d088f2"
+            color: "#d5e2ff"
+            border.color: "#386cde"
             border.width: 3
             radius: 10
 
@@ -447,7 +477,7 @@ Window {
             }
 
             color: "white"
-            border.color: "#d088f2"
+            border.color: "#386cde"
             border.width: 3
             radius: 10
 
@@ -460,7 +490,7 @@ Window {
                     right: money_value.right
                     bottom: money_value.bottom
                     topMargin: 10
-                    leftMargin: 20
+                    leftMargin: 10
                     bottomMargin: 6
                 }
                 color: activeFocus ? "black" : "gray"
@@ -482,15 +512,15 @@ Window {
                 topMargin: 15
             }
 
-            color: "#d088f2"
-            border.color: "#7d3a9c"
+            color: "#6e91de"
+            border.color: "#386cde"
             border.width: 3
             radius: 10
 
             Text {
                 anchors.centerIn: parent
                 text: "Совершить платеж"
-                color: "#222024"
+                color: "white"
                 font.family: "Helvetica"
                 font.pointSize: 12
                 font.bold: true
@@ -504,12 +534,12 @@ Window {
                 }
 
                 onPressed: {
-                    parent.color = "#7d3a9c"
+                    parent.color = "#2b53ab"
                     parent.border.color = "dark gray"
                 }
                 onReleased: {
-                    parent.color = "#d088f2"
-                    parent.border.color = "#7d3a9c"
+                    parent.color = "#6e91de"
+                    parent.border.color = "#386cde"
                 }
             }
         }

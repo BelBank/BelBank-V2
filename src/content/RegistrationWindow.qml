@@ -19,8 +19,8 @@ Window {
 
         Image {
             id: logo_on_background
-            source: "/images/capture_20220617214014956.png"
-            width: 350
+            source: "/images/Logo.png"
+            width: 445
             height: 250
             anchors {
                 horizontalCenter: rectangler.horizontalCenter
@@ -32,8 +32,8 @@ Window {
             id: name_text
             width: 200
             height: 40
-            color: "#fdffbd"
-            border.color: "#d088f2"
+            color: "#d5e2ff"
+            border.color: "#386cde"
             border.width: 3
             radius: 10
 
@@ -60,8 +60,8 @@ Window {
             id: nickname_text
             width: 200
             height: 40
-            color: "#fdffbd"
-            border.color: "#d088f2"
+            color: "#d5e2ff"
+            border.color: "#386cde"
             border.width: 3
             radius: 10
 
@@ -88,8 +88,8 @@ Window {
             id: password_text
             width: 200
             height: nickname_text.height
-            color: "#fdffbd"
-            border.color: "#d088f2"
+            color: "#d5e2ff"
+            border.color: "#386cde"
             border.width: 3
             radius: 10
 
@@ -116,8 +116,8 @@ Window {
             id: repeat_password_text
             width: 200
             height: nickname_text.height
-            color: "#fdffbd"
-            border.color: "#d088f2"
+            color: "#d5e2ff"
+            border.color: "#386cde"
             border.width: 3
             radius: 10
 
@@ -153,7 +153,7 @@ Window {
 
             height: nickname_text.height
             color: "white"
-            border.color: "#d088f2"
+            border.color: "#386cde"
             border.width: 3
             radius: 10
 
@@ -186,7 +186,7 @@ Window {
 
             height: nickname_text.height
             color: "white"
-            border.color: "#d088f2"
+            border.color: "#386cde"
             border.width: 3
             radius: 10
 
@@ -220,7 +220,7 @@ Window {
 
             height: nickname_text.height
             color: "white"
-            border.color: "#d088f2"
+            border.color: "#386cde"
             border.width: 3
             radius: 10
 
@@ -257,7 +257,7 @@ Window {
 
             height: nickname_text.height
             color: "white"
-            border.color: "#d088f2"
+            border.color: "#386cde"
             border.width: 3
             radius: 10
 
@@ -293,15 +293,15 @@ Window {
                 topMargin: 14
             }
 
-            color: "#d088f2"
-            border.color: "#7d3a9c"
+            color: "#6e91de"
+            border.color: "#386cde"
             border.width: 3
             radius: 10
 
             Text {
                 anchors.centerIn: parent
                 text: "Зарегистрироваться"
-                color: "#222024"
+                color: "white"
                 font.family: "Helvetica"
                 font.pointSize: 14
                 font.bold: true
@@ -311,9 +311,13 @@ Window {
 
                 anchors.fill: parent
                 onClicked: {
-                    if(text_password.text != text_repeat_password.text) {
+                    if (text_password.text != text_repeat_password.text) {
+
                         // ошибка: пароли не совпадают
-                    } else if (!Controller.registration(nickname_input.text, text_password.text, name_input.text)) {
+                    } else if (!Controller.registration(nickname_input.text,
+                                                        text_password.text,
+                                                        name_input.text)) {
+
                         // ошибка регистрации
                     } else {
                         // успешная регистрация
@@ -322,12 +326,12 @@ Window {
                 }
 
                 onPressed: {
-                    parent.color = "#7d3a9c"
+                    parent.color = "#2b53ab"
                     parent.border.color = "dark gray"
                 }
                 onReleased: {
-                    parent.color = "#d088f2"
-                    parent.border.color = "#7d3a9c"
+                    parent.color = "#6e91de"
+                    parent.border.color = "#386cde"
                 }
             }
         }
@@ -342,15 +346,15 @@ Window {
                 right: rectangler.right
                 margins: 15
             }
-            color: "#d088f2"
-            border.color: "#7d3a9c"
+            color: "#6e91de"
+            border.color: "#386cde"
             border.width: 3
             radius: 10
 
             Text {
                 anchors.centerIn: parent
                 text: "Вернуться на окно входа"
-                color: "#222024"
+                color: "white"
                 font.family: "Helvetica"
                 font.pointSize: 12
                 font.bold: true
@@ -364,12 +368,12 @@ Window {
                 }
 
                 onPressed: {
-                    parent.color = "#7d3a9c"
+                    parent.color = "#2b53ab"
                     parent.border.color = "dark gray"
                 }
                 onReleased: {
-                    parent.color = "#d088f2"
-                    parent.border.color = "#7d3a9c"
+                    parent.color = "#6e91de"
+                    parent.border.color = "#386cde"
                 }
             }
         }
