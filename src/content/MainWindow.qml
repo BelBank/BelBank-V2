@@ -7,16 +7,20 @@ Window {
 
     id: mainwindow
 
-    signal errored(bool text_)
-
     width: 1920
     height: 1080
     visible: true
 
-    //    flags: {
+    UniversalMessage {
+        visible: false
+        id: error
+    }
 
-    //        // Qt.WindowFullScreen
-    //    }
+    function set_error(text_) {
+        error.text__ = text_
+        error.visible = true
+    }
+
     Rectangle {
         id: header
         height: 100
@@ -96,7 +100,7 @@ Window {
                 anchors.fill: parent
                 onClicked: {
                     //set_authorization_window()
-                    main_window.errored("AAAAAAAAAAAAAAAAA")
+                    set_error("zdlkfjbnzdflkbjn")
                 }
                 onPressed: {
                     parent.color = "#242f67"

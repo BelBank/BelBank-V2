@@ -14,53 +14,51 @@ ApplicationWindow {
         source: "AuthorizationWindow.qml"
     }
 
-    StackView {
-        id: error_stack
-    }
+    //    StackView {
+    //        id: error_stack
+    //        initialItem: universal_message_window
+    //        visible: false
+    //    }
+    //    Component {
+    //        id: auth_window
+    //        AuthorizationWindow {}
+    //    }
+    //    Component {
+    //        id: main_window
+    //        MainWindow {}
+    //    }
 
-    Component {
-        id: auth_window
-        AuthorizationWindow {}
-    }
-    Component {
-        id: main_window
-        MainWindow {
-            onErrored: {
+    //    Component {
+    //        id: reg_window
+    //        RegistrationWindow {}
+    //    }
+    //    Component {
+    //        id: card_window
+    //        NewCardWindow {}
+    //    }
+    //    Component {
+    //        id: payment_window
+    //        PaymentWindow {}
+    //    }
+    //    Component {
+    //        id: universal_message_window
+    //        UniversalMessage {
 
-                universal_message_window.message_ = text_
-                error_stack.push(universal_message_window)
-            }
-        }
-    }
-    Component {
-        id: reg_window
-        RegistrationWindow {}
-    }
-    Component {
-        id: card_window
-        NewCardWindow {}
-    }
-    Component {
-        id: payment_window
-        PaymentWindow {}
-    }
-    Component {
-        id: universal_message_window
-        UniversalMessage {}
-    }
-    Component {
-        id: insufficient_funds_error_window
-        InsufficientFundsMessage {}
-    }
-    Component {
-        id: successful_payment_message_window
-        SuccessfulPaymentMessage {}
-    }
+    //        }
+    //    }
 
-    function set_universal_message(text) {
+    //    Component {
+    //        id: insufficient_funds_error_window
+    //        InsufficientFundsMessage {}
+    //    }
+    //    Component {
+    //        id: successful_payment_message_window
+    //        SuccessfulPaymentMessage {}
+    //    }
 
-        loader.source = "UniversalMessage.qml"
-        universal_message_window.message__ = text
+    function set_text(text_) {
+        idiot.text__ = text_
+        idiot.visible = true
     }
 
     function set_main_window() {

@@ -4,12 +4,10 @@ import QtQuick.Controls 2.15
 import QtQuick.Window 2.12
 
 Window {
-    function set_text(text_) {
-        message__ = text_
-    }
 
-    property alias message__: message.text
     id: universalMessage_window
+
+    property string text__: "error"
     title: "Уведомление"
     visible: true
     width: 350
@@ -31,7 +29,7 @@ Window {
 
         Image {
             id: logo_image
-            source: "/images/capture_20220617214014956.png"
+            source: "/images/Logo.png"
             width: message_window_rect.width / 3.5
             height: message_window_rect.height / 3.5
             anchors.horizontalCenter: message_window_rect.horizontalCenter
@@ -69,7 +67,7 @@ Window {
                 Text {
                     id: message
                     // text: "Message about incorrect data"
-                    text: "error"
+                    text: universalMessage_window.text__
                     width: message_rect.width - 10
                     wrapMode: Text.WordWrap
                     padding: 7
