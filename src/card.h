@@ -25,9 +25,10 @@ public:
 	double getBalance() const;
 
 private:
-	QString card_number;
+    QString card_number; // [payment_system]143 [1 - gold, 2 - silver]*** **** ****
 	QString card_holder;
 	bool is_gold;
+    short payment_system; // 4 - VISA, 5 - MASTERCARD ( я считаю, что нужно еще)
 	QDate valid_thru;
 	double balance;
 };

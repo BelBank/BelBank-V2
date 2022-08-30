@@ -13,6 +13,7 @@
 #include <QNetworkAccessManager>
 #include <QNetworkReply>
 #include <QNetworkRequest>
+#include <QRandomGenerator>
 #include <QSqlDatabase>
 #include <QSqlError>
 #include <QSqlQuery>
@@ -45,11 +46,14 @@ public Q_SLOTS:
 	 */
 	bool enterToBank(const QString& login, const QString& password);
 
+    bool prepareQML();
 	/**
 	 *  # Метод для создания новой карты и добавления ее в БД
 	 *  # Возвращает false, если addNewCard вернул false либо срок действия карты истёк
 	 */
-	bool makeNewCard(const QString& card_number, bool is_gold, const QString& valid);
+    bool makeCard(const QString& card_number, bool is_gold, const QString& valid);
+
+    bool makeNewCard(bool is_gold, short payment_system);
 
 	/**
 	 *  # Вызывается автоматически из makeNewCard
@@ -83,6 +87,7 @@ public Q_SLOTS:
 	 */
 	bool registration(const QString& login, const QString& password, const QString& owner_name);
 
+    bool makePayment(const QString& card_nummber, const QString& payment_cost);
 	/**
 	 * # Experimental
 	 */
