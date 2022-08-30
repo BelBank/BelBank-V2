@@ -19,6 +19,7 @@ Window {
 
     }
     property alias cardlist: card_model
+    property alias cardview: lv
 
     Rectangle {
         id: header

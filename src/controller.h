@@ -25,6 +25,10 @@ class Controller : public QObject {
 public:
 	explicit Controller(QObject* parent = nullptr);
 
+	/**
+	 * # Функция дважды хеширует пароли, по алгоритму Sha3_256 и Sha3_512
+	 * # Возвращает захешированный пароль в виде QByteArray-
+	 */
 	QByteArray hashPassword(const QString& password);
 
 public Q_SLOTS:
@@ -53,11 +57,18 @@ public Q_SLOTS:
 	 */
 	bool addNewCard(Card new_card);
 
+	/**
+	 * # В метод передается только имя владельца карты
+	 * # Метод делает выборку из таблицы card_owner
+	 * # Возвращает массив интов - айдишники карт, которыми владеет данный пользователь
+	 * # Если метод вернул массив, где единственный элемент равен -1, то произошла ошибка при выборке
+	 */
+
 	QVector<int> getCardsId(const QString& owner_name);
 
 	/**
 	 *  # В метод передается только имя владельца карты
-	 *  # Метод выбирает из БД данные по картам пользователя в формате JSON
+	 *  # Метод выбирает из БД данные по картам пользователя
 	 *  # Обрабатывает их и, соответсвенно, заполняет массив карт для переменной client
 	 *  # Возвращает true в случае успеха, false в случае ошибки выборки из card или card_owner
 	 */
@@ -72,6 +83,9 @@ public Q_SLOTS:
 	 */
 	bool registration(const QString& login, const QString& password, const QString& owner_name);
 
+	/**
+	 * # Experimental
+	 */
 	void exchangeRates();
 
 	void getExchangeRates();
@@ -80,7 +94,10 @@ public Q_SLOTS:
 
 signals:
 	void test();
-
+	/**
+	 * # Сигнал, который вызывает при необходимости добавить карту в интерфейс
+	 * # Передает в QML все данные по карте, чтобы отобразить их
+	 */
 	void cardToQML(
 			const QString& number, const QString& owner_name, bool is_gold, const QString& valid, double balance);
 
