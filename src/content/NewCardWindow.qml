@@ -8,11 +8,25 @@ Window {
     width: 800
     height: 600
     visible: true
-    title: "Выбор тарифа"
+    title: "Создание новой карты"
     flags: {
         Qt.CustomizeWindowHint
         Qt.WindowFullScreen
     }
+
+
+
+    /////////////////////////////////////////////////////use function set_error("TEXT") to set an error
+    UniversalMessage {
+        visible: false
+        id: error
+    }
+
+    function set_error(text_) {
+        error.text__ = text_
+        error.visible = true
+    }
+    ///////////////////////////////////////////////////////
 
     Rectangle {
         id: card_rectangle
@@ -23,9 +37,9 @@ Window {
 
     Image {
         id: logo_on_background
-        source: "/images/capture_20220617214014956.png"
-        width: 300
-        height: 150
+        source: "/images/Logo.png"
+        width: 364
+        height: 118
         anchors {
             horizontalCenter: card_rectangle.horizontalCenter
             top: card_rectangle.top
@@ -42,18 +56,18 @@ Window {
             right: card_rectangle.right
             margins: 15
         }
-        color: "#d088f2"
-        border.color: "#7d3a9c"
+        color: "#6e91de"
+        border.color: "#264892"
         border.width: 3
         radius: 10
 
         Text {
             anchors.centerIn: parent
             text: "Вернуться на главную страницу"
-            color: "#222024"
             font.family: "Helvetica"
             font.pointSize: 9
             font.bold: true
+            color: "white"
         }
 
         MouseArea {
@@ -64,11 +78,11 @@ Window {
             }
 
             onPressed: {
-                parent.color = "#7d3a9c"
+                parent.color = "#274cac"
                 parent.border.color = "dark gray"
             }
             onReleased: {
-                parent.color = "#d088f2"
+                parent.color = "#6e91de"
                 parent.border.color = "#7d3a9c"
             }
         }
@@ -77,7 +91,7 @@ Window {
     Rectangle {
         id: visa
         property bool visa_active: false
-        color: visa_active ? "#fdffbd" : "white"
+        color: visa_active ? "#d5e2ff" : "white"
         height: 30
         width: 210
         anchors {
@@ -88,7 +102,7 @@ Window {
         }
         radius: 8
         border.width: 3
-        border.color: "#d088f2"
+        border.color: "#264892"
         Text {
             id: visa_text
             text: "VISA"
@@ -121,7 +135,7 @@ Window {
     Rectangle {
         id: mastercard
         property bool mastercard_active: false
-        color: mastercard_active ? "#fdffbd" : "white"
+        color: mastercard_active ? "#d5e2ff" : "white"
         height: 30
         width: 210
         anchors {
@@ -132,7 +146,7 @@ Window {
         }
         radius: 8
         border.width: 3
-        border.color: "#d088f2"
+        border.color: "#264892"
         Text {
             id: mastercard_text
             text: "MASTERCARD"
@@ -165,7 +179,7 @@ Window {
     Rectangle {
         id: mir
         property bool mir_active: false
-        color: mir_active ? "#fdffbd" : "white"
+        color: mir_active ? "#d5e2ff" : "white"
         height: 30
         width: 210
         anchors {
@@ -175,7 +189,7 @@ Window {
         }
         radius: 8
         border.width: 3
-        border.color: "#d088f2"
+        border.color: "#264892"
         Text {
             id: mir_text
             text: "МИР"
@@ -218,10 +232,10 @@ Window {
             bottomMargin: 15
             bottom: create_new_card.top
         }
-        color: active ? "#fdffbd" : "white"
+        color: active ? "#d5e2ff" : "white"
         radius: 8
         border.width: 3
-        border.color: "#d088f2"
+        border.color: "#264892"
 
         Text {
             id: silver_rate_text
@@ -361,7 +375,7 @@ Window {
     Rectangle {
         id: gold_card
         property bool active: false
-        color: active ? "#fdffbd" : "white"
+        color: active ? "#d5e2ff" : "white"
         height: card_rectangle.height / 2 + 100
         width: card_rectangle.height / 2 + 30
         anchors {
@@ -374,7 +388,7 @@ Window {
         }
         radius: 8
         border.width: 3
-        border.color: "#d088f2"
+        border.color: "#264892"
 
         Text {
             id: gold_rate_text
@@ -523,18 +537,19 @@ Window {
             rightMargin: 50
         }
 
-        color: "#d088f2"
-        border.color: "#7d3a9c"
+        color: "#6e91de"
+        border.color: "#264892"
         border.width: 3
         radius: 10
 
         Text {
             anchors.centerIn: parent
             text: "Создать новую карту"
-            color: "#222024"
+
             font.family: "Helvetica"
             font.pointSize: 12
             font.bold: true
+            color: "white"
         }
 
         MouseArea {
@@ -545,11 +560,11 @@ Window {
             }
 
             onPressed: {
-                parent.color = "#7d3a9c"
+                parent.color = "#274cac"
                 parent.border.color = "dark gray"
             }
             onReleased: {
-                parent.color = "#d088f2"
+                parent.color = "#6e91de"
                 parent.border.color = "#7d3a9c"
             }
         }

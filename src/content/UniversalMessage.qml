@@ -4,7 +4,10 @@ import QtQuick.Controls 2.15
 import QtQuick.Window 2.12
 
 Window {
+
     id: universalMessage_window
+
+    property string text__: "error"
     title: "Уведомление"
     visible: true
     width: 350
@@ -26,9 +29,9 @@ Window {
 
         Image {
             id: logo_image
-            source: "/images/capture_20220617214014956.png"
-            width: message_window_rect.width/3.5
-            height: message_window_rect.height/3.5
+            source: "/images/Logo.png"
+            width: message_window_rect.width / 3.5
+            height: message_window_rect.height / 3.5
             anchors.horizontalCenter: message_window_rect.horizontalCenter
             anchors.top: message_window_rect.top
             anchors.topMargin: message_window_rect.border.width + 2
@@ -36,7 +39,7 @@ Window {
 
         Rectangle {
             id: message_rect
-            width: message_window_rect.width/2 + 50
+            width: message_window_rect.width / 2 + 50
             anchors {
                 top: logo_image.bottom
                 bottom: ok_button.top
@@ -55,12 +58,16 @@ Window {
                 anchors.margins: 2
                 contentWidth: message.width
                 contentHeight: message.height
-                ScrollBar.vertical: ScrollBar { opacity: 0.2; visible: true; }
+                ScrollBar.vertical: ScrollBar {
+                    opacity: 0.2
+                    visible: true
+                }
                 clip: true
 
                 Text {
                     id: message
-                    text: "Message about incorrect data"
+                    // text: "Message about incorrect data"
+                    text: universalMessage_window.text__
                     width: message_rect.width - 10
                     wrapMode: Text.WordWrap
                     padding: 7

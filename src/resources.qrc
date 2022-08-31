@@ -1,7 +1,6 @@
 <RCC>
     <qresource prefix="/">
         <file>content/AuthorizationWindow.qml</file>
-        <file>images/capture_20220617214014956.png</file>
         <file>images/EURO.png</file>
         <file>images/Fon.jpg</file>
         <file>images/free-icon-telephone-4996346 (1).png</file>
@@ -34,5 +33,7 @@
         <file>content/SuccessfulPaymentMessage.qml</file>
         <file>images/MountainForSuccessfulPayment.png</file>
         <file>content/InsufficientFundsMessage.qml</file>
+        <file>images/Logo.png</file>
+        <file>content/AddCardWindow.qml</file>
     </qresource>
 </RCC>
