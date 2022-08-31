@@ -8,7 +8,7 @@ Window {
     width: 800
     height: 600
     visible: true
-    title: "Выбор тарифа"
+    title: "Создание новой карты"
     flags: {
         Qt.CustomizeWindowHint
         Qt.WindowFullScreen

@@ -77,6 +77,10 @@ ApplicationWindow {
         loader.source = "NewCardWindow.qml"
     }
 
+    function set_add_card_window() {
+        loader.source = "AddCardWindow.qml"
+    }
+
     function set_payment_window() {
         loader.source = "PaymentWindow.qml"
     }

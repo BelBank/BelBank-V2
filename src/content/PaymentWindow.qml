@@ -10,7 +10,6 @@ Window {
     visible: true
     flags: Qt.CustomizeWindowHint
 
-
     /////////////////////////////////////////////////////use function set_error("TEXT") to set an error
     UniversalMessage {
         visible: false
@@ -21,13 +20,10 @@ Window {
         error.text__ = text_
         error.visible = true
     }
+
     ///////////////////////////////////////////////////////
-
-
-
-
     color: "white"
-    title: "Выбор тарифа"
+    title: "Создание платежа"
     Rectangle {
         id: payment_rectangle
 
@@ -221,14 +217,18 @@ Window {
                         if (card.type) {
                             if (card.system) {
                                 sorce = "/images/Golden card VISA.png"
-                            } else {
+                            } else if (model.system === "mastercard") {
                                 sorce = "/images/Golden Card Mastercard.png"
+                            } else {
+                                sorce = "/images/Golden card MIR .png"
                             }
                         } else {
                             if (card.system) {
                                 sorce = "/images/Silver card VISA.png"
-                            } else {
+                            } else if (model.system === "mastercard") {
                                 sorce = "/images/Silver card Mastercard.png"
+                            } else {
+                                sorce = "/images/Silver card MIR.png"
                             }
                         }
                         return sorce
@@ -283,14 +283,19 @@ Window {
                                 //fill: parent
                                 centerIn: parent
                             }
-                            color: "gray"
-                            radius: 8
-                            border.width: 3
-                            border.color: "gray"
+                            color: "transparent"
+                            Image {
+                                anchors {
+                                    fill: parent
+                                }
+                                source: "/images/card_background.jpg"
+                                opacity: 0.75
+                            }
 
                             Text {
                                 id: card_info_text
                                 text: "Данные о карте:"
+                                color: "white"
                                 anchors {
                                     horizontalCenter: payment_card_info.horizontalCenter
                                     top: payment_card_info.top
@@ -300,6 +305,8 @@ Window {
                             }
                             Text {
                                 id: payment_cardholder_name_text
+                                color: "white"
+
                                 anchors {
                                     left: payment_card_info.left
                                     top: card_info_text.bottom
@@ -311,6 +318,8 @@ Window {
                                 Text {
                                     ///////////////////////////////
                                     id: payment_cardholder_name
+                                    color: "white"
+
                                     anchors {
                                         verticalCenter: payment_cardholder_name_text.verticalCenter
                                         left: payment_cardholder_name_text.right
@@ -322,6 +331,8 @@ Window {
                             }
                             Text {
                                 id: payment_card_number_text
+                                color: "white"
+
                                 text: "Номер карты:"
                                 font.pixelSize: 10
                                 anchors {
@@ -333,6 +344,8 @@ Window {
                                 Text {
                                     ///////////////////////////////
                                     id: payment_card_number
+                                    color: "white"
+
                                     anchors {
                                         verticalCenter: payment_card_number_text.verticalCenter
                                         left: payment_card_number_text.right
@@ -344,6 +357,8 @@ Window {
                             }
                             Text {
                                 id: payment_valid_thru_text
+                                color: "white"
+
                                 text: "Годна до:"
                                 font.pixelSize: 10
                                 anchors {
@@ -355,6 +370,8 @@ Window {
                                 Text {
                                     ///////////////////////////////
                                     id: payment_valid_thru
+                                    color: "white"
+
                                     anchors {
                                         verticalCenter: payment_valid_thru_text.verticalCenter
                                         left: payment_valid_thru_text.right

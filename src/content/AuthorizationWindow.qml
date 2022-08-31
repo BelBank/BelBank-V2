@@ -36,7 +36,7 @@ Window {
         width: 350
         height: 40
         color: "white"
-        border.color: "#d088f2"
+        border.color: "#264892"
         border.width: 3
         radius: 10
 
@@ -65,8 +65,8 @@ Window {
         anchors.top: phone.top
         width: 100
         height: 40
-        color: "#fdffbd"
-        border.color: "#d088f2"
+        color: "#d5e2ff"
+        border.color: "#264892"
         border.width: 3
         radius: 10
 
@@ -92,7 +92,7 @@ Window {
         width: 380
         height: 40
         color: "white"
-        border.color: "#d088f2"
+        border.color: "#264892"
         border.width: 3
         radius: 10
 
@@ -129,8 +129,8 @@ Window {
         anchors.left: phoneid.left
         width: 140
         height: 40
-        color: "#fdffbd"
-        border.color: "#d088f2"
+        color: "#d5e2ff"
+        border.color: "#264892"
         border.width: 3
         radius: 10
 
@@ -154,18 +154,18 @@ Window {
             left: phoneid.left
             topMargin: 15
         }
-        color: "#d088f2"
-        border.color: "#7d3a9c"
-        border.width: 2
-        radius: 10
+        color: "#6e91de"
+                radius: 8
+                border.width: 3
+                border.color: "#264892"
 
         Text {
             anchors.centerIn: parent
             text: "Войти"
-            color: "#222024"
             font.family: "Helvetica"
-            font.pointSize: 17
-            font.bold: true
+                        font.pointSize: 12
+                        font.bold: true
+                        color: "white"
         }
 
         MouseArea {
@@ -200,18 +200,18 @@ Window {
             left: enter.left
             topMargin: 10
         }
-        color: "#d088f2"
-        border.color: "#7d3a9c"
-        border.width: 2
-        radius: 10
+        color: "#6e91de"
+                radius: 8
+                border.width: 3
+                border.color: "#264892"
 
         Text {
             anchors.centerIn: parent
             text: "Зарегистрироваться"
-            color: "#222024"
             font.family: "Helvetica"
-            font.pointSize: 12
-            font.bold: true
+                        font.pointSize: 12
+                        font.bold: true
+                        color: "white"
         }
 
         MouseArea {

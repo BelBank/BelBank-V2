@@ -34,5 +34,6 @@
         <file>images/MountainForSuccessfulPayment.png</file>
         <file>content/InsufficientFundsMessage.qml</file>
         <file>images/Logo.png</file>
+        <file>content/AddCardWindow.qml</file>
     </qresource>
 </RCC>

@@ -361,7 +361,6 @@ Window {
                                 id: card_info
                                 height: 180
                                 width: 480
-                                radius: 15
                                 anchors {
                                     //fill: parent
                                     centerIn: parent
@@ -371,13 +370,12 @@ Window {
                                         fill: parent
                                     }
                                     source: "/images/card_background.jpg"
-                                    opacity: 0.8
+                                    opacity: 0.75
                                 }
 
-                                border.width: 2
-                                border.color: "gray"
-
                                 Text {
+                                    color: "white"
+
                                     text: "Данные о карте:"
                                     anchors {
                                         horizontalCenter: card_info.horizontalCenter
@@ -387,6 +385,8 @@ Window {
                                     font.pixelSize: 22
                                 }
                                 Text {
+                                    color: "white"
+
                                     id: cardholder_name_text
                                     anchors {
                                         left: card_info.left
@@ -397,6 +397,8 @@ Window {
                                     text: "Имя держателя:"
                                     font.pixelSize: 20
                                     Text {
+                                        color: "white"
+
                                         ///////////////////////////////
                                         id: cardholder_name
                                         anchors {
@@ -410,6 +412,7 @@ Window {
                                 }
                                 Text {
                                     id: card_number_text
+                                    color: "white"
                                     text: "Номер карты:"
                                     font.pixelSize: 20
                                     anchors {
@@ -420,6 +423,8 @@ Window {
                                     }
                                     Text {
                                         ///////////////////////////////
+                                        color: "white"
+
                                         id: card_number
                                         anchors {
                                             verticalCenter: card_number_text.verticalCenter
@@ -431,6 +436,8 @@ Window {
                                     }
                                 }
                                 Text {
+                                    color: "white"
+
                                     id: valid_thru_text
                                     text: "Годна до:"
                                     font.pixelSize: 20
@@ -442,6 +449,8 @@ Window {
                                     }
                                     Text {
                                         ///////////////////////////////
+                                        color: "white"
+
                                         id: valid_thru
                                         anchors {
                                             verticalCenter: valid_thru_text.verticalCenter
@@ -482,7 +491,7 @@ Window {
                 height: 230
                 color: "#d5e2ff"
                 anchors {
-                    top: new_card.bottom
+                    top: add_card.bottom
                     topMargin: 20
                     bottom: finance.bottom
                     left: finance.left
@@ -741,7 +750,7 @@ Window {
 
             Rectangle {
                 id: new_card
-                height: 40
+                height: 23
                 anchors {
                     top: lv.bottom
                     left: finance.left
@@ -759,7 +768,7 @@ Window {
                     anchors.centerIn: parent
                     text: "Создать новую карту"
                     font.family: "Helvetica"
-                    font.pointSize: 17
+                    font.pointSize: 13
                     font.bold: true
                     color: "white"
                 }
@@ -767,6 +776,47 @@ Window {
                     anchors.fill: parent
                     onClicked: {
                         set_new_card_window()
+                    }
+
+                    onPressed: {
+                        parent.color = "#242f67"
+                        parent.border.color = "dark gray"
+                    }
+                    onReleased: {
+                        parent.color = "#6e91de"
+                        parent.border.color = "#7d3a9c"
+                    }
+                }
+            }
+
+            Rectangle {
+                id: add_card
+                height: 23
+                anchors {
+                    top: new_card.bottom
+                    left: finance.left
+                    right: finance.right
+                    rightMargin: 50
+                    leftMargin: 50
+                    topMargin: 10
+                    bottomMargin: 20
+                }
+                color: "#6e91de"
+                border.color: "#264892"
+                border.width: 2
+                radius: 10
+                Text {
+                    anchors.centerIn: parent
+                    text: "Добавить карту"
+                    font.family: "Helvetica"
+                    font.pointSize: 13
+                    font.bold: true
+                    color: "white"
+                }
+                MouseArea {
+                    anchors.fill: parent
+                    onClicked: {
+                        set_add_card_window()
                     }
 
                     onPressed: {
@@ -1116,7 +1166,7 @@ Window {
                                 id: beltelecom_text
                                 Layout.row: 1
                                 Layout.column: 3
-                                font.pixelSize: 20
+                                font.pixelSize: 18
                                 text: "Белтелеком"
                             }
 
@@ -1379,7 +1429,6 @@ Window {
                 }
 
                 color: "white"
-
 
                 ListView {
                     currentIndex: -1
