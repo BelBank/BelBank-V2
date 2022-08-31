@@ -67,14 +67,31 @@ bool Controller::enterToBank(const QString& login, const QString& password) {
 	return true;
 }
 
-bool Controller::prepareQML() {
-    qDebug() << "QML preparing...";
+QVariantList Controller::cardsToQML() {
     std::vector<Card> cards = client.getCards();
     emit Controller::test();
+    QVariantList cards_to_qml;
+    int number_of_cards = 0;
     foreach (Card card, cards) {
-        emit Controller::cardToQML(
-                card.getNumber(), card.getHolderName(), card.getType(), card.getValid(), card.getBalance());
+        //        emit Controller::cardToQML(
+        //            card.getNumber(), card.getHolderName(), card.getType(), card.getValid(), card.getBalance());
+        QVariantList card_variant;
+        card_variant.push_back(card.getNumber());
+        card_variant.push_back(card.getHolderName());
+        card_variant.push_back(card.getType());
+        card_variant.push_back(card.getValid());
+        card_variant.push_back(card.getBalance());
+        cards_to_qml.push_back(card_variant);
+        number_of_cards++;
+        //        card.getNumber(), card.getHolderName(), card.getType(), card.getValid(), card.getBalance()
     }
+    cards_to_qml.insert(0, number_of_cards);
+    return cards_to_qml;
+}
+
+bool Controller::prepareQML() {
+    qDebug() << "QML preparing...";
+
     return true;
 }
 

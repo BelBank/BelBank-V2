@@ -46,6 +46,8 @@ public Q_SLOTS:
 	 */
 	bool enterToBank(const QString& login, const QString& password);
 
+    Q_INVOKABLE QVariantList cardsToQML();
+
     bool prepareQML();
 	/**
 	 *  # Метод для создания новой карты и добавления ее в БД
