@@ -83,7 +83,6 @@ QVariantList Controller::cardsToQML() {
         card_variant.push_back(card.getBalance());
         cards_to_qml.push_back(card_variant);
         number_of_cards++;
-        //        card.getNumber(), card.getHolderName(), card.getType(), card.getValid(), card.getBalance()
     }
     cards_to_qml.insert(0, number_of_cards);
     return cards_to_qml;
@@ -95,12 +94,20 @@ bool Controller::prepareQML() {
     return true;
 }
 
-bool Controller::makeCard(const QString& card_number, bool is_gold, const QString& valid) {
+bool Controller::makeCard(const QString& card_number, const QString& valid) {
 	QString valid_copy = valid;
-	if (QDate(QDate::fromString("01/" + valid_copy.insert(3, "20"), "dd/MM/yyyy")) < QDate::currentDate()) {
+    valid_copy = "01/" + valid_copy.insert(3, "20");
+    qDebug() << "Valid thru " << valid_copy;
+    if (QDate(QDate::fromString(valid_copy, "dd/MM/yyyy")) < QDate::currentDate()) {
 		qDebug() << "Card is not valid";
 		return false;
 	}
+    bool is_gold;
+    if (card_number[5] == '1') {
+        is_gold = true;
+    } else {
+        is_gold = false;
+    }
 	Card new_card(card_number, client.getName(), is_gold, valid);
 	if (!addNewCard(new_card)) {
 		return false;
@@ -140,6 +147,18 @@ bool Controller::makeNewCard(bool is_gold, short payment_system) {
 
 bool Controller::addNewCard(Card new_card) {
 	QSqlQuery add_card_query(database);
+    QSqlQuery find_duplicates_query(database);
+    find_duplicates_query.prepare("SELECT number FROM card WHERE number = :number");
+    find_duplicates_query.bindValue(0, new_card.getNumber());
+    if (!find_duplicates_query.exec()) {
+        qDebug() << "Query for adding new card failed! Error: " << find_duplicates_query.lastError().text();
+        return false;
+    }
+    if (find_duplicates_query.next()) {
+        qDebug() << "This card is already exist for other user";
+        return false;
+    }
+
 	add_card_query.prepare(
 			"INSERT INTO card (number, is_gold, valid, balance) "
 			"VALUES (:number, :is_gold, :valid, :balance)");
@@ -163,7 +182,7 @@ bool Controller::addNewCard(Card new_card) {
 	qDebug() << "Max id is " << add_card_query.value("max").toString();
 	cards_id.push_back(add_card_query.value("max").toInt());
 	add_card_query.prepare(
-			"UPDATE card_owner "
+            "UPDATE user_info "
 			"SET cards = :cards "
 			"WHERE owner_name = :owner_name");
 	QStringList cards_array;
@@ -186,7 +205,7 @@ bool Controller::addNewCard(Card new_card) {
 QVector<int> Controller::getCardsId(const QString& owner_name) {
 	QSqlQuery get_cards_id_query(database);
 	QVector<int> cards_id;
-	get_cards_id_query.prepare("SELECT cards FROM card_owner WHERE owner_name = :owner_name");
+    get_cards_id_query.prepare("SELECT cards FROM user_info WHERE owner_name = :owner_name");
 	get_cards_id_query.bindValue(0, owner_name);
 	if (!get_cards_id_query.exec()) {
 		qDebug() << "Query for getting cards array failed! Error: " << get_cards_id_query.lastError().text();
@@ -263,11 +282,11 @@ bool Controller::registration(const QString& login, const QString& password, con
 		return false;
 	}
 	registration_query.prepare(
-			"INSERT INTO card_owner (owner_name) "
+            "INSERT INTO user_info (owner_name) "
 			"VALUES (:owner_name)");
 	registration_query.bindValue(0, owner_name);
 	if (!registration_query.exec()) {
-		qDebug() << "Query for regustration in card_owner failed! Error: "
+        qDebug() << "Query for regustration in user_info failed! Error: "
 						 << registration_query.lastError().text();
 		return false;
 	}
@@ -285,7 +304,7 @@ bool Controller::makePayment(const QString& card_number, const QString& payment_
     balance_query.prepare("SELECT balance FROM card WHERE number = :number");
     balance_query.bindValue(0, card_number);
     if (!balance_query.exec()) {
-        qDebug() << "Query for regustration in card_owner failed! Error: " << balance_query.lastError().text();
+        qDebug() << "Query for regustration in user_info failed! Error: " << balance_query.lastError().text();
         // emit somethingWrong()
         return false;
     }
@@ -308,7 +327,7 @@ bool Controller::makePayment(const QString& card_number, const QString& payment_
     balance_query.bindValue(0, balance);
     balance_query.bindValue(1, card_number);
     if (!balance_query.exec()) {
-        qDebug() << "Query for regustration in card_owner failed! Error: " << balance_query.lastError().text();
+        qDebug() << "Query for regustration in user_info failed! Error: " << balance_query.lastError().text();
         // emit somethingWrong()
         return false;
     }

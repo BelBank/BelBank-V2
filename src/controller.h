@@ -53,7 +53,7 @@ public Q_SLOTS:
 	 *  # Метод для создания новой карты и добавления ее в БД
 	 *  # Возвращает false, если addNewCard вернул false либо срок действия карты истёк
 	 */
-    bool makeCard(const QString& card_number, bool is_gold, const QString& valid);
+    bool makeCard(const QString& card_number, const QString& valid);
 
     bool makeNewCard(bool is_gold, short payment_system);
 
