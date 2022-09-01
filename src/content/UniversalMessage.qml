@@ -9,82 +9,47 @@ Window {
 
     property string text__: "error"
     property string next_window: ""
-    title: "Уведомление"
+    flags: {
+        Qt.CustomizeWindowHint
+        Qt.Dialog
+        Qt.FramelessWindowHint
+    }
+
     visible: true
-    width: 350
-    height: 250
+    width: 400
+    height: 225
 
     Rectangle {
         id: message_window_rect
-        //anchors.fill: message_window
         width: universalMessage_window.width
         height: universalMessage_window.height
-        radius: 20
-        Image {
-            source: "/images/MountainForBackground.png"
-            anchors.fill: message_window_rect
-        }
-        border.width: 3
-        border.color: "#dbaaf2"
+
+        border.width: 5
+        border.color: "#6e91de"
         clip: true
 
         Image {
             id: logo_image
             source: "/images/Logo.png"
-            width: message_window_rect.width / 3.5
-            height: message_window_rect.height / 3.5
-            anchors.horizontalCenter: message_window_rect.horizontalCenter
-            anchors.top: message_window_rect.top
-            anchors.topMargin: message_window_rect.border.width + 2
-        }
-
-        Rectangle {
-            id: message_rect
-            width: message_window_rect.width / 2 + 50
+            width: 250
+            height: logo_image.width / 16 * 9
             anchors {
-                top: logo_image.bottom
-                bottom: ok_button.top
+                top: message_window_rect.top
                 horizontalCenter: message_window_rect.horizontalCenter
-                topMargin: 2
-                bottomMargin: 2
-            }
-            color: "white"
-            border.width: 2
-            border.color: "#dbaaf2"
-            radius: 5
-
-            Flickable {
-                id: flick_message_rect
-                anchors.fill: message_rect
-                anchors.margins: 2
-                contentWidth: message.width
-                contentHeight: message.height
-                ScrollBar.vertical: ScrollBar {
-                    opacity: 0.2
-                    visible: true
-                }
-                clip: true
-
-                Text {
-                    id: message
-                    // text: "Message about incorrect data"
-                    text: universalMessage_window.text__
-                    width: message_rect.width - 10
-                    wrapMode: Text.WordWrap
-                    padding: 7
-                    font.family: "Helvetica"
-                    font.pointSize: 12
-                }
             }
         }
 
+        //        Rectangle{
+        //            id: messa
+        //        }
         Rectangle {
             id: ok_button
-            width: 80
-            height: 40
+            width: 200
+            height: 25
             radius: 25
-            color: "#d088f2"
-            border.color: "#28aaf5"
+            border.width: 2
+            color: "#6e91de"
+            border.color: "#264892"
             anchors {
                 bottom: message_window_rect.bottom
                 horizontalCenter: message_window_rect.horizontalCenter
@@ -92,17 +57,13 @@ Window {
             }
 
             Text {
-                text: "OK"
+                text: "Ок"
                 font.family: "Helvetica"
+                color: "black"
                 font.pointSize: 14
-                font.bold: true
+                //font.bold: true
                 anchors {
-                    fill: ok_button
-                    rightMargin: 25
-                    leftMargin: 25
-                    topMargin: 10
-                    bottomMargin: 5
-                    centerIn: ok_button
+                    centreIn: parent
                 }
             }
 
@@ -123,12 +84,12 @@ Window {
                     }
                 }
                 onPressed: {
-                    ok_button.color = "#7d3a9c"
-                    ok_button.border.color = "dark gray"
+                    ok_button.color = "#274cac"
+                    ok_button.border.color = "gray"
                 }
                 onReleased: {
-                    ok_button.color = "#d088f2"
-                    ok_button.border.color = "#28aaf5"
+                    ok_button.color = "#6e91de"
+                    ok_button.border.color = "#264892"
                 }
             }
         }
