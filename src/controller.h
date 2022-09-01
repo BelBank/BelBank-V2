@@ -72,6 +72,8 @@ public Q_SLOTS:
 
 	QVector<int> getCardsId(const QString& owner_name);
 
+    QVector<int> getFavPaymentsId(const QString& owner_name);
+
 	/**
 	 *  # В метод передается только имя владельца карты
 	 *  # Метод выбирает из БД данные по картам пользователя
@@ -81,6 +83,7 @@ public Q_SLOTS:
 
 	bool getCardsFromDB(const QString& owner_name);
 
+    bool getFavPaymentsFromDB(const QString& owner_name);
 	/**
 	 *  # В метод передается логин, пароль и имя пользователя
 	 *  # Метод добавляет данные пользователя в БД, соответсвенно, регистрируя его
@@ -93,11 +96,13 @@ public Q_SLOTS:
 	/**
 	 * # Experimental
 	 */
-	void exchangeRates();
+    void exchangeRatesRequest();
 
 	void getExchangeRates();
 
-	QStringList exchangeRatesToQML(QJsonDocument exchange_rates);
+    void exchangeRates(QJsonDocument rates_doc);
+
+    QStringList exchangeRatesForBank();
 
 signals:
 	void test();
@@ -112,6 +117,7 @@ private:
 	User client;
 	QSqlDatabase database;
 	QNetworkReply* reply_exchange_rates;
+    QStringList exchange_rates;
 };
 
 #endif	// CONTROLLER_H
