@@ -20,10 +20,11 @@ Window {
         id: error
     }
 
-    function set_error(text_, window = "") {
+    function set_error(text_, window = "", error_ = true) {
         error.text__ = text_
         error.visible = true
         error.next_window = window
+        error.error_information = error_
     }
 
     ///////////////////////////////////////////////////////
@@ -139,7 +140,7 @@ Window {
             activeFocusOnTab: true
             font.family: "Helvetica"
             font.pointSize: 16
-            inputMask: "9999[  ]9999[  ]9999[  ]9999"
+            inputMask: "9999[ ]9999[ ]9999[ ]9999"
             onFocusChanged: {
                 if (activeFocus) {
                     cursorPosition = 0
