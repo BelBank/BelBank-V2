@@ -11,7 +11,7 @@ Card::Card(const QString& card_number, const QString& owner_name, bool is_gold, 
 	this->is_gold = is_gold;
     this->payment_system = card_number[0] == '4' ? 4 : 5;
 	this->valid_thru = QDate(QDate::fromString(valid_thru, "MM/yy"));
-	this->balance = 1234.0;	 // maybe random?
+    this->balance = QRandomGenerator::global()->bounded(0, 150);	// maybe random?
 }
 
 Card::Card(const QString& card_number,

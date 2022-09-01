@@ -94,12 +94,20 @@ bool Controller::prepareQML() {
     return true;
 }
 
-bool Controller::makeCard(const QString& card_number, bool is_gold, const QString& valid) {
+bool Controller::makeCard(const QString& card_number, const QString& valid) {
 	QString valid_copy = valid;
-	if (QDate(QDate::fromString("01/" + valid_copy.insert(3, "20"), "dd/MM/yyyy")) < QDate::currentDate()) {
+    valid_copy = "01/" + valid_copy.insert(3, "20");
+    qDebug() << "Valid thru " << valid_copy;
+    if (QDate(QDate::fromString(valid_copy, "dd/MM/yyyy")) < QDate::currentDate()) {
 		qDebug() << "Card is not valid";
 		return false;
 	}
+    bool is_gold;
+    if (card_number[5] == '1') {
+        is_gold = true;
+    } else {
+        is_gold = false;
+    }
 	Card new_card(card_number, client.getName(), is_gold, valid);
 	if (!addNewCard(new_card)) {
 		return false;
@@ -139,6 +147,18 @@ bool Controller::makeNewCard(bool is_gold, short payment_system) {
 
 bool Controller::addNewCard(Card new_card) {
 	QSqlQuery add_card_query(database);
+    QSqlQuery find_duplicates_query(database);
+    find_duplicates_query.prepare("SELECT number FROM card WHERE number = :number");
+    find_duplicates_query.bindValue(0, new_card.getNumber());
+    if (!find_duplicates_query.exec()) {
+        qDebug() << "Query for adding new card failed! Error: " << find_duplicates_query.lastError().text();
+        return false;
+    }
+    if (find_duplicates_query.next()) {
+        qDebug() << "This card is already exist for other user";
+        return false;
+    }
+
 	add_card_query.prepare(
 			"INSERT INTO card (number, is_gold, valid, balance) "
 			"VALUES (:number, :is_gold, :valid, :balance)");
