@@ -103,10 +103,10 @@ Window {
             }
 
             Text {
-                text: "Ок"
+                text: "ОК"
                 font.family: "Helvetica"
                 color: "black"
-                font.pointSize: 14
+                font.pointSize: 13
                 anchors {
                     centerIn: parent
                 }

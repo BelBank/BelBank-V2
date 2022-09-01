@@ -341,16 +341,16 @@ Window {
             }
 
             MouseArea {
-
+                property bool false_: false
                 anchors.fill: parent
                 onClicked: {
                     if (name_input.text == "") {
                         set_error("Введите имя!")
-                    }else if (nickname_input.text == "") {
+                    } else if (nickname_input.text == "") {
                         set_error("Введите никнейм!")
-                    }else if (text_password.length < 8) {
+                    } else if (text_password.length < 8) {
                         set_error("Пароль обязан состоять из 8 и более символов!")
-                    }else if (text_password.text != text_repeat_password.text) {
+                    } else if (text_password.text != text_repeat_password.text) {
                         set_error("Пароли не совпадают!")
                     } else if (!Controller.registration(nickname_input.text,
                                                         text_password.text,
@@ -358,7 +358,7 @@ Window {
                         set_error("Ошибка регистрации!")
                     } else {
                         set_error("Пользователь успешно зарегистрирован!",
-                                  "auth")
+                                  "auth", false_)
                     }
                 }
 

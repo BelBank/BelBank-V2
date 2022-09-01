@@ -224,8 +224,7 @@ Window {
                 if (Controller.enterToBank(login_text.text, text0.text)) {
                     set_main_window()
                 } else {
-
-
+                        set_error("Проверьте правильность введённых данных!", "main")
                 }
             }
 
