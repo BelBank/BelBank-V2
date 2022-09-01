@@ -25,7 +25,6 @@ Window {
         error.visible = true
         error.next_window = window
         error.error_information = error_
-
     }
 
     ///////////////////////////////////////////////////////
@@ -554,29 +553,31 @@ Window {
         }
 
         MouseArea {
+            property bool false_: false
 
             anchors.fill: parent
             onClicked: {
-                if (!visa.visa_active && !mastercard.mastercard_active && !mir.mir_active) {
+                if (!visa.visa_active && !mastercard.mastercard_active
+                        && !mir.mir_active) {
                     // ошибка не выбрана платежная система
+                    set_error("Не выбрана платежная система!")
                 } else if (!silver_card.active && !gold_card.active) {
                     // ошибка не выбран tariff
+                    set_error("Не выбран тариф!")
                 } else {
                     var payment_system
                     if (visa.visa_active) {
                         payment_system = 4
                     } else if (mastercard.mastercard_active) {
-                            payment_system = 5
+                        payment_system = 5
                     } else {
                         payment_system = 3
                     }
                     var tariff = gold_card.active ? 1 : 2
                     if (Controller.makeNewCard(tariff, payment_system)) {
-                        set_main_window()
+                        set_error("Карта успешно создана!", "main", false_)
                     }
                 }
-
-
             }
 
             onPressed: {

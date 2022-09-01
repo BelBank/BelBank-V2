@@ -240,26 +240,32 @@ Window {
         }
 
         MouseArea {
+            property bool false_: false
 
             anchors.fill: parent
             onClicked: {
                 if (number.text[0] < '3' || number.text[0] > '5') {
                     // ошибка неправильный номер карты (платежная система)
+                    set_error("Неверный номер карты!")
                 }
-                if (number.text[1] !== '1' || number.text[1] !== '4' || number.text[1] !== '3') {
+                if (number.text[1] !== '1' || number.text[1] !== '4'
+                        || number.text[1] !== '3') {
                     // ошибка карта не нашего банка
+                    set_error("Данная карта не принадлежит нашему банку!")
                 }
                 if (number.text[5] !== '1' && number.text[5] !== '2') {
                     // ошибка хз, что хочешь пиши, но тут неправильно введен тариф
+                    set_error("Неверный номер карты!")
                 }
 
                 if (Controller.makeCard(number.text, validity.text)) {
                     console.info("Success adding card!")
-                    set_main_window()
+
+                    set_error("Карта успешно добавлена!", "main", false_)
                 } else {
                     // ошибка добавления
+                    set_error("Ошибка добавления!")
                 }
-
             }
 
             onPressed: {

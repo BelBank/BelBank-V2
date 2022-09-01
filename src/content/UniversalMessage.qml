@@ -51,9 +51,9 @@ Window {
                 top: logo_image.bottom
                 topMargin: 10
                 left: error_icon.right
-                leftMargin: 15
+                leftMargin: 5
                 right: message_window_rect.right
-                rightMargin: 30
+                rightMargin: 25
             }
             color: "#d5e2ff"
 
@@ -78,7 +78,7 @@ Window {
                 top: logo_image.bottom
                 topMargin: 5
                 left: message_window_rect.left
-                leftMargin: 30
+                leftMargin: 25
             }
             Image {
                 anchors {
@@ -99,7 +99,7 @@ Window {
             anchors {
                 bottom: message_window_rect.bottom
                 horizontalCenter: message_window_rect.horizontalCenter
-                bottomMargin: message_window_rect.border.width + 3
+                bottomMargin: 15
             }
 
             Text {
