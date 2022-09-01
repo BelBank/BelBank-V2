@@ -129,7 +129,7 @@ Window {
 
         TextInput {
             id: number
-            maximumLength: 16
+            maximumLength: 19
             anchors {
                 centerIn: parent
                 left: parent.left
@@ -243,7 +243,23 @@ Window {
 
             anchors.fill: parent
             onClicked: {
-                set_main_window()
+                if (number.text[0] < '3' || number.text[0] > '5') {
+                    // ошибка неправильный номер карты (платежная система)
+                }
+                if (number.text[1] !== '1' || number.text[1] !== '4' || number.text[1] !== '3') {
+                    // ошибка карта не нашего банка
+                }
+                if (number.text[5] !== '1' && number.text[5] !== '2') {
+                    // ошибка хз, что хочешь пиши, но тут неправильно введен тариф
+                }
+
+                if (Controller.makeCard(number.text, validity.text)) {
+                    console.info("Success adding card!")
+                    set_main_window()
+                } else {
+                    // ошибка добавления
+                }
+
             }
 
             onPressed: {

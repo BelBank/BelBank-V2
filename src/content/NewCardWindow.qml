@@ -557,7 +557,26 @@ Window {
 
             anchors.fill: parent
             onClicked: {
-                set_main_window()
+                if (!visa.visa_active && !mastercard.mastercard_active && !mir.mir_active) {
+                    // ошибка не выбрана платежная система
+                } else if (!silver_card.active && !gold_card.active) {
+                    // ошибка не выбран tariff
+                } else {
+                    var payment_system
+                    if (visa.visa_active) {
+                        payment_system = 4
+                    } else if (mastercard.mastercard_active) {
+                            payment_system = 5
+                    } else {
+                        payment_system = 3
+                    }
+                    var tariff = gold_card.active ? 1 : 2
+                    if (Controller.makeNewCard(tariff, payment_system)) {
+                        set_main_window()
+                    }
+                }
+
+
             }
 
             onPressed: {
