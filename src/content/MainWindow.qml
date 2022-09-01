@@ -3,6 +3,10 @@ import QtQuick.Layouts 1.15
 import QtQuick.Controls 2.15
 import QtQuick.Window 2.12
 
+
+
+
+
 Window {
 
     id: mainwindow
@@ -20,6 +24,8 @@ Window {
         error.text__ = text_
         error.visible = true
     }
+    property alias cardlist: card_model
+    property alias cardview: lv
 
     Rectangle {
         id: header
@@ -234,6 +240,8 @@ Window {
                 snapMode: ListView.SnapOneItem
                 orientation: ListView.Horizontal
                 delegate: card_delegate
+
+
                 model: ListModel {
                     id: card_model
                     ListElement {
