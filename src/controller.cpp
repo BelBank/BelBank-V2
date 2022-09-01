@@ -83,7 +83,6 @@ QVariantList Controller::cardsToQML() {
         card_variant.push_back(card.getBalance());
         cards_to_qml.push_back(card_variant);
         number_of_cards++;
-        //        card.getNumber(), card.getHolderName(), card.getType(), card.getValid(), card.getBalance()
     }
     cards_to_qml.insert(0, number_of_cards);
     return cards_to_qml;

@@ -165,7 +165,7 @@ Window {
     Rectangle {
         id: card_validity
 
-        width:
+        width: 100
         height: 40
         radius: 8
         border.width: 3
