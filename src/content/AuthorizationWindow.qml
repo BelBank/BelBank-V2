@@ -16,9 +16,10 @@ Window {
         id: error
     }
 
-    function set_error(text_) {
+    function set_error(text_, window = "") {
         error.text__ = text_
         error.visible = true
+        error.next_window = window
     }
 
     ///////////////////////////////////////////////////////
@@ -53,6 +54,11 @@ Window {
             activeFocusOnTab: true
             font.family: "Helvetica"
             font.pointSize: 16
+            onFocusChanged: {
+                if (activeFocus) {
+                    cursorPosition = 0
+                }
+            }
         }
     }
 
@@ -97,9 +103,11 @@ Window {
         radius: 10
 
         TextInput {
+            property bool showText: false
+            property bool onFocus: false
 
             id: text0
-            maximumLength: 25
+            maximumLength: 16
             anchors {
                 top: password.top
                 left: password.left
@@ -113,9 +121,49 @@ Window {
             activeFocusOnTab: true
             font.family: "Helvetica"
             font.pointSize: 16
-            echoMode: TextInput.Password
-            //passwordCharacter: QString
-            passwordMaskDelay: 500
+            echoMode: showText ? TextField.Normal : TextField.Password
+            passwordMaskDelay: 100
+            onFocusChanged: {
+                if (activeFocus) {
+                    cursorPosition = 0
+                }
+            }
+        }
+
+        Rectangle {
+            width: parent.height
+            height: parent.height
+            anchors {
+                right: parent.right
+                top: parent.top
+                bottom: parent.bottom
+                margins: 4
+            }
+            radius: 4
+            color: text0.showText ? "#d5e2ff" : "transparent"
+            Image {
+                id: visible_password_icon
+                width: parent.height
+                height: parent.height
+                anchors {
+                    right: parent.right
+                    top: parent.top
+                    bottom: parent.bottom
+                    left: parent.left
+                }
+                source: "/images/password_visible.png"
+                MouseArea {
+                    anchors {
+                        fill: parent
+                    }
+                    onPressed: {
+                        text0.showText = true
+                    }
+                    onReleased: {
+                        text0.showText = false
+                    }
+                }
+            }
         }
     }
 
@@ -155,17 +203,17 @@ Window {
             topMargin: 15
         }
         color: "#6e91de"
-                radius: 8
-                border.width: 3
-                border.color: "#264892"
+        radius: 8
+        border.width: 3
+        border.color: "#264892"
 
         Text {
             anchors.centerIn: parent
             text: "Войти"
             font.family: "Helvetica"
-                        font.pointSize: 12
-                        font.bold: true
-                        color: "white"
+            font.pointSize: 12
+            font.bold: true
+            color: "white"
         }
 
         MouseArea {
@@ -180,12 +228,12 @@ Window {
             }
 
             onPressed: {
-                parent.color = "#7d3a9c"
+                parent.color = "#242f67"
                 parent.border.color = "dark gray"
             }
             onReleased: {
-                parent.color = "#d088f2"
-                parent.border.color = "#7d3a9c"
+                parent.color = "#6e91de"
+                parent.border.color = "#264892"
             }
         }
     }
@@ -201,17 +249,17 @@ Window {
             topMargin: 10
         }
         color: "#6e91de"
-                radius: 8
-                border.width: 3
-                border.color: "#264892"
+        radius: 8
+        border.width: 3
+        border.color: "#264892"
 
         Text {
             anchors.centerIn: parent
             text: "Зарегистрироваться"
             font.family: "Helvetica"
-                        font.pointSize: 12
-                        font.bold: true
-                        color: "white"
+            font.pointSize: 12
+            font.bold: true
+            color: "white"
         }
 
         MouseArea {
@@ -222,12 +270,12 @@ Window {
             }
 
             onPressed: {
-                parent.color = "#7d3a9c"
+                parent.color = "#242f67"
                 parent.border.color = "dark gray"
             }
             onReleased: {
-                parent.color = "#d088f2"
-                parent.border.color = "#7d3a9c"
+                parent.color = "#6e91de"
+                parent.border.color = "#264892"
             }
         }
     }

@@ -14,20 +14,19 @@ Window {
         Qt.WindowFullScreen
     }
 
-
-
     /////////////////////////////////////////////////////use function set_error("TEXT") to set an error
     UniversalMessage {
         visible: false
         id: error
     }
 
-    function set_error(text_) {
+    function set_error(text_, window = "") {
         error.text__ = text_
         error.visible = true
+        error.next_window = window
     }
-    ///////////////////////////////////////////////////////
 
+    ///////////////////////////////////////////////////////
     Rectangle {
         id: card_rectangle
         anchors.fill: parent
@@ -83,7 +82,7 @@ Window {
             }
             onReleased: {
                 parent.color = "#6e91de"
-                parent.border.color = "#7d3a9c"
+                parent.border.color = "#264892"
             }
         }
     }
@@ -565,7 +564,7 @@ Window {
             }
             onReleased: {
                 parent.color = "#6e91de"
-                parent.border.color = "#7d3a9c"
+                parent.border.color = "#264892"
             }
         }
     }

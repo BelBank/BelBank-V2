@@ -14,6 +14,8 @@ ApplicationWindow {
         source: "AuthorizationWindow.qml"
     }
 
+
+
     //    StackView {
     //        id: error_stack
     //        initialItem: universal_message_window
@@ -56,10 +58,6 @@ ApplicationWindow {
     //        SuccessfulPaymentMessage {}
     //    }
 
-    function set_text(text_) {
-        idiot.text__ = text_
-        idiot.visible = true
-    }
 
     function set_main_window() {
         loader.source = "MainWindow.qml"
@@ -67,6 +65,7 @@ ApplicationWindow {
 
     function set_authorization_window() {
         loader.source = "AuthorizationWindow.qml"
+
     }
 
     function set_registration_window() {

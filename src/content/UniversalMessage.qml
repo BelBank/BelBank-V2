@@ -8,6 +8,7 @@ Window {
     id: universalMessage_window
 
     property string text__: "error"
+    property string next_window: ""
     title: "Уведомление"
     visible: true
     width: 350
@@ -109,6 +110,17 @@ Window {
                 anchors.fill: ok_button
                 onClicked: {
                     universalMessage_window.close()
+                    if (next_window === "") {
+
+                    } else if (next_window === "auth") {
+                        set_authorization_window()
+                    } else if (next_window === "add_card") {
+                        set_add_card_window()
+                    } else if (next_window === "payment") {
+                        set_payment_window()
+                    } else if (next_window === "regiser") {
+                        set_registration_window()
+                    }
                 }
                 onPressed: {
                     ok_button.color = "#7d3a9c"

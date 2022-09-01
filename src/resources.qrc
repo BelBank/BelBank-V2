@@ -35,5 +35,6 @@
         <file>content/InsufficientFundsMessage.qml</file>
         <file>images/Logo.png</file>
         <file>content/AddCardWindow.qml</file>
+        <file>images/password_visible.png</file>
     </qresource>
 </RCC>

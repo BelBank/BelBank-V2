@@ -8,7 +8,6 @@ Window {
     width: 800
     height: 600
     visible: true
-    flags: Qt.CustomizeWindowHint
 
     /////////////////////////////////////////////////////use function set_error("TEXT") to set an error
     UniversalMessage {
@@ -16,12 +15,13 @@ Window {
         id: error
     }
 
-    function set_error(text_) {
+    function set_error(text_, window = "") {
         error.text__ = text_
         error.visible = true
+        error.next_window = window
     }
-    ///////////////////////////////////////////////////////
 
+    ///////////////////////////////////////////////////////
     Rectangle {
         id: rectangler
         anchors {
@@ -182,6 +182,11 @@ Window {
                 activeFocusOnTab: true
                 font.family: "Helvetica"
                 font.pointSize: 16
+                onFocusChanged: {
+                    if (activeFocus) {
+                        cursorPosition = 0
+                    }
+                }
             }
         }
 
@@ -215,6 +220,11 @@ Window {
                 activeFocusOnTab: true
                 font.family: "Helvetica"
                 font.pointSize: 16
+                onFocusChanged: {
+                    if (activeFocus) {
+                        cursorPosition = 0
+                    }
+                }
             }
         }
 
@@ -238,7 +248,7 @@ Window {
 
             TextInput {
                 id: text_password
-                maximumLength: 25
+                maximumLength: 16
                 anchors {
                     top: password.top
                     left: password.left
@@ -254,6 +264,11 @@ Window {
                 font.pointSize: 16
                 echoMode: TextInput.Password
                 passwordMaskDelay: 500
+                onFocusChanged: {
+                    if (activeFocus) {
+                        cursorPosition = 0
+                    }
+                }
             }
         }
 
@@ -275,7 +290,7 @@ Window {
 
             TextInput {
                 id: text_repeat_password
-                maximumLength: 25
+                maximumLength: 16
                 anchors {
                     top: repeat_password.top
                     left: repeat_password.left
@@ -291,6 +306,11 @@ Window {
                 font.pointSize: 16
                 echoMode: TextInput.Password
                 passwordMaskDelay: 500
+                onFocusChanged: {
+                    if (activeFocus) {
+                        cursorPosition = 0
+                    }
+                }
             }
         }
 
@@ -323,17 +343,21 @@ Window {
 
                 anchors.fill: parent
                 onClicked: {
-                    if (text_password.text != text_repeat_password.text) {
-
-                        // ошибка: пароли не совпадают
+                    if (name_input.text == "") {
+                        set_error("Введите имя!")
+                    }else if (nickname_input.text == "") {
+                        set_error("Введите никнейм!")
+                    }else if (text_password.length < 8) {
+                        set_error("Пароль обязан состоять из 8 и более символов!")
+                    }else if (text_password.text != text_repeat_password.text) {
+                        set_error("Пароли не совпадают!")
                     } else if (!Controller.registration(nickname_input.text,
                                                         text_password.text,
                                                         name_input.text)) {
-
-                        // ошибка регистрации
+                        set_error("Ошибка регистрации!")
                     } else {
-                        // успешная регистрация
-                        set_authorization_window()
+                        set_error("Пользователь успешно зарегистрирован!",
+                                  "auth")
                     }
                 }
 

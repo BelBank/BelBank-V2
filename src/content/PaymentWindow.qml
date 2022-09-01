@@ -16,9 +16,10 @@ Window {
         id: error
     }
 
-    function set_error(text_) {
+    function set_error(text_, window = "") {
         error.text__ = text_
         error.visible = true
+        error.next_window = window
     }
 
     ///////////////////////////////////////////////////////

@@ -20,9 +20,10 @@ Window {
         id: error
     }
 
-    function set_error(text_) {
+    function set_error(text_, window = "") {
         error.text__ = text_
         error.visible = true
+        error.next_window = window
     }
 
     ///////////////////////////////////////////////////////
@@ -34,10 +35,11 @@ Window {
     color: "white"
 
     Image {
+        height: new_card_window.height * 0.67
+        width: new_card_window.width * 0.9
         id: logo_on_background
         source: "/images/Logo.png"
-        width: new_card_window.width * 0.55
-        height: new_card_window.height * 0.39
+
         anchors {
             horizontalCenter: card_rectangle.horizontalCenter
             top: card_rectangle.top
@@ -81,7 +83,7 @@ Window {
             }
             onReleased: {
                 parent.color = "#6e91de"
-                parent.border.color = "#7d3a9c"
+                parent.border.color = "#264892"
             }
         }
     }
@@ -93,7 +95,8 @@ Window {
         anchors {
             top: logo_on_background.bottom
             topMargin: 15
-            left: silver_card.left
+            left: card_rectangle.left
+            leftMargin: 50
         }
         radius: 8
         border.width: 3
@@ -120,7 +123,6 @@ Window {
             left: enter_card_number_text.right
             top: enter_card_number_text.top
             bottom: enter_card_number_text.bottom
-            right: gold_card.right
             leftMargin: 30
         }
 
@@ -137,6 +139,12 @@ Window {
             activeFocusOnTab: true
             font.family: "Helvetica"
             font.pointSize: 16
+            inputMask: "9999[  ]9999[  ]9999[  ]9999"
+            onFocusChanged: {
+                if (activeFocus) {
+                    cursorPosition = 0
+                }
+            }
         }
     }
 
@@ -147,7 +155,8 @@ Window {
         anchors {
             top: card_number.bottom
             topMargin: 15
-            left: silver_card.left
+            leftMargin: 50
+            left: card_rectangle.left
         }
         radius: 8
         border.width: 3
@@ -165,7 +174,7 @@ Window {
     Rectangle {
         id: card_validity
 
-        width:
+        width: 100
         height: 40
         radius: 8
         border.width: 3
@@ -190,6 +199,12 @@ Window {
             activeFocusOnTab: true
             font.family: "Helvetica"
             font.pointSize: 16
+            inputMask: "99[ / ]99"
+            onFocusChanged: {
+                if (activeFocus) {
+                    cursorPosition = 0
+                }
+            }
         }
     }
 
@@ -236,7 +251,7 @@ Window {
             }
             onReleased: {
                 parent.color = "#6e91de"
-                parent.border.color = "#7d3a9c"
+                parent.border.color = "#264892"
             }
         }
     }
