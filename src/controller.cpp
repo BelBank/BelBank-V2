@@ -182,7 +182,7 @@ bool Controller::addNewCard(Card new_card) {
 	qDebug() << "Max id is " << add_card_query.value("max").toString();
 	cards_id.push_back(add_card_query.value("max").toInt());
 	add_card_query.prepare(
-			"UPDATE card_owner "
+            "UPDATE user_info "
 			"SET cards = :cards "
 			"WHERE owner_name = :owner_name");
 	QStringList cards_array;
@@ -205,7 +205,7 @@ bool Controller::addNewCard(Card new_card) {
 QVector<int> Controller::getCardsId(const QString& owner_name) {
 	QSqlQuery get_cards_id_query(database);
 	QVector<int> cards_id;
-	get_cards_id_query.prepare("SELECT cards FROM card_owner WHERE owner_name = :owner_name");
+    get_cards_id_query.prepare("SELECT cards FROM user_info WHERE owner_name = :owner_name");
 	get_cards_id_query.bindValue(0, owner_name);
 	if (!get_cards_id_query.exec()) {
 		qDebug() << "Query for getting cards array failed! Error: " << get_cards_id_query.lastError().text();
@@ -282,11 +282,11 @@ bool Controller::registration(const QString& login, const QString& password, con
 		return false;
 	}
 	registration_query.prepare(
-			"INSERT INTO card_owner (owner_name) "
+            "INSERT INTO user_info (owner_name) "
 			"VALUES (:owner_name)");
 	registration_query.bindValue(0, owner_name);
 	if (!registration_query.exec()) {
-		qDebug() << "Query for regustration in card_owner failed! Error: "
+        qDebug() << "Query for regustration in user_info failed! Error: "
 						 << registration_query.lastError().text();
 		return false;
 	}
@@ -304,7 +304,7 @@ bool Controller::makePayment(const QString& card_number, const QString& payment_
     balance_query.prepare("SELECT balance FROM card WHERE number = :number");
     balance_query.bindValue(0, card_number);
     if (!balance_query.exec()) {
-        qDebug() << "Query for regustration in card_owner failed! Error: " << balance_query.lastError().text();
+        qDebug() << "Query for regustration in user_info failed! Error: " << balance_query.lastError().text();
         // emit somethingWrong()
         return false;
     }
@@ -327,7 +327,7 @@ bool Controller::makePayment(const QString& card_number, const QString& payment_
     balance_query.bindValue(0, balance);
     balance_query.bindValue(1, card_number);
     if (!balance_query.exec()) {
-        qDebug() << "Query for regustration in card_owner failed! Error: " << balance_query.lastError().text();
+        qDebug() << "Query for regustration in user_info failed! Error: " << balance_query.lastError().text();
         // emit somethingWrong()
         return false;
     }
