@@ -56,6 +56,7 @@ bool Controller::testConnection() {
 
 bool Controller::enterToBank(const QString& login, const QString& password) {
     qDebug() << "Entering...";
+    emit Controller::setError("Hello World!");
     if (!this->testConnection()) {
         return false;
     }

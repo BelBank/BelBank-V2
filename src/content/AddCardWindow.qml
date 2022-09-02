@@ -227,10 +227,10 @@ Window {
 
             anchors.fill: parent
             onClicked: {
-                if (number.text[0] < '3' || number.text[0] > '5') {
+                if (number.text[0] !== '2' && number.text[0] !== '4' && number.text[0] !== '5') {
                     // ошибка неправильный номер карты (платежная система)
                 }
-                if (number.text[1] !== '1' || number.text[1] !== '4' || number.text[1] !== '3') {
+                if (number.text[1] !== '1' || number.text[2] !== '4' || number.text[3] !== '3') {
                     // ошибка карта не нашего банка
                 }
                 if (number.text[5] !== '1' && number.text[5] !== '2') {

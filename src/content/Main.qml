@@ -7,20 +7,11 @@ ApplicationWindow {
     id: main_stack_window
     width: 1920
     height: 1080
+
     Connections {
         target: Controller
-        function onTest() {
-            console.log("Test is working")
-        }
-        function onCardToQML(number, owner_name, is_gold, valid, balance) {
-//                    onCardToQML: {
-            console.log(mainwindow.cardlist.rowCount())
-//         mainwindow.cardview.model = mainwindow.cardlist.append({name : "admin", number : "5143 5478 6589 5412", valid : "24/07",
-//                                  type : "gold", system : "visa"})
-//            mainwindow.lv
-        }
         function onSetError(error) {
-            console.log("Error!")
+            console.warn("Error!")
             mainwindow.set_error(error)
         }
     }

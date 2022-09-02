@@ -567,7 +567,7 @@ Window {
                     } else if (mastercard.mastercard_active) {
                             payment_system = 5
                     } else {
-                        payment_system = 3
+                        payment_system = 2
                     }
                     var tariff = gold_card.active ? 1 : 2
                     if (Controller.makeNewCard(tariff, payment_system)) {

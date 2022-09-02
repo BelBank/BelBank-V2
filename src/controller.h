@@ -60,7 +60,7 @@ public Q_SLOTS:
      *
      *  QString card_number = list_cards[1][0];
      *  QString holder_name = list_cards[1][1];
-     *  int payment_system = list_cards[1][2]; // 3 - MIR, 4 - VISA, 5 - MASTERCARD
+     *  int payment_system = list_cards[1][2]; // 2 - MIR, 4 - VISA, 5 - MASTERCARD
      *  bool card_type = list_cards[1][3]; // true - gold, false - silver
      *  QString valid_thru = list_cards[1][4]; // format: MM/yy
      *  double card_balance = list_cards[1][5];
