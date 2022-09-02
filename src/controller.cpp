@@ -11,14 +11,15 @@ Controller::Controller(QObject* parent) : QObject{parent} {
 	//    database.setUserName("root");
 	//    database.setPassword("root");
 
-	//    Connect to PostgreSQL host
-	database.setHostName("163.123.183.87");
+    //    Connect to PostgreSQL host
+
+    database.setHostName("163.123.183.87");
 	database.setPort(11967);
 	database.setDatabaseName("bank");
 	database.setUserName("root");
 	database.setPassword("drakonkapusta");
 
-	if (database.open()) {
+    if (is_connected and database.open()) {
 		qDebug() << "Database success connection!";
 	} else {
 		qDebug() << "Database connetion failed.";
@@ -39,9 +40,26 @@ QString Controller::getUserName() const {
 	return client.getName();
 }
 
+bool Controller::testConnection() {
+    QTcpSocket* test_connection = new QTcpSocket();
+    test_connection->connectToHost("www.google.com", 80);
+    bool is_connected = test_connection->waitForConnected();
+    if (!is_connected) {
+        qDebug() << "No network connection";
+        emit Controller::setError("Ошибка подключения к Интернету!");
+        return false;
+    } else {
+        qDebug() << "Computer is connected to Internet";
+        return true;
+    }
+}
+
 bool Controller::enterToBank(const QString& login, const QString& password) {
-	qDebug() << "Entering...";
-	if (login == "" or password == "") {
+    qDebug() << "Entering...";
+    if (!this->testConnection()) {
+        return false;
+    }
+    if (login == "" or password == "") {
 		qDebug() << "No data in field";
 		return false;
 	}

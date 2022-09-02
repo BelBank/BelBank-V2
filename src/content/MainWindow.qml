@@ -5,8 +5,6 @@ import QtQuick.Window 2.12
 
 
 
-
-
 Window {
 
     id: mainwindow

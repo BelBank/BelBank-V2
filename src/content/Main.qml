@@ -15,12 +15,13 @@ ApplicationWindow {
         function onCardToQML(number, owner_name, is_gold, valid, balance) {
 //                    onCardToQML: {
             console.log(mainwindow.cardlist.rowCount())
-//            mainwindow.cardlist.append({"name" : owner_name, "number" : number, "valid" : valid,
-//                                  "type" : is_gold ? "gold" : "silver", "system" : "visa"})
-
-         mainwindow.cardview.model = mainwindow.cardlist.append({name : "admin", number : "5143 5478 6589 5412", valid : "24/07",
-                                  type : "gold", system : "visa"})
+//         mainwindow.cardview.model = mainwindow.cardlist.append({name : "admin", number : "5143 5478 6589 5412", valid : "24/07",
+//                                  type : "gold", system : "visa"})
 //            mainwindow.lv
+        }
+        function onSetError(error) {
+            console.log("Error!")
+            mainwindow.set_error(error)
         }
     }
 
