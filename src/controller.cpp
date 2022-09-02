@@ -19,7 +19,7 @@ Controller::Controller(QObject* parent) : QObject{parent} {
 	database.setUserName("root");
 	database.setPassword("drakonkapusta");
 
-    if (is_connected and database.open()) {
+    if (database.open()) {
 		qDebug() << "Database success connection!";
 	} else {
 		qDebug() << "Database connetion failed.";
@@ -91,11 +91,10 @@ QVariantList Controller::cardsToQML() {
     QVariantList cards_to_qml;
     int number_of_cards = 0;
     foreach (Card card, cards) {
-        //        emit Controller::cardToQML(
-        //            card.getNumber(), card.getHolderName(), card.getType(), card.getValid(), card.getBalance());
         QVariantList card_variant;
         card_variant.push_back(card.getNumber());
         card_variant.push_back(card.getHolderName());
+        card_variant.push_back((int)(card.getNumber()[0].toLatin1() - '0'));
         card_variant.push_back(card.getType());
         card_variant.push_back(card.getValid());
         card_variant.push_back(card.getBalance());
