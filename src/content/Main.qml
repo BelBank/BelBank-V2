@@ -27,6 +27,10 @@ ApplicationWindow {
                                                                    })
             //            mainwindow.lv
         }
+        function onSetError(error) {
+            console.log("Error!")
+            mainwindow.set_error(error)
+        }
     }
 
     MainWindow {

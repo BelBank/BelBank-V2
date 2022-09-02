@@ -5,8 +5,6 @@ import QtQuick.Window 2.12
 
 
 
-
-
 Window {
 
     id: mainwindow
@@ -586,12 +584,13 @@ Window {
                         }
                     }
 
+
                     Text {
                         Layout.row: 2
                         Layout.columnSpan: 1
                         Layout.column: 2
                         font.pixelSize: rub.font.pixelSize
-                        //                        text: Controller.exchangeRatesToQML()[0];
+                        text: Controller.exchangeRatesForBank()[0]
                         anchors {
                             horizontalCenter: sell.horizontalCenter
                         }
@@ -601,7 +600,7 @@ Window {
                         Layout.columnSpan: 1
                         Layout.column: 3
                         font.pixelSize: rub.font.pixelSize
-                        //                        text: Controller.exchangeRatesToQML()[1];
+                        text: Controller.exchangeRatesForBank()[1]
                         anchors {
                             horizontalCenter: buy.horizontalCenter
                         }
@@ -628,7 +627,7 @@ Window {
                         Layout.columnSpan: 1
                         Layout.column: 2
                         font.pixelSize: rub.font.pixelSize
-                        text: "2.63"
+                        text: Controller.exchangeRatesForBank()[2]
                         anchors {
                             horizontalCenter: sell.horizontalCenter
                         }
@@ -638,7 +637,7 @@ Window {
                         Layout.columnSpan: 1
                         Layout.column: 3
                         font.pixelSize: rub.font.pixelSize
-                        text: "2.59"
+                        text: Controller.exchangeRatesForBank()[3]
                         anchors {
                             horizontalCenter: buy.horizontalCenter
                         }
@@ -665,7 +664,7 @@ Window {
                         Layout.columnSpan: 1
                         Layout.column: 2
                         font.pixelSize: rub.font.pixelSize
-                        text: "3.2"
+                        text: Controller.exchangeRatesForBank()[4]
                         anchors {
                             horizontalCenter: sell.horizontalCenter
                         }
@@ -675,7 +674,7 @@ Window {
                         Layout.columnSpan: 1
                         Layout.column: 3
                         font.pixelSize: rub.font.pixelSize
-                        text: "3.15"
+                        text: Controller.exchangeRatesForBank()[5]
                         anchors {
                             horizontalCenter: buy.horizontalCenter
                         }
@@ -703,7 +702,7 @@ Window {
                         Layout.columnSpan: 1
                         Layout.column: 2
                         font.pixelSize: rub.font.pixelSize
-                        text: "4"
+                        text: Controller.exchangeRatesForBank()[6]
                         anchors {
                             horizontalCenter: sell.horizontalCenter
                         }
@@ -713,7 +712,7 @@ Window {
                         Layout.columnSpan: 1
                         Layout.column: 3
                         font.pixelSize: rub.font.pixelSize
-                        text: "3.679"
+                        text: Controller.exchangeRatesForBank()[7]
                         anchors {
                             horizontalCenter: buy.horizontalCenter
                         }
@@ -741,7 +740,7 @@ Window {
                         Layout.columnSpan: 1
                         Layout.column: 2
                         font.pixelSize: rub.font.pixelSize
-                        text: "5.64"
+                        text: Controller.exchangeRatesForBank()[8]
                         anchors {
                             horizontalCenter: sell.horizontalCenter
                         }
@@ -751,7 +750,7 @@ Window {
                         Layout.columnSpan: 1
                         Layout.column: 3
                         font.pixelSize: rub.font.pixelSize
-                        text: "5.14"
+                        text: Controller.exchangeRatesForBank()[9]
                         anchors {
                             horizontalCenter: buy.horizontalCenter
                         }
