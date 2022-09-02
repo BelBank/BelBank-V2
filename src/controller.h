@@ -39,6 +39,8 @@ public Q_SLOTS:
 	 *  # В основном нужен для получения имени пользователя в QML интерфейсе
 	 */
 	QString getUserName() const;
+
+    bool testConnection();
 	/**
 	 *  # В метод передается логин и пароль, метод делает выборку из БД
 	 *  # Возвращает true, если профиль был найден
@@ -46,6 +48,22 @@ public Q_SLOTS:
 	 */
 	bool enterToBank(const QString& login, const QString& password);
 
+    /**
+     * # Метод считывает данные карт пользователя и возвращает их как QVariantList в QVariantList
+     * # А первый элемент возвращаемого листа - количество карт
+     *
+     * # Example
+     *
+     *  QVaritantList list_cards = cardsToQML();
+     *
+     *  list_cards[0] - количество карт в листе
+     *
+     *  QString card_number = list_cards[1][0];
+     *  QString holder_name = list_cards[1][1];
+     *  bool card_type = list_cards[1][2]; // true - gold, false - silver
+     *  QString valid_thru = list_cards[1][3]; // format: MM/yy
+     *  double card_balance = list_cards[1][4];
+     */
     Q_INVOKABLE QVariantList cardsToQML();
 
     bool prepareQML();
@@ -72,6 +90,8 @@ public Q_SLOTS:
 
 	QVector<int> getCardsId(const QString& owner_name);
 
+    QVector<int> getFavPaymentsId(const QString& owner_name);
+
 	/**
 	 *  # В метод передается только имя владельца карты
 	 *  # Метод выбирает из БД данные по картам пользователя
@@ -81,6 +101,7 @@ public Q_SLOTS:
 
 	bool getCardsFromDB(const QString& owner_name);
 
+    bool getFavPaymentsFromDB(const QString& owner_name);
 	/**
 	 *  # В метод передается логин, пароль и имя пользователя
 	 *  # Метод добавляет данные пользователя в БД, соответсвенно, регистрируя его
@@ -93,11 +114,13 @@ public Q_SLOTS:
 	/**
 	 * # Experimental
 	 */
-	void exchangeRates();
+    void exchangeRatesRequest();
 
 	void getExchangeRates();
 
-	QStringList exchangeRatesToQML(QJsonDocument exchange_rates);
+    void exchangeRates(QJsonDocument rates_doc);
+
+    QStringList exchangeRatesForBank();
 
 signals:
 	void test();
@@ -108,10 +131,13 @@ signals:
 	void cardToQML(
 			const QString& number, const QString& owner_name, bool is_gold, const QString& valid, double balance);
 
+    void setError(const QString& error);
+
 private:
-	User client;
+    User client;
 	QSqlDatabase database;
 	QNetworkReply* reply_exchange_rates;
+    QStringList exchange_rates;
 };
 
 #endif	// CONTROLLER_H

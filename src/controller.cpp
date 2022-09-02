@@ -11,20 +11,21 @@ Controller::Controller(QObject* parent) : QObject{parent} {
 	//    database.setUserName("root");
 	//    database.setPassword("root");
 
-	//    Connect to PostgreSQL host
-	database.setHostName("163.123.183.87");
+    //    Connect to PostgreSQL host
+
+    database.setHostName("163.123.183.87");
 	database.setPort(11967);
 	database.setDatabaseName("bank");
 	database.setUserName("root");
 	database.setPassword("drakonkapusta");
 
-	if (database.open()) {
+    if (is_connected and database.open()) {
 		qDebug() << "Database success connection!";
 	} else {
 		qDebug() << "Database connetion failed.";
 	}
 
-	//    exchangeRates();
+    this->exchangeRatesRequest();
 }
 
 QByteArray Controller::hashPassword(const QString& password) {
@@ -39,9 +40,26 @@ QString Controller::getUserName() const {
 	return client.getName();
 }
 
+bool Controller::testConnection() {
+    QTcpSocket* test_connection = new QTcpSocket();
+    test_connection->connectToHost("www.google.com", 80);
+    bool is_connected = test_connection->waitForConnected();
+    if (!is_connected) {
+        qDebug() << "No network connection";
+        emit Controller::setError("Ошибка подключения к Интернету!");
+        return false;
+    } else {
+        qDebug() << "Computer is connected to Internet";
+        return true;
+    }
+}
+
 bool Controller::enterToBank(const QString& login, const QString& password) {
-	qDebug() << "Entering...";
-	if (login == "" or password == "") {
+    qDebug() << "Entering...";
+    if (!this->testConnection()) {
+        return false;
+    }
+    if (login == "" or password == "") {
 		qDebug() << "No data in field";
 		return false;
 	}
@@ -230,6 +248,34 @@ QVector<int> Controller::getCardsId(const QString& owner_name) {
 	return cards_id;
 }
 
+QVector<int> Controller::getFavPaymentsId(const QString& owner_name) {
+    QSqlQuery get_payments_id_query(database);
+    QVector<int> payments_id;
+    get_payments_id_query.prepare("SELECT favorite_payments FROM user_info WHERE owner_name = :owner_name");
+    get_payments_id_query.bindValue(0, owner_name);
+    if (!get_payments_id_query.exec()) {
+        qDebug() << "Query for getting cards array failed! Error: " << get_payments_id_query.lastError().text();
+        payments_id.push_back(-1);
+        return payments_id;
+    }
+    get_payments_id_query.next();
+    QStringList cards_list = get_payments_id_query.value("favorite_payments").toString().split(",");
+    foreach (QString val, cards_list) {
+        if (val.contains('{')) {
+            val.remove('{');
+        }
+        if (val.contains('}')) {
+            val.remove('}');
+        }
+        if (val == "0") {
+            continue;
+        }
+        payments_id.push_back(val.toInt());
+    }
+    qDebug() << "Favorite payments id's " << payments_id;
+    return payments_id;
+}
+
 bool Controller::getCardsFromDB(const QString& owner_name) {
 	QSqlQuery get_cards_query(database);
 	QVector<int> cards_id = getCardsId(owner_name);
@@ -240,7 +286,6 @@ bool Controller::getCardsFromDB(const QString& owner_name) {
 	std::vector<Card> cards;
 	get_cards_query.prepare("SELECT * FROM card WHERE id = :id");
 	foreach (const int& id, cards_id) {
-		qDebug() << "id is " << id;
 		get_cards_query.bindValue(0, id);
 		if (!get_cards_query.exec()) {
 			qDebug() << "Query for getting cards array failed! Error: " << get_cards_query.lastError().text();
@@ -260,6 +305,31 @@ bool Controller::getCardsFromDB(const QString& owner_name) {
 	}
 	client.setCards(cards);
 	return true;
+}
+
+bool Controller::getFavPaymentsFromDB(const QString& owner_name) {
+    QSqlQuery get_payments_query(database);
+    QVector<int> payments_id = getFavPaymentsId(owner_name);
+    if (payments_id.contains(-1)) {
+        qDebug() << "Error!";
+        return false;
+    }
+    std::vector<QString> payments;
+    get_payments_query.prepare("SELECT * FROM payment WHERE id = :id");
+    foreach (const int& id, payments_id) {
+        get_payments_query.bindValue(0, id);
+        if (!get_payments_query.exec()) {
+            qDebug() << "Query for getting cards array failed! Error: " << get_payments_query.lastError().text();
+            return false;
+        }
+        if (!get_payments_query.next()) {
+            qDebug() << "No reply from cards";
+            return false;
+        }
+        payments.push_back(get_payments_query.value("name").toString());
+    }
+    client.setFavPayments(payments);
+    return true;
 }
 
 bool Controller::registration(const QString& login, const QString& password, const QString& owner_name) {
@@ -337,7 +407,7 @@ bool Controller::makePayment(const QString& card_number, const QString& payment_
     return true;
 }
 
-void Controller::exchangeRates() {
+void Controller::exchangeRatesRequest() {
 	QNetworkAccessManager* manager = new QNetworkAccessManager;
 	QNetworkRequest request;
 	request.setUrl(
@@ -349,13 +419,24 @@ void Controller::exchangeRates() {
 void Controller::getExchangeRates() {
 	QByteArray result = reply_exchange_rates->readAll();
 	QJsonDocument exchange_rates = QJsonDocument::fromJson(result);
-	exchangeRatesToQML(exchange_rates);
+    exchangeRates(exchange_rates);
 }
 
-QStringList Controller::exchangeRatesToQML(QJsonDocument exchange_rates) {
-	QStringList rates_list;
-	QJsonValue rates = exchange_rates.object().value("rates");
-	rates_list.push_back(rates["RUS"].toString());
-	//    rates_list.push
-	return rates_list;
+void Controller::exchangeRates(QJsonDocument rates_doc) {
+    QJsonObject rates = rates_doc["rates"].toObject();
+    exchange_rates.push_back(QString::number(rates["BYN"].toDouble() / rates["RUB"].toDouble() * 100));
+    exchange_rates.push_back(QString::number(rates["BYN"].toDouble()));
+    exchange_rates.push_back(QString::number(rates["BYN"].toDouble() / rates["EUR"].toDouble()));
+    exchange_rates.push_back(QString::number(rates["BYN"].toDouble() / rates["CNY"].toDouble() * 10));
+    exchange_rates.push_back(QString::number(rates["BYN"].toDouble() / rates["PLN"].toDouble() * 10));
+}
+
+QStringList Controller::exchangeRatesForBank() {
+    QStringList rates_to_qml;
+    foreach (QString rate, exchange_rates) {
+        qDebug() << "Rate " << rate;
+        rates_to_qml.push_back(QString::number(round(rate.toDouble() * 1.02 * 100) / 100));
+        rates_to_qml.push_back(QString::number(round(rate.toDouble() * 0.98 * 100) / 100));
+    }
+    return rates_to_qml;
 }
