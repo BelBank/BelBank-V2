@@ -20,9 +20,11 @@ Window {
         id: error
     }
 
-    function set_error(text_) {
+    function set_error(text_, window = "", error_ = true) {
         error.text__ = text_
         error.visible = true
+        error.next_window = window
+        error.error_information = error_
     }
 
     ///////////////////////////////////////////////////////
@@ -34,10 +36,11 @@ Window {
     color: "white"
 
     Image {
+        height: new_card_window.height * 0.67
+        width: new_card_window.width * 0.9
         id: logo_on_background
         source: "/images/Logo.png"
-        width: new_card_window.width * 0.55
-        height: new_card_window.height * 0.39
+
         anchors {
             horizontalCenter: card_rectangle.horizontalCenter
             top: card_rectangle.top
@@ -81,7 +84,7 @@ Window {
             }
             onReleased: {
                 parent.color = "#6e91de"
-                parent.border.color = "#7d3a9c"
+                parent.border.color = "#264892"
             }
         }
     }
@@ -93,7 +96,8 @@ Window {
         anchors {
             top: logo_on_background.bottom
             topMargin: 15
-            left: silver_card.left
+            left: card_rectangle.left
+            leftMargin: 50
         }
         radius: 8
         border.width: 3
@@ -120,7 +124,6 @@ Window {
             left: enter_card_number_text.right
             top: enter_card_number_text.top
             bottom: enter_card_number_text.bottom
-            right: gold_card.right
             leftMargin: 30
         }
 
@@ -137,6 +140,12 @@ Window {
             activeFocusOnTab: true
             font.family: "Helvetica"
             font.pointSize: 16
+            inputMask: "9999[ ]9999[ ]9999[ ]9999"
+            onFocusChanged: {
+                if (activeFocus) {
+                    cursorPosition = 0
+                }
+            }
         }
     }
 
@@ -147,7 +156,8 @@ Window {
         anchors {
             top: card_number.bottom
             topMargin: 15
-            left: silver_card.left
+            leftMargin: 50
+            left: card_rectangle.left
         }
         radius: 8
         border.width: 3
@@ -190,6 +200,12 @@ Window {
             activeFocusOnTab: true
             font.family: "Helvetica"
             font.pointSize: 16
+            inputMask: "99[ / ]99"
+            onFocusChanged: {
+                if (activeFocus) {
+                    cursorPosition = 0
+                }
+            }
         }
     }
 
@@ -224,26 +240,31 @@ Window {
         }
 
         MouseArea {
+            property bool false_: false
 
             anchors.fill: parent
             onClicked: {
                 if (number.text[0] !== '2' && number.text[0] !== '4' && number.text[0] !== '5') {
                     // ошибка неправильный номер карты (платежная система)
+                    set_error("Неверный номер карты!")
                 }
                 if (number.text[1] !== '1' || number.text[2] !== '4' || number.text[3] !== '3') {
                     // ошибка карта не нашего банка
+                    set_error("Данная карта не принадлежит нашему банку!")
                 }
                 if (number.text[5] !== '1' && number.text[5] !== '2') {
                     // ошибка хз, что хочешь пиши, но тут неправильно введен тариф
+                    set_error("Неверный номер карты!")
                 }
 
                 if (Controller.makeCard(number.text, validity.text)) {
                     console.info("Success adding card!")
-                    set_main_window()
+
+                    set_error("Карта успешно добавлена!", "main", false_)
                 } else {
                     // ошибка добавления
+                    set_error("Ошибка добавления!")
                 }
-
             }
 
             onPressed: {
@@ -252,7 +273,7 @@ Window {
             }
             onReleased: {
                 parent.color = "#6e91de"
-                parent.border.color = "#7d3a9c"
+                parent.border.color = "#264892"
             }
         }
     }
