@@ -13,14 +13,19 @@ ApplicationWindow {
             console.log("Test is working")
         }
         function onCardToQML(number, owner_name, is_gold, valid, balance) {
-//                    onCardToQML: {
+            //                    onCardToQML: {
             console.log(mainwindow.cardlist.rowCount())
-//            mainwindow.cardlist.append({"name" : owner_name, "number" : number, "valid" : valid,
-//                                  "type" : is_gold ? "gold" : "silver", "system" : "visa"})
 
-         mainwindow.cardview.model = mainwindow.cardlist.append({name : "admin", number : "5143 5478 6589 5412", valid : "24/07",
-                                  type : "gold", system : "visa"})
-//            mainwindow.lv
+            //            mainwindow.cardlist.append({"name" : owner_name, "number" : number, "valid" : valid,
+            //                                  "type" : is_gold ? "gold" : "silver", "system" : "visa"})
+            mainwindow.cardview.model = mainwindow.cardlist.append({
+                                                                       "name": "admin",
+                                                                       "number": "5143 5478 6589 5412",
+                                                                       "valid": "24/07",
+                                                                       "type": "gold",
+                                                                       "system": "visa"
+                                                                   })
+            //            mainwindow.lv
         }
     }
 
@@ -28,7 +33,11 @@ ApplicationWindow {
         id: mainwindow
     }
 
+
     Loader {
+
+        asynchronous: true
+        visible: true
         id: loader
         anchors.fill: parent
         source: "AuthorizationWindow.qml"
@@ -36,56 +45,13 @@ ApplicationWindow {
 
 
 
-    //    StackView {
-    //        id: error_stack
-    //        initialItem: universal_message_window
-    //        visible: false
-    //    }
-    //    Component {
-    //        id: auth_window
-    //        AuthorizationWindow {}
-    //    }
-    //    Component {
-    //        id: main_window
-    //        MainWindow {}
-    //    }
-
-    //    Component {
-    //        id: reg_window
-    //        RegistrationWindow {}
-    //    }
-    //    Component {
-    //        id: card_window
-    //        NewCardWindow {}
-    //    }
-    //    Component {
-    //        id: payment_window
-    //        PaymentWindow {}
-    //    }
-    //    Component {
-    //        id: universal_message_window
-    //        UniversalMessage {
-
-    //        }
-    //    }
-
-    //    Component {
-    //        id: insufficient_funds_error_window
-    //        InsufficientFundsMessage {}
-    //    }
-    //    Component {
-    //        id: successful_payment_message_window
-    //        SuccessfulPaymentMessage {}
-    //    }
-
-
     function set_main_window() {
+
         loader.source = "MainWindow.qml"
     }
 
     function set_authorization_window() {
         loader.source = "AuthorizationWindow.qml"
-
     }
 
     function set_registration_window() {

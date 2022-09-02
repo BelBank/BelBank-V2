@@ -264,7 +264,6 @@ Window {
         }
 
         MouseArea {
-
             anchors.fill: parent
             onClicked: {
                 set_registration_window()
