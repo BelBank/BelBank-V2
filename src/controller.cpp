@@ -44,17 +44,6 @@ QVariant Controller::getCardsCount() const {
     return QVariant(client.getCards().size());
 }
 
-QStringList Controller::test() {
-    QStringList a;
-    a << "5143 1364 3648 3746";
-    a << "admin";
-    a << "01/27";
-    a << "gold";
-    a << "visa";
-    a << "234.87";
-    return a;
-}
-
 bool Controller::testConnection() {
     QTcpSocket* test_connection = new QTcpSocket();
     test_connection->connectToHost("www.google.com", 80);
@@ -94,16 +83,11 @@ bool Controller::enterToBank(const QString& login, const QString& password) {
 	qDebug() << "Success login";
 	this->client.setName(login_query.value(3).toString());
 	this->getCardsFromDB(login_query.value(1).toString());
-    //    if (!prepareQML()) {
-    //        qDebug() << "Preparing QML failed";
-    //        return false;
-    //    }
 	return true;
 }
 
 QVariantList Controller::cardsToQML() {
     std::vector<Card> cards = client.getCards();
-    emit Controller::test();
     QVariantList cards_to_qml;
     int number_of_cards = 0;
     foreach (Card card, cards) {
