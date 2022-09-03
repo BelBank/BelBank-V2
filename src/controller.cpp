@@ -12,7 +12,6 @@ Controller::Controller(QObject* parent) : QObject{parent} {
 	//    database.setPassword("root");
 
     //    Connect to PostgreSQL host
-
     database.setHostName("163.123.183.87");
 	database.setPort(11967);
 	database.setDatabaseName("bank");
@@ -46,7 +45,7 @@ bool Controller::testConnection() {
     bool is_connected = test_connection->waitForConnected();
     if (!is_connected) {
         qDebug() << "No network connection";
-        emit Controller::setError("Ошибка подключения к Интернету!");
+        //        emit Controller::setError("Ошибка подключения к Интернету!");
         return false;
     } else {
         qDebug() << "Computer is connected to Internet";
@@ -56,7 +55,7 @@ bool Controller::testConnection() {
 
 bool Controller::enterToBank(const QString& login, const QString& password) {
     qDebug() << "Entering...";
-    emit Controller::setError("Hello World!");
+    //    emit Controller::setError("Hello World!");
     if (!this->testConnection()) {
         return false;
     }
@@ -138,7 +137,6 @@ bool Controller::makeNewCard(bool is_gold, short payment_system) {
     card_number.push_back(QString::number(payment_system));
     card_number += "143 ";
     card_number += is_gold ? '1' : '2';
-    QRandomGenerator generator;
     card_number += QString::number(QRandomGenerator::global()->bounded(100, 999)) + ' ' +
                                  QString::number(QRandomGenerator::global()->bounded(1000, 9999)) + ' ' +
                                  QString::number(QRandomGenerator::global()->bounded(1000, 9999));
@@ -218,6 +216,43 @@ bool Controller::addNewCard(Card new_card) {
 		return false;
 	}
 	return true;
+}
+
+bool Controller::addNewFavPayment(const QString& payment) {
+    QSqlQuery add_payment(database);
+    QVector<int> fav_payments = this->getFavPaymentsId(client.getName());
+    if (fav_payments.length() == 5) {
+        fav_payments.pop_back();
+    }
+    add_payment.prepare("SELECT id FROM payment WHERE name = :payment");
+    add_payment.bindValue(0, payment);
+    if (!add_payment.exec()) {
+        qDebug() << "Query for getting cards array failed! Error: " << add_payment.lastError().text();
+        return false;
+    }
+    if (!add_payment.next()) {
+        qDebug() << "No reply from payment";
+        return false;
+    }
+    fav_payments.push_front(add_payment.value("id").toInt());
+    add_payment.prepare(
+            "UPDATE user_info "
+            "SET favorite_payments = :payments "
+            "WHERE owner_name = :owner_name");
+    QStringList payments_array;
+    foreach (const int& value, fav_payments) {
+        if (value == 0) {
+            continue;
+        }
+        payments_array << QString::number(value);
+    }
+    add_payment.bindValue(0, "{ " + payments_array.join(",") + " }");
+    add_payment.bindValue(1, client.getName());
+    if (!add_payment.exec()) {
+        qDebug() << "Query for updating cards array failed! Error: " << add_payment.lastError().text();
+        return false;
+    }
+    return true;
 }
 
 QVector<int> Controller::getCardsId(const QString& owner_name) {
@@ -330,6 +365,16 @@ bool Controller::getFavPaymentsFromDB(const QString& owner_name) {
     }
     client.setFavPayments(payments);
     return true;
+}
+
+QStringList Controller::favoritePaymentsToQML() {
+    std::vector<QString> payments = client.getFavPayments();
+    QStringList payments_list;
+    foreach (QString payment, payments) {
+        payments_list.push_back(payment);
+    }
+    payments_list.insert(0, QString::number(payments_list.length()));
+    return payments_list;
 }
 
 bool Controller::registration(const QString& login, const QString& password, const QString& owner_name) {

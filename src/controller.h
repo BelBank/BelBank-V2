@@ -82,6 +82,7 @@ public Q_SLOTS:
 	 */
 	bool addNewCard(Card new_card);
 
+    bool addNewFavPayment(const QString& payment);
 	/**
 	 * # В метод передается только имя владельца карты
 	 * # Метод делает выборку из таблицы card_owner
@@ -103,7 +104,10 @@ public Q_SLOTS:
 	bool getCardsFromDB(const QString& owner_name);
 
     bool getFavPaymentsFromDB(const QString& owner_name);
-	/**
+
+    Q_INVOKABLE QStringList favoritePaymentsToQML();
+
+    /**
 	 *  # В метод передается логин, пароль и имя пользователя
 	 *  # Метод добавляет данные пользователя в БД, соответсвенно, регистрируя его
 	 *  # Возвращает true, в случае успеха
