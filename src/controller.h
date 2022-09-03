@@ -41,7 +41,7 @@ public Q_SLOTS:
 	 */
 	QString getUserName() const;
 
-    int getCardsCount() const;
+    QVariant getCardsCount() const;
 
     QStringList test();
 

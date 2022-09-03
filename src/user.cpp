@@ -16,6 +16,7 @@ void User::setName(const QString& name) {
 }
 
 void User::setCards(std::vector<Card> cards_to_set) {
+    cards.clear();
     foreach (Card new_card, cards_to_set) {
         this->cards.push_back(new_card);
     }

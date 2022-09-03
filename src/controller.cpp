@@ -39,9 +39,9 @@ QString Controller::getUserName() const {
 	return client.getName();
 }
 
-int Controller::getCardsCount() const {
-    return 1;
-    //    return client.getCards().size();
+QVariant Controller::getCardsCount() const {
+    //    return 1;
+    return QVariant(client.getCards().size());
 }
 
 QStringList Controller::test() {

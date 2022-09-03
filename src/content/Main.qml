@@ -11,9 +11,15 @@ ApplicationWindow {
     Connections {
         target: Controller
         function onCardToQML(number, owner_name, type, valid, system, balance) {
+            console.log("Row count: ", loader.item.cardlist.rowCount())
+            console.log("Cards count: ", Controller.getCardsCount())
+            if (loader.item.cardlist.rowCount() === Controller.getCardsCount()) {
+                loader.item.cardview.clearModel();
+
+            }
             console.log("card to qml, number: " + number)
             loader.item.cardview.addElement(number, owner_name, type, valid, system, balance)
-            console.log(loader.item.cardlist.rowCount())
+
             console.warn("name ", loader.item.cardlist.get(0).name)
             console.warn("number ", loader.item.cardlist.get(0).number)
             console.warn("valid ", loader.item.cardlist.get(0).valid)
@@ -52,38 +58,22 @@ ApplicationWindow {
     }
 
     function set_authorization_window() {
-        if(loader.source === "MainWindow.qml") {
-            loader.item.cardview.clearModel();
-        }
-
         loader.source = "AuthorizationWindow.qml"
     }
 
     function set_registration_window() {
-        if(loader.source === "MainWindow.qml") {
-            loader.item.cardview.clearModel();
-        }
         loader.source = "RegistrationWindow.qml"
     }
 
     function set_new_card_window() {
-        if(loader.source === "MainWindow.qml") {
-            loader.item.cardview.clearModel();
-        }
         loader.source = "NewCardWindow.qml"
     }
 
     function set_add_card_window() {
-        if(loader.source === "MainWindow.qml") {
-            loader.item.cardview.clearModel();
-        }
         loader.source = "AddCardWindow.qml"
     }
 
     function set_payment_window() {
-        if(loader.source === "MainWindow.qml") {
-            loader.item.cardview.clearModel();
-        }
         loader.source = "PaymentWindow.qml"
     }
 }
