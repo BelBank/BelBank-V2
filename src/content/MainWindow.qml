@@ -519,12 +519,15 @@ Window {
                     id: grid__
                     rows: 7
                     columns: 4
+                    Layout.fillHeight: true
                     anchors {
                         top: parent.top
                         bottom: parent.bottom
                         right: parent.right
                         left: parent.left
-                        margins: 10
+                        rightMargin: 30
+                        leftMargin: 30
+                        bottomMargin: 20
                     }
 
                     Text {
@@ -533,9 +536,9 @@ Window {
                         Layout.column: 0
 
                         id: cash_title
-                        font.pixelSize: 20
-                        font.bold: true
+                        font.pixelSize: 22
 
+                        //font.bold: true
                         Layout.alignment: Qt.AlignCenter
                         text: "Курсы валют в отделениях БелБанка"
                     }
@@ -543,7 +546,7 @@ Window {
                         Layout.row: 1
                         Layout.columnSpan: 2
                         Layout.column: 0
-                        font.pixelSize: 18
+                        font.pixelSize: 17
                         font.bold: true
                         text: "    Валюта:"
                     }
@@ -554,7 +557,7 @@ Window {
                         Layout.row: 1
                         Layout.columnSpan: 1
                         Layout.column: 2
-                        font.pixelSize: 18
+                        font.pixelSize: 17
                         font.bold: true
 
                         text: "   Продажа:"
@@ -566,7 +569,7 @@ Window {
                         Layout.row: 1
                         Layout.columnSpan: 1
                         Layout.column: 3
-                        font.pixelSize: 18
+                        font.pixelSize: 17
                         font.bold: true
 
                         text: "Покупка:"
@@ -958,6 +961,8 @@ Window {
 
                         GridLayout {
                             rows: 5
+                            Layout.fillWidth: true
+                            Layout.fillHeight: true
 
                             columns: 4
                             anchors {
@@ -1597,8 +1602,44 @@ Window {
                     bottom: payments.bottom
                     bottomMargin: 20
                 }
+                radius: 10
 
-                color: "white"
+                color: "#d5e2ff"
+
+                Text {
+                    id: operation_name
+                    anchors {
+                        left: history.left
+                        leftMargin: 5
+                        top: payments_history.top
+                        topMargin: 5
+                    }
+                    text: "Название платежа"
+                    font.pixelSize: 16
+                }
+
+                Text {
+                    id: operation_date
+                    anchors {
+                        top: payments_history.top
+                        topMargin: 5
+                        horizontalCenter: payments_history.horizontalCenter
+                    }
+                    text: "Дата проведения платежа"
+                    font.pixelSize: 16
+                }
+
+                Text {
+                    id: value
+                    anchors {
+                        right: history.right
+                        rightMargin: 5
+                        top: payments_history.top
+                        topMargin: 5
+                    }
+                    text: "Сумма платежа"
+                    font.pixelSize: 16
+                }
 
                 ListView {
                     currentIndex: -1
@@ -1608,7 +1649,14 @@ Window {
                     width: 385
                     height: 719
                     anchors {
-                        fill: parent
+                        left: parent.left
+                        right: parent.right
+                        bottom: parent.bottom
+                        leftMargin: 30
+                        rightMargin: 30
+                        bottomMargin: 14
+                        top: operation_name.bottom
+                        topMargin: 6
                     }
                     model: historyModel
                     delegate: historyDelegate
@@ -1714,9 +1762,9 @@ Window {
 
                     Rectangle {
                         radius: 8
-                        color: index % 2 ? "#d5e2ff" : "#bed2ff"
-                        height: 30
-                        clip: true
+                        color: index % 2 ? "#a8c2ff" : "#bed2ff"
+                        height: 37
+                        // clip: true
                         width: 385
                         border.width: 1
                         border.color: "#264892"
@@ -1730,8 +1778,10 @@ Window {
                             id: payment_name
                             height: parent.height
                             text: model.name
-                            font.pixelSize: 20
+                            font.pixelSize: 19
                             anchors {
+                                top: parent.top
+                                topMargin: 4
                                 left: parent.left
                                 leftMargin: 15
                             }
@@ -1740,8 +1790,10 @@ Window {
 
                             height: parent.height
                             text: model.value
-                            font.pixelSize: 20
+                            font.pixelSize: 19
                             anchors {
+                                top: parent.top
+                                topMargin: 4
                                 right: parent.right
                                 rightMargin: 15
                             }
@@ -1750,9 +1802,11 @@ Window {
 
                             height: parent.height
                             text: model.date
-                            font.pixelSize: 20
+                            font.pixelSize: 19
 
                             anchors {
+                                top: parent.top
+                                topMargin: 4
                                 horizontalCenter: parent.horizontalCenter
                             }
                         }
@@ -2296,8 +2350,9 @@ D{i:11}D{i:12}D{i:13}D{i:14}D{i:2}D{i:17}D{i:19}D{i:18}D{i:38}D{i:39}D{i:40}D{i:
 D{i:43}D{i:42}D{i:44}D{i:45}D{i:47}D{i:46}D{i:48}D{i:49}D{i:51}D{i:50}D{i:52}D{i:53}
 D{i:55}D{i:54}D{i:56}D{i:57}D{i:59}D{i:58}D{i:60}D{i:61}D{i:37}D{i:36}D{i:63}D{i:64}
 D{i:62}D{i:66}D{i:67}D{i:65}D{i:16}D{i:69}D{i:70}D{i:72}D{i:71}D{i:139}D{i:140}D{i:142}
-D{i:144}D{i:160}D{i:141}D{i:166}D{i:169}D{i:215}D{i:167}D{i:68}D{i:15}D{i:220}D{i:222}
-D{i:221}D{i:225}D{i:224}D{i:227}D{i:226}D{i:223}D{i:233}D{i:229}D{i:237}D{i:219}
+D{i:143}D{i:144}D{i:145}D{i:147}D{i:163}D{i:141}D{i:169}D{i:172}D{i:218}D{i:170}D{i:68}
+D{i:15}D{i:223}D{i:225}D{i:224}D{i:228}D{i:227}D{i:230}D{i:229}D{i:226}D{i:236}D{i:232}
+D{i:240}D{i:222}
 }
 ##^##*/
 

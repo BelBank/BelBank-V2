@@ -83,7 +83,7 @@ Window {
             color: "#222024"
             font.family: "Helvetica"
             font.pointSize: 14
-            font.bold: true
+            //font.bold: true
         }
     }
 
@@ -189,7 +189,7 @@ Window {
             color: "#222024"
             font.family: "Helvetica"
             font.pointSize: 14
-            font.bold: true
+            //font.bold: true
         }
     }
 
@@ -212,7 +212,7 @@ Window {
             anchors.centerIn: parent
             text: "Войти"
             font.family: "Helvetica"
-            font.pointSize: 12
+            font.pointSize: 14
             font.bold: true
             color: "white"
         }
