@@ -237,8 +237,6 @@ Window {
                 snapMode: ListView.SnapOneItem
                 orientation: ListView.Horizontal
 
-                model: Controller.cardsToQML()
-
                 delegate: Component {
                     id: card_delegate
                     Rectangle {
@@ -309,7 +307,7 @@ Window {
                                     }
                                     font.pixelSize: 40
                                     // font.bold: true
-                                    text: "34342.14" //model[1][4] // model.balance
+                                    text: model.balance //model[1][4] // model.balance
                                     color: "#0048ad"
                                 }
                             }
@@ -362,7 +360,7 @@ Window {
                                             left: cardholder_name_text.right
                                             leftMargin: 13
                                         }
-                                        text: model[1][1] //model.name
+                                        text: model.name //model.name
                                         font.pixelSize: 20
                                     }
                                 }
@@ -387,7 +385,7 @@ Window {
                                             left: card_number_text.right
                                             leftMargin: 13
                                         }
-                                        text: model[1][0] //model.number
+                                        text: model.number //model.number
                                         font.pixelSize: 20
                                     }
                                 }
@@ -413,7 +411,7 @@ Window {
                                             left: valid_thru_text.right
                                             leftMargin: 13
                                         }
-                                        text: model[1][3] //model.valid
+                                        text: model.valid //model.valid
                                         font.pixelSize: 20
                                     }
                                 }
