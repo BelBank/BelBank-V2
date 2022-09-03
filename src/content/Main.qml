@@ -37,8 +37,8 @@ ApplicationWindow {
         id: mainwindow
     }
 
-
     Loader {
+        property alias loaderItem: loader.item
 
         asynchronous: true
         visible: true
@@ -46,8 +46,6 @@ ApplicationWindow {
         anchors.fill: parent
         source: "AuthorizationWindow.qml"
     }
-
-
 
     function set_main_window() {
 
@@ -70,7 +68,19 @@ ApplicationWindow {
         loader.source = "AddCardWindow.qml"
     }
 
-    function set_payment_window() {
-        loader.source = "PaymentWindow.qml"
+    Component {
+        id: payment
+        PaymentWindow {
+            name: " "
+        }
+    }
+
+    function set_payment_window(str) {
+
+        //        loader.sourceComponent = payment
+        //        loader.loaderItem.name = str
+        loader.setSource("PaymentWindow.qml", {
+                             "name": str
+                         })
     }
 }

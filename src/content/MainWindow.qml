@@ -334,9 +334,10 @@ Window {
                             anchors.fill: parent
                             front: Image {
                                 id: card_img
-                                width: 480
+                                width: 700
+                                height: 310
                                 anchors {
-                                    //fill: parent
+                                    // fill: parent
                                     centerIn: parent
                                 }
                                 source: getCard()
@@ -344,14 +345,14 @@ Window {
                                     id: balance_text
                                     anchors {
                                         left: parent.left
-                                        leftMargin: 30
+                                        leftMargin: 250
                                         top: card_img.top
-                                        topMargin: card_img.height / 2 - 8
+                                        topMargin: card_img.height / 2 - 20
                                     }
-                                    font.pixelSize: 50
+                                    font.pixelSize: 40
                                     text: "Баланс:"
-                                    color: "white"
-                                    font.bold: true
+                                    color: "#0048ad"
+                                    //font.bold: true
                                 }
                                 Text {
                                     id: balance
@@ -360,10 +361,10 @@ Window {
                                         leftMargin: 15
                                         verticalCenter: balance_text.verticalCenter
                                     }
-                                    font.pixelSize: 60
+                                    font.pixelSize: 40
                                     // font.bold: true
-                                    text: model[1][4] // model.balance
-                                    color: "white"
+                                    text: "34342.14" //model[1][4] // model.balance
+                                    color: "#0048ad"
                                 }
                             }
                             back: Rectangle {
@@ -1565,7 +1566,7 @@ Window {
                             right: parent.right
                         }
                         Text {
-
+                            id: payment_name
                             height: parent.height
                             text: model.name
                             font.pixelSize: 20
@@ -1589,6 +1590,7 @@ Window {
                             height: parent.height
                             text: model.date
                             font.pixelSize: 20
+
                             anchors {
                                 horizontalCenter: parent.horizontalCenter
                             }
@@ -1597,8 +1599,9 @@ Window {
                         MouseArea {
                             anchors.fill: parent
                             onClicked: __lv.currentIndex = index
+
                             onDoubleClicked: {
-                                set_payment_window()
+                                set_payment_window(payment_name.text)
                             }
                         }
                     }
@@ -2127,12 +2130,12 @@ Window {
 /*##^##
 Designer {
     D{i:0;formeditorZoom:0.75}D{i:1}D{i:3}D{i:4}D{i:5}D{i:7}D{i:8}D{i:6}D{i:9}D{i:10}
-D{i:11}D{i:12}D{i:13}D{i:14}D{i:2}D{i:17}D{i:26}D{i:18}D{i:45}D{i:46}D{i:47}D{i:48}
-D{i:50}D{i:49}D{i:51}D{i:52}D{i:54}D{i:53}D{i:55}D{i:56}D{i:58}D{i:57}D{i:59}D{i:60}
-D{i:62}D{i:61}D{i:63}D{i:64}D{i:66}D{i:65}D{i:67}D{i:68}D{i:44}D{i:43}D{i:70}D{i:71}
-D{i:69}D{i:73}D{i:74}D{i:72}D{i:16}D{i:76}D{i:77}D{i:79}D{i:78}D{i:134}D{i:135}D{i:137}
-D{i:139}D{i:155}D{i:136}D{i:161}D{i:164}D{i:210}D{i:162}D{i:75}D{i:15}D{i:217}D{i:216}
-D{i:219}D{i:218}D{i:215}D{i:225}D{i:221}D{i:229}D{i:214}
+D{i:11}D{i:12}D{i:13}D{i:14}D{i:2}D{i:17}D{i:19}D{i:18}D{i:38}D{i:39}D{i:40}D{i:41}
+D{i:43}D{i:42}D{i:44}D{i:45}D{i:47}D{i:46}D{i:48}D{i:49}D{i:51}D{i:50}D{i:52}D{i:53}
+D{i:55}D{i:54}D{i:56}D{i:57}D{i:59}D{i:58}D{i:60}D{i:61}D{i:37}D{i:36}D{i:63}D{i:64}
+D{i:62}D{i:66}D{i:67}D{i:65}D{i:16}D{i:69}D{i:70}D{i:72}D{i:71}D{i:127}D{i:128}D{i:130}
+D{i:132}D{i:148}D{i:129}D{i:154}D{i:157}D{i:203}D{i:155}D{i:68}D{i:15}D{i:208}D{i:210}
+D{i:209}D{i:213}D{i:212}D{i:215}D{i:214}D{i:211}D{i:221}D{i:217}D{i:225}D{i:207}
 }
 ##^##*/
 

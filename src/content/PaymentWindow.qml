@@ -4,6 +4,9 @@ import QtQuick.Controls 2.15
 import QtQuick.Window 2.12
 
 Window {
+
+    property var name
+    //название платежа, как заказывали
     id: payment_window
     width: 800
     height: 600
@@ -21,12 +24,11 @@ Window {
         error.visible = true
         error.next_window = window
         error.error_information = error_
-
     }
 
     ///////////////////////////////////////////////////////
     color: "white"
-    title: "Создание платежа"
+    title: "Оформление платежа"
     Rectangle {
         id: payment_rectangle
 
@@ -195,7 +197,7 @@ Window {
                     valid: "25/08"
                     type: "gold"
                     system: "mastercard"
-                    balance: "33423"
+                    balance: "33423.00"
                 }
                 ListElement {
                     name: "Павел Староста"
@@ -245,8 +247,8 @@ Window {
                         anchors.fill: parent
                         front: Image {
                             id: card_img
-                            width: 270
-                            height: 120
+                            width: 400
+                            height: 190
                             anchors {
                                 //fill: parent
                                 centerIn: parent
@@ -256,26 +258,26 @@ Window {
                                 id: balance_text
                                 anchors {
                                     left: parent.left
-                                    leftMargin: 30
+                                    leftMargin: 145
                                     top: card_img.top
-                                    topMargin: card_img.height / 2
+                                    topMargin: card_img.height / 2 - 10
                                 }
-                                font.pixelSize: 25
+                                font.pixelSize: 22
                                 text: "Баланс:"
-                                color: "white"
-                                font.bold: true
+                                color: "#0048ad"
+                                //font.bold: true
                             }
                             Text {
                                 id: balance
                                 anchors {
                                     left: balance_text.right
-                                    leftMargin: 15
+                                    leftMargin: 10
                                     verticalCenter: balance_text.verticalCenter
                                 }
-                                font.pixelSize: 35
+                                font.pixelSize: 22
                                 // font.bold: true
                                 text: model.balance
-                                color: "white"
+                                color: "#0048ad"
                             }
                         }
                         back: Rectangle {
