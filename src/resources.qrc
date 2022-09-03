@@ -35,5 +35,10 @@
         <file>content/InsufficientFundsMessage.qml</file>
         <file>images/Logo.png</file>
         <file>content/AddCardWindow.qml</file>
+        <file>images/password_visible.png</file>
+        <file>images/error_icon.png</file>
+        <file>images/information_icon.png</file>
+        <file>images/Logo_for_error.png</file>
+        <file>images/BelBankQR.jpg</file>
     </qresource>
 </RCC>
