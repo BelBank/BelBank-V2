@@ -225,6 +225,7 @@ Window {
             }
 
             ListView {
+
                 id: lv
                 height: 240
                 width: 500
@@ -375,6 +376,7 @@ Window {
                                     //fill: parent
                                     centerIn: parent
                                 }
+
                                 Image {
                                     anchors {
                                         fill: parent
@@ -441,7 +443,8 @@ Window {
                                             left: card_number_text.right
                                             leftMargin: 13
                                         }
-                                        text: model[1][0] //model.number
+                                        text: Controller.cardsToQML(
+                                                  )[1] //model.number
                                         font.pixelSize: 20
                                     }
                                 }
@@ -467,7 +470,7 @@ Window {
                                             left: valid_thru_text.right
                                             leftMargin: 13
                                         }
-                                        text: model[1][3] //model.valid
+                                        text: model[1] //model.valid
                                         font.pixelSize: 20
                                     }
                                 }
@@ -990,7 +993,7 @@ Window {
                                 width: 60
                                 height: 140
                                 onClicked: {
-                                    set_payment_window()
+                                    set_payment_window("МТС")
                                 }
                                 onPressed: {
                                     mts_text.font.bold = true
@@ -1010,7 +1013,7 @@ Window {
                                 width: 60
                                 height: 140
                                 onClicked: {
-                                    set_payment_window()
+                                    set_payment_window("А1")
                                 }
                                 onPressed: {
                                     a1_text.font.bold = true
@@ -1030,7 +1033,7 @@ Window {
                                 width: 60
                                 height: 140
                                 onClicked: {
-                                    set_payment_window()
+                                    set_payment_window("Лайф")
                                 }
                                 onPressed: {
                                     life_text.font.bold = true
@@ -1050,7 +1053,7 @@ Window {
                                 width: 110
                                 height: 140
                                 onClicked: {
-                                    set_payment_window()
+                                    set_payment_window("Белтелеком")
                                 }
                                 onPressed: {
                                     beltelecom_text.font.bold = true
@@ -1070,7 +1073,7 @@ Window {
                                 width: 60
                                 height: 140
                                 onClicked: {
-                                    set_payment_window()
+                                    set_payment_window("ByFly")
                                 }
                                 onPressed: {
                                     byfly_text.font.bold = true
@@ -1926,7 +1929,7 @@ Window {
                             anchors.fill: parent
                             onClicked: __lv.currentIndex = index
                             onDoubleClicked: {
-                                set_payment_window()
+                                set_payment_window(model.name)
                             }
                         }
                     }

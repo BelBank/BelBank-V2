@@ -21,7 +21,6 @@ Window {
         error.visible = true
         error.next_window = window
         error.error_information = error_
-
     }
 
     ///////////////////////////////////////////////////////
@@ -224,7 +223,8 @@ Window {
                 if (Controller.enterToBank(login_text.text, text0.text)) {
                     set_main_window()
                 } else {
-                        set_error("Проверьте правильность введённых данных!", "main")
+                    set_error("Проверьте правильность введённых данных!",
+                              "main") //убрать "main" при релизе
                 }
             }
 
