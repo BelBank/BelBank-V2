@@ -18,6 +18,7 @@
 #include <QSqlError>
 #include <QSqlQuery>
 #include <QSqlRecord>
+#include <QThread>
 
 #include "user.h"
 
@@ -39,6 +40,10 @@ public Q_SLOTS:
 	 *  # В основном нужен для получения имени пользователя в QML интерфейсе
 	 */
 	QString getUserName() const;
+
+    int getCardsCount() const;
+
+    QStringList test();
 
     bool testConnection();
 	/**
@@ -67,7 +72,7 @@ public Q_SLOTS:
      */
     Q_INVOKABLE QVariantList cardsToQML();
 
-    bool prepareQML();
+    Q_INVOKABLE bool prepareQML(QVariant source);
 	/**
 	 *  # Метод для создания новой карты и добавления ее в БД
 	 *  # Возвращает false, если addNewCard вернул false либо срок действия карты истёк
@@ -128,13 +133,17 @@ public Q_SLOTS:
     QStringList exchangeRatesForBank();
 
 signals:
-	void test();
+
 	/**
 	 * # Сигнал, который вызывает при необходимости добавить карту в интерфейс
 	 * # Передает в QML все данные по карте, чтобы отобразить их
 	 */
-	void cardToQML(
-			const QString& number, const QString& owner_name, bool is_gold, const QString& valid, double balance);
+    void cardToQML(const QString& number,
+                                 const QString& owner_name,
+                                 const QString& type,
+                                 const QString& valid,
+                                 const QString& system,
+                                 const QString& balance);
 
     void setError(const QString& error);
 

@@ -573,7 +573,7 @@ Window {
                     } else {
                         payment_system = 2
                     }
-                    var tariff = gold_card.active ? 1 : 2
+                    var tariff = gold_card.active ? 1 : 0
                     if (Controller.makeNewCard(tariff, payment_system)) {
                         set_error("Карта успешно создана!", "main", false_)
                     }

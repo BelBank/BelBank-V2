@@ -39,6 +39,22 @@ QString Controller::getUserName() const {
 	return client.getName();
 }
 
+int Controller::getCardsCount() const {
+    return 1;
+    //    return client.getCards().size();
+}
+
+QStringList Controller::test() {
+    QStringList a;
+    a << "5143 1364 3648 3746";
+    a << "admin";
+    a << "01/27";
+    a << "gold";
+    a << "visa";
+    a << "234.87";
+    return a;
+}
+
 bool Controller::testConnection() {
     QTcpSocket* test_connection = new QTcpSocket();
     test_connection->connectToHost("www.google.com", 80);
@@ -78,10 +94,10 @@ bool Controller::enterToBank(const QString& login, const QString& password) {
 	qDebug() << "Success login";
 	this->client.setName(login_query.value(3).toString());
 	this->getCardsFromDB(login_query.value(1).toString());
-    if (!prepareQML()) {
-        qDebug() << "Preparing QML failed";
-        return false;
-    }
+    //    if (!prepareQML()) {
+    //        qDebug() << "Preparing QML failed";
+    //        return false;
+    //    }
 	return true;
 }
 
@@ -105,9 +121,34 @@ QVariantList Controller::cardsToQML() {
     return cards_to_qml;
 }
 
-bool Controller::prepareQML() {
-    qDebug() << "QML preparing...";
-
+bool Controller::prepareQML(QVariant source) {
+    if (source.toString() != "MainWindow.qml") {
+        return true;
+    }
+    qDebug() << "QML preparing... ";
+    std::vector<Card> cards = client.getCards();
+    foreach (Card card, cards) {
+        QString type;
+        QString payment_system;
+        if (card.getType()) {
+            type = "gold";
+        } else {
+            type = "silver";
+        }
+        if (card.getNumber()[0] == '2') {
+            payment_system = "MIR";
+        } else if (card.getNumber()[0] == '4') {
+            payment_system = "visa";
+        } else {
+            payment_system = "mastercard";
+        }
+        emit Controller::cardToQML(card.getNumber(),
+                                                             card.getHolderName(),
+                                                             type,
+                                                             card.getValid(),
+                                                             payment_system,
+                                                             QString::number(card.getBalance()));
+    }
     return true;
 }
 
@@ -129,6 +170,7 @@ bool Controller::makeCard(const QString& card_number, const QString& valid) {
 	if (!addNewCard(new_card)) {
 		return false;
 	}
+    this->getCardsFromDB(client.getName());
 	return true;
 }
 
@@ -158,6 +200,7 @@ bool Controller::makeNewCard(bool is_gold, short payment_system) {
         qDebug() << "Failed adding";
         return false;
     }
+    this->getCardsFromDB(client.getName());
     return true;
 }
 
