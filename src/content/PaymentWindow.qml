@@ -568,6 +568,10 @@ Window {
 
                 anchors.fill: parent
                 onClicked: {
+                    if (make_a_payment_selected.selected) {
+
+                    }
+
                     set_main_window()
                 }
 
