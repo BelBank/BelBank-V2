@@ -13,7 +13,7 @@ Window {
 
     UniversalMessage {
         visible: false
-        id: errorr
+        id: error
     }
 
     function set_error(text_, window = "", error_ = true) {
@@ -345,22 +345,22 @@ Window {
                                 Text {
                                     id: balance_text
                                     anchors {
-                                        left: parent.left
-                                        leftMargin: 250
-                                        top: card_img.top
-                                        topMargin: card_img.height / 2 - 20
+                                        bottom: balance.bottom
+                                        left: balance.right
+                                        leftMargin: 10
+                                        bottomMargin: 30
                                     }
-                                    font.pixelSize: 40
-                                    text: "Баланс:"
+                                    font.pixelSize: 18
+                                    text: "BYN"
                                     color: "#0048ad"
-                                    //font.bold: true
                                 }
                                 Text {
                                     id: balance
                                     anchors {
-                                        left: balance_text.right
-                                        leftMargin: 15
-                                        verticalCenter: balance_text.verticalCenter
+                                        left: parent.left
+                                        leftMargin: 280
+                                        top: card_img.top
+                                        topMargin: card_img.height / 2 - 20
                                     }
                                     font.pixelSize: 40
                                     // font.bold: true

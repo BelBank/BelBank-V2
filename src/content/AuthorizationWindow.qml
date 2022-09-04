@@ -32,6 +32,48 @@ Window {
     }
 
     Rectangle {
+        id: exit
+        width: 250
+        height: 30
+        anchors {
+            right: parent.right
+            top: parent.top
+            rightMargin: 20
+            topMargin: 20
+        }
+
+        color: "#6e91de"
+        radius: 8
+        border.width: 3
+        border.color: "#264892"
+
+        Text {
+            anchors.centerIn: parent
+            text: "Выйти из приложения"
+            font.family: "Helvetica"
+            font.pointSize: 14
+            font.bold: true
+            color: "white"
+        }
+
+        MouseArea {
+            anchors.fill: parent
+            onClicked: {
+                Qt.quit()
+            }
+
+            onPressed: {
+                parent.color = "#242f67"
+                parent.border.color = "dark gray"
+            }
+            onReleased: {
+                parent.color = "#6e91de"
+                parent.border.color = "#264892"
+            }
+        }
+    }
+
+    Rectangle {
         id: phone
         x: main.width / 2 - 120
         y: main.height / 2 + 90
