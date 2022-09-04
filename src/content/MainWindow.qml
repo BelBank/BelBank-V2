@@ -25,6 +25,8 @@ Window {
     }
     property alias cardview: lv
     property alias cardlist: card_model
+    property alias paymentview: selected_payments
+    property alias paymentlist: selected_paymentModel
     Rectangle {
         id: header
         height: 100
@@ -1411,62 +1413,19 @@ Window {
                                 border.width: 3
                                 border.color: "#6e91de"
                             }
+
+                            function addFavPayment(payment) {
+                                selected_paymentModel.append({"name": payment})
+                            }
+                            function clearModel() {
+                                selected_paymentModel.clear()
+                            }
                         }
 
                         ListModel {
                             id: selected_paymentModel
-                            ListElement {
-                                name: "Приорбанк"
-                            }
-                            ListElement {
-                                name: "Гаи"
-                            }
-                            ListElement {
-                                name: "Погашение кредита"
-                            }
-                            ListElement {
-
-                                name: "Коммунальные платежи"
-                            }
-                            ListElement {
-
-                                name: "МТС"
-                            }
-                            ListElement {
-                                name: "Приорбанк"
-                            }
-                            ListElement {
-                                name: "Гаи"
-                            }
-                            ListElement {
-                                name: "Погашение кредита"
-                            }
-                            ListElement {
-
-                                name: "Коммунальные платежи"
-                            }
-                            ListElement {
-
-                                name: "МТС"
-                            }
-                            ListElement {
-                                name: "Приорбанк"
-                            }
-                            ListElement {
-                                name: "Гаи"
-                            }
-                            ListElement {
-                                name: "Погашение кредита"
-                            }
-                            ListElement {
-
-                                name: "Коммунальные платежи"
-                            }
-                            ListElement {
-
-                                name: "МТС"
-                            }
                         }
+
                         Component {
                             id: selected_paymentDelegate
 

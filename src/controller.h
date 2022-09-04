@@ -47,6 +47,8 @@ public Q_SLOTS:
      */
     QVariant getCardsCount() const;
 
+    QVariant getFavPaymentsCount() const;
+
     /**
      * Метод для проверки подключения к интернету
      */
@@ -197,6 +199,8 @@ signals:
                                  const QString& valid,
                                  const QString& system,
                                  const QString& balance);
+
+    void paymentToQML(const QString& payment);
 
     void setError(const QString& error);
 

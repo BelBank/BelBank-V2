@@ -27,6 +27,13 @@ ApplicationWindow {
             console.warn("type ", loader.item.cardlist.get(0).type)
             console.warn("system ", loader.item.cardlist.get(0).system)
         }
+        function onPaymentToQML(payment) {
+            if (loader.item.paymentlist.rowCount() === Controller.getFavPaymentsCount()) {
+                loader.item.paymentlist.clearModel();
+            }
+            loader.item.paymentview.addFavPayment(payment)
+        }
+
         function onSetError(error) {
             console.log("Error!")
             mainwindow.set_error(error)
@@ -76,18 +83,7 @@ ApplicationWindow {
         loader.source = "AddCardWindow.qml"
     }
 
-//    Component {
-//        id: payment
-//        PaymentWindow {
-//            name: " "
-//        }
-//    }
-
     function set_payment_window(str) {
-
-        //        loader.sourceComponent = payment
-        //        loader.loaderItem.name = str
-//        loader.setSource("PaymentWindow.qml", {"name": str })
         loader.source = "PaymentWindow.qml"
         payment_name = str
     }

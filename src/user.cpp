@@ -23,6 +23,7 @@ void User::setCards(std::vector<Card> cards_to_set) {
 }
 
 void User::setFavPayments(std::vector<QString> payments) {
+    favorite_payments.clear();
     foreach (const QString& payment, payments) {
         this->favorite_payments.push_back(payment);
     }

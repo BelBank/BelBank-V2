@@ -44,6 +44,10 @@ QVariant Controller::getCardsCount() const {
     return QVariant(client.getCards().size());
 }
 
+QVariant Controller::getFavPaymentsCount() const {
+    return QVariant(client.getFavPayments().size());
+}
+
 bool Controller::testConnection() {
     QTcpSocket* test_connection = new QTcpSocket();
     test_connection->connectToHost("www.google.com", 80);
@@ -83,6 +87,7 @@ bool Controller::enterToBank(const QString& login, const QString& password) {
 	qDebug() << "Success login";
 	this->client.setName(login_query.value(3).toString());
 	this->getCardsFromDB(login_query.value(1).toString());
+    this->getFavPaymentsFromDB(client.getName());
 	return true;
 }
 
@@ -132,6 +137,10 @@ bool Controller::prepareQML(QVariant source) {
                                                              card.getValid(),
                                                              payment_system,
                                                              QString::number(card.getBalance()));
+    }
+    QStringList payments = favoritePaymentsToQML();
+    foreach (QString payment, payments) {
+        emit Controller::paymentToQML(payment);
     }
     return true;
 }
@@ -242,6 +251,7 @@ bool Controller::addNewCard(Card new_card) {
 		qDebug() << "Query for updating cards array failed! Error: " << add_card_query.lastError().text();
 		return false;
 	}
+    this->getFavPaymentsFromDB(client.getName());
 	return true;
 }
 
@@ -401,7 +411,6 @@ QStringList Controller::favoritePaymentsToQML() {
     foreach (QString payment, payments) {
         payments_list.push_back(payment);
     }
-    payments_list.insert(0, QString::number(payments_list.length()));
     return payments_list;
 }
 
