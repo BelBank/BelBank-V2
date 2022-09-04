@@ -37,7 +37,7 @@ Window {
             height: 110
             anchors {
                 top: message_window_rect.top
-                topMargin: 15
+                topMargin: 10
                 horizontalCenter: message_window_rect.horizontalCenter
             }
         }
@@ -90,8 +90,8 @@ Window {
 
         Rectangle {
             id: ok_button
-            width: 100
-            height: 23
+            width: 120
+            height: 33
             radius: 25
             border.width: 2
             color: "#6e91de"
@@ -99,7 +99,7 @@ Window {
             anchors {
                 bottom: message_window_rect.bottom
                 horizontalCenter: message_window_rect.horizontalCenter
-                bottomMargin: 15
+                bottomMargin: 10
             }
 
             Text {

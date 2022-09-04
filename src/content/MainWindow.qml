@@ -223,6 +223,7 @@ Window {
             }
 
             ListView {
+
                 id: lv
                 height: 240
                 width: 500
@@ -319,6 +320,7 @@ Window {
                                     //fill: parent
                                     centerIn: parent
                                 }
+
                                 Image {
                                     anchors {
                                         fill: parent
@@ -472,12 +474,15 @@ Window {
                     id: grid__
                     rows: 7
                     columns: 4
+                    Layout.fillHeight: true
                     anchors {
                         top: parent.top
                         bottom: parent.bottom
                         right: parent.right
                         left: parent.left
-                        margins: 10
+                        rightMargin: 30
+                        leftMargin: 30
+                        bottomMargin: 20
                     }
 
                     Text {
@@ -486,9 +491,9 @@ Window {
                         Layout.column: 0
 
                         id: cash_title
-                        font.pixelSize: 20
-                        font.bold: true
+                        font.pixelSize: 22
 
+                        //font.bold: true
                         Layout.alignment: Qt.AlignCenter
                         text: "Курсы валют в отделениях БелБанка"
                     }
@@ -496,26 +501,30 @@ Window {
                         Layout.row: 1
                         Layout.columnSpan: 2
                         Layout.column: 0
-                        font.pixelSize: 18
+                        font.pixelSize: 17
                         font.bold: true
                         text: "    Валюта:"
                     }
                     Text {
+                        Layout.alignment: Qt.AlignCenter
+
                         id: sell
                         Layout.row: 1
                         Layout.columnSpan: 1
                         Layout.column: 2
-                        font.pixelSize: 18
+                        font.pixelSize: 17
                         font.bold: true
 
                         text: "   Продажа:"
                     }
                     Text {
                         id: buy
+                        Layout.alignment: Qt.AlignCenter
+
                         Layout.row: 1
                         Layout.columnSpan: 1
                         Layout.column: 3
-                        font.pixelSize: 18
+                        font.pixelSize: 17
                         font.bold: true
 
                         text: "Покупка:"
@@ -536,30 +545,27 @@ Window {
                             source: "/images/RUB.png"
                             anchors {
                                 right: rub.left
-                                //left: grid__.left
                             }
                         }
                     }
 
                     Text {
+                        Layout.alignment: Qt.AlignCenter
+
                         Layout.row: 2
                         Layout.columnSpan: 1
                         Layout.column: 2
                         font.pixelSize: rub.font.pixelSize
                         text: Controller.exchangeRatesForBank()[0]
-                        anchors {
-                            horizontalCenter: sell.horizontalCenter
-                        }
                     }
                     Text {
+                        Layout.alignment: Qt.AlignCenter
+
                         Layout.row: 2
                         Layout.columnSpan: 1
                         Layout.column: 3
                         font.pixelSize: rub.font.pixelSize
                         text: Controller.exchangeRatesForBank()[1]
-                        anchors {
-                            horizontalCenter: buy.horizontalCenter
-                        }
                     }
                     Text {
                         Layout.row: 3
@@ -574,29 +580,26 @@ Window {
                             source: "/images/USD.png"
                             anchors {
                                 right: usd.left
-                                // left: grid__.left
                             }
                         }
                     }
                     Text {
+                        Layout.alignment: Qt.AlignCenter
+
                         Layout.row: 3
                         Layout.columnSpan: 1
                         Layout.column: 2
                         font.pixelSize: rub.font.pixelSize
                         text: Controller.exchangeRatesForBank()[2]
-                        anchors {
-                            horizontalCenter: sell.horizontalCenter
-                        }
                     }
                     Text {
+                        Layout.alignment: Qt.AlignCenter
+
                         Layout.row: 3
                         Layout.columnSpan: 1
                         Layout.column: 3
                         font.pixelSize: rub.font.pixelSize
                         text: Controller.exchangeRatesForBank()[3]
-                        anchors {
-                            horizontalCenter: buy.horizontalCenter
-                        }
                     }
                     Text {
                         Layout.row: 4
@@ -611,29 +614,26 @@ Window {
                             source: "/images/EURO.png"
                             anchors {
                                 right: euro.left
-                                //left: grid__.left
                             }
                         }
                     }
                     Text {
+                        Layout.alignment: Qt.AlignCenter
+
                         Layout.row: 4
                         Layout.columnSpan: 1
                         Layout.column: 2
                         font.pixelSize: rub.font.pixelSize
                         text: Controller.exchangeRatesForBank()[4]
-                        anchors {
-                            horizontalCenter: sell.horizontalCenter
-                        }
                     }
                     Text {
+                        Layout.alignment: Qt.AlignCenter
+
                         Layout.row: 4
                         Layout.columnSpan: 1
                         Layout.column: 3
                         font.pixelSize: rub.font.pixelSize
                         text: Controller.exchangeRatesForBank()[5]
-                        anchors {
-                            horizontalCenter: buy.horizontalCenter
-                        }
                     }
 
                     Text {
@@ -649,7 +649,6 @@ Window {
                             source: "/images/china.jpg"
                             anchors {
                                 right: china.left
-                                //left: grid__.left
                             }
                         }
                     }
@@ -659,9 +658,7 @@ Window {
                         Layout.column: 2
                         font.pixelSize: rub.font.pixelSize
                         text: Controller.exchangeRatesForBank()[6]
-                        anchors {
-                            horizontalCenter: sell.horizontalCenter
-                        }
+                        Layout.alignment: Qt.AlignCenter
                     }
                     Text {
                         Layout.row: 5
@@ -669,9 +666,7 @@ Window {
                         Layout.column: 3
                         font.pixelSize: rub.font.pixelSize
                         text: Controller.exchangeRatesForBank()[7]
-                        anchors {
-                            horizontalCenter: buy.horizontalCenter
-                        }
+                        Layout.alignment: Qt.AlignCenter
                     }
 
                     Text {
@@ -687,7 +682,6 @@ Window {
                             source: "/images/PLN.jpg"
                             anchors {
                                 right: pln.left
-                                //left: grid__.left
                             }
                         }
                     }
@@ -697,9 +691,7 @@ Window {
                         Layout.column: 2
                         font.pixelSize: rub.font.pixelSize
                         text: Controller.exchangeRatesForBank()[8]
-                        anchors {
-                            horizontalCenter: sell.horizontalCenter
-                        }
+                        Layout.alignment: Qt.AlignCenter
                     }
                     Text {
                         Layout.row: 6
@@ -707,9 +699,7 @@ Window {
                         Layout.column: 3
                         font.pixelSize: rub.font.pixelSize
                         text: Controller.exchangeRatesForBank()[9]
-                        anchors {
-                            horizontalCenter: buy.horizontalCenter
-                        }
+                        Layout.alignment: Qt.AlignCenter
                     }
                 }
             }
@@ -842,7 +832,7 @@ Window {
             Rectangle {
                 id: popular_payments
 
-                height: payments.height / 2 - 70
+                height: payments.height / 2
                 //                border.color: "#d088f2"
                 //                color: "#fdffbd"
                 //                border.width: 3
@@ -926,27 +916,31 @@ Window {
 
                         GridLayout {
                             rows: 5
+                            Layout.fillWidth: true
+                            Layout.fillHeight: true
 
                             columns: 4
                             anchors {
-                                leftMargin: 80
-                                topMargin: 30
-                                rightMargin: 30
-                                bottomMargin: 50
+                                leftMargin: 50
+                                topMargin: 15
+                                rightMargin: 50
+                                bottomMargin: 20
                                 fill: parent
                             }
 
                             MouseArea {
                                 id: mts_mouse_area
+                                Layout.alignment: Qt.AlignHCenter
+
                                 Layout.row: 0
                                 Layout.column: 0
                                 Layout.rowSpan: 2
                                 Layout.columnSpan: 1
 
-                                width: 60
+                                width: beltelecom_text.width
                                 height: 140
                                 onClicked: {
-                                    set_payment_window()
+                                    set_payment_window("МТС")
                                 }
                                 onPressed: {
                                     mts_text.font.bold = true
@@ -958,15 +952,17 @@ Window {
 
                             MouseArea {
                                 id: a1_mouse_area
+                                Layout.alignment: Qt.AlignHCenter
+
                                 Layout.row: 0
                                 Layout.column: 1
                                 Layout.rowSpan: 2
                                 Layout.columnSpan: 1
 
-                                width: 60
+                                width: beltelecom_text.width
                                 height: 140
                                 onClicked: {
-                                    set_payment_window()
+                                    set_payment_window("А1")
                                 }
                                 onPressed: {
                                     a1_text.font.bold = true
@@ -978,15 +974,17 @@ Window {
 
                             MouseArea {
                                 id: life_mouse_area
-                                Layout.row: 0
-                                Layout.column: 2
+                                Layout.alignment: Qt.AlignHCenter
+
+                                Layout.row: 3
+                                Layout.column: 1
                                 Layout.rowSpan: 2
                                 Layout.columnSpan: 1
 
-                                width: 60
+                                width: beltelecom_text.width
                                 height: 140
                                 onClicked: {
-                                    set_payment_window()
+                                    set_payment_window("Лайф")
                                 }
                                 onPressed: {
                                     life_text.font.bold = true
@@ -998,15 +996,17 @@ Window {
 
                             MouseArea {
                                 id: beltelecom_mouse_area
+                                Layout.alignment: Qt.AlignHCenter
+
                                 Layout.row: 0
                                 Layout.column: 3
                                 Layout.rowSpan: 2
                                 Layout.columnSpan: 1
 
-                                width: 110
+                                width: beltelecom_text.width + 10
                                 height: 140
                                 onClicked: {
-                                    set_payment_window()
+                                    set_payment_window("Белтелеком")
                                 }
                                 onPressed: {
                                     beltelecom_text.font.bold = true
@@ -1018,15 +1018,17 @@ Window {
 
                             MouseArea {
                                 id: byfly_mouse_area
+                                Layout.alignment: Qt.AlignHCenter
+
                                 Layout.row: 3
                                 Layout.column: 0
                                 Layout.rowSpan: 2
                                 Layout.columnSpan: 1
 
-                                width: 60
+                                width: beltelecom_text.width
                                 height: 140
                                 onClicked: {
-                                    set_payment_window()
+                                    set_payment_window("ByFly")
                                 }
                                 onPressed: {
                                     byfly_text.font.bold = true
@@ -1036,16 +1038,85 @@ Window {
                                 }
                             }
 
+                            MouseArea {
+                                id: card_to_card_area
+                                Layout.alignment: Qt.AlignHCenter
+
+                                Layout.row: 0
+                                Layout.column: 2
+                                Layout.rowSpan: 2
+                                Layout.columnSpan: 1
+
+                                width: card_to_card_text.width
+                                height: 140
+                                onClicked: {
+                                    set_payment_window("Перевод на карту")
+                                }
+                                onPressed: {
+                                    card_to_card_text.font.bold = true
+                                }
+                                onReleased: {
+                                    card_to_card_text.font.bold = false
+                                }
+                            }
+
+                            MouseArea {
+                                id: requisites_area
+                                Layout.alignment: Qt.AlignHCenter
+
+                                Layout.row: 3
+                                Layout.column: 2
+                                Layout.rowSpan: 2
+                                Layout.columnSpan: 1
+
+                                width: requisites_text.width
+                                height: 140
+                                onClicked: {
+                                    set_payment_window("Платеж по реквизитам")
+                                }
+                                onPressed: {
+                                    requisites_text.font.bold = true
+                                }
+                                onReleased: {
+                                    requisites_text.font.bold = false
+                                }
+                            }
+
+                            MouseArea {
+                                id: loans_area
+                                width: loans_text.width
+                                Layout.alignment: Qt.AlignHCenter
+
+                                Layout.row: 3
+                                Layout.column: 3
+                                Layout.rowSpan: 2
+                                Layout.columnSpan: 1
+
+                                height: 140
+                                onClicked: {
+                                    set_payment_window("Погашение кредита")
+                                }
+                                onPressed: {
+                                    loans_text.font.bold = true
+                                }
+                                onReleased: {
+                                    loans_text.font.bold = false
+                                }
+                            }
+
                             Rectangle {
+                                Layout.alignment: Qt.AlignHCenter
+
                                 id: mts
 
                                 Layout.row: 0
                                 Layout.column: 0
-                                width: 60
-                                height: 60
+                                width: beltelecom_text.width
+                                height: 105
 
                                 clip: true
-                                radius: 30
+                                border.width: 10
+                                border.color: "#6e91de"
 
                                 Image {
                                     fillMode: Image.Stretch
@@ -1057,18 +1128,22 @@ Window {
                                 }
                             }
                             Text {
+                                Layout.alignment: Qt.AlignHCenter
+
                                 id: mts_text
                                 Layout.row: 1
                                 Layout.column: 0
                                 font.pixelSize: 20
-                                text: " МТС"
+                                text: "МТС"
                             }
 
                             Rectangle {
+                                Layout.alignment: Qt.AlignHCenter
+
                                 Layout.row: 0
                                 Layout.column: 1
-                                width: 60
-                                height: 60
+                                width: beltelecom_text.width
+                                height: mts.height
 
                                 Image {
                                     fillMode: Image.Stretch
@@ -1079,18 +1154,22 @@ Window {
                                 }
                             }
                             Text {
+                                Layout.alignment: Qt.AlignHCenter
+
                                 id: a1_text
                                 Layout.row: 1
                                 Layout.column: 1
                                 font.pixelSize: 20
-                                text: "    А1"
+                                text: "А1"
                             }
 
                             Rectangle {
-                                Layout.row: 0
-                                Layout.column: 2
-                                width: 60
-                                height: 60
+                                Layout.alignment: Qt.AlignHCenter
+
+                                Layout.row: 3
+                                Layout.column: 1
+                                width: beltelecom_text.width
+                                height: mts.height
 
                                 Image {
                                     fillMode: Image.Stretch
@@ -1101,45 +1180,49 @@ Window {
                                 }
                             }
                             Text {
+                                Layout.alignment: Qt.AlignHCenter
+
                                 id: life_text
-                                Layout.row: 1
-                                Layout.column: 2
+                                Layout.row: 4
+                                Layout.column: 1
                                 font.pixelSize: 20
-                                text: "   Life"
+                                text: "Life"
                             }
 
                             Rectangle {
+                                Layout.alignment: Qt.AlignHCenter
+
                                 Layout.row: 0
                                 Layout.column: 3
-                                width: 60
-                                height: 60
+                                width: beltelecom_text.width + 13
+                                height: mts.height
                                 color: "transparent"
 
                                 Image {
-                                    fillMode: Image.Stretch
+                                    fillMode: Image.PreserveAspectCrop
                                     anchors {
                                         fill: parent
                                     }
                                     source: "/images/Beltelecom.png"
-                                    anchors.rightMargin: -21
-                                    anchors.bottomMargin: 0
-                                    anchors.leftMargin: 21
-                                    anchors.topMargin: 0
                                 }
                             }
                             Text {
+                                Layout.alignment: Qt.AlignHCenter
+
                                 id: beltelecom_text
                                 Layout.row: 1
                                 Layout.column: 3
-                                font.pixelSize: 18
+                                font.pixelSize: 20
                                 text: "Белтелеком"
                             }
 
                             Rectangle {
+                                Layout.alignment: Qt.AlignHCenter
+
                                 Layout.row: 3
                                 Layout.column: 0
-                                width: 60
-                                height: 60
+                                width: beltelecom_text.width
+                                height: mts.height
 
                                 Image {
                                     fillMode: Image.Stretch
@@ -1150,11 +1233,93 @@ Window {
                                 }
                             }
                             Text {
+                                Layout.alignment: Qt.AlignHCenter
+
                                 id: byfly_text
                                 Layout.row: 4
                                 Layout.column: 0
                                 font.pixelSize: 20
-                                text: " ByFly"
+                                text: "ByFly"
+                            }
+
+                            Rectangle {
+                                Layout.alignment: Qt.AlignHCenter
+
+                                Layout.row: 0
+                                Layout.column: 2
+                                width: card_to_card_text.width + 13
+                                height: mts.height
+
+                                Image {
+                                    Layout.alignment: Qt.AlignHCenter
+
+                                    fillMode: Image.Stretch
+                                    anchors {
+                                        fill: parent
+                                    }
+                                    source: "/images/card_to_card_payment.png"
+                                }
+                            }
+                            Text {
+                                Layout.alignment: Qt.AlignHCenter
+
+                                id: card_to_card_text
+                                Layout.row: 1
+                                Layout.column: 2
+                                font.pixelSize: 20
+                                text: "Перевод на\n     карту"
+                            }
+
+                            Rectangle {
+                                Layout.alignment: Qt.AlignHCenter
+
+                                Layout.row: 3
+                                Layout.column: 2
+                                width: requisites_text.width + 13
+                                height: mts.height
+
+                                Image {
+                                    fillMode: Image.Stretch
+                                    anchors {
+                                        fill: parent
+                                    }
+                                    source: "/images/requisites_payment.png"
+                                }
+                            }
+                            Text {
+                                Layout.alignment: Qt.AlignHCenter
+
+                                id: requisites_text
+                                Layout.row: 4
+                                Layout.column: 2
+                                font.pixelSize: 20
+                                text: "Перевод по\nреквизитам"
+                            }
+
+                            Rectangle {
+                                Layout.alignment: Qt.AlignHCenter
+
+                                Layout.row: 3
+                                Layout.column: 3
+                                width: loans_text.width + 13
+                                height: mts.height
+
+                                Image {
+
+                                    fillMode: Image.Stretch
+                                    anchors {
+                                        fill: parent
+                                    }
+                                    source: "/images/percentage_icon.png"
+                                }
+                            }
+                            Text {
+                                Layout.alignment: Qt.AlignHCenter
+                                id: loans_text
+                                Layout.row: 4
+                                Layout.column: 3
+                                font.pixelSize: 20
+                                text: "Погашение\n кредитов"
                             }
                         }
                     }
@@ -1392,8 +1557,44 @@ Window {
                     bottom: payments.bottom
                     bottomMargin: 20
                 }
+                radius: 10
 
-                color: "white"
+                color: "#d5e2ff"
+
+                Text {
+                    id: operation_name
+                    anchors {
+                        left: history.left
+                        leftMargin: 5
+                        top: payments_history.top
+                        topMargin: 5
+                    }
+                    text: "Название платежа"
+                    font.pixelSize: 16
+                }
+
+                Text {
+                    id: operation_date
+                    anchors {
+                        top: payments_history.top
+                        topMargin: 5
+                        horizontalCenter: payments_history.horizontalCenter
+                    }
+                    text: "Дата проведения платежа"
+                    font.pixelSize: 16
+                }
+
+                Text {
+                    id: value
+                    anchors {
+                        right: history.right
+                        rightMargin: 5
+                        top: payments_history.top
+                        topMargin: 5
+                    }
+                    text: "Сумма платежа"
+                    font.pixelSize: 16
+                }
 
                 ListView {
                     currentIndex: -1
@@ -1403,7 +1604,14 @@ Window {
                     width: 385
                     height: 719
                     anchors {
-                        fill: parent
+                        left: parent.left
+                        right: parent.right
+                        bottom: parent.bottom
+                        leftMargin: 30
+                        rightMargin: 30
+                        bottomMargin: 14
+                        top: operation_name.bottom
+                        topMargin: 6
                     }
                     model: historyModel
                     delegate: historyDelegate
@@ -1509,9 +1717,9 @@ Window {
 
                     Rectangle {
                         radius: 8
-                        color: index % 2 ? "#d5e2ff" : "#bed2ff"
-                        height: 30
-                        clip: true
+                        color: index % 2 ? "#a8c2ff" : "#bed2ff"
+                        height: 37
+                        // clip: true
                         width: 385
                         border.width: 1
                         border.color: "#264892"
@@ -1525,8 +1733,10 @@ Window {
                             id: payment_name
                             height: parent.height
                             text: model.name
-                            font.pixelSize: 20
+                            font.pixelSize: 19
                             anchors {
+                                top: parent.top
+                                topMargin: 4
                                 left: parent.left
                                 leftMargin: 15
                             }
@@ -1535,8 +1745,10 @@ Window {
 
                             height: parent.height
                             text: model.value
-                            font.pixelSize: 20
+                            font.pixelSize: 19
                             anchors {
+                                top: parent.top
+                                topMargin: 4
                                 right: parent.right
                                 rightMargin: 15
                             }
@@ -1545,9 +1757,11 @@ Window {
 
                             height: parent.height
                             text: model.date
-                            font.pixelSize: 20
+                            font.pixelSize: 19
 
                             anchors {
+                                top: parent.top
+                                topMargin: 4
                                 horizontalCenter: parent.horizontalCenter
                             }
                         }
@@ -1614,7 +1828,7 @@ Window {
                         radius: 4
                         color: "#6e91de"
                         width: 385
-                        height: 40
+                        height: 35
 
                         border.width: 2
                         border.color: "black"
@@ -1627,6 +1841,7 @@ Window {
                             font.pixelSize: 16
                             font.bold: true
                             text: section
+                            color: "white"
                         }
 
                         MouseArea {
@@ -1852,7 +2067,7 @@ Window {
                     Rectangle {
                         radius: 8
                         color: index % 2 ? "#d5e2ff" : "#bed2ff"
-                        height: expanded ? 30 : 0
+                        height: expanded ? 27 : 0
                         clip: true
                         width: 385
                         border.width: 1
@@ -1866,7 +2081,7 @@ Window {
 
                             height: parent.height
                             text: model.name
-                            font.pixelSize: 20
+                            font.pixelSize: 17
                             anchors {
                                 horizontalCenter: parent.horizontalCenter
                             }
@@ -1882,7 +2097,7 @@ Window {
                             anchors.fill: parent
                             onClicked: __lv.currentIndex = index
                             onDoubleClicked: {
-                                set_payment_window()
+                                set_payment_window(model.name)
                             }
                         }
                     }
@@ -2089,9 +2304,10 @@ Designer {
 D{i:11}D{i:12}D{i:13}D{i:14}D{i:2}D{i:17}D{i:19}D{i:18}D{i:38}D{i:39}D{i:40}D{i:41}
 D{i:43}D{i:42}D{i:44}D{i:45}D{i:47}D{i:46}D{i:48}D{i:49}D{i:51}D{i:50}D{i:52}D{i:53}
 D{i:55}D{i:54}D{i:56}D{i:57}D{i:59}D{i:58}D{i:60}D{i:61}D{i:37}D{i:36}D{i:63}D{i:64}
-D{i:62}D{i:66}D{i:67}D{i:65}D{i:16}D{i:69}D{i:70}D{i:72}D{i:71}D{i:127}D{i:128}D{i:130}
-D{i:132}D{i:148}D{i:129}D{i:154}D{i:157}D{i:203}D{i:155}D{i:68}D{i:15}D{i:208}D{i:210}
-D{i:209}D{i:213}D{i:212}D{i:215}D{i:214}D{i:211}D{i:221}D{i:217}D{i:225}D{i:207}
+D{i:62}D{i:66}D{i:67}D{i:65}D{i:16}D{i:69}D{i:70}D{i:72}D{i:71}D{i:139}D{i:140}D{i:142}
+D{i:143}D{i:144}D{i:145}D{i:147}D{i:163}D{i:141}D{i:169}D{i:172}D{i:218}D{i:170}D{i:68}
+D{i:15}D{i:223}D{i:225}D{i:224}D{i:228}D{i:227}D{i:230}D{i:229}D{i:226}D{i:236}D{i:232}
+D{i:240}D{i:222}
 }
 ##^##*/
 

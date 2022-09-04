@@ -40,5 +40,8 @@
         <file>images/information_icon.png</file>
         <file>images/Logo_for_error.png</file>
         <file>images/BelBankQR.jpg</file>
+        <file>images/card_to_card_payment.png</file>
+        <file>images/requisites_payment.png</file>
+        <file>images/percentage_icon.png</file>
     </qresource>
 </RCC>

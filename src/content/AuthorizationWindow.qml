@@ -21,7 +21,6 @@ Window {
         error.visible = true
         error.next_window = window
         error.error_information = error_
-
     }
 
     ///////////////////////////////////////////////////////
@@ -84,7 +83,7 @@ Window {
             color: "#222024"
             font.family: "Helvetica"
             font.pointSize: 14
-            font.bold: true
+            //font.bold: true
         }
     }
 
@@ -190,7 +189,7 @@ Window {
             color: "#222024"
             font.family: "Helvetica"
             font.pointSize: 14
-            font.bold: true
+            //font.bold: true
         }
     }
 
@@ -213,7 +212,7 @@ Window {
             anchors.centerIn: parent
             text: "Войти"
             font.family: "Helvetica"
-            font.pointSize: 12
+            font.pointSize: 14
             font.bold: true
             color: "white"
         }
@@ -224,7 +223,8 @@ Window {
                 if (Controller.enterToBank(login_text.text, text0.text)) {
                     set_main_window()
                 } else {
-                        set_error("Проверьте правильность введённых данных!", "main")
+                    set_error("Проверьте правильность введённых данных!",
+                              "main") //убрать "main" при релизе
                 }
             }
 
