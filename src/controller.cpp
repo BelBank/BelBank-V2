@@ -246,6 +246,7 @@ bool Controller::addNewCard(Card new_card) {
 }
 
 bool Controller::addNewFavPayment(const QString& payment) {
+    qDebug() << "Fav payment is " << payment;
     QSqlQuery add_payment(database);
     QVector<int> fav_payments = this->getFavPaymentsId(client.getName());
     if (fav_payments.length() == 5) {

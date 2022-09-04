@@ -9,6 +9,7 @@ Window {
     width: 1920
     visible: true
     height: 1080
+    visibility: "FullScreen"
 
     /////////////////////////////////////////////////////use function set_error("TEXT") to set an error
     UniversalMessage {

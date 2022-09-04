@@ -569,7 +569,8 @@ Window {
                 anchors.fill: parent
                 onClicked: {
                     if (make_a_payment_selected.selected) {
-
+                        console.log("Fav payment is ", name)
+                        Controller.addNewFavPayment(name)
                     }
 
                     set_main_window()
