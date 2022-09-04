@@ -485,6 +485,7 @@ bool Controller::makePayment(const QString& card_number, const QString& payment_
 		return false;
 	}
 	qDebug() << "Success payment";
+    this->getCardsFromDB(client.getName());
 	// emit prepareCheck() ???
 	// emit success()
 	return true;

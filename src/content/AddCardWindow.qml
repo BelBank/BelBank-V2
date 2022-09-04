@@ -200,7 +200,7 @@ Window {
             activeFocusOnTab: true
             font.family: "Helvetica"
             font.pointSize: 16
-            inputMask: "99[ / ]99"
+            inputMask: "99[/]99"
             onFocusChanged: {
                 if (activeFocus) {
                     cursorPosition = 0

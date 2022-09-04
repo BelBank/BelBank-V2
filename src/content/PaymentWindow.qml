@@ -178,6 +178,7 @@ Window {
 
             Component {
                 id: card_delegate
+
                 Rectangle {
                     id: rect_for_flip_card
 
@@ -530,7 +531,6 @@ Window {
                 top: money_value.bottom
                 topMargin: 15
             }
-
             color: "#6e91de"
             border.color: "#386cde"
             border.width: 3
@@ -552,9 +552,15 @@ Window {
                     if (make_a_payment_selected.selected) {
                         console.log("Fav payment is ", name)
                         Controller.addNewFavPayment(name)
-                    }
 
-                    set_main_window()
+                    }
+                    if (text0.text === "" || text00.text === "") {
+                        // ошибка нет платежа или суммы
+                    } else if (Controller.makePayment(card_model.get(card_choose.indexAt(card_choose.currentItem.x,card_choose.currentItem.y)).number,
+                                                      text00.text)) {
+                        // успех
+                        set_main_window()
+                    }
                 }
 
                 onPressed: {
