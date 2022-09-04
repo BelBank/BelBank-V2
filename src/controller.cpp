@@ -106,10 +106,10 @@ QVariantList Controller::cardsToQML() {
 }
 
 bool Controller::prepareQML(QVariant source) {
-    if (source.toString() != "MainWindow.qml") {
+    if (source.toString() != "MainWindow.qml" and source.toString() != "PaymentWindow.qml") {
         return true;
     }
-    qDebug() << "QML preparing... ";
+    qDebug() << "QML preparing in " << source.toString() << "...";
     std::vector<Card> cards = client.getCards();
     foreach (Card card, cards) {
         QString type;
@@ -507,7 +507,6 @@ void Controller::exchangeRates(QJsonDocument rates_doc) {
 QStringList Controller::exchangeRatesForBank() {
 	QStringList rates_to_qml;
 	foreach (QString rate, exchange_rates) {
-		qDebug() << "Rate " << rate;
 		rates_to_qml.push_back(QString::number(round(rate.toDouble() * 1.02 * 100) / 100));
 		rates_to_qml.push_back(QString::number(round(rate.toDouble() * 0.98 * 100) / 100));
 	}

@@ -967,7 +967,7 @@ Window {
                                 width: 60
                                 height: 140
                                 onClicked: {
-                                    set_payment_window()
+                                    set_payment_window("A1")
                                 }
                                 onPressed: {
                                     a1_text.font.bold = true

@@ -5,7 +5,9 @@ import QtQuick.Window 2.12
 
 Window {
 
-    property var name
+    property var name: "payment"
+    property alias cardview: card_choose
+    property alias cardlist: card_model
     //название платежа, как заказывали
     id: payment_window
     width: 800
@@ -173,41 +175,7 @@ Window {
             snapMode: ListView.SnapOneItem
             orientation: ListView.Horizontal
             delegate: card_delegate
-            model: ListModel {
-                id: card_model
-                ListElement {
-                    name: "Петя Иванов"
-                    number: "1234 5678 1234 5678"
-                    valid: "25/08"
-                    type: "gold"
-                    system: "visa"
-                    balance: "3.23"
-                }
-                ListElement {
-                    name: "Шурик Скворцов"
-                    number: "1234 5678 7654 5678"
-                    valid: "35/08"
-                    type: "silver"
-                    system: "visa"
-                    balance: "0"
-                }
-                ListElement {
-                    name: "PaShampusik"
-                    number: "1346 5678 1234 5678"
-                    valid: "25/08"
-                    type: "gold"
-                    system: "mastercard"
-                    balance: "33423.00"
-                }
-                ListElement {
-                    name: "Павел Староста"
-                    number: "1234 5678 1234 5678"
-                    valid: "25/08"
-                    type: "gold"
-                    system: "visa"
-                    balance: "323.24"
-                }
-            }
+
             Component {
                 id: card_delegate
                 Rectangle {
@@ -217,27 +185,7 @@ Window {
                     height: 120
                     color: "white"
 
-                    function getCard() {
-                        var sorce
-                        if (card.type) {
-                            if (card.system) {
-                                sorce = "/images/Golden card VISA.png"
-                            } else if (model.system === "mastercard") {
-                                sorce = "/images/Golden Card Mastercard.png"
-                            } else {
-                                sorce = "/images/Golden card MIR .png"
-                            }
-                        } else {
-                            if (card.system) {
-                                sorce = "/images/Silver card VISA.png"
-                            } else if (model.system === "mastercard") {
-                                sorce = "/images/Silver card Mastercard.png"
-                            } else {
-                                sorce = "/images/Silver card MIR.png"
-                            }
-                        }
-                        return sorce
-                    }
+
 
                     Flipable {
                         id: card
@@ -252,6 +200,27 @@ Window {
                             anchors {
                                 //fill: parent
                                 centerIn: parent
+                            }
+                            function getCard() {
+                                var sorce
+                                if (card.type) {
+                                    if (card.system) {
+                                        sorce = "/images/Golden card VISA.png"
+                                    } else if (model.system === "mastercard") {
+                                        sorce = "/images/Golden Card Mastercard.png"
+                                    } else {
+                                        sorce = "/images/Golden card MIR .png"
+                                    }
+                                } else {
+                                    if (card.system) {
+                                        sorce = "/images/Silver card VISA.png"
+                                    } else if (model.system === "mastercard") {
+                                        sorce = "/images/Silver card Mastercard.png"
+                                    } else {
+                                        sorce = "/images/Silver card MIR.png"
+                                    }
+                                }
+                                return sorce
                             }
                             source: getCard()
                             Text {
@@ -408,6 +377,18 @@ Window {
                         }
                     }
                 }
+
+
+            }
+            model: ListModel {
+                id: card_model
+            }
+            function addElement(number, name, type, valid, system, balance) {
+                card_model.append({"number": number, "name": name, "valid": valid, "type": type,
+                                      "system": system, "balance": balance})
+            }
+            function clearModel() {
+                card_model.clear()
             }
         }
 
