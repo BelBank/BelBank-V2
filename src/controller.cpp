@@ -290,6 +290,7 @@ bool Controller::addNewFavPayment(const QString& payment) {
         qDebug() << "Query for updating cards array failed! Error: " << add_payment.lastError().text();
         return false;
     }
+    this->getFavPaymentsFromDB(client.getName());
     return true;
 }
 
