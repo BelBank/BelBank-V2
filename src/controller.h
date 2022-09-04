@@ -113,6 +113,8 @@ public Q_SLOTS:
      */
     bool addNewFavPayment(const QString& payment);
 
+    bool addRecentPayment(const QString& payment, const QString& payment_cost);
+
     /**
 	 * # В метод передается только имя владельца карты
      * # Метод делает выборку из таблицы user_info

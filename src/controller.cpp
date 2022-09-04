@@ -88,6 +88,7 @@ bool Controller::enterToBank(const QString& login, const QString& password) {
 	this->client.setName(login_query.value(3).toString());
 	this->getCardsFromDB(login_query.value(1).toString());
     this->getFavPaymentsFromDB(client.getName());
+    this->addRecentPayment("Кредит", "234.56");
 	return true;
 }
 
@@ -291,6 +292,60 @@ bool Controller::addNewFavPayment(const QString& payment) {
         return false;
     }
     this->getFavPaymentsFromDB(client.getName());
+    return true;
+}
+
+bool Controller::addRecentPayment(const QString& payment, const QString& payment_cost) {
+    QSqlQuery get_recent_payments(database);
+    get_recent_payments.prepare("SELECT recent_payments FROM user_info WHERE owner_name = :name");
+    get_recent_payments.bindValue(0, client.getName());
+    if (!get_recent_payments.exec()) {
+        qDebug() << "Query for getting recent payments array failed! Error: "
+                         << get_recent_payments.lastError().text();
+        return false;
+    }
+    QJsonArray payments_array;
+    while (get_recent_payments.next()) {
+        QJsonObject recordObject;
+        for (int x = 0; x < get_recent_payments.record().count(); x++) {
+            recordObject.insert(get_recent_payments.record().fieldName(x),
+                                                    QJsonValue::fromVariant(get_recent_payments.value(x)));
+        }
+        qDebug() << "QJsonObject " << recordObject;
+        if (recordObject.value("recent_payments").toString() == "") {
+            break;
+        }
+        payments_array.push_back(
+                recordObject.value("recent_payments").toString().replace(QLatin1String("\\\""), QLatin1String("\"")));
+    }
+    qDebug() << "Json from DB " << payments_array;
+    if (payments_array.size() == 10) {
+        payments_array.pop_back();
+    }
+    QJsonObject new_payment;
+    new_payment.insert("name", payment);
+    new_payment.insert("date", QDate::currentDate().toString("dd/MM/yyyy"));
+    new_payment.insert("cost", payment_cost);
+
+    QSqlQuery update_recent_payments(database);
+    update_recent_payments.prepare(
+            "UPDATE user_info "
+            "SET recent_payments = :payments "
+            "WHERE owner_name = :owner_name");
+    QJsonDocument doc_to_db;
+    if (!payments_array.isEmpty()) {
+        payments_array.push_back(new_payment);
+        doc_to_db.setArray(payments_array);
+    } else {
+        doc_to_db.setObject(new_payment);
+    }
+    update_recent_payments.bindValue(0, QString(doc_to_db.toJson(QJsonDocument::Compact)));
+    update_recent_payments.bindValue(1, client.getName());
+    if (!update_recent_payments.exec()) {
+        qDebug() << "Query for updating recent_payments array failed! Error: "
+                         << update_recent_payments.lastError().text();
+        return false;
+    }
     return true;
 }
 

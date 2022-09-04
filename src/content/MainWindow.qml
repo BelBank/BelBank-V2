@@ -10,8 +10,8 @@ Window {
     width: 1920
     height: 1080
     visible: true
-    visibility: "FullScreen"
 
+    visibility: Window.Maximized
     UniversalMessage {
         visible: false
         id: error
