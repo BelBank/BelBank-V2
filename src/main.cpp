@@ -6,15 +6,15 @@
 
 int main(int argc, char *argv[]) {
 #if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
-    QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
+	QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
 #endif
-    QGuiApplication app(argc, argv);
+	QGuiApplication app(argc, argv);
 
-    QQmlApplicationEngine engine;
-    Controller *controller = new Controller();
+	QQmlApplicationEngine engine;
+	Controller *controller = new Controller();
 
-    engine.rootContext()->setContextProperty("Controller", controller);
-    const QUrl url(QStringLiteral("qrc:/content/Main.qml"));
+	engine.rootContext()->setContextProperty("Controller", controller);
+	const QUrl url(QStringLiteral("qrc:/content/Main.qml"));
 	QObject::connect(
 			&engine,
 			&QQmlApplicationEngine::objectCreated,
@@ -24,8 +24,9 @@ int main(int argc, char *argv[]) {
 					QCoreApplication::exit(-1);
 			},
 			Qt::QueuedConnection);
+	app.setHighDpiScaleFactorRoundingPolicy(Qt::HighDpiScaleFactorRoundingPolicy::Floor);
 
-    engine.load(url);
+	engine.load(url);
 
-    return app.exec();
+	return app.exec();
 }
