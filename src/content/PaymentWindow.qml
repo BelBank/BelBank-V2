@@ -559,6 +559,7 @@ Window {
                     } else if (Controller.makePayment(card_model.get(card_choose.indexAt(card_choose.currentItem.x,card_choose.currentItem.y)).number,
                                                       text00.text)) {
                         // успех
+                        Controller.addRecentPayment(name, text00.text)
                         set_main_window()
                     }
                 }

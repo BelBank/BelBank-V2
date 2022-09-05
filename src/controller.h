@@ -131,6 +131,8 @@ public Q_SLOTS:
      */
     QVector<int> getFavPaymentsId(const QString& owner_name);
 
+    QVector<int> getRecentPaymentsId(const QString& owner_name);
+
 	/**
 	 *  # В метод передается только имя владельца карты
 	 *  # Метод выбирает из БД данные по картам пользователя
@@ -151,6 +153,8 @@ public Q_SLOTS:
      * # Метод, отсылающий избранные платежи в QML
      */
     Q_INVOKABLE QStringList favoritePaymentsToQML();
+
+    QList<QStringList> recentPaymentsToQML();
 
     /**
 	 *  # В метод передается логин, пароль и имя пользователя
@@ -203,6 +207,8 @@ signals:
                                  const QString& balance);
 
     void paymentToQML(const QString& payment);
+
+    void recPaymentsToQML(const QString& name, const QString& date, const QString& time, const QString& cost);
 
     void setError(const QString& error);
 

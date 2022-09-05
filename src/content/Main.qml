@@ -29,9 +29,14 @@ ApplicationWindow {
         }
         function onPaymentToQML(payment) {
             if (loader.item.paymentlist.rowCount() === Controller.getFavPaymentsCount()) {
-                loader.item.paymentlist.clearModel();
+                loader.item.paymentview.clearModel();
             }
             loader.item.paymentview.addFavPayment(payment)
+        }
+
+        function onRecPaymentsToQML(name, date, time, cost) {
+            console.log("Recent payment " + name + ' ' + date)
+            loader.item.recentPaymentView.addElement(name, date, time, cost)
         }
 
         function onSetError(error) {
