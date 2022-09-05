@@ -10,7 +10,7 @@ Window {
     visible: true
     title: "Создание новой карты"
 
-   flags: Qt.Window | Qt.FramelessWindowHint
+    flags: Qt.Window | Qt.FramelessWindowHint
 
     /////////////////////////////////////////////////////use function set_error("TEXT") to set an error
     UniversalMessage {

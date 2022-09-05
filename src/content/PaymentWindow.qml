@@ -259,42 +259,36 @@ Window {
                                 //fill: parent
                                 centerIn: parent
                             }
-                            color: "transparent"
-                            Image {
-                                anchors {
-                                    fill: parent
-                                }
-                                source: "/images/card_background.jpg"
-                                opacity: 0.75
-                            }
+                            color: "#d5e2ff"
+                            radius: 12
 
                             Text {
                                 id: card_info_text
                                 text: "Данные о карте:"
-                                color: "white"
+                                color: "black"
                                 anchors {
                                     horizontalCenter: payment_card_info.horizontalCenter
                                     top: payment_card_info.top
                                     topMargin: 10
                                 }
-                                font.pixelSize: 12
+                                font.pixelSize: 14
                             }
                             Text {
                                 id: payment_cardholder_name_text
-                                color: "white"
+                                color: "black"
 
                                 anchors {
                                     left: payment_card_info.left
                                     top: card_info_text.bottom
-                                    topMargin: 15
+                                    topMargin: 10
                                     leftMargin: 15
                                 }
                                 text: "Имя держателя:"
-                                font.pixelSize: 10
+                                font.pixelSize: 13
                                 Text {
                                     ///////////////////////////////
                                     id: payment_cardholder_name
-                                    color: "white"
+                                    color: "black"
 
                                     anchors {
                                         verticalCenter: payment_cardholder_name_text.verticalCenter
@@ -302,25 +296,25 @@ Window {
                                         leftMargin: 13
                                     }
                                     text: model.name
-                                    font.pixelSize: 10
+                                    font.pixelSize: 13
                                 }
                             }
                             Text {
                                 id: payment_card_number_text
-                                color: "white"
+                                color: "black"
 
                                 text: "Номер карты:"
-                                font.pixelSize: 10
+                                font.pixelSize: 13
                                 anchors {
                                     left: payment_card_info.left
                                     top: payment_cardholder_name_text.bottom
-                                    topMargin: 15
+                                    topMargin: 10
                                     leftMargin: 15
                                 }
                                 Text {
                                     ///////////////////////////////
                                     id: payment_card_number
-                                    color: "white"
+                                    color: "black"
 
                                     anchors {
                                         verticalCenter: payment_card_number_text.verticalCenter
@@ -328,25 +322,25 @@ Window {
                                         leftMargin: 13
                                     }
                                     text: model.number
-                                    font.pixelSize: 10
+                                    font.pixelSize: 13
                                 }
                             }
                             Text {
                                 id: payment_valid_thru_text
-                                color: "white"
+                                color: "black"
 
                                 text: "Годна до:"
-                                font.pixelSize: 10
+                                font.pixelSize: 13
                                 anchors {
                                     left: payment_card_info.left
                                     top: payment_card_number_text.bottom
-                                    topMargin: 15
+                                    topMargin: 10
                                     leftMargin: 15
                                 }
                                 Text {
                                     ///////////////////////////////
                                     id: payment_valid_thru
-                                    color: "white"
+                                    color: "black"
 
                                     anchors {
                                         verticalCenter: payment_valid_thru_text.verticalCenter
@@ -354,7 +348,7 @@ Window {
                                         leftMargin: 13
                                     }
                                     text: model.valid
-                                    font.pixelSize: 10
+                                    font.pixelSize: 13
                                 }
                             }
                         }
@@ -456,7 +450,7 @@ Window {
                 }
                 color: activeFocus ? "black" : "gray"
                 focus: true
-                inputMask: requisites ? "9999[ ]9999[ ]9999[ ]9999" : "nnnnnnnnnnnnnnnnnnnnnnnn"
+                inputMask: requisites ? "9999[ ]9999[ ]9999[ ]9999" : "000000000000000000000"
                 activeFocusOnTab: true
                 font.family: "Helvetica"
                 font.pointSize: 16
@@ -567,6 +561,7 @@ Window {
                     if (text0.text === "" || text00.text === "") {
 
                         // ошибка нет платежа или суммы
+                        set_error("Неверно введенные данные!")
                     } else if (Controller.makePayment(
                                    card_model.get(
                                        card_choose.indexAt(
@@ -575,6 +570,8 @@ Window {
                                    text00.text)) {
                         // успех
                         set_main_window()
+                    } else {
+                        set_error("Ошипка!")
                     }
                 }
 
