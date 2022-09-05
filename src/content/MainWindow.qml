@@ -75,7 +75,8 @@ Window {
             font.bold: true
             color: "white"
 
-            text: Controller.getUserName() ///тут должен присваиваться ник клиента.
+            text: Controller.getUserName(
+                      ) ///тут должен присваиваться ник клиента.
         }
 
         Rectangle {
@@ -251,8 +252,6 @@ Window {
                         width: 500
                         height: 240
                         color: "white"
-
-
 
                         Flipable {
                             id: card
@@ -447,12 +446,18 @@ Window {
                 }
 
                 model: ListModel {
-                    id:card_model
+                    id: card_model
                 }
 
                 function addElement(number, name, type, valid, system, balance) {
-                    card_model.append({"number": number, "name": name, "valid": valid, "type": type,
-                                          "system": system, "balance": balance})
+                    card_model.append({
+                                          "number": number,
+                                          "name": name,
+                                          "valid": valid,
+                                          "type": type,
+                                          "system": system,
+                                          "balance": balance
+                                      })
                 }
                 function clearModel() {
                     card_model.clear()
@@ -1394,6 +1399,18 @@ Window {
                             }
                         }
 
+                        Text {
+                            text: "Наименование платежа"
+                            font.pixelSize: 16
+                            anchors {
+                                top: parent.top
+                                topMargin: 5
+                                bottomMargin: 5
+                                bottom: selected_payments.top
+                                horizontalCenter: parent.horizontalCenter
+                            }
+                        }
+
                         ListView {
                             currentIndex: -1
                             id: selected_payments
@@ -1418,7 +1435,9 @@ Window {
                             }
 
                             function addFavPayment(payment) {
-                                selected_paymentModel.append({"name": payment})
+                                selected_paymentModel.append({
+                                                                 "name": payment
+                                                             })
                             }
                             function clearModel() {
                                 selected_paymentModel.clear()
@@ -1435,7 +1454,7 @@ Window {
                             Rectangle {
                                 radius: 3
                                 color: index % 2 ? "#d5e2ff" : "#bed2ff"
-                                height: 30
+                                height: 40
                                 clip: true
                                 width: 385
                                 border.width: 1

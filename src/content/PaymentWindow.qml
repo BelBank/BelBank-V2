@@ -5,7 +5,6 @@ import QtQuick.Window 2.12
 
 Window {
 
-    property var name
     property bool requisites: false
     property var name: "payment"
     property alias cardview: card_choose
@@ -189,8 +188,6 @@ Window {
                     height: 120
                     color: "white"
 
-
-
                     Flipable {
                         id: card
                         property bool flipped: false
@@ -230,22 +227,23 @@ Window {
                             Text {
                                 id: balance_text
                                 anchors {
-                                    left: parent.left
-                                    leftMargin: 145
-                                    top: card_img.top
-                                    topMargin: card_img.height / 2 - 10
+                                    left: balance.right
+                                    leftMargin: 4
+                                    bottom: balance.bottom
+                                    bottomMargin: 10
                                 }
-                                font.pixelSize: 22
-                                text: "Баланс:"
+                                font.pixelSize: 16
+                                text: "BYN"
                                 color: "#0048ad"
                                 //font.bold: true
                             }
                             Text {
                                 id: balance
                                 anchors {
-                                    left: balance_text.right
-                                    leftMargin: 10
-                                    verticalCenter: balance_text.verticalCenter
+                                    left: parent.left
+                                    leftMargin: 160
+                                    top: card_img.top
+                                    topMargin: card_img.height / 2 - 10
                                 }
                                 font.pixelSize: 22
                                 // font.bold: true
@@ -381,15 +379,19 @@ Window {
                         }
                     }
                 }
-
-
             }
             model: ListModel {
                 id: card_model
             }
             function addElement(number, name, type, valid, system, balance) {
-                card_model.append({"number": number, "name": name, "valid": valid, "type": type,
-                                      "system": system, "balance": balance})
+                card_model.append({
+                                      "number": number,
+                                      "name": name,
+                                      "valid": valid,
+                                      "type": type,
+                                      "system": system,
+                                      "balance": balance
+                                  })
             }
             function clearModel() {
                 card_model.clear()
@@ -561,12 +563,16 @@ Window {
                     if (make_a_payment_selected.selected) {
                         console.log("Fav payment is ", name)
                         Controller.addNewFavPayment(name)
-
                     }
                     if (text0.text === "" || text00.text === "") {
+
                         // ошибка нет платежа или суммы
-                    } else if (Controller.makePayment(card_model.get(card_choose.indexAt(card_choose.currentItem.x,card_choose.currentItem.y)).number,
-                                                      text00.text)) {
+                    } else if (Controller.makePayment(
+                                   card_model.get(
+                                       card_choose.indexAt(
+                                           card_choose.currentItem.x,
+                                           card_choose.currentItem.y)).number,
+                                   text00.text)) {
                         // успех
                         set_main_window()
                     }
