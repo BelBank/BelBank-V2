@@ -47,6 +47,8 @@ public Q_SLOTS:
      */
     QVariant getCardsCount() const;
 
+    QVariant getFavPaymentsCount() const;
+
     /**
      * Метод для проверки подключения к интернету
      */
@@ -111,6 +113,8 @@ public Q_SLOTS:
      */
     bool addNewFavPayment(const QString& payment);
 
+    bool addRecentPayment(const QString& payment, const QString& payment_cost);
+
     /**
 	 * # В метод передается только имя владельца карты
      * # Метод делает выборку из таблицы user_info
@@ -126,6 +130,8 @@ public Q_SLOTS:
      * # Если метод вернул массив, где единственный элемент равен -1, то произошла ошибка при выборке
      */
     QVector<int> getFavPaymentsId(const QString& owner_name);
+
+    QVector<int> getRecentPaymentsId(const QString& owner_name);
 
 	/**
 	 *  # В метод передается только имя владельца карты
@@ -147,6 +153,8 @@ public Q_SLOTS:
      * # Метод, отсылающий избранные платежи в QML
      */
     Q_INVOKABLE QStringList favoritePaymentsToQML();
+
+    QList<QStringList> recentPaymentsToQML();
 
     /**
 	 *  # В метод передается логин, пароль и имя пользователя
@@ -197,6 +205,10 @@ signals:
                                  const QString& valid,
                                  const QString& system,
                                  const QString& balance);
+
+    void paymentToQML(const QString& payment);
+
+    void recPaymentsToQML(const QString& name, const QString& date, const QString& time, const QString& cost);
 
     void setError(const QString& error);
 

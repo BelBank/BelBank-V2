@@ -11,22 +11,23 @@ public:
     explicit User(QObject* parent = nullptr);
 
     const QString& getName() const;
-    std::vector<Card> getCards() const;
-    std::vector<QString> getFavPayments() const;
+    QVector<Card> getCards() const;
+    QVector<QString> getFavPayments() const;
+    QVector<int> getRecentPayments() const;
 
     void setName(const QString& name_to_set);
-    void setCards(std::vector<Card> cards_to_set);
-    void setFavPayments(std::vector<QString> payments);
-
+    void setCards(QVector<Card> cards_to_set);
+    void setFavPayments(QVector<QString> payments);
+    void setRecentPayments(QVector<int> payments);
     void printCardsData() const;
 
 signals:
 
 private:
     QString user_name;
-    std::vector<Card> cards;
-    std::vector<QString> favorite_payments;
-    std::vector<int> recent_payments;
+    QVector<Card> cards;
+    QVector<QString> favorite_payments;
+    QVector<int> recent_payments;
 };
 
 #endif	// USER_H

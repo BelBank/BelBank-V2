@@ -7,6 +7,7 @@ ApplicationWindow {
     id: main_stack_window
     width: 1920
     height: 1080
+    property var payment_name
 
     Connections {
         target: Controller
@@ -26,6 +27,18 @@ ApplicationWindow {
             console.warn("type ", loader.item.cardlist.get(0).type)
             console.warn("system ", loader.item.cardlist.get(0).system)
         }
+        function onPaymentToQML(payment) {
+            if (loader.item.paymentlist.rowCount() === Controller.getFavPaymentsCount()) {
+                loader.item.paymentview.clearModel();
+            }
+            loader.item.paymentview.addFavPayment(payment)
+        }
+
+        function onRecPaymentsToQML(name, date, time, cost) {
+            console.log("Recent payment " + name + ' ' + date)
+            loader.item.recentPaymentView.addElement(name, date, time, cost)
+        }
+
         function onSetError(error) {
             console.log("Error!")
             mainwindow.set_error(error)
@@ -46,6 +59,10 @@ ApplicationWindow {
         anchors.fill: parent
         source: "AuthorizationWindow.qml"
         onLoaded: {
+            console.log("Loader name ", loader.item.name)
+            if (loader.item.name === "payment") {
+                loader.item.name = payment_name
+            }
             loader.item.cardview.clearModel();
             Controller.prepareQML(loader.source)
         }
@@ -71,19 +88,8 @@ ApplicationWindow {
         loader.source = "AddCardWindow.qml"
     }
 
-    Component {
-        id: payment
-        PaymentWindow {
-            name: " "
-        }
-    }
-
     function set_payment_window(str) {
-
-        //        loader.sourceComponent = payment
-        //        loader.loaderItem.name = str
-        loader.setSource("PaymentWindow.qml", {
-                             "name": str
-                         })
+        loader.source = "PaymentWindow.qml"
+        payment_name = str
     }
 }
