@@ -8,18 +8,20 @@ ApplicationWindow {
     width: 1920
     height: 1080
     property var payment_name
+    property bool requisites: false
 
     Connections {
         target: Controller
         function onCardToQML(number, owner_name, type, valid, system, balance) {
             console.log("Row count: ", loader.item.cardlist.rowCount())
             console.log("Cards count: ", Controller.getCardsCount())
-            if (loader.item.cardlist.rowCount() === Controller.getCardsCount()) {
-                loader.item.cardview.clearModel();
-
+            if (loader.item.cardlist.rowCount(
+                        ) === Controller.getCardsCount()) {
+                loader.item.cardview.clearModel()
             }
             console.log("card to qml, number: " + number)
-            loader.item.cardview.addElement(number, owner_name, type, valid, system, balance)
+            loader.item.cardview.addElement(number, owner_name, type, valid,
+                                            system, balance)
 
             console.warn("name ", loader.item.cardlist.get(0).name)
             console.warn("number ", loader.item.cardlist.get(0).number)
@@ -62,18 +64,23 @@ ApplicationWindow {
             console.log("Loader name ", loader.item.name)
             if (loader.item.name === "payment") {
                 loader.item.name = payment_name
+                loader.item.requisites = main_stack_window.requisites
             }
-            loader.item.cardview.clearModel();
+            loader.item.cardview.clearModel()
             Controller.prepareQML(loader.source)
         }
     }
 
     function set_main_window() {
+
+        loader.item.transientParent = null
         loader.source = "MainWindow.qml"
     }
 
     function set_authorization_window() {
+        // loader.item.transientParent = null
         loader.source = "AuthorizationWindow.qml"
+        //loader.item.transientParent = null
     }
 
     function set_registration_window() {
@@ -88,8 +95,9 @@ ApplicationWindow {
         loader.source = "AddCardWindow.qml"
     }
 
-    function set_payment_window(str) {
+    function set_payment_window(str, req = false) {
         loader.source = "PaymentWindow.qml"
         payment_name = str
+        requisites = req
     }
 }

@@ -5,6 +5,7 @@ import QtQuick.Window 2.12
 
 Window {
 
+    property bool requisites: false
     property var name: "payment"
     property alias cardview: card_choose
     property alias cardlist: card_model
@@ -13,7 +14,8 @@ Window {
     width: 800
     height: 600
     visible: true
-    flags: Qt.CustomizeWindowHint
+
+    flags: Qt.Window | Qt.FramelessWindowHint
 
     /////////////////////////////////////////////////////use function set_error("TEXT") to set an error
     UniversalMessage {
@@ -227,22 +229,23 @@ Window {
                             Text {
                                 id: balance_text
                                 anchors {
-                                    left: parent.left
-                                    leftMargin: 145
-                                    top: card_img.top
-                                    topMargin: card_img.height / 2 - 10
+                                    left: balance.right
+                                    leftMargin: 4
+                                    bottom: balance.bottom
+                                    bottomMargin: 10
                                 }
-                                font.pixelSize: 22
-                                text: "Баланс:"
+                                font.pixelSize: 16
+                                text: "BYN"
                                 color: "#0048ad"
                                 //font.bold: true
                             }
                             Text {
                                 id: balance
                                 anchors {
-                                    left: balance_text.right
-                                    leftMargin: 10
-                                    verticalCenter: balance_text.verticalCenter
+                                    left: parent.left
+                                    leftMargin: 160
+                                    top: card_img.top
+                                    topMargin: card_img.height / 2 - 10
                                 }
                                 font.pixelSize: 22
                                 // font.bold: true
@@ -258,42 +261,36 @@ Window {
                                 //fill: parent
                                 centerIn: parent
                             }
-                            color: "transparent"
-                            Image {
-                                anchors {
-                                    fill: parent
-                                }
-                                source: "/images/card_background.jpg"
-                                opacity: 0.75
-                            }
+                            color: "#d5e2ff"
+                            radius: 12
 
                             Text {
                                 id: card_info_text
                                 text: "Данные о карте:"
-                                color: "white"
+                                color: "black"
                                 anchors {
                                     horizontalCenter: payment_card_info.horizontalCenter
                                     top: payment_card_info.top
                                     topMargin: 10
                                 }
-                                font.pixelSize: 12
+                                font.pixelSize: 14
                             }
                             Text {
                                 id: payment_cardholder_name_text
-                                color: "white"
+                                color: "black"
 
                                 anchors {
                                     left: payment_card_info.left
                                     top: card_info_text.bottom
-                                    topMargin: 15
+                                    topMargin: 10
                                     leftMargin: 15
                                 }
                                 text: "Имя держателя:"
-                                font.pixelSize: 10
+                                font.pixelSize: 13
                                 Text {
                                     ///////////////////////////////
                                     id: payment_cardholder_name
-                                    color: "white"
+                                    color: "black"
 
                                     anchors {
                                         verticalCenter: payment_cardholder_name_text.verticalCenter
@@ -301,25 +298,25 @@ Window {
                                         leftMargin: 13
                                     }
                                     text: model.name
-                                    font.pixelSize: 10
+                                    font.pixelSize: 13
                                 }
                             }
                             Text {
                                 id: payment_card_number_text
-                                color: "white"
+                                color: "black"
 
                                 text: "Номер карты:"
-                                font.pixelSize: 10
+                                font.pixelSize: 13
                                 anchors {
                                     left: payment_card_info.left
                                     top: payment_cardholder_name_text.bottom
-                                    topMargin: 15
+                                    topMargin: 10
                                     leftMargin: 15
                                 }
                                 Text {
                                     ///////////////////////////////
                                     id: payment_card_number
-                                    color: "white"
+                                    color: "black"
 
                                     anchors {
                                         verticalCenter: payment_card_number_text.verticalCenter
@@ -327,25 +324,25 @@ Window {
                                         leftMargin: 13
                                     }
                                     text: model.number
-                                    font.pixelSize: 10
+                                    font.pixelSize: 13
                                 }
                             }
                             Text {
                                 id: payment_valid_thru_text
-                                color: "white"
+                                color: "black"
 
                                 text: "Годна до:"
-                                font.pixelSize: 10
+                                font.pixelSize: 13
                                 anchors {
                                     left: payment_card_info.left
                                     top: payment_card_number_text.bottom
-                                    topMargin: 15
+                                    topMargin: 10
                                     leftMargin: 15
                                 }
                                 Text {
                                     ///////////////////////////////
                                     id: payment_valid_thru
-                                    color: "white"
+                                    color: "black"
 
                                     anchors {
                                         verticalCenter: payment_valid_thru_text.verticalCenter
@@ -353,7 +350,7 @@ Window {
                                         leftMargin: 13
                                     }
                                     text: model.valid
-                                    font.pixelSize: 10
+                                    font.pixelSize: 13
                                 }
                             }
                         }
@@ -385,8 +382,14 @@ Window {
                 id: card_model
             }
             function addElement(number, name, type, valid, system, balance) {
-                card_model.append({"number": number, "name": name, "valid": valid, "type": type,
-                                      "system": system, "balance": balance})
+                card_model.append({
+                                      "number": number,
+                                      "name": name,
+                                      "valid": valid,
+                                      "type": type,
+                                      "system": system,
+                                      "balance": balance
+                                  })
             }
             function clearModel() {
                 card_model.clear()
@@ -409,7 +412,7 @@ Window {
                 topMargin: 15
             }
             Text {
-                text: "Номер счета:"
+                text: requisites ? "Номер карты:" : "Номер счета:"
                 color: "#222024"
                 font.family: "Helvetica"
                 font.pointSize: 14
@@ -451,9 +454,15 @@ Window {
                 }
                 color: activeFocus ? "black" : "gray"
                 focus: true
+                inputMask: requisites ? "9999[ ]9999[ ]9999[ ]9999" : "000000000000000000000"
                 activeFocusOnTab: true
                 font.family: "Helvetica"
                 font.pointSize: 16
+                onFocusChanged: {
+                    if (activeFocus) {
+                        cursorPosition = 0
+                    }
+                }
             }
         }
 
@@ -552,15 +561,21 @@ Window {
                     if (make_a_payment_selected.selected) {
                         console.log("Fav payment is ", name)
                         Controller.addNewFavPayment(name)
-
                     }
                     if (text0.text === "" || text00.text === "") {
+
                         // ошибка нет платежа или суммы
-                    } else if (Controller.makePayment(card_model.get(card_choose.indexAt(card_choose.currentItem.x,card_choose.currentItem.y)).number,
-                                                      text00.text)) {
+                        set_error("Неверно введенные данные!")
+                    } else if (Controller.makePayment(
+                                   card_model.get(
+                                       card_choose.indexAt(
+                                           card_choose.currentItem.x,
+                                           card_choose.currentItem.y)).number,
+                                   text00.text)) {
                         // успех
-                        Controller.addRecentPayment(name, text00.text)
                         set_main_window()
+                    } else {
+                        set_error("Ошипка!")
                     }
                 }
 

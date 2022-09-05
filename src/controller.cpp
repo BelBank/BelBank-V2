@@ -18,7 +18,7 @@ Controller::Controller(QObject* parent) : QObject{parent} {
 	database.setUserName("root");
 	database.setPassword("drakonkapusta");
 
-    if (database.open()) {
+	if (database.open()) {
 		qDebug() << "Database success connection!";
 	} else {
 		qDebug() << "Database connetion failed.";
@@ -40,8 +40,8 @@ QString Controller::getUserName() const {
 }
 
 QVariant Controller::getCardsCount() const {
-    //    return 1;
-    return QVariant(client.getCards().size());
+	//    return 1;
+	return QVariant(client.getCards().size());
 }
 
 QVariant Controller::getFavPaymentsCount() const {
@@ -49,26 +49,26 @@ QVariant Controller::getFavPaymentsCount() const {
 }
 
 bool Controller::testConnection() {
-    QTcpSocket* test_connection = new QTcpSocket();
-    test_connection->connectToHost("www.google.com", 80);
-    bool is_connected = test_connection->waitForConnected();
-    if (!is_connected) {
-        qDebug() << "No network connection";
-        //        emit Controller::setError("Ошибка подключения к Интернету!");
-        return false;
-    } else {
-        qDebug() << "Computer is connected to Internet";
-        return true;
-    }
+	QTcpSocket* test_connection = new QTcpSocket();
+	test_connection->connectToHost("www.google.com", 80);
+	bool is_connected = test_connection->waitForConnected();
+	if (!is_connected) {
+		qDebug() << "No network connection";
+		//        emit Controller::setError("Ошибка подключения к Интернету!");
+		return false;
+	} else {
+		qDebug() << "Computer is connected to Internet";
+		return true;
+	}
 }
 
 bool Controller::enterToBank(const QString& login, const QString& password) {
-    qDebug() << "Entering...";
-    //    emit Controller::setError("Hello World!");
-    if (!this->testConnection()) {
-        return false;
-    }
-    if (login == "" or password == "") {
+	qDebug() << "Entering...";
+	//    emit Controller::setError("Hello World!");
+	if (!this->testConnection()) {
+		return false;
+	}
+	if (login == "" or password == "") {
 		qDebug() << "No data in field";
 		return false;
 	}
@@ -175,38 +175,38 @@ bool Controller::makeCard(const QString& card_number, const QString& valid) {
 	if (!addNewCard(new_card)) {
 		return false;
 	}
-    this->getCardsFromDB(client.getName());
+	this->getCardsFromDB(client.getName());
 	return true;
 }
 
 bool Controller::makeNewCard(bool is_gold, short payment_system) {
-    QString card_number;
-    card_number.push_back(QString::number(payment_system));
-    card_number += "143 ";
-    card_number += is_gold ? '1' : '2';
-    card_number += QString::number(QRandomGenerator::global()->bounded(100, 999)) + ' ' +
-                                 QString::number(QRandomGenerator::global()->bounded(1000, 9999)) + ' ' +
-                                 QString::number(QRandomGenerator::global()->bounded(1000, 9999));
-    qDebug() << "Number of new card: " << card_number;
-    QDate valid = QDate::currentDate().addYears(5);
-    QString valid_str = valid.toString("MM/yy");
-    qDebug() << "Valid of new card: " << valid_str;
-    QSqlQuery find_duplicates_query(database);
-    find_duplicates_query.prepare("SELECT number FROM card WHERE number = :number");
-    find_duplicates_query.bindValue(0, card_number);
-    if (!find_duplicates_query.exec()) {
-        qDebug() << "Query for adding new card failed! Error: " << find_duplicates_query.lastError().text();
-        return false;
-    }
-    if (find_duplicates_query.next()) {
-        return makeNewCard(is_gold, payment_system);
-    }
-    if (!addNewCard(Card(card_number, client.getName(), is_gold, valid_str))) {
-        qDebug() << "Failed adding";
-        return false;
-    }
-    this->getCardsFromDB(client.getName());
-    return true;
+	QString card_number;
+	card_number.push_back(QString::number(payment_system));
+	card_number += "143 ";
+	card_number += is_gold ? '1' : '2';
+	card_number += QString::number(QRandomGenerator::global()->bounded(100, 999)) + ' ' +
+									QString::number(QRandomGenerator::global()->bounded(1000, 9999)) + ' ' +
+									QString::number(QRandomGenerator::global()->bounded(1000, 9999));
+	qDebug() << "Number of new card: " << card_number;
+	QDate valid = QDate::currentDate().addYears(5);
+	QString valid_str = valid.toString("MM/yy");
+	qDebug() << "Valid of new card: " << valid_str;
+	QSqlQuery find_duplicates_query(database);
+	find_duplicates_query.prepare("SELECT number FROM card WHERE number = :number");
+	find_duplicates_query.bindValue(0, card_number);
+	if (!find_duplicates_query.exec()) {
+		qDebug() << "Query for adding new card failed! Error: " << find_duplicates_query.lastError().text();
+		return false;
+	}
+	if (find_duplicates_query.next()) {
+		return makeNewCard(is_gold, payment_system);
+	}
+	if (!addNewCard(Card(card_number, client.getName(), is_gold, valid_str))) {
+		qDebug() << "Failed adding";
+		return false;
+	}
+	this->getCardsFromDB(client.getName());
+	return true;
 }
 
 bool Controller::addNewCard(Card new_card) {

@@ -11,6 +11,8 @@ Window {
     height: 1080
     visible: true
 
+    flags: Qt.Window | Qt.FramelessWindowHint
+
     visibility: Window.Maximized
     UniversalMessage {
         visible: false
@@ -77,7 +79,8 @@ Window {
             font.bold: true
             color: "white"
 
-            text: Controller.getUserName() ///тут должен присваиваться ник клиента.
+            text: Controller.getUserName(
+                      ) ///тут должен присваиваться ник клиента.
         }
 
         Rectangle {
@@ -254,8 +257,6 @@ Window {
                         height: 240
                         color: "white"
 
-
-
                         Flipable {
                             id: card
                             property bool flipped: false
@@ -327,17 +328,11 @@ Window {
                                     //fill: parent
                                     centerIn: parent
                                 }
-
-                                Image {
-                                    anchors {
-                                        fill: parent
-                                    }
-                                    source: "/images/card_background.jpg"
-                                    opacity: 0.75
-                                }
+                                color: "#d5e2ff"
+                                radius: 12
 
                                 Text {
-                                    color: "white"
+                                    color: "black"
 
                                     text: "Данные о карте:"
                                     anchors {
@@ -345,10 +340,10 @@ Window {
                                         top: card_info.top
                                         topMargin: 10
                                     }
-                                    font.pixelSize: 22
+                                    font.pixelSize: 24
                                 }
                                 Text {
-                                    color: "white"
+                                    color: "black"
 
                                     id: cardholder_name_text
                                     anchors {
@@ -358,9 +353,9 @@ Window {
                                         leftMargin: 15
                                     }
                                     text: "Имя держателя:"
-                                    font.pixelSize: 20
+                                    font.pixelSize: 22
                                     Text {
-                                        color: "white"
+                                        color: "black"
 
                                         ///////////////////////////////
                                         id: cardholder_name
@@ -370,12 +365,12 @@ Window {
                                             leftMargin: 13
                                         }
                                         text: model.name //model.name
-                                        font.pixelSize: 20
+                                        font.pixelSize: 22
                                     }
                                 }
                                 Text {
                                     id: card_number_text
-                                    color: "white"
+                                    color: "black"
                                     text: "Номер карты:"
                                     font.pixelSize: 20
                                     anchors {
@@ -386,7 +381,7 @@ Window {
                                     }
                                     Text {
                                         ///////////////////////////////
-                                        color: "white"
+                                        color: "black"
 
                                         id: card_number
                                         anchors {
@@ -399,7 +394,7 @@ Window {
                                     }
                                 }
                                 Text {
-                                    color: "white"
+                                    color: "black"
 
                                     id: valid_thru_text
                                     text: "Годна до:"
@@ -412,7 +407,7 @@ Window {
                                     }
                                     Text {
                                         ///////////////////////////////
-                                        color: "white"
+                                        color: "black"
 
                                         id: valid_thru
                                         anchors {
@@ -449,12 +444,18 @@ Window {
                 }
 
                 model: ListModel {
-                    id:card_model
+                    id: card_model
                 }
 
                 function addElement(number, name, type, valid, system, balance) {
-                    card_model.append({"number": number, "name": name, "valid": valid, "type": type,
-                                          "system": system, "balance": balance})
+                    card_model.append({
+                                          "number": number,
+                                          "name": name,
+                                          "valid": valid,
+                                          "type": type,
+                                          "system": system,
+                                          "balance": balance
+                                      })
                 }
                 function clearModel() {
                     card_model.clear()
@@ -1056,8 +1057,9 @@ Window {
 
                                 width: card_to_card_text.width
                                 height: 140
+
                                 onClicked: {
-                                    set_payment_window("Перевод на карту")
+                                    set_payment_window("Перевод на карту", true)
                                 }
                                 onPressed: {
                                     card_to_card_text.font.bold = true
@@ -1395,6 +1397,31 @@ Window {
                             }
                         }
 
+                        Text {
+                            id: selected_payments_text
+                            text: "Наименование платежа"
+                            visible: !selected_payments.count ? false : true
+                            font.pixelSize: 16
+                            anchors {
+                                top: selected.top
+                                topMargin: 5
+                                bottomMargin: 5
+                                bottom: selected_payments.top
+                                horizontalCenter: parent.horizontalCenter
+                            }
+                        }
+
+                        Text {
+                            visible: !selected_payments.count ? true : false
+                            anchors {
+                                centerIn: parent
+                            }
+                            font.pixelSize: 50
+                            color: "gray"
+
+                            text: "Избранных платежей нет"
+                        }
+
                         ListView {
                             currentIndex: -1
                             id: selected_payments
@@ -1403,8 +1430,14 @@ Window {
                             width: 385
                             height: 719
                             anchors {
-                                fill: parent
-                                margins: 50
+                                top: selected.top
+                                topMargin: 40
+                                left: parent.left
+                                leftMargin: 20
+                                rightMargin: 20
+                                right: parent.right
+                                bottomMargin: 20
+                                bottom: parent.bottom
                             }
                             model: selected_paymentModel
                             delegate: selected_paymentDelegate
@@ -1436,7 +1469,7 @@ Window {
                             Rectangle {
                                 radius: 3
                                 color: index % 2 ? "#d5e2ff" : "#bed2ff"
-                                height: 30
+                                height: 40
                                 clip: true
                                 width: 385
                                 border.width: 1
@@ -1526,6 +1559,18 @@ Window {
                 color: "#d5e2ff"
 
                 Text {
+                    visible: !history.count ? true : false
+                    text: "Нет недавних платежей"
+                    font.pixelSize: 50
+                    anchors {
+                        centerIn: parent
+                    }
+                    color: "gray"
+                }
+
+                Text {
+                    visible: history.count ? true : false
+
                     id: operation_name
                     anchors {
                         left: history.left
@@ -1538,6 +1583,8 @@ Window {
                 }
 
                 Text {
+                    visible: history.count ? true : false
+
                     id: operation_date
                     anchors {
                         top: payments_history.top
@@ -1549,6 +1596,8 @@ Window {
                 }
 
                 Text {
+                    visible: history.count ? true : false
+
                     id: value
                     anchors {
                         right: history.right
@@ -2013,7 +2062,7 @@ Window {
             anchors {
                 top: parent.top
                 left: parent.left
-                leftMargin: 30
+                leftMargin: 20
                 topMargin: 5
             }
             font.pixelSize: 15
@@ -2031,7 +2080,7 @@ Window {
                 top: faq.bottom
                 topMargin: 5
 
-                leftMargin: 40
+                leftMargin: 30
                 bottomMargin: 5
             }
 
@@ -2189,13 +2238,13 @@ Window {
 /*##^##
 Designer {
     D{i:0;formeditorZoom:0.75}D{i:1}D{i:3}D{i:4}D{i:5}D{i:7}D{i:8}D{i:6}D{i:9}D{i:10}
-D{i:11}D{i:12}D{i:13}D{i:14}D{i:2}D{i:17}D{i:19}D{i:18}D{i:38}D{i:39}D{i:40}D{i:41}
-D{i:43}D{i:42}D{i:44}D{i:45}D{i:47}D{i:46}D{i:48}D{i:49}D{i:51}D{i:50}D{i:52}D{i:53}
-D{i:55}D{i:54}D{i:56}D{i:57}D{i:59}D{i:58}D{i:60}D{i:61}D{i:37}D{i:36}D{i:63}D{i:64}
-D{i:62}D{i:66}D{i:67}D{i:65}D{i:16}D{i:69}D{i:70}D{i:72}D{i:71}D{i:139}D{i:140}D{i:142}
-D{i:143}D{i:144}D{i:145}D{i:147}D{i:163}D{i:141}D{i:169}D{i:172}D{i:218}D{i:170}D{i:68}
-D{i:15}D{i:223}D{i:225}D{i:224}D{i:228}D{i:227}D{i:230}D{i:229}D{i:226}D{i:236}D{i:232}
-D{i:240}D{i:222}
+D{i:11}D{i:12}D{i:13}D{i:14}D{i:2}D{i:17}D{i:18}D{i:38}D{i:39}D{i:40}D{i:41}D{i:43}
+D{i:42}D{i:44}D{i:45}D{i:47}D{i:46}D{i:48}D{i:49}D{i:51}D{i:50}D{i:52}D{i:53}D{i:55}
+D{i:54}D{i:56}D{i:57}D{i:59}D{i:58}D{i:60}D{i:61}D{i:37}D{i:36}D{i:63}D{i:64}D{i:62}
+D{i:66}D{i:67}D{i:65}D{i:16}D{i:69}D{i:70}D{i:72}D{i:71}D{i:126}D{i:127}D{i:129}D{i:130}
+D{i:131}D{i:132}D{i:133}D{i:135}D{i:136}D{i:128}D{i:142}D{i:145}D{i:191}D{i:143}D{i:68}
+D{i:15}D{i:196}D{i:198}D{i:197}D{i:201}D{i:200}D{i:203}D{i:202}D{i:199}D{i:209}D{i:205}
+D{i:213}D{i:195}
 }
 ##^##*/
 
