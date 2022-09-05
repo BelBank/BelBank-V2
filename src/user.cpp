@@ -16,12 +16,14 @@ void User::setName(const QString& name) {
 }
 
 void User::setCards(std::vector<Card> cards_to_set) {
+    cards.clear();
     foreach (Card new_card, cards_to_set) {
         this->cards.push_back(new_card);
     }
 }
 
 void User::setFavPayments(std::vector<QString> payments) {
+    favorite_payments.clear();
     foreach (const QString& payment, payments) {
         this->favorite_payments.push_back(payment);
     }

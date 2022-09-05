@@ -18,6 +18,7 @@
 #include <QSqlError>
 #include <QSqlQuery>
 #include <QSqlRecord>
+#include <QThread>
 
 #include "user.h"
 
@@ -35,13 +36,25 @@ public:
 public Q_SLOTS:
 
 	/**
-	 *  # Вспомогательный метод для получение имени авторизированного пользователя
+     *  # Вспомогательный метод для получения имени авторизированного пользователя
 	 *  # В основном нужен для получения имени пользователя в QML интерфейсе
 	 */
 	QString getUserName() const;
 
+    /**
+     *  # Вспомогательный метод для получения количества карт пользователя
+     *  # В основном нужен для получения количества карт пользователя в QML интерфейсе
+     */
+    QVariant getCardsCount() const;
+
+    QVariant getFavPaymentsCount() const;
+
+    /**
+     * Метод для проверки подключения к интернету
+     */
     bool testConnection();
-	/**
+
+    /**
 	 *  # В метод передается логин и пароль, метод делает выборку из БД
 	 *  # Возвращает true, если профиль был найден
 	 *  # Возвращает false, если ошибка при выборке, данные были пустыми либо профиль не найден
@@ -60,19 +73,33 @@ public Q_SLOTS:
      *
      *  QString card_number = list_cards[1][0];
      *  QString holder_name = list_cards[1][1];
-     *  bool card_type = list_cards[1][2]; // true - gold, false - silver
-     *  QString valid_thru = list_cards[1][3]; // format: MM/yy
-     *  double card_balance = list_cards[1][4];
+     *  int payment_system = list_cards[1][2]; // 2 - MIR, 4 - VISA, 5 - MASTERCARD
+     *  bool card_type = list_cards[1][3]; // true - gold, false - silver
+     *  QString valid_thru = list_cards[1][4]; // format: MM/yy
+     *  double card_balance = list_cards[1][5];
      */
     Q_INVOKABLE QVariantList cardsToQML();
 
-    bool prepareQML();
-	/**
-	 *  # Метод для создания новой карты и добавления ее в БД
-	 *  # Возвращает false, если addNewCard вернул false либо срок действия карты истёк
-	 */
+    /**
+     * Метод для пересылки информации по картам из с++ в QML
+     * Вызывается непосредственно в QML
+     */
+    Q_INVOKABLE bool prepareQML(QVariant source);
+
+    /**
+     *  # Метод для создания карты и добавления ее в БД
+     *  # Возвращает false, если addNewCard вернул false либо срок действия карты истёк
+     */
     bool makeCard(const QString& card_number, const QString& valid);
 
+    /**
+     * # Метод для генерирования новой *виртуальной* карты
+     * # Номер генерируется по схеме [2 - MIR, 4 - VISA, 5 - MasterCard]143 [1 - gold, 2 - silver]*** **** ****
+     * # Валидность карты = текущая дата (MM/yy) + количество лет, в зависимости от тарифа
+     * # В метод передаются только тариф и платежная система
+     * # Метод выбирает из БД карту с таким же номером, как сгенерированный, если таковой имеется
+     * # То метод рекурсивно вызывает сам себя
+     */
     bool makeNewCard(bool is_gold, short payment_system);
 
 	/**
@@ -81,28 +108,51 @@ public Q_SLOTS:
 	 */
 	bool addNewCard(Card new_card);
 
-	/**
+    /**
+     *
+     */
+    bool addNewFavPayment(const QString& payment);
+
+    bool addRecentPayment(const QString& payment, const QString& payment_cost);
+
+    /**
 	 * # В метод передается только имя владельца карты
-	 * # Метод делает выборку из таблицы card_owner
+     * # Метод делает выборку из таблицы user_info
 	 * # Возвращает массив интов - айдишники карт, которыми владеет данный пользователь
 	 * # Если метод вернул массив, где единственный элемент равен -1, то произошла ошибка при выборке
 	 */
+    QVector<int> getCardsId(const QString& owner_name);
 
-	QVector<int> getCardsId(const QString& owner_name);
-
+    /**
+     * # В метод передается только имя пользователя
+     * # Метод делает выборку из таблицы user_info
+     * # Возвращает массив интов - айдишники платежей, которыми владеет данный пользователь
+     * # Если метод вернул массив, где единственный элемент равен -1, то произошла ошибка при выборке
+     */
     QVector<int> getFavPaymentsId(const QString& owner_name);
 
 	/**
 	 *  # В метод передается только имя владельца карты
 	 *  # Метод выбирает из БД данные по картам пользователя
 	 *  # Обрабатывает их и, соответсвенно, заполняет массив карт для переменной client
-	 *  # Возвращает true в случае успеха, false в случае ошибки выборки из card или card_owner
+     *  # Возвращает true в случае успеха, false в случае ошибки выборки из card или user_info
 	 */
+    bool getCardsFromDB(const QString& owner_name);
 
-	bool getCardsFromDB(const QString& owner_name);
-
+    /**
+     *  # В метод передается только имя владельца карты
+     *  # Метод выбирает из БД названия избранных платежей
+     *  # Обрабатывает их и, соответсвенно, заполняет массив favorite_payments для переменной client
+     *  # Возвращает true в случае успеха, false в случае ошибки выборки из payment или user_info
+     */
     bool getFavPaymentsFromDB(const QString& owner_name);
-	/**
+
+    /**
+     * # Метод, отсылающий избранные платежи в QML
+     */
+    Q_INVOKABLE QStringList favoritePaymentsToQML();
+
+    /**
 	 *  # В метод передается логин, пароль и имя пользователя
 	 *  # Метод добавляет данные пользователя в БД, соответсвенно, регистрируя его
 	 *  # Возвращает true, в случае успеха
@@ -110,26 +160,49 @@ public Q_SLOTS:
 	 */
 	bool registration(const QString& login, const QString& password, const QString& owner_name);
 
+    /**
+     * @brief makePayment
+     * @param card_nummber
+     * @param payment_cost
+     * @return
+     */
     bool makePayment(const QString& card_nummber, const QString& payment_cost);
-	/**
-	 * # Experimental
-	 */
+
+    /**
+     * Метод, посылающий HTTP GET-запрос открытому API курсов валют
+     */
     void exchangeRatesRequest();
 
-	void getExchangeRates();
+    /**
+     * Метод, вызывающийся, когда ответ от API полностью пришел и его можно считать
+     * Вызывает метод exchangeRates(), куда посылает курсы валют в формате JSON
+     */
+    void getExchangeRates();
 
+    /**
+     * Метод, который заполняет поле exchange_rates, т.е. подготавливает курсы по НацБанку
+     */
     void exchangeRates(QJsonDocument rates_doc);
 
+    /**
+     * Метод, использующийся для передачи курсов валют С КОМИССИЕЙ в QML
+     */
     QStringList exchangeRatesForBank();
 
 signals:
-	void test();
+
 	/**
 	 * # Сигнал, который вызывает при необходимости добавить карту в интерфейс
 	 * # Передает в QML все данные по карте, чтобы отобразить их
 	 */
-	void cardToQML(
-			const QString& number, const QString& owner_name, bool is_gold, const QString& valid, double balance);
+    void cardToQML(const QString& number,
+                                 const QString& owner_name,
+                                 const QString& type,
+                                 const QString& valid,
+                                 const QString& system,
+                                 const QString& balance);
+
+    void paymentToQML(const QString& payment);
 
     void setError(const QString& error);
 

@@ -7,28 +7,33 @@ ApplicationWindow {
     id: main_stack_window
     width: 1920
     height: 1080
-
+    property var payment_name
 
     Connections {
         target: Controller
-        function onTest() {
-            console.log("Test is working")
-        }
-        function onCardToQML(number, owner_name, is_gold, valid, balance) {
-            //                    onCardToQML: {
-            console.log(mainwindow.cardlist.rowCount())
+        function onCardToQML(number, owner_name, type, valid, system, balance) {
+            console.log("Row count: ", loader.item.cardlist.rowCount())
+            console.log("Cards count: ", Controller.getCardsCount())
+            if (loader.item.cardlist.rowCount() === Controller.getCardsCount()) {
+                loader.item.cardview.clearModel();
 
-            //            mainwindow.cardlist.append({"name" : owner_name, "number" : number, "valid" : valid,
-            //                                  "type" : is_gold ? "gold" : "silver", "system" : "visa"})
-            mainwindow.cardview.model = mainwindow.cardlist.append({
-                                                                       "name": "admin",
-                                                                       "number": "5143 5478 6589 5412",
-                                                                       "valid": "24/07",
-                                                                       "type": "gold",
-                                                                       "system": "visa"
-                                                                   })
-            //            mainwindow.lv
+            }
+            console.log("card to qml, number: " + number)
+            loader.item.cardview.addElement(number, owner_name, type, valid, system, balance)
+
+            console.warn("name ", loader.item.cardlist.get(0).name)
+            console.warn("number ", loader.item.cardlist.get(0).number)
+            console.warn("valid ", loader.item.cardlist.get(0).valid)
+            console.warn("type ", loader.item.cardlist.get(0).type)
+            console.warn("system ", loader.item.cardlist.get(0).system)
         }
+        function onPaymentToQML(payment) {
+            if (loader.item.paymentlist.rowCount() === Controller.getFavPaymentsCount()) {
+                loader.item.paymentlist.clearModel();
+            }
+            loader.item.paymentview.addFavPayment(payment)
+        }
+
         function onSetError(error) {
             console.log("Error!")
             mainwindow.set_error(error)
@@ -37,6 +42,7 @@ ApplicationWindow {
 
     MainWindow {
         id: mainwindow
+        visible: false
     }
 
     Loader {
@@ -47,6 +53,14 @@ ApplicationWindow {
         id: loader
         anchors.fill: parent
         source: "AuthorizationWindow.qml"
+        onLoaded: {
+            console.log("Loader name ", loader.item.name)
+            if (loader.item.name === "payment") {
+                loader.item.name = payment_name
+            }
+            loader.item.cardview.clearModel();
+            Controller.prepareQML(loader.source)
+        }
     }
 
     function set_main_window() {
@@ -73,20 +87,8 @@ ApplicationWindow {
         loader.source = "AddCardWindow.qml"
     }
 
-    Component {
-        id: payment
-        PaymentWindow {
-            name: " "
-        }
-    }
-
-    function set_payment_window(str, requisites = false) {
-
-        //        loader.sourceComponent = payment
-        //        loader.loaderItem.name = str
-        loader.setSource("PaymentWindow.qml", {
-                             "name": str,
-                             "requisites": requisites
-                         })
+    function set_payment_window(str) {
+        loader.source = "PaymentWindow.qml"
+        payment_name = str
     }
 }

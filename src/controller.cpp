@@ -11,15 +11,14 @@ Controller::Controller(QObject* parent) : QObject{parent} {
 	//    database.setUserName("root");
 	//    database.setPassword("root");
 
-	//    Connect to PostgreSQL host
-
-	database.setHostName("163.123.183.87");
+    //    Connect to PostgreSQL host
+    database.setHostName("163.123.183.87");
 	database.setPort(11967);
 	database.setDatabaseName("bank");
 	database.setUserName("root");
 	database.setPassword("drakonkapusta");
 
-	if (database.open()) {
+    if (database.open()) {
 		qDebug() << "Database success connection!";
 	} else {
 		qDebug() << "Database connetion failed.";
@@ -40,26 +39,36 @@ QString Controller::getUserName() const {
 	return client.getName();
 }
 
+QVariant Controller::getCardsCount() const {
+    //    return 1;
+    return QVariant(client.getCards().size());
+}
+
+QVariant Controller::getFavPaymentsCount() const {
+    return QVariant(client.getFavPayments().size());
+}
+
 bool Controller::testConnection() {
-	QTcpSocket* test_connection = new QTcpSocket();
-	test_connection->connectToHost("www.google.com", 80);
-	bool is_connected = test_connection->waitForConnected();
-	if (!is_connected) {
-		qDebug() << "No network connection";
-		emit Controller::setError("Ошибка подключения к Интернету!");
-		return false;
-	} else {
-		qDebug() << "Computer is connected to Internet";
-		return true;
-	}
+    QTcpSocket* test_connection = new QTcpSocket();
+    test_connection->connectToHost("www.google.com", 80);
+    bool is_connected = test_connection->waitForConnected();
+    if (!is_connected) {
+        qDebug() << "No network connection";
+        //        emit Controller::setError("Ошибка подключения к Интернету!");
+        return false;
+    } else {
+        qDebug() << "Computer is connected to Internet";
+        return true;
+    }
 }
 
 bool Controller::enterToBank(const QString& login, const QString& password) {
-	qDebug() << "Entering...";
-	if (!this->testConnection()) {
-		return false;
-	}
-	if (login == "" or password == "") {
+    qDebug() << "Entering...";
+    //    emit Controller::setError("Hello World!");
+    if (!this->testConnection()) {
+        return false;
+    }
+    if (login == "" or password == "") {
 		qDebug() << "No data in field";
 		return false;
 	}
@@ -78,38 +87,63 @@ bool Controller::enterToBank(const QString& login, const QString& password) {
 	qDebug() << "Success login";
 	this->client.setName(login_query.value(3).toString());
 	this->getCardsFromDB(login_query.value(1).toString());
-	if (!prepareQML()) {
-		qDebug() << "Preparing QML failed";
-		return false;
-	}
+    this->getFavPaymentsFromDB(client.getName());
+    this->addRecentPayment("Кредит", "234.56");
 	return true;
 }
 
 QVariantList Controller::cardsToQML() {
-	std::vector<Card> cards = client.getCards();
-	emit Controller::test();
-	QVariantList cards_to_qml;
-	int number_of_cards = 0;
-	foreach (Card card, cards) {
-		//        emit Controller::cardToQML(
-		//            card.getNumber(), card.getHolderName(), card.getType(), card.getValid(), card.getBalance());
-		QVariantList card_variant;
-		card_variant.push_back(card.getNumber());
-		card_variant.push_back(card.getHolderName());
-		card_variant.push_back(card.getType());
-		card_variant.push_back(card.getValid());
-		card_variant.push_back(card.getBalance());
-		cards_to_qml.push_back(card_variant);
-		number_of_cards++;
-	}
-	cards_to_qml.insert(0, number_of_cards);
-	return cards_to_qml;
+    std::vector<Card> cards = client.getCards();
+    QVariantList cards_to_qml;
+    int number_of_cards = 0;
+    foreach (Card card, cards) {
+        QVariantList card_variant;
+        card_variant.push_back(card.getNumber());
+        card_variant.push_back(card.getHolderName());
+        card_variant.push_back((int)(card.getNumber()[0].toLatin1() - '0'));
+        card_variant.push_back(card.getType());
+        card_variant.push_back(card.getValid());
+        card_variant.push_back(card.getBalance());
+        cards_to_qml.push_back(card_variant);
+        number_of_cards++;
+    }
+    cards_to_qml.insert(0, number_of_cards);
+    return cards_to_qml;
 }
 
-bool Controller::prepareQML() {
-	qDebug() << "QML preparing...";
-
-	return true;
+bool Controller::prepareQML(QVariant source) {
+    if (source.toString() != "MainWindow.qml" and source.toString() != "PaymentWindow.qml") {
+        return true;
+    }
+    qDebug() << "QML preparing in " << source.toString() << "...";
+    std::vector<Card> cards = client.getCards();
+    foreach (Card card, cards) {
+        QString type;
+        QString payment_system;
+        if (card.getType()) {
+            type = "gold";
+        } else {
+            type = "silver";
+        }
+        if (card.getNumber()[0] == '2') {
+            payment_system = "MIR";
+        } else if (card.getNumber()[0] == '4') {
+            payment_system = "visa";
+        } else {
+            payment_system = "mastercard";
+        }
+        emit Controller::cardToQML(card.getNumber(),
+                                                             card.getHolderName(),
+                                                             type,
+                                                             card.getValid(),
+                                                             payment_system,
+                                                             QString::number(card.getBalance()));
+    }
+    QStringList payments = favoritePaymentsToQML();
+    foreach (QString payment, payments) {
+        emit Controller::paymentToQML(payment);
+    }
+    return true;
 }
 
 bool Controller::makeCard(const QString& card_number, const QString& valid) {
@@ -130,37 +164,38 @@ bool Controller::makeCard(const QString& card_number, const QString& valid) {
 	if (!addNewCard(new_card)) {
 		return false;
 	}
+    this->getCardsFromDB(client.getName());
 	return true;
 }
 
 bool Controller::makeNewCard(bool is_gold, short payment_system) {
-	QString card_number;
-	card_number.push_back(QString::number(payment_system));
-	card_number += "143 ";
-	card_number += is_gold ? '1' : '2';
-	QRandomGenerator generator;
-	card_number += QString::number(QRandomGenerator::global()->bounded(100, 999)) + ' ' +
-									QString::number(QRandomGenerator::global()->bounded(1000, 9999)) + ' ' +
-									QString::number(QRandomGenerator::global()->bounded(1000, 9999));
-	qDebug() << "Number of new card: " << card_number;
-	QDate valid = QDate::currentDate().addYears(5);
-	QString valid_str = valid.toString("MM/yy");
-	qDebug() << "Valid of new card: " << valid_str;
-	QSqlQuery find_duplicates_query(database);
-	find_duplicates_query.prepare("SELECT number FROM card WHERE number = :number");
-	find_duplicates_query.bindValue(0, card_number);
-	if (!find_duplicates_query.exec()) {
-		qDebug() << "Query for adding new card failed! Error: " << find_duplicates_query.lastError().text();
-		return false;
-	}
-	if (find_duplicates_query.next()) {
-		return makeNewCard(is_gold, payment_system);
-	}
-	if (!addNewCard(Card(card_number, client.getName(), is_gold, valid_str))) {
-		qDebug() << "Failed adding";
-		return false;
-	}
-	return true;
+    QString card_number;
+    card_number.push_back(QString::number(payment_system));
+    card_number += "143 ";
+    card_number += is_gold ? '1' : '2';
+    card_number += QString::number(QRandomGenerator::global()->bounded(100, 999)) + ' ' +
+                                 QString::number(QRandomGenerator::global()->bounded(1000, 9999)) + ' ' +
+                                 QString::number(QRandomGenerator::global()->bounded(1000, 9999));
+    qDebug() << "Number of new card: " << card_number;
+    QDate valid = QDate::currentDate().addYears(5);
+    QString valid_str = valid.toString("MM/yy");
+    qDebug() << "Valid of new card: " << valid_str;
+    QSqlQuery find_duplicates_query(database);
+    find_duplicates_query.prepare("SELECT number FROM card WHERE number = :number");
+    find_duplicates_query.bindValue(0, card_number);
+    if (!find_duplicates_query.exec()) {
+        qDebug() << "Query for adding new card failed! Error: " << find_duplicates_query.lastError().text();
+        return false;
+    }
+    if (find_duplicates_query.next()) {
+        return makeNewCard(is_gold, payment_system);
+    }
+    if (!addNewCard(Card(card_number, client.getName(), is_gold, valid_str))) {
+        qDebug() << "Failed adding";
+        return false;
+    }
+    this->getCardsFromDB(client.getName());
+    return true;
 }
 
 bool Controller::addNewCard(Card new_card) {
@@ -217,7 +252,101 @@ bool Controller::addNewCard(Card new_card) {
 		qDebug() << "Query for updating cards array failed! Error: " << add_card_query.lastError().text();
 		return false;
 	}
+    this->getFavPaymentsFromDB(client.getName());
 	return true;
+}
+
+bool Controller::addNewFavPayment(const QString& payment) {
+    qDebug() << "Fav payment is " << payment;
+    QSqlQuery add_payment(database);
+    QVector<int> fav_payments = this->getFavPaymentsId(client.getName());
+    if (fav_payments.length() == 5) {
+        fav_payments.pop_back();
+    }
+    add_payment.prepare("SELECT id FROM payment WHERE name = :payment");
+    add_payment.bindValue(0, payment);
+    if (!add_payment.exec()) {
+        qDebug() << "Query for getting cards array failed! Error: " << add_payment.lastError().text();
+        return false;
+    }
+    if (!add_payment.next()) {
+        qDebug() << "No reply from payment";
+        return false;
+    }
+    fav_payments.push_front(add_payment.value("id").toInt());
+    add_payment.prepare(
+            "UPDATE user_info "
+            "SET favorite_payments = :payments "
+            "WHERE owner_name = :owner_name");
+    QStringList payments_array;
+    foreach (const int& value, fav_payments) {
+        if (value == 0) {
+            continue;
+        }
+        payments_array << QString::number(value);
+    }
+    add_payment.bindValue(0, "{ " + payments_array.join(",") + " }");
+    add_payment.bindValue(1, client.getName());
+    if (!add_payment.exec()) {
+        qDebug() << "Query for updating cards array failed! Error: " << add_payment.lastError().text();
+        return false;
+    }
+    this->getFavPaymentsFromDB(client.getName());
+    return true;
+}
+
+bool Controller::addRecentPayment(const QString& payment, const QString& payment_cost) {
+    QSqlQuery get_recent_payments(database);
+    get_recent_payments.prepare("SELECT recent_payments FROM user_info WHERE owner_name = :name");
+    get_recent_payments.bindValue(0, client.getName());
+    if (!get_recent_payments.exec()) {
+        qDebug() << "Query for getting recent payments array failed! Error: "
+                         << get_recent_payments.lastError().text();
+        return false;
+    }
+    QJsonArray payments_array;
+    while (get_recent_payments.next()) {
+        QJsonObject recordObject;
+        for (int x = 0; x < get_recent_payments.record().count(); x++) {
+            recordObject.insert(get_recent_payments.record().fieldName(x),
+                                                    QJsonValue::fromVariant(get_recent_payments.value(x)));
+        }
+        qDebug() << "QJsonObject " << recordObject;
+        if (recordObject.value("recent_payments").toString() == "") {
+            break;
+        }
+        payments_array.push_back(
+                recordObject.value("recent_payments").toString().replace(QLatin1String("\\\""), QLatin1String("\"")));
+    }
+    qDebug() << "Json from DB " << payments_array;
+    if (payments_array.size() == 10) {
+        payments_array.pop_back();
+    }
+    QJsonObject new_payment;
+    new_payment.insert("name", payment);
+    new_payment.insert("date", QDate::currentDate().toString("dd/MM/yyyy"));
+    new_payment.insert("cost", payment_cost);
+
+    QSqlQuery update_recent_payments(database);
+    update_recent_payments.prepare(
+            "UPDATE user_info "
+            "SET recent_payments = :payments "
+            "WHERE owner_name = :owner_name");
+    QJsonDocument doc_to_db;
+    if (!payments_array.isEmpty()) {
+        payments_array.push_back(new_payment);
+        doc_to_db.setArray(payments_array);
+    } else {
+        doc_to_db.setObject(new_payment);
+    }
+    update_recent_payments.bindValue(0, QString(doc_to_db.toJson(QJsonDocument::Compact)));
+    update_recent_payments.bindValue(1, client.getName());
+    if (!update_recent_payments.exec()) {
+        qDebug() << "Query for updating recent_payments array failed! Error: "
+                         << update_recent_payments.lastError().text();
+        return false;
+    }
+    return true;
 }
 
 QVector<int> Controller::getCardsId(const QString& owner_name) {
@@ -332,6 +461,15 @@ bool Controller::getFavPaymentsFromDB(const QString& owner_name) {
 	return true;
 }
 
+QStringList Controller::favoritePaymentsToQML() {
+    std::vector<QString> payments = client.getFavPayments();
+    QStringList payments_list;
+    foreach (QString payment, payments) {
+        payments_list.push_back(payment);
+    }
+    return payments_list;
+}
+
 bool Controller::registration(const QString& login, const QString& password, const QString& owner_name) {
 	if (login == "" or password == "" or owner_name == "") {
 		return false;
@@ -402,6 +540,7 @@ bool Controller::makePayment(const QString& card_number, const QString& payment_
 		return false;
 	}
 	qDebug() << "Success payment";
+    this->getCardsFromDB(client.getName());
 	// emit prepareCheck() ???
 	// emit success()
 	return true;
@@ -434,7 +573,6 @@ void Controller::exchangeRates(QJsonDocument rates_doc) {
 QStringList Controller::exchangeRatesForBank() {
 	QStringList rates_to_qml;
 	foreach (QString rate, exchange_rates) {
-		qDebug() << "Rate " << rate;
 		rates_to_qml.push_back(QString::number(round(rate.toDouble() * 1.02 * 100) / 100));
 		rates_to_qml.push_back(QString::number(round(rate.toDouble() * 0.98 * 100) / 100));
 	}
