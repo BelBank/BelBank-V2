@@ -30,8 +30,8 @@ Window {
         Image {
             id: logo_image
             source: "/images/capture_20220617214014956.png"
-            width: successfulPaymentWindow_rect.width/2.3
-            height: successfulPaymentWindow_rect.height/2.3
+            width: successfulPaymentWindow_rect.width / 2.3
+            height: successfulPaymentWindow_rect.height / 2.3
             anchors {
                 horizontalCenter: successfulPaymentWindow_rect.horizontalCenter
                 top: successfulPaymentWindow_rect.top
@@ -41,7 +41,7 @@ Window {
 
         Rectangle {
             id: message_rect
-            width: successfulPaymentWindow_rect.width/1.5
+            width: successfulPaymentWindow_rect.width / 1.5
             anchors {
                 top: logo_image.bottom
                 bottom: ok_button.top
@@ -85,7 +85,6 @@ Window {
                 bottom: successfulPaymentWindow_rect.bottom
                 horizontalCenter: successfulPaymentWindow_rect.horizontalCenter
                 bottomMargin: successfulPaymentWindow_rect.border.width + 3
-
             }
 
             Text {

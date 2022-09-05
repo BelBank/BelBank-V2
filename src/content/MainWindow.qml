@@ -11,6 +11,8 @@ Window {
     height: 1080
     visible: true
 
+    flags: Qt.Window | Qt.FramelessWindowHint
+
     UniversalMessage {
         visible: false
         id: error
@@ -1094,8 +1096,9 @@ Window {
 
                                 width: card_to_card_text.width
                                 height: 140
+
                                 onClicked: {
-                                    set_payment_window("Перевод на карту")
+                                    set_payment_window("Перевод на карту", true)
                                 }
                                 onPressed: {
                                     card_to_card_text.font.bold = true

@@ -6,12 +6,14 @@ import QtQuick.Window 2.12
 Window {
 
     property var name
+    property bool requisites: false
     //название платежа, как заказывали
     id: payment_window
     width: 800
     height: 600
     visible: true
-    flags: Qt.CustomizeWindowHint
+
+    flags: Qt.Window | Qt.FramelessWindowHint
 
     /////////////////////////////////////////////////////use function set_error("TEXT") to set an error
     UniversalMessage {
@@ -427,7 +429,7 @@ Window {
                 topMargin: 15
             }
             Text {
-                text: "Номер счета:"
+                text: requisites ? "Номер карты:" : "Номер счета:"
                 color: "#222024"
                 font.family: "Helvetica"
                 font.pointSize: 14
@@ -469,9 +471,15 @@ Window {
                 }
                 color: activeFocus ? "black" : "gray"
                 focus: true
+                inputMask: requisites ? "9999[ ]9999[ ]9999[ ]9999" : "nnnnnnnnnnnnnnnnnnnnnnnn"
                 activeFocusOnTab: true
                 font.family: "Helvetica"
                 font.pointSize: 16
+                onFocusChanged: {
+                    if (activeFocus) {
+                        cursorPosition = 0
+                    }
+                }
             }
         }
 

@@ -7,6 +7,8 @@ ApplicationWindow {
     id: main_stack_window
     width: 1920
     height: 1080
+
+
     Connections {
         target: Controller
         function onTest() {
@@ -49,11 +51,14 @@ ApplicationWindow {
 
     function set_main_window() {
 
+        loader.item.transientParent = null
         loader.source = "MainWindow.qml"
     }
 
     function set_authorization_window() {
+        // loader.item.transientParent = null
         loader.source = "AuthorizationWindow.qml"
+        //loader.item.transientParent = null
     }
 
     function set_registration_window() {
@@ -75,12 +80,13 @@ ApplicationWindow {
         }
     }
 
-    function set_payment_window(str) {
+    function set_payment_window(str, requisites = false) {
 
         //        loader.sourceComponent = payment
         //        loader.loaderItem.name = str
         loader.setSource("PaymentWindow.qml", {
-                             "name": str
+                             "name": str,
+                             "requisites": requisites
                          })
     }
 }

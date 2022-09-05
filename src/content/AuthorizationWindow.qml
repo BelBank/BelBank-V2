@@ -10,6 +10,8 @@ Window {
     visible: true
     height: 1080
 
+    flags: Qt.Window | Qt.FramelessWindowHint
+
     /////////////////////////////////////////////////////use function set_error("TEXT") to set an error
     UniversalMessage {
         visible: false
@@ -33,8 +35,8 @@ Window {
 
     Rectangle {
         id: exit
-        width: 250
-        height: 30
+        width: 300
+        height: 50
         anchors {
             right: parent.right
             top: parent.top

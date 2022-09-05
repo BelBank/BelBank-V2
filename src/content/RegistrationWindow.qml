@@ -9,6 +9,8 @@ Window {
     height: 600
     visible: true
 
+    flags: Qt.Window | Qt.FramelessWindowHint
+
     /////////////////////////////////////////////////////use function set_error("TEXT") to set an error
     UniversalMessage {
         visible: false
