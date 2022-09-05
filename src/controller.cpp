@@ -18,12 +18,7 @@ Controller::Controller(QObject* parent) : QObject{parent} {
 	database.setUserName("root");
 	database.setPassword("drakonkapusta");
 
-	if (database.open()) {
-		qDebug() << "Database success connection!";
-	} else {
-		qDebug() << "Database connetion failed.";
-	}
-
+    this->testDBConnection();
 	this->exchangeRatesRequest();
 }
 
@@ -62,12 +57,27 @@ bool Controller::testConnection() {
 	}
 }
 
+bool Controller::testDBConnection() {
+    if (database.open()) {
+        qDebug() << "Database success connection!";
+        is_db_connected = true;
+        return true;
+    } else {
+        qDebug() << "Database connetion failed.";
+        is_db_connected = false;
+        return false;
+    }
+}
+
 bool Controller::enterToBank(const QString& login, const QString& password) {
 	qDebug() << "Entering...";
 	//    emit Controller::setError("Hello World!");
 	if (!this->testConnection()) {
 		return false;
 	}
+    if (!is_db_connected and !testDBConnection()) {
+        return false;
+    }
 	if (login == "" or password == "") {
 		qDebug() << "No data in field";
 		return false;
@@ -185,11 +195,16 @@ bool Controller::makeNewCard(bool is_gold, short payment_system) {
 	card_number += "143 ";
 	card_number += is_gold ? '1' : '2';
 	card_number += QString::number(QRandomGenerator::global()->bounded(100, 999)) + ' ' +
-									QString::number(QRandomGenerator::global()->bounded(1000, 9999)) + ' ' +
-									QString::number(QRandomGenerator::global()->bounded(1000, 9999));
+                                 QString::number(QRandomGenerator::global()->bounded(1000, 9999)) + ' ' +
+                                 QString::number(QRandomGenerator::global()->bounded(1000, 9999));
 	qDebug() << "Number of new card: " << card_number;
-	QDate valid = QDate::currentDate().addYears(5);
-	QString valid_str = valid.toString("MM/yy");
+    QDate valid;
+    if (is_gold) {
+        valid = QDate::currentDate().addYears(5);
+    } else {
+        valid = QDate::currentDate().addYears(4);
+    }
+    QString valid_str = valid.toString("MM/yy");
 	qDebug() << "Valid of new card: " << valid_str;
 	QSqlQuery find_duplicates_query(database);
 	find_duplicates_query.prepare("SELECT number FROM card WHERE number = :number");
@@ -334,7 +349,7 @@ bool Controller::addRecentPayment(const QString& payment, const QString& payment
         return false;
     }
     QVector<int> payments_id = this->getRecentPaymentsId(client.getName());
-    payments_id.push_back(update_recent_payments.value("max").toInt());
+    payments_id.push_front(update_recent_payments.value("max").toInt());
     update_recent_payments.prepare(
             "UPDATE user_info "
             "SET recent_payments = :payments "
@@ -618,6 +633,69 @@ bool Controller::makePayment(const QString& card_number, const QString& payment_
 	// emit prepareCheck() ???
 	// emit success()
 	return true;
+}
+
+bool Controller::makeRemittance(const QString& card_number,
+                                                                const QString& target_card_number,
+                                                                const QString& cost) {
+    if (card_number == target_card_number) {
+        qDebug() << "Can't transit money with 2 equal cards";
+        return false;
+    }
+    QSqlQuery check_card_in_bank(database);
+    check_card_in_bank.prepare("SELECT balance FROM card WHERE number = :number");
+    check_card_in_bank.bindValue(0, target_card_number);
+    if (!check_card_in_bank.exec()) {
+        qDebug() << "Query for checking card failed! Error: " << check_card_in_bank.lastError().text();
+        return false;
+    }
+
+    QSqlQuery get_balance(database);
+    get_balance.prepare("SELECT balance FROM card WHERE number = :number");
+    get_balance.bindValue(0, card_number);
+    if (!get_balance.exec()) {
+        qDebug() << "Query for getting balance failed! Error: " << get_balance.lastError().text();
+        return false;
+    }
+    get_balance.next();
+    double balance = get_balance.value("balance").toDouble();
+
+    if (balance < cost.toDouble()) {
+        qDebug() << "Not enough money";
+        return false;
+    }
+    balance -= cost.toDouble();
+
+    if (check_card_in_bank.next()) {
+        double balance_of_target = check_card_in_bank.value("balance").toDouble();
+        balance_of_target += cost.toDouble();
+
+        QSqlQuery balance_query(database);
+        balance_query.prepare(
+                "UPDATE card "
+                "SET balance = :balance "
+                "WHERE number = :number");
+        balance_query.bindValue(0, QString::number(balance_of_target));
+        balance_query.bindValue(1, target_card_number);
+        if (!balance_query.exec()) {
+            qDebug() << "Query for updating balance failed! Error: " << balance_query.lastError().text();
+            return false;
+        }
+    }
+    QSqlQuery balance_query(database);
+    balance_query.prepare(
+            "UPDATE card "
+            "SET balance = :balance "
+            "WHERE number = :number");
+    balance_query.bindValue(0, QString::number(balance));
+    balance_query.bindValue(1, card_number);
+    if (!balance_query.exec()) {
+        qDebug() << "Query for updating balance failed! Error: " << balance_query.lastError().text();
+        return false;
+    }
+    qDebug() << "Success transaction!";
+    this->getCardsFromDB(client.getName());
+    return true;
 }
 
 void Controller::exchangeRatesRequest() {

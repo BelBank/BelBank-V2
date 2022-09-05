@@ -14,18 +14,16 @@ RESOURCES += resources.qrc
 
 INCLUDEPATH += $$PWD/libs/soci/include \
         #$$PWD/libs/soci/build/include \
-        $$PWD/../PostgreSQL/14/include \
-	/usr/include/postgresql \
-        /usr/local/include/soci/
 
 
 
 
-linux {
-    LIBS += -L/usr/local/lib/ \
-         /usr/local/lib/libsoci_postgresql.so \
-         /usr/local/lib/libsoci_core.so
-}
+
+#linux {
+#    LIBS += -L/usr/local/lib/ \
+#         /usr/local/lib/libsoci_postgresql.so \
+#         /usr/local/lib/libsoci_core.so
+#}
 # Additional import path used to resolve QML modules in Qt Creator's code model
 QML_IMPORT_PATH =
 

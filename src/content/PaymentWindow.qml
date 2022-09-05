@@ -563,15 +563,22 @@ Window {
                         Controller.addNewFavPayment(name)
                     }
                     if (text0.text === "" || text00.text === "") {
-
-                        // ошибка нет платежа или суммы
                         set_error("Неверно введенные данные!")
+
+                    } else if (requisites) {
+                        if(Controller.makeRemittance(card_model.get(
+                                                      card_choose.indexAt(
+                                                          card_choose.currentItem.x,
+                                                          card_choose.currentItem.y)).number, text0.text, text00.text)) {
+                            set_main_window()
+                        }
                     } else if (Controller.makePayment(
                                    card_model.get(
                                        card_choose.indexAt(
                                            card_choose.currentItem.x,
                                            card_choose.currentItem.y)).number,
                                    text00.text)) {
+                        Controller.addRecentPayment(name, text00.text)
                         // успех
                         set_main_window()
                     } else {

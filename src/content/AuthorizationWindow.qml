@@ -79,7 +79,7 @@ Window {
     Rectangle {
         id: phone
         x: main.width / 2 - 120
-        y: main.height / 2 + 90
+        y: main.height / 2 + 200
         width: 350
         height: 40
         color: "white"

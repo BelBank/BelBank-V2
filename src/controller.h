@@ -54,6 +54,7 @@ public Q_SLOTS:
      */
     bool testConnection();
 
+    bool testDBConnection();
     /**
 	 *  # В метод передается логин и пароль, метод делает выборку из БД
 	 *  # Возвращает true, если профиль был найден
@@ -172,6 +173,8 @@ public Q_SLOTS:
      */
     bool makePayment(const QString& card_nummber, const QString& payment_cost);
 
+    bool makeRemittance(const QString& card_number, const QString& target_card_number, const QString& cost);
+
     /**
      * Метод, посылающий HTTP GET-запрос открытому API курсов валют
      */
@@ -215,6 +218,7 @@ signals:
 private:
     User client;
 	QSqlDatabase database;
+    bool is_db_connected = false;
 	QNetworkReply* reply_exchange_rates;
     QStringList exchange_rates;
 };
