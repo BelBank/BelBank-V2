@@ -188,8 +188,6 @@ Window {
                     height: 120
                     color: "white"
 
-
-
                     Flipable {
                         id: card
                         property bool flipped: false
@@ -375,8 +373,6 @@ Window {
                         }
                     }
                 }
-
-
             }
             model: ListModel {
                 id: card_model
@@ -514,6 +510,7 @@ Window {
                 id: text00
                 maximumLength: 25
                 anchors {
+
                     top: money_value.top
                     left: money_value.left
                     right: money_value.right
@@ -522,6 +519,10 @@ Window {
                     leftMargin: 10
                     bottomMargin: 6
                 }
+                validator: RegularExpressionValidator {
+                    regularExpression: /(\d{1,5})([.]\d{1,2})?$/
+                }
+
                 color: activeFocus ? "black" : "gray"
                 focus: true
                 activeFocusOnTab: true
@@ -562,9 +563,9 @@ Window {
                         console.log("Fav payment is ", name)
                         Controller.addNewFavPayment(name)
                     }
-                    if (text0.text === "" || text00.text === "") {
+                    if (text0.text === "" || text00.text === ""
+                            || !text00.acceptableInput) {
                         set_error("Неверно введенные данные!")
-
                     } else if (requisites) {
                         if(Controller.makeRemittance(card_model.get(
                                                       card_choose.indexAt(

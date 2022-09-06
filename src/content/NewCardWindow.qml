@@ -551,10 +551,13 @@ Window {
         }
 
         MouseArea {
+            id: new_card_area
             property bool false_: false
 
             anchors.fill: parent
             onClicked: {
+                new_card_area.enabled = false
+
                 if (!visa.visa_active && !mastercard.mastercard_active
                         && !mir.mir_active) {
                     // ошибка не выбрана платежная система

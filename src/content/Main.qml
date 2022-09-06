@@ -30,8 +30,9 @@ ApplicationWindow {
             console.warn("system ", loader.item.cardlist.get(0).system)
         }
         function onPaymentToQML(payment) {
-            if (loader.item.paymentlist.rowCount() === Controller.getFavPaymentsCount()) {
-                loader.item.paymentview.clearModel();
+            if (loader.item.paymentlist.rowCount(
+                        ) === Controller.getFavPaymentsCount()) {
+                loader.item.paymentview.clearModel()
             }
             loader.item.paymentview.addFavPayment(payment)
         }
@@ -59,6 +60,8 @@ ApplicationWindow {
         visible: true
         id: loader
         anchors.fill: parent
+        anchors.centerIn: parent
+
         source: "AuthorizationWindow.qml"
         onLoaded: {
             console.log("Loader name ", loader.item.name)

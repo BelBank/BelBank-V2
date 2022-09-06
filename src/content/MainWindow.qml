@@ -32,7 +32,6 @@ Window {
     property alias recentPaymentView: history
     property alias recentPaymentList: historyModel
 
-
     Rectangle {
         id: header
         height: 100
@@ -1452,7 +1451,9 @@ Window {
                             }
 
                             function addFavPayment(payment) {
-                                selected_paymentModel.append({"name": payment})
+                                selected_paymentModel.append({
+                                                                 "name": payment
+                                                             })
                             }
                             function clearModel() {
                                 selected_paymentModel.clear()
@@ -1638,8 +1639,11 @@ Window {
                         border.color: "#6e91de"
                     }
                     function addElement(name, date, time, cost) {
-                        historyModel.append({"value": cost, "name": name,
-                                              "date": date + ' ' + time})
+                        historyModel.append({
+                                                "value": cost,
+                                                "name": name,
+                                                "date": date + ' ' + time
+                                            })
                     }
                     function clearModel() {
                         historyModel.clear()

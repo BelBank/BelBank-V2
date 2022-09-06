@@ -9,10 +9,7 @@ Window {
     height: 600
     visible: true
     title: "Добавление карты банка"
-    flags: {
-        Qt.CustomizeWindowHint
-        Qt.WindowFullScreen
-    }
+    flags: Qt.Window | Qt.FramelessWindowHint
 
     /////////////////////////////////////////////////////use function set_error("TEXT") to set an error
     UniversalMessage {
