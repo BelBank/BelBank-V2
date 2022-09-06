@@ -12,7 +12,7 @@ int main(int argc, char *argv[]) {
 
 	QQmlApplicationEngine engine;
 	Controller *controller = new Controller();
-
+    app.setWindowIcon(QIcon(":/images/Logo_for_error.png"));
 	engine.rootContext()->setContextProperty("Controller", controller);
 	const QUrl url(QStringLiteral("qrc:/content/Main.qml"));
 	QObject::connect(
