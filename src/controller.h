@@ -1,10 +1,6 @@
 #ifndef CONTROLLER_H
 #define CONTROLLER_H
 
-#include <QObject>
-
-//#include "db_pool.hpp"
-
 #include <QCryptographicHash>
 #include <QJsonArray>
 #include <QJsonDocument>
@@ -13,6 +9,7 @@
 #include <QNetworkAccessManager>
 #include <QNetworkReply>
 #include <QNetworkRequest>
+#include <QObject>
 #include <QRandomGenerator>
 #include <QSqlDatabase>
 #include <QSqlError>
@@ -23,23 +20,23 @@
 #include "user.h"
 
 class Controller : public QObject {
-	Q_OBJECT
+    Q_OBJECT
 public:
-	explicit Controller(QObject* parent = nullptr);
+    explicit Controller(QObject* parent = nullptr);
 
-	/**
-	 * # Функция дважды хеширует пароли, по алгоритму Sha3_256 и Sha3_512
-	 * # Возвращает захешированный пароль в виде QByteArray-
-	 */
-	QByteArray hashPassword(const QString& password);
+    /**
+     * # Функция дважды хеширует пароли, по алгоритму Sha3_256 и Sha3_512
+     * # Возвращает захешированный пароль в виде QByteArray-
+     */
+    QByteArray hashPassword(const QString& password);
 
 public Q_SLOTS:
 
-	/**
+    /**
      *  # Вспомогательный метод для получения имени авторизированного пользователя
-	 *  # В основном нужен для получения имени пользователя в QML интерфейсе
-	 */
-	QString getUserName() const;
+     *  # В основном нужен для получения имени пользователя в QML интерфейсе
+     */
+    QString getUserName() const;
 
     /**
      *  # Вспомогательный метод для получения количества карт пользователя
@@ -47,6 +44,10 @@ public Q_SLOTS:
      */
     QVariant getCardsCount() const;
 
+    /**
+     *  # Вспомогательный метод для получения количества избранных платежей пользователя
+     *  # В основном нужен для получения количества карт пользователя в QML интерфейсе
+     */
     QVariant getFavPaymentsCount() const;
 
     /**
@@ -54,13 +55,16 @@ public Q_SLOTS:
      */
     bool testConnection();
 
+    /**
+     * Метод для проверки подключения к СУБД
+     */
     bool testDBConnection();
     /**
-	 *  # В метод передается логин и пароль, метод делает выборку из БД
-	 *  # Возвращает true, если профиль был найден
-	 *  # Возвращает false, если ошибка при выборке, данные были пустыми либо профиль не найден
-	 */
-	bool enterToBank(const QString& login, const QString& password);
+     *  # В метод передается логин и пароль, метод делает выборку из БД
+     *  # Возвращает true, если профиль был найден
+     *  # Возвращает false, если ошибка при выборке, данные были пустыми либо профиль не найден
+     */
+    bool enterToBank(const QString& login, const QString& password);
 
     /**
      * # Метод считывает данные карт пользователя и возвращает их как QVariantList в QVariantList
@@ -103,43 +107,54 @@ public Q_SLOTS:
      */
     bool makeNewCard(bool is_gold, short payment_system);
 
-	/**
-	 *  # Вызывается автоматически из makeNewCard
-	 *  # Возвращает false, если ошибка при добавлении карты в БД
-	 */
-	bool addNewCard(Card new_card);
+    /**
+     *  # Вызывается автоматически из makeNewCard
+     *  # Возвращает false, если ошибка при добавлении карты в БД
+     */
+    bool addNewCard(Card new_card);
 
     /**
-     *
+     *  Метод, который создает избранный платеж для объекта client
+     *  Помещает его в СУБД
      */
     bool addNewFavPayment(const QString& payment);
 
+    /**
+     *  Метод, который создает последний платеж для объекта client
+     *  Помещает его в СУБД
+     */
     bool addRecentPayment(const QString& payment, const QString& payment_cost);
 
     /**
-	 * # В метод передается только имя владельца карты
+     * # В метод передается только имя владельца карты
      * # Метод делает выборку из таблицы user_info
-	 * # Возвращает массив интов - айдишники карт, которыми владеет данный пользователь
-	 * # Если метод вернул массив, где единственный элемент равен -1, то произошла ошибка при выборке
-	 */
+     * # Возвращает массив интов - айдишники карт, которыми владеет данный пользователь
+     * # Если метод вернул массив, где единственный элемент равен -1, то произошла ошибка при выборке
+     */
     QVector<int> getCardsId(const QString& owner_name);
 
     /**
      * # В метод передается только имя пользователя
      * # Метод делает выборку из таблицы user_info
-     * # Возвращает массив интов - айдишники платежей, которыми владеет данный пользователь
+     * # Возвращает массив интов - айдишники избранных платежей данного пользователя
      * # Если метод вернул массив, где единственный элемент равен -1, то произошла ошибка при выборке
      */
     QVector<int> getFavPaymentsId(const QString& owner_name);
 
+    /**
+     * # В метод передается только имя пользователя
+     * # Метод делает выборку из таблицы user_info
+     * # Возвращает массив интов - айдишники последних платежей данного пользователя
+     * # Если метод вернул массив, где единственный элемент равен -1, то произошла ошибка при выборке
+     */
     QVector<int> getRecentPaymentsId(const QString& owner_name);
 
-	/**
-	 *  # В метод передается только имя владельца карты
-	 *  # Метод выбирает из БД данные по картам пользователя
-	 *  # Обрабатывает их и, соответсвенно, заполняет массив карт для переменной client
+    /**
+     *  # В метод передается только имя владельца карты
+     *  # Метод выбирает из БД данные по картам пользователя
+     *  # Обрабатывает их и, соответсвенно, заполняет массив карт для переменной client
      *  # Возвращает true в случае успеха, false в случае ошибки выборки из card или user_info
-	 */
+     */
     bool getCardsFromDB(const QString& owner_name);
 
     /**
@@ -155,24 +170,34 @@ public Q_SLOTS:
      */
     Q_INVOKABLE QStringList favoritePaymentsToQML();
 
+    /**
+     * # Метод, отсылающий последние платежи в QML
+     */
     QList<QStringList> recentPaymentsToQML();
 
     /**
-	 *  # В метод передается логин, пароль и имя пользователя
-	 *  # Метод добавляет данные пользователя в БД, соответсвенно, регистрируя его
-	 *  # Возвращает true, в случае успеха
-	 *  # Возвращает false, если ошибка при добавлении данных либо данные были пустыми
-	 */
-	bool registration(const QString& login, const QString& password, const QString& owner_name);
+     *  # В метод передается логин, пароль и имя пользователя
+     *  # Метод добавляет данные пользователя в БД, соответсвенно, регистрируя его
+     *  # Возвращает true, в случае успеха
+     *  # Возвращает false, если ошибка при добавлении данных либо данные были пустыми
+     */
+    bool registration(const QString& login, const QString& password, const QString& owner_name);
 
     /**
-     * @brief makePayment
-     * @param card_nummber
-     * @param payment_cost
-     * @return
+     * Метод, который совершает платеж на счет, который ввел пользователь
+     * На вход принимает номер карты и сумму платежа
+     * Списывает с данной карты сумму, переданную на вход и, если на балансе карты достаточно средств, совершает
+     * платеж
      */
     bool makePayment(const QString& card_nummber, const QString& payment_cost);
 
+    /**
+     * Метод, который совершает перевод на карту, которую ввел пользователь
+     * На вход принимает номер карты списания, номер карты получения и сумму перевода
+     * Если карта получения - карта нашего банка, то переведет на нее деньги
+     * Списывает с данной карты сумму, переданную на вход и, если на балансе карты достаточно средств, совершает
+     * перевод
+     */
     bool makeRemittance(const QString& card_number, const QString& target_card_number, const QString& cost);
 
     /**
@@ -198,10 +223,10 @@ public Q_SLOTS:
 
 signals:
 
-	/**
-	 * # Сигнал, который вызывает при необходимости добавить карту в интерфейс
-	 * # Передает в QML все данные по карте, чтобы отобразить их
-	 */
+    /**
+     * # Сигнал, который вызывает при необходимости добавить карту в интерфейс
+     * # Передает в QML все данные по карте, чтобы отобразить их
+     */
     void cardToQML(const QString& number,
                                  const QString& owner_name,
                                  const QString& type,
@@ -217,9 +242,9 @@ signals:
 
 private:
     User client;
-	QSqlDatabase database;
+    QSqlDatabase database;
     bool is_db_connected = false;
-	QNetworkReply* reply_exchange_rates;
+    QNetworkReply* reply_exchange_rates;
     QStringList exchange_rates;
 };
 
