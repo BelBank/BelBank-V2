@@ -570,7 +570,10 @@ Window {
                                                       card_choose.indexAt(
                                                           card_choose.currentItem.x,
                                                           card_choose.currentItem.y)).number, text0.text, text00.text)) {
+                            Controller.addRecentPayment("Перевод на карту", text00.text)
                             set_main_window()
+                        } else {
+                            set_error("Ошибка перевода!")
                         }
                     } else if (Controller.makePayment(
                                    card_model.get(
@@ -582,7 +585,7 @@ Window {
                         // успех
                         set_main_window()
                     } else {
-                        set_error("Ошипка!")
+                        set_error("Ошибка платежа!")
                     }
                 }
 
