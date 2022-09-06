@@ -36,8 +36,9 @@ Window {
     Image {
         id: logo_on_background
         source: "/images/Logo.png"
+        fillMode: Image.PreserveAspectFit
         width: 364
-        height: 118
+        height: 180
         anchors {
             horizontalCenter: card_rectangle.horizontalCenter
             top: card_rectangle.top
