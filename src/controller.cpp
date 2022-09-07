@@ -435,7 +435,7 @@ QVector<int> Controller::getRecentPaymentsId(const QString& owner_name) {
     QSqlQuery get_recent_payments(database);
     QVector<int> payments_id;
     get_recent_payments.prepare("SELECT recent_payments FROM user_info WHERE owner_name = :name");
-    get_recent_payments.bindValue(0, client.getName());
+    get_recent_payments.bindValue(0, owner_name);
     if (!get_recent_payments.exec()) {
         qDebug() << "Query for getting recent payments array failed! Error: "
                          << get_recent_payments.lastError().text();
@@ -640,6 +640,10 @@ bool Controller::makePayment(const QString& card_number, const QString& payment_
 bool Controller::makeRemittance(const QString& card_number,
                                                                 const QString& target_card_number,
                                                                 const QString& cost) {
+    if (target_card_number.size() < 19) {
+        qDebug() << "Not valid number";
+        return false;
+    }
     if (card_number == target_card_number) {
         qDebug() << "Can't transit money with 2 equal cards";
         return false;

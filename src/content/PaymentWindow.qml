@@ -559,7 +559,6 @@ Window {
                 id: payment_area
                 anchors.fill: parent
                 onClicked: {
-                    payment_area.enabled = false
                     if (make_a_payment_selected.selected) {
                         console.log("Fav payment is ", name)
                         Controller.addNewFavPayment(name)
@@ -576,7 +575,9 @@ Window {
                                     text0.text, text00.text)) {
                             Controller.addRecentPayment("Перевод на карту",
                                                         text00.text)
-                            set_main_window()
+                            set_error("Платеж успешно совершен!", "main", false)
+                            payment_area.enabled = false
+
                         } else {
                             set_error("Ошибка перевода!")
                         }
@@ -589,7 +590,7 @@ Window {
                         Controller.addRecentPayment(name, text00.text)
                         // успех
                         //set_main_window()
-                        set_error("Платеж успешно совершен!", "main", false_)
+                        set_error("Платеж успешно совершен!", "main", false)
 
                         payment_area.enabled = false
                     } else {
