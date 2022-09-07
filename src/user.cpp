@@ -20,6 +20,7 @@ QVector<int> User::getRecentPayments() const {
 }
 
 void User::setName(const QString& name) {
+    user_name.clear();
     this->user_name = name;
 }
 
@@ -42,6 +43,13 @@ void User::setRecentPayments(QVector<int> payments) {
     foreach (int payment, payments) {
         this->recent_payments.push_back(payment);
     }
+}
+
+void User::clearSession() {
+    cards.clear();
+    user_name.clear();
+    favorite_payments.clear();
+    recent_payments.clear();
 }
 
 void User::printCardsData() const {

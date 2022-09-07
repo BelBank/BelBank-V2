@@ -19,6 +19,8 @@ public:
     void setCards(QVector<Card> cards_to_set);
     void setFavPayments(QVector<QString> payments);
     void setRecentPayments(QVector<int> payments);
+    void clearSession();
+
     void printCardsData() const;
 
 signals:
@@ -30,4 +32,4 @@ private:
     QVector<int> recent_payments;
 };
 
-#endif	// USER_H
+#endif  // USER_H
