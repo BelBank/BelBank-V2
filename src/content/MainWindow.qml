@@ -230,6 +230,29 @@ Window {
                 text: "Финансы"
                 font.pixelSize: 30
             }
+            Rectangle {
+                Text {
+                    text: "У вас отсутствуют карты"
+                    font.pixelSize: 40
+                    color: "gray"
+                    visible: !lv.count ? true : false
+                    anchors {
+                        centerIn: parent
+                    }
+                }
+
+                width: 500
+                height: 200
+                color: "#d5e2ff"
+                anchors {
+                    top: finance_text.top
+                    left: finance.left
+                    right: finance.right
+                    margins: 40
+                }
+                radius: 10
+                visible: !lv.count ? true : false
+            }
 
             ListView {
 
