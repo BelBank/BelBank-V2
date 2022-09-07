@@ -556,9 +556,10 @@ Window {
             }
 
             MouseArea {
-
+                id: payment_area
                 anchors.fill: parent
                 onClicked: {
+                    payment_area.enabled = false
                     if (make_a_payment_selected.selected) {
                         console.log("Fav payment is ", name)
                         Controller.addNewFavPayment(name)
@@ -567,11 +568,14 @@ Window {
                             || !text00.acceptableInput) {
                         set_error("Неверно введенные данные!")
                     } else if (requisites) {
-                        if(Controller.makeRemittance(card_model.get(
-                                                      card_choose.indexAt(
-                                                          card_choose.currentItem.x,
-                                                          card_choose.currentItem.y)).number, text0.text, text00.text)) {
-                            Controller.addRecentPayment("Перевод на карту", text00.text)
+                        if (Controller.makeRemittance(
+                                    card_model.get(
+                                        card_choose.indexAt(
+                                            card_choose.currentItem.x,
+                                            card_choose.currentItem.y)).number,
+                                    text0.text, text00.text)) {
+                            Controller.addRecentPayment("Перевод на карту",
+                                                        text00.text)
                             set_main_window()
                         } else {
                             set_error("Ошибка перевода!")

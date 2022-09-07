@@ -238,10 +238,12 @@ Window {
         }
 
         MouseArea {
+            id: add_area
             property bool false_: false
 
             anchors.fill: parent
             onClicked: {
+                add_area.enabled = false
                 if (number.text[0] !== '2' && number.text[0] !== '4'
                         && number.text[0] !== '5') {
                     // ошибка неправильный номер карты (платежная система)
