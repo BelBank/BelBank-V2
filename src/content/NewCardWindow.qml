@@ -557,7 +557,6 @@ Window {
 
             anchors.fill: parent
             onClicked: {
-                new_card_area.enabled = false
 
                 if (!visa.visa_active && !mastercard.mastercard_active
                         && !mir.mir_active) {
@@ -577,6 +576,8 @@ Window {
                     }
                     var tariff = gold_card.active ? 1 : 0
                     if (Controller.makeNewCard(tariff, payment_system)) {
+                        new_card_area.enabled = false
+
                         set_error("Карта успешно создана!", "main", false_)
                     }
                 }

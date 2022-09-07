@@ -588,7 +588,10 @@ Window {
                                    text00.text)) {
                         Controller.addRecentPayment(name, text00.text)
                         // успех
-                        set_main_window()
+                        //set_main_window()
+                        set_error("Платеж успешно совершен!", "main", false_)
+
+                        payment_area.enabled = false
                     } else {
                         set_error("Ошибка платежа!")
                     }
