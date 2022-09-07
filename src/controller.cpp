@@ -3,7 +3,7 @@
 #include <QDebug>
 
 Controller::Controller(QObject* parent) : QObject{parent} {
-    database = QSqlDatabase::addDatabase("QPSQL");
+	database = QSqlDatabase::addDatabase("QPSQL");
 
     // Connect to local database
     database.setHostName("localhost");
@@ -18,43 +18,43 @@ Controller::Controller(QObject* parent) : QObject{parent} {
     //    database.setUserName("root");
     //    database.setPassword("drakonkapusta");
 
-    this->testDBConnection();
-    this->exchangeRatesRequest();
+	this->testDBConnection();
+	this->exchangeRatesRequest();
 }
 
 QByteArray Controller::hashPassword(const QString& password) {
-    QByteArray hash(password.toStdString().c_str());
-    hash = QCryptographicHash::hash(hash, QCryptographicHash::Sha3_256);
-    hash = QCryptographicHash::hash(hash, QCryptographicHash::Sha3_512);
-    qDebug() << "Hashed password: " << hash;
-    return hash;
+	QByteArray hash(password.toStdString().c_str());
+	hash = QCryptographicHash::hash(hash, QCryptographicHash::Sha3_256);
+	hash = QCryptographicHash::hash(hash, QCryptographicHash::Sha3_512);
+	qDebug() << "Hashed password: " << hash;
+	return hash;
 }
 
 QString Controller::getUserName() const {
-    return client.getName();
+	return client.getName();
 }
 
 QVariant Controller::getCardsCount() const {
-    //    return 1;
-    return QVariant(client.getCards().size());
+	//    return 1;
+	return QVariant(client.getCards().size());
 }
 
 QVariant Controller::getFavPaymentsCount() const {
-    return QVariant(client.getFavPayments().size());
+	return QVariant(client.getFavPayments().size());
 }
 
 bool Controller::testConnection() {
-    QTcpSocket* test_connection = new QTcpSocket();
-    test_connection->connectToHost("www.google.com", 80);
-    bool is_connected = test_connection->waitForConnected();
-    if (!is_connected) {
-        qDebug() << "No network connection";
-        //        emit Controller::setError("Ошибка подключения к Интернету!");
-        return false;
-    } else {
-        qDebug() << "Computer is connected to Internet";
-        return true;
-    }
+	QTcpSocket* test_connection = new QTcpSocket();
+	test_connection->connectToHost("www.google.com", 80);
+	bool is_connected = test_connection->waitForConnected();
+	if (!is_connected) {
+		qDebug() << "No network connection";
+		//        emit Controller::setError("Ошибка подключения к Интернету!");
+		return false;
+	} else {
+		qDebug() << "Computer is connected to Internet";
+		return true;
+	}
 }
 
 bool Controller::testDBConnection() {
@@ -71,62 +71,62 @@ bool Controller::testDBConnection() {
 }
 
 bool Controller::enterToBank(const QString& login, const QString& password) {
-    client.clearSession();
-    qDebug() << "Entering...";
-    //    emit Controller::setError("Hello World!");
-    if (!this->testConnection()) {
-        return false;
-    }
-    if (!is_db_connected and !testDBConnection()) {
-        return false;
-    }
-    if (login == "" or password == "") {
-        qDebug() << "No data in field";
-        return false;
-    }
-    QSqlQuery login_query(database);
-    login_query.prepare("SELECT * FROM bank_login WHERE login = :login AND password = :password");
-    login_query.bindValue(0, login);
-    login_query.bindValue(1, hashPassword(password));
-    if (!login_query.exec()) {
-        qDebug() << "Query for login failed! Error: " << login_query.lastError().text();
-        return false;
-    }
-    if (!login_query.next()) {
-        qDebug() << "No such user";
-        return false;
-    }
-    qDebug() << "Success login";
-    this->client.setName(login_query.value(3).toString());
-    this->getCardsFromDB(login_query.value(1).toString());
-    this->getFavPaymentsFromDB(client.getName());
-    this->getRecentPaymentsId(client.getName());
-    return true;
+	client.clearSession();
+	qDebug() << "Entering...";
+	//    emit Controller::setError("Hello World!");
+	if (!this->testConnection()) {
+		return false;
+	}
+	if (!is_db_connected and !testDBConnection()) {
+		return false;
+	}
+	if (login == "" or password == "") {
+		qDebug() << "No data in field";
+		return false;
+	}
+	QSqlQuery login_query(database);
+	login_query.prepare("SELECT * FROM bank_login WHERE login = :login AND password = :password");
+	login_query.bindValue(0, login);
+	login_query.bindValue(1, hashPassword(password));
+	if (!login_query.exec()) {
+		qDebug() << "Query for login failed! Error: " << login_query.lastError().text();
+		return false;
+	}
+	if (!login_query.next()) {
+		qDebug() << "No such user";
+		return false;
+	}
+	qDebug() << "Success login";
+	this->client.setName(login_query.value(3).toString());
+	this->getCardsFromDB(client.getName());
+	this->getFavPaymentsFromDB(client.getName());
+	this->getRecentPaymentsId(client.getName());
+	return true;
 }
 
 QVariantList Controller::cardsToQML() {
-    QVector<Card> cards = client.getCards();
-    QVariantList cards_to_qml;
-    int number_of_cards = 0;
-    foreach (Card card, cards) {
-        QVariantList card_variant;
-        card_variant.push_back(card.getNumber());
-        card_variant.push_back(card.getHolderName());
-        card_variant.push_back((int)(card.getNumber()[0].toLatin1() - '0'));
-        card_variant.push_back(card.getType());
-        card_variant.push_back(card.getValid());
-        card_variant.push_back(card.getBalance());
-        cards_to_qml.push_back(card_variant);
-        number_of_cards++;
-    }
-    cards_to_qml.insert(0, number_of_cards);
-    return cards_to_qml;
+	QVector<Card> cards = client.getCards();
+	QVariantList cards_to_qml;
+	int number_of_cards = 0;
+	foreach (Card card, cards) {
+		QVariantList card_variant;
+		card_variant.push_back(card.getNumber());
+		card_variant.push_back(card.getHolderName());
+		card_variant.push_back((int)(card.getNumber()[0].toLatin1() - '0'));
+		card_variant.push_back(card.getType());
+		card_variant.push_back(card.getValid());
+		card_variant.push_back(card.getBalance());
+		cards_to_qml.push_back(card_variant);
+		number_of_cards++;
+	}
+	cards_to_qml.insert(0, number_of_cards);
+	return cards_to_qml;
 }
 
 bool Controller::prepareQML(QVariant source) {
-    if (source.toString() != "MainWindow.qml" and source.toString() != "PaymentWindow.qml") {
-        return true;
-    }
+	if (source.toString() != "MainWindow.qml" and source.toString() != "PaymentWindow.qml") {
+		return true;
+	}
 
     qDebug() << "QML preparing in " << source.toString() << "...";
     QVector<Card> cards = client.getCards();
@@ -170,25 +170,25 @@ bool Controller::prepareQML(QVariant source) {
 }
 
 bool Controller::makeCard(const QString& card_number, const QString& valid) {
-    QString valid_copy = valid;
-    valid_copy = "01/" + valid_copy.insert(3, "20");
-    qDebug() << "Valid thru " << valid_copy;
-    if (QDate(QDate::fromString(valid_copy, "dd/MM/yyyy")) < QDate::currentDate()) {
-        qDebug() << "Card is not valid";
-        return false;
-    }
-    bool is_gold;
-    if (card_number[5] == '1') {
-        is_gold = true;
-    } else {
-        is_gold = false;
-    }
-    Card new_card(card_number, client.getName(), is_gold, valid);
-    if (!addNewCard(new_card)) {
-        return false;
-    }
-    this->getCardsFromDB(client.getName());
-    return true;
+	QString valid_copy = valid;
+	valid_copy = "01/" + valid_copy.insert(3, "20");
+	qDebug() << "Valid thru " << valid_copy;
+	if (QDate(QDate::fromString(valid_copy, "dd/MM/yyyy")) < QDate::currentDate()) {
+		qDebug() << "Card is not valid";
+		return false;
+	}
+	bool is_gold;
+	if (card_number[5] == '1') {
+		is_gold = true;
+	} else {
+		is_gold = false;
+	}
+	Card new_card(card_number, client.getName(), is_gold, valid);
+	if (!addNewCard(new_card)) {
+		return false;
+	}
+	this->getCardsFromDB(client.getName());
+	return true;
 }
 
 bool Controller::makeNewCard(bool is_gold, short payment_system) {
@@ -227,18 +227,18 @@ bool Controller::makeNewCard(bool is_gold, short payment_system) {
 }
 
 bool Controller::addNewCard(Card new_card) {
-    QSqlQuery add_card_query(database);
-    QSqlQuery find_duplicates_query(database);
-    find_duplicates_query.prepare("SELECT number FROM card WHERE number = :number");
-    find_duplicates_query.bindValue(0, new_card.getNumber());
-    if (!find_duplicates_query.exec()) {
-        qDebug() << "Query for adding new card failed! Error: " << find_duplicates_query.lastError().text();
-        return false;
-    }
-    if (find_duplicates_query.next()) {
-        qDebug() << "This card is already exist for other user";
-        return false;
-    }
+	QSqlQuery add_card_query(database);
+	QSqlQuery find_duplicates_query(database);
+	find_duplicates_query.prepare("SELECT number FROM card WHERE number = :number");
+	find_duplicates_query.bindValue(0, new_card.getNumber());
+	if (!find_duplicates_query.exec()) {
+		qDebug() << "Query for adding new card failed! Error: " << find_duplicates_query.lastError().text();
+		return false;
+	}
+	if (find_duplicates_query.next()) {
+		qDebug() << "This card is already exist for other user";
+		return false;
+	}
 
     add_card_query.prepare(
             "INSERT INTO card (number, is_gold, valid, balance) "
@@ -276,12 +276,12 @@ bool Controller::addNewCard(Card new_card) {
     add_card_query.bindValue(0, "{ " + cards_array.join(",") + " }");
     add_card_query.bindValue(1, client.getName());
 
-    if (!add_card_query.exec()) {
-        qDebug() << "Query for updating cards array failed! Error: " << add_card_query.lastError().text();
-        return false;
-    }
-    this->getFavPaymentsFromDB(client.getName());
-    return true;
+	if (!add_card_query.exec()) {
+		qDebug() << "Query for updating cards array failed! Error: " << add_card_query.lastError().text();
+		return false;
+	}
+	this->getFavPaymentsFromDB(client.getName());
+	return true;
 }
 
 bool Controller::addNewFavPayment(const QString& payment) {
@@ -376,31 +376,31 @@ bool Controller::addRecentPayment(const QString& payment, const QString& payment
 }
 
 QVector<int> Controller::getCardsId(const QString& owner_name) {
-    QSqlQuery get_cards_id_query(database);
-    QVector<int> cards_id;
-    get_cards_id_query.prepare("SELECT cards FROM user_info WHERE owner_name = :owner_name");
-    get_cards_id_query.bindValue(0, owner_name);
-    if (!get_cards_id_query.exec()) {
-        qDebug() << "Query for getting cards array failed! Error: " << get_cards_id_query.lastError().text();
-        cards_id.push_back(-1);
-        return cards_id;
-    }
-    get_cards_id_query.next();
-    QStringList cards_list = get_cards_id_query.value("cards").toString().split(",");
-    foreach (QString val, cards_list) {
-        if (val.contains('{')) {
-            val.remove('{');
-        }
-        if (val.contains('}')) {
-            val.remove('}');
-        }
-        if (val == "0") {
-            continue;
-        }
-        cards_id.push_back(val.toInt());
-    }
-    qDebug() << "Cards id's " << cards_id;
-    return cards_id;
+	QSqlQuery get_cards_id_query(database);
+	QVector<int> cards_id;
+	get_cards_id_query.prepare("SELECT cards FROM user_info WHERE owner_name = :owner_name");
+	get_cards_id_query.bindValue(0, owner_name);
+	if (!get_cards_id_query.exec()) {
+		qDebug() << "Query for getting cards array failed! Error: " << get_cards_id_query.lastError().text();
+		cards_id.push_back(-1);
+		return cards_id;
+	}
+	get_cards_id_query.next();
+	QStringList cards_list = get_cards_id_query.value("cards").toString().split(",");
+	foreach (QString val, cards_list) {
+		if (val.contains('{')) {
+			val.remove('{');
+		}
+		if (val.contains('}')) {
+			val.remove('}');
+		}
+		if (val == "0") {
+			continue;
+		}
+		cards_id.push_back(val.toInt());
+	}
+	qDebug() << "Cards id's " << cards_id;
+	return cards_id;
 }
 
 QVector<int> Controller::getFavPaymentsId(const QString& owner_name) {
@@ -443,29 +443,29 @@ QVector<int> Controller::getRecentPaymentsId(const QString& owner_name) {
         return payments_id;
     }
 
-    if (get_recent_payments.next()) {
-        qDebug() << get_recent_payments.value("recent_payments").toString();
-        QStringList payments_list = get_recent_payments.value("recent_payments").toString().split(",");
-        qDebug() << "QStringList payments is " << payments_list;
-        foreach (QString val, payments_list) {
-            if (val.contains('{')) {
-                val.remove('{');
-            }
-            if (val.contains('}')) {
-                val.remove('}');
-            }
-            if (val == "0") {
-                continue;
-            }
-            payments_id.push_back(val.toInt());
-        }
-    }
-    qDebug() << "Payments id's " << payments_id;
-    if (payments_id.size() == 10) {
-        payments_id.pop_back();
-    }
-    client.setRecentPayments(payments_id);
-    return payments_id;
+	if (get_recent_payments.next()) {
+		qDebug() << get_recent_payments.value("recent_payments").toString();
+		QStringList payments_list = get_recent_payments.value("recent_payments").toString().split(",");
+		qDebug() << "QStringList payments is " << payments_list;
+		foreach (QString val, payments_list) {
+			if (val.contains('{')) {
+				val.remove('{');
+			}
+			if (val.contains('}')) {
+				val.remove('}');
+			}
+			if (val == "0") {
+				continue;
+			}
+			payments_id.push_back(val.toInt());
+		}
+	}
+	qDebug() << "Payments id's " << payments_id;
+	if (payments_id.size() == 10) {
+		payments_id.pop_back();
+	}
+	client.setRecentPayments(payments_id);
+	return payments_id;
 }
 
 bool Controller::getCardsFromDB(const QString& owner_name) {
@@ -525,17 +525,17 @@ bool Controller::getFavPaymentsFromDB(const QString& owner_name) {
 }
 
 QStringList Controller::favoritePaymentsToQML() {
-    QVector<QString> payments = client.getFavPayments();
-    QStringList payments_list;
-    foreach (QString payment, payments) {
-        payments_list.push_back(payment);
-    }
-    return payments_list;
+	QVector<QString> payments = client.getFavPayments();
+	QStringList payments_list;
+	foreach (QString payment, payments) {
+		payments_list.push_back(payment);
+	}
+	return payments_list;
 }
 
 QList<QStringList> Controller::recentPaymentsToQML() {
-    QList<QStringList> payments;
-    QVector<int> payments_id = client.getRecentPayments();
+	QList<QStringList> payments;
+	QVector<int> payments_id = client.getRecentPayments();
 
     foreach (int id, payments_id) {
         QSqlQuery get_payment_info(database);
@@ -555,10 +555,10 @@ QList<QStringList> Controller::recentPaymentsToQML() {
                      << get_payment_info.value("time").toTime().toString("HH:mm:ss")
                      << QString::number(get_payment_info.value("cost").toDouble());
 
-            payments.push_back(info);
-        }
-    }
-    return payments;
+			payments.push_back(info);
+		}
+	}
+	return payments;
 }
 
 bool Controller::registration(const QString& login, const QString& password, const QString& owner_name) {
@@ -652,25 +652,25 @@ bool Controller::makeRemittance(const QString& card_number,
         return false;
     }
 
-    QSqlQuery get_balance(database);
-    get_balance.prepare("SELECT balance FROM card WHERE number = :number");
-    get_balance.bindValue(0, card_number);
-    if (!get_balance.exec()) {
-        qDebug() << "Query for getting balance failed! Error: " << get_balance.lastError().text();
-        return false;
-    }
-    get_balance.next();
-    double balance = get_balance.value("balance").toDouble();
+	QSqlQuery get_balance(database);
+	get_balance.prepare("SELECT balance FROM card WHERE number = :number");
+	get_balance.bindValue(0, card_number);
+	if (!get_balance.exec()) {
+		qDebug() << "Query for getting balance failed! Error: " << get_balance.lastError().text();
+		return false;
+	}
+	get_balance.next();
+	double balance = get_balance.value("balance").toDouble();
 
-    if (balance < cost.toDouble()) {
-        qDebug() << "Not enough money";
-        return false;
-    }
-    balance -= cost.toDouble();
+	if (balance < cost.toDouble()) {
+		qDebug() << "Not enough money";
+		return false;
+	}
+	balance -= cost.toDouble();
 
-    if (check_card_in_bank.next()) {
-        double balance_of_target = check_card_in_bank.value("balance").toDouble();
-        balance_of_target += cost.toDouble();
+	if (check_card_in_bank.next()) {
+		double balance_of_target = check_card_in_bank.value("balance").toDouble();
+		balance_of_target += cost.toDouble();
 
         QSqlQuery balance_query(database);
         balance_query.prepare(
@@ -710,25 +710,25 @@ void Controller::exchangeRatesRequest() {
 }
 
 void Controller::getExchangeRates() {
-    QByteArray result = reply_exchange_rates->readAll();
-    QJsonDocument exchange_rates = QJsonDocument::fromJson(result);
-    exchangeRates(exchange_rates);
+	QByteArray result = reply_exchange_rates->readAll();
+	QJsonDocument exchange_rates = QJsonDocument::fromJson(result);
+	exchangeRates(exchange_rates);
 }
 
 void Controller::exchangeRates(QJsonDocument rates_doc) {
-    QJsonObject rates = rates_doc["rates"].toObject();
-    exchange_rates.push_back(QString::number(rates["BYN"].toDouble() / rates["RUB"].toDouble() * 100));
-    exchange_rates.push_back(QString::number(rates["BYN"].toDouble()));
-    exchange_rates.push_back(QString::number(rates["BYN"].toDouble() / rates["EUR"].toDouble()));
-    exchange_rates.push_back(QString::number(rates["BYN"].toDouble() / rates["CNY"].toDouble() * 10));
-    exchange_rates.push_back(QString::number(rates["BYN"].toDouble() / rates["PLN"].toDouble() * 10));
+	QJsonObject rates = rates_doc["rates"].toObject();
+	exchange_rates.push_back(QString::number(rates["BYN"].toDouble() / rates["RUB"].toDouble() * 100));
+	exchange_rates.push_back(QString::number(rates["BYN"].toDouble()));
+	exchange_rates.push_back(QString::number(rates["BYN"].toDouble() / rates["EUR"].toDouble()));
+	exchange_rates.push_back(QString::number(rates["BYN"].toDouble() / rates["CNY"].toDouble() * 10));
+	exchange_rates.push_back(QString::number(rates["BYN"].toDouble() / rates["PLN"].toDouble() * 10));
 }
 
 QStringList Controller::exchangeRatesForBank() {
-    QStringList rates_to_qml;
-    foreach (QString rate, exchange_rates) {
-        rates_to_qml.push_back(QString::number(round(rate.toDouble() * 1.02 * 100) / 100));
-        rates_to_qml.push_back(QString::number(round(rate.toDouble() * 0.98 * 100) / 100));
-    }
-    return rates_to_qml;
+	QStringList rates_to_qml;
+	foreach (QString rate, exchange_rates) {
+		rates_to_qml.push_back(QString::number(round(rate.toDouble() * 1.02 * 100) / 100));
+		rates_to_qml.push_back(QString::number(round(rate.toDouble() * 0.98 * 100) / 100));
+	}
+	return rates_to_qml;
 }

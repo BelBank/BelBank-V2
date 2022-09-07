@@ -243,7 +243,6 @@ Window {
 
             anchors.fill: parent
             onClicked: {
-                add_area.enabled = false
                 if (number.text[0] !== '2' && number.text[0] !== '4'
                         && number.text[0] !== '5') {
                     // ошибка неправильный номер карты (платежная система)
@@ -260,6 +259,8 @@ Window {
                 }
 
                 if (Controller.makeCard(number.text, validity.text)) {
+                    add_area.enabled = false
+
                     console.info("Success adding card!")
 
                     set_error("Карта успешно добавлена!", "main", false_)
