@@ -263,7 +263,7 @@ Window {
 
                     console.info("Success adding card!")
 
-                    set_error("Карта успешно добавлена!", "main", false_)
+                    set_error("Карта успешно добавлена!", "main", false)
                 } else {
                     // ошибка добавления
                     set_error("Ошибка добавления!")
